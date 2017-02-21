@@ -54,10 +54,6 @@ var theta = 0;
 
 animate();
 
-// For high end VR devices like Vive and Oculus, take into account the stage
-// parameters provided.
-setupStage()
-
 function animate() {
   effect.render(scene, camera);
   lat = Math.max( -85, Math.min( 85, lat ) );
@@ -126,28 +122,4 @@ function onResize() {
   effect.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-}
-
-// Get the HMD, and if we're dealing with something that specifies
-// stageParameters, rearrange the scene.
-function setupStage() {
-  navigator.getVRDisplays().then(function(displays) {
-    if (displays.length > 0) {
-      vrDisplay = displays[0];
-      if (vrDisplay.stageParameters) {
-        setStageDimensions(vrDisplay.stageParameters);
-      }
-      vrDisplay.requestAnimationFrame(animate);
-    }
-  });
-}
-function setStageDimensions(stage) {
-  // Make the skybox fit the stage.
-  var material = mesh.material;
-  scene.remove(mesh);
-  // Size the skybox according to the size of the actual stage.
-  var geometry = new THREE.BoxGeometry(stage.sizeX, boxSize, stage.sizeZ);
-  mesh = new THREE.Mesh(geometry, material);
-  // Place it on the floor.
-  scene.add(mesh);
 }
