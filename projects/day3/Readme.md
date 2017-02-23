@@ -1,4 +1,4 @@
-# Day 2 - 360 VR Videos
+# Day 3 - Movie Theatre in Virtual Reality
 
 [Demo](https://risonsimon.com/projects/day3) | [Tutorial](movie-theatre-vr-tutorial-webvr/)
 
