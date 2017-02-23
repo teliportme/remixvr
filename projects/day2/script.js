@@ -41,9 +41,6 @@ var options = {
   textEnterVRTitle: 'Play Video'
 };
 var enterVRButton = new webvrui.EnterVRButton(renderer.domElement, options);
-enterVRButton.on('exit', function() {
-  renderer.domElement.removeEventListener('click', onClick, false);
-});
 enterVRButton.on('hide', function() {
   document.getElementById('ui').style.display = 'none';
 });
@@ -67,20 +64,11 @@ var lat = 0;
 var lng = 0;
 var savedLat = 0;
 var savedLng = 0;
-var phi = 0;
-var theta = 0;
 
 animate();
 
 function animate() {
   effect.render(scene, camera);
-  lat = Math.max( -85, Math.min( 85, lat ) );
-  phi = THREE.Math.degToRad( 90 - lat );
-  theta = THREE.Math.degToRad( lng );
-  camera.target.x = 500 * Math.sin( phi ) * Math.cos( theta );
-  camera.target.y = - 500 * Math.cos( phi );
-  camera.target.z = 500 * Math.sin( phi ) * Math.sin( theta );
-  camera.lookAt( camera.target );
 
   if (enterVRButton.isPresenting()) {
     controls.update();
