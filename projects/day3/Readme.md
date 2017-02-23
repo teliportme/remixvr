@@ -1,9 +1,8 @@
 # Day 2 - 360 VR Videos
 
-[Demo](https://risonsimon.com/projects/day2) | [Tutorial](http://tutorialsforvr.com/360-virtual-reality-videos-tutorial/)
+[Demo](https://risonsimon.com/projects/day3) | [Tutorial](movie-theatre-vr-tutorial-webvr/)
 
 
-View 360 videos in virtual reality.
+Watch any video in a movie theatre in virtual reality.
 
-Video by [Kolor](http://www.kolor.com)
-
+Project done using Three.js and WebVR.
