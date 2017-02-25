@@ -61,33 +61,6 @@ for ( i = 0; i < parameters.length; i ++ ) {
   scene.add( particles );
 }
 
-// var particleSystem = new THREE.GPUParticleSystem({
-//   maxParticles: 250000,
-//   particleSpriteTex: new THREE.TextureLoader().load('raindrop.png')
-// });
-// scene.add( particleSystem);
-
-// // options passed during each spawned
-// var options = {
-//   position: new THREE.Vector3(),
-//   positionRandomness: 3,
-//   velocity: new THREE.Vector3(),
-//   velocityRandomness: 3,
-//   color: 0xaa88ff,
-//   colorRandomness: 0,
-//   turbulence: 0,
-//   lifetime: 10,
-//   size: 15,
-//   sizeRandomness: 10
-// };
-
-// var spawnerOptions = {
-//   spawnRate: 3260,
-//   horizontalSpeed: 1,
-//   verticalSpeed: 2,
-//   timeScale: 1
-// }
-
 var vrOptions = {
   color: 'white',
   background: 'black',
@@ -120,35 +93,11 @@ var clock = new THREE.Clock(true);
 var tick = 0;
 animate();
 
-// options.velocity.y += 1;
-// options.position.z = camera.position.z;
-// options.position.x = camera.position.x;
-// options.position.y = camera.position.y;
-
 function animate() {
 var time = Date.now() * 0.00005;
   if (enterVRButton.isPresenting()) {
     controls.update();
   }
-
-  // var delta = clock.getDelta() * spawnerOptions.timeScale;
-  // tick += delta;
-
-  // if (tick < 0) tick = 0;
-
-  // if (delta > 0) {
-  //   options.position.x = Math.sin(tick * spawnerOptions.horizontalSpeed) * 20;
-  //   options.position.y = Math.sin(tick * spawnerOptions.verticalSpeed);
-  //   options.position.z = -Math.sin(tick * spawnerOptions.horizontalSpeed + spawnerOptions.verticalSpeed) * 5;
-
-  //   for (var x = 0; x < spawnerOptions.spawnRate * delta; x++) {
-  //     // Yep, that's really it. Spawning particles is super cheap, and once you spawn them, the rest of
-  //     // their lifecycle is handled entirely on the GPU, driven by a time uniform updated below
-  //     particleSystem.spawnParticle(options);
-  //   }
-  // }
-
-  // particleSystem.update(tick);
 
   for (i = 0; i < scene.children.length; i ++) {
     var object = scene.children[i];
