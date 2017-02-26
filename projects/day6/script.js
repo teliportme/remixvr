@@ -23,7 +23,7 @@ var materials = [];
 
 for (var i = 0; i< images.length; i++){
   textures.push(getTexture(images[i]))
-  materials[i] = new THREE.MeshBasicMaterial({ map: textures[i], side: THREE.DoubleSide});
+  materials[i] = new THREE.MeshLambertMaterial({ map: textures[i], side: THREE.DoubleSide});
 }
 
 function getTexture(imgUrl) {
