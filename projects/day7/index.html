@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Public Speaking VR - Day 7 - Days In VR</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Practice public speaking in virtual reality along with a teleprompter!"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/threejs/r83/three.min.js"></script>
+  <script src="/common/webvr-polyfill.min.js"></script>
+  <script src="/common/VRControls.js"></script>
+  <script src="/common/VREffect.js"></script>
+  <script src="/common/webvr-ui.min.js"></script>
+  <style type="text/css">
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      color: #fff;
+      margin: 0px;
+      padding: 0;
+      overflow: hidden;
+    }
+    #ui {
+     position: absolute;
+     bottom: 10px;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     text-align: center;
+     font-family: 'Karla', sans-serif;
+     z-index: 1;
+    }
+    a#no-vr {
+     display: block;
+     color: white;
+     margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <div id="vr-button"></div>
+    <a id="no-vr" href="#">Try without a headset</a>
+  </div>
+<script src="script.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-18119185-16', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
