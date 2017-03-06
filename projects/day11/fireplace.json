@@ -95461,7 +95461,7 @@
 					,"semantic": 1
 					,"index": 0
 					,"type": 3
-					,"value": "MARBLE.BMP"
+					,"value": "marble.bmp"
 				}
 				,{
 					 "key": "$tex.blend"
@@ -95682,7 +95682,7 @@
 					,"semantic": 1
 					,"index": 0
 					,"type": 3
-					,"value": "BLACK.JPG"
+					,"value": "Black.jpg"
 				}
 				,{
 					 "key": "$tex.blend"
