@@ -1,7 +1,5 @@
-# Day 1 - 360 VR Photos
+# Day 20 - Glitch Effect in VR
 
-[Demo](https://risonsimon.com/projects/day1) | [Tutorial](http://tutorialsforvr.com/360-virtual-reality-photos-tutorial/)
+[Demo](https://risonsimon.com/projects/day20) | [Tutorial](http://tutorialsforvr.com/glitch-effect-webvr-using-shaders/)
 
-
-View 360 photos in virtual reality.
-
+Add glitch effect to VR.
