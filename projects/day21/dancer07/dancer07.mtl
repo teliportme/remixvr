@@ -1,0 +1,26 @@
+# Blender MTL File: 'dancer07.blend'
+# Material Count: 2
+
+newmtl m_clubGirlC
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_clubGirlsC_dm.jpg
+map_Ke t_clubGirlsC_dm.jpg
+map_Disp t_clubGirlsC_n.jpg
+map_Ks t_clubGirlsC_s.jpg
+
+newmtl m_clubGirl_eye.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_eye_d.jpg
+map_Disp t_eye_n.jpg

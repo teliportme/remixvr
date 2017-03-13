@@ -1,0 +1,32 @@
+# Blender MTL File: 'forlan.blend'
+# Material Count: 3
+
+newmtl Material__612
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TX_Wm_NPC_TaniaCloth_Body_D.jpg
+
+newmtl Material__646
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TX_Wm_NPC_Tania_Head_D.jpg
+
+newmtl Material__708
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TX_Wm_NPC_TaniaCloth_Hair_D.jpg
