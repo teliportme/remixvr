@@ -4,17 +4,11 @@ camera.target = new THREE.Vector3(0 , 0, 0);
 camera.lookAt(camera.target);
 
 var controls = new THREE.VRControls(camera);
-// controls.standing = true;
 
 var scene = new THREE.Scene();
 var ambient = new THREE.AmbientLight( 0xffffff );
 scene.add( ambient );
 
-var light = new THREE.PointLight( 0xFFFFDD, 1, 100 );
-light.position.set( 0, 0, 0 );
-// scene.add( light );
-
-var mesh;
 var mtlLoader = new THREE.MTLLoader();
 mtlLoader.setPath('/projects/day25/');
 mtlLoader.setTexturePath('/projects/day25/');
@@ -32,10 +26,7 @@ mtlLoader.load('test1.mtl', function(materials) {
     object.position.z = 2;
     object.position.x = -5;
     object.name = 'house';
-    mesh = object;
     scene.add(object);
-    // var box = new THREE.BoxHelper(object, 0xffff00);
-    // scene.add( box );
 
     animate(object);
   });

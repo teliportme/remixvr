@@ -1,8 +1,5 @@
-# Day 3 - Movie Theatre in Virtual Reality
+# Day 25 - Virtual tour in VR
 
-[Demo](https://risonsimon.com/projects/day3) | [Tutorial](http://tutorialsforvr.com/movie-theatre-vr-tutorial-webvr/)
+[Demo](https://risonsimon.com/projects/day25) | [Tutorial](http://tutorialsforvr.com/creating-virtual-house-tour-vr/)
 
-
-Watch any video in a movie theatre in virtual reality.
-
-Project done using Three.js and WebVR.
+Create a guided virtual tour in WebVR.
