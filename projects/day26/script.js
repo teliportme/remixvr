@@ -80,7 +80,8 @@ document.body.appendChild(renderer.domElement);
 var options = {
   color: 'black',
   background: 'white',
-  corners: 'square'
+  corners: 'square',
+  textEnterVRTitle: 'Start in VR'
 };
 var enterVRButton = new webvrui.EnterVRButton(renderer.domElement, options);
 enterVRButton.on('exit', function() {
@@ -122,9 +123,9 @@ function animate() {
 
   effect.render(scene, camera);
 
-  // if (enterVRButton.isPresenting()) {
+  if (enterVRButton.isPresenting()) {
     controls.update();
-  // }
+  }
 
   requestAnimationFrame(animate);
 }

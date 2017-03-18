@@ -96,9 +96,9 @@ var box = new THREE.BoxHelper( planeObject, 0xffff00 );
 scene.add( box );
 for (var x = -80; x < 80; x += 40) {
   for (var z = -400; z < 400; z += 20) {
-      var speaker=sphere.clone();
-      speaker.position.set(x+Math.random()*15,controls.userHeight + 1,z+Math.random()*15);
-      planeObject.add(speaker)
+      var sphere1=sphere.clone();
+      sphere1.position.set(x+Math.random()*15,controls.userHeight + 1,z+Math.random()*15);
+      planeObject.add(sphere1)
   }            
 }
 scene.add(planeObject);
