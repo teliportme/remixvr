@@ -1,7 +1,6 @@
-# Day 1 - 360 VR Photos
+# Day 28 - VR interface in WebVR
 
-[Demo](https://risonsimon.com/projects/day1) | [Tutorial](http://tutorialsforvr.com/360-virtual-reality-photos-tutorial/)
+[Demo](https://risonsimon.com/projects/day28) | [Tutorial](http://tutorialsforvr.com/vr-interface-in-webvr/)
 
-
-View 360 photos in virtual reality.
+Create a VR interface in WebVR to view panoramas.
 
