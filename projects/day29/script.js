@@ -113,9 +113,9 @@ function animate() {
   setUpDates();
   effect.render(scene, camera);
 
-  // if (enterVRButton.isPresenting()) {
+  if (enterVRButton.isPresenting()) {
     controls.update();
-  // }
+  }
 
   requestAnimationFrame(animate);
 }

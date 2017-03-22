@@ -1,7 +1,5 @@
-# Day 1 - 360 VR Photos
+# Day 29 - World clock in VR
 
-[Demo](https://risonsimon.com/projects/day1) | [Tutorial](http://tutorialsforvr.com/360-virtual-reality-photos-tutorial/)
+[Demo](https://risonsimon.com/projects/day29) | [Tutorial](http://tutorialsforvr.com/world-clock-using-momentjs-in-vr/)
 
-
-View 360 photos in virtual reality.
-
+Create world clock in VR using momentjs.
