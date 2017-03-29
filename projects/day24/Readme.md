@@ -1,7 +1,5 @@
-# Day 1 - 360 VR Photos
+# Day 24 - Hyperspeed in VR
 
-[Demo](https://risonsimon.com/projects/day1) | [Tutorial](http://tutorialsforvr.com/360-virtual-reality-photos-tutorial/)
+[Demo](https://risonsimon.com/projects/day24) | [Tutorial](https://tutorialsforvr.com/lines-webvr-travel-hyperspeed-vr/)
 
-
-View 360 photos in virtual reality.
-
+Hyperspeed effect in VR.

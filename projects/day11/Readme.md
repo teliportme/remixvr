@@ -1,7 +1,5 @@
-# Day 1 - 360 VR Photos
+# Day 11 - Fireplace in VR
 
-[Demo](https://risonsimon.com/projects/day1) | [Tutorial](http://tutorialsforvr.com/360-virtual-reality-photos-tutorial/)
+[Demo](https://risonsimon.com/projects/day11) | [Tutorial](https://tutorialsforvr.com/fireplace-webvr-tutorial/)
 
-
-View 360 photos in virtual reality.
-
+Fireplace in WebVR useful for interior designing in VR.
