@@ -1,0 +1,25 @@
+{
+  "title": "Objects",
+  "directory": "objectsvr",
+  "description": "Objects in VR",
+  "author": "RemixVR",
+  "variables": [
+    {
+      "name": "object",
+      "type": "dropdown",
+      "value": "Bear_Brown",
+      "options": ["Bear_Brown", "Cat"]
+    },
+    {
+      "name": "soundFile",
+      "type": "dropdown",
+      "value": "bear2.mp3",
+      "options": ["bear2.mp3", "Cat2.mp3"]
+    },
+    {
+      "name": "color",
+      "type": "text",
+      "value": "black"
+    }
+  ]
+}
