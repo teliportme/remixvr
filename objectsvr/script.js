@@ -159,7 +159,7 @@ function animate() {
 
     // if the ray intersects with the object 1 text, start rotating the object
     if (intersects[0].object.name === objectName) {
-      // sound.play();
+      sound.play();
       var timer = Date.now() * multiplier;
       if (object1 && object1.rotation) {
         object1.rotation.y = Math.cos(timer) * 3;

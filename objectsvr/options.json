@@ -1,7 +1,7 @@
 {
-  "title": "Objects",
+  "title": "Objects in VR",
   "directory": "objectsvr",
-  "description": "Objects in VR",
+  "description": "This template allows you to load different objects in VR, set a color for the background and play a sound when interacted with it.",
   "author": "RemixVR",
   "variables": [
     {

@@ -1,11 +1,59 @@
-let formElement = document.getElementById('form');
-let options;
 
-init();
+const queryStringOptions = (function queryStringOptions(a) {
+  if (a === "") return {};
+  const b = {};
+  for (let i = 0; i < a.length; ++i) {
+    const p = a[i].split('=', 2);
+    if (p.length === 1) {
+      b[p[0]] = "";
+    } else {
+      b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+  }
+  return b;
+}(window.location.search.substr(1).split('&')));
 
-function init() {
-  loadJSON(function (response) {
-    options = JSON.parse(response);
+let templateName = queryStringOptions.name ? queryStringOptions.name : 'objectsvr';
+
+setup('objectsvr', 'form1');
+setup('rainvr', 'form2');
+
+function setup(templateName, formId) {
+  loadJSON(templateName, function (response) {
+    let options = JSON.parse(response);
+
+    let jumbotron = document.createElement('div');
+    jumbotron.className = 'jumbotron';
+
+    let heading = document.createElement('h1');
+    heading.className = 'display-3';
+    heading.innerText = options.title;
+    jumbotron.appendChild(heading);
+
+    let description = document.createElement('p');
+    description.className = 'lead';
+    description.innerHTML = options.description;
+    jumbotron.appendChild(description);
+
+    let all = document.getElementById('all');
+    all.appendChild(jumbotron);
+
+    let formElement = document.createElement('form');
+    formElement.id = formId;
+
+    let formContainer = document.createElement('div');
+    formContainer.className = 'container';
+    let row = document.createElement('div');
+    row.className = 'row';
+    formContainer.appendChild(row);
+    let col = document.createElement('div');
+    col.className = 'col';
+    row.appendChild(col);
+    col.appendChild(formElement);
+
+    all.appendChild(formContainer);
+    formContainer.appendChild(row);;
+
     for (let i = 0; i < options.variables.length; i++) {
       var option = options.variables[i];
       if (option.type === 'text') {
@@ -33,6 +81,16 @@ function init() {
           selectGroup.appendChild(optionItem);
         }
         formElement.appendChild(divContainer);
+      } else if (option.type === 'number') {
+        let divContainer = document.createElement('div');
+        divContainer.className = 'form-group';
+        let input = document.createElement('input');
+        input.id = option.name;
+        input.type = 'number';
+        input.className = 'form-control';
+        input.placeholder = option.name;
+        divContainer.appendChild(input);
+        formElement.appendChild(divContainer);
       }
     }
     let submitButton = document.createElement('button');
@@ -40,24 +98,25 @@ function init() {
     submitButton.className = 'btn btn-primary';
     submitButton.innerText = 'Submit';
     formElement.appendChild(submitButton);
+
+    let formItem = document.getElementById(formId);
+    formItem.addEventListener('submit', function (event) {
+      event.preventDefault();
+      console.log(options)
+      let queryString = '/?';
+
+      for (let i = 0; i < options.variables.length; i++) {
+        let option = options.variables[i];
+        let field = document.getElementById(option.name);
+        let value = field.value ? field.value : option.value;
+        queryString = queryString + option.name + '=' + value + '&';
+      }
+
+      openInNewTab('/' + options.directory + queryString);
+
+    });
   });
 }
-
-formElement.addEventListener('submit', function(event) {
-  event.preventDefault();
-  let queryString = '/?';
-
-  for (let i = 0; i < options.variables.length; i++) {
-    let option = options.variables[i];
-    let field = document.getElementById(option.name);
-    let value = field.value ? field.value : option.value;
-    queryString = queryString + option.name + '=' + value + '&';
-  }
-
-  openInNewTab('/' + options.directory + queryString);
-
-});
-
 
 function openInNewTab(url) {
   var win = window.open(url, '_blank');
@@ -65,11 +124,11 @@ function openInNewTab(url) {
 }
 
 
-function loadJSON(callback) {
+function loadJSON(templateName, callback) {
 
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
-  xobj.open('GET', 'objectsVR/options.json', true); // Replace 'my_data' with the path to your file
+  xobj.open('GET', templateName + '/options.json', true); // Replace 'my_data' with the path to your file
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
       // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
