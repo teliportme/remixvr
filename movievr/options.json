@@ -1,0 +1,17 @@
+{
+  "title": "Movie Theatre in VR",
+  "directory": "movievr",
+  "description": "This template allows you to load different a video to be played in the VR movie theatre.",
+  "author": "RemixVR",
+  "variables": [
+    {
+      "name": "videoUrl",
+      "type": "dropdown",
+      "value": "patagonia.mp4",
+      "options": [
+        "patagonia.mp4",
+        "animals.mp4"
+      ]
+    }
+  ]
+}

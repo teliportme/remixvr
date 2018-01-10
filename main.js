@@ -17,6 +17,7 @@ let templateName = queryStringOptions.name ? queryStringOptions.name : 'objectsv
 
 setup('objectsvr', 'form1');
 setup('rainvr', 'form2');
+setup('movievr', 'form3');
 
 function setup(templateName, formId) {
   loadJSON(templateName, function (response) {
@@ -64,6 +65,11 @@ function setup(templateName, formId) {
       samples = [
         '/rainvr/?rainImage=raindrop.png&pano=pano1.jpg&particleNumber=30000&',
         '/rainvr/?rainImage=unicef.png&pano=pano1.jpg&particleNumber=1500&'
+      ]
+    } else if (templateName === 'movievr') {
+      samples = [
+        '/movievr/?videoUrl=animals.mp4&',
+        '/movievr/?videoUrl=patagonia.mp4&'
       ]
     }
 

@@ -64,7 +64,7 @@ function init() {
     fog: true
   });
 
-  const sizeValue = rainImage === 'unicef.png' ? 1 : 0.09;
+  const sizeValue = rainImage === 'unicef.png' ? 1 : 0.2;
 
   const emitter = new SPE.Emitter({
     maxAge: {
