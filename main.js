@@ -52,7 +52,35 @@ function setup(templateName, formId) {
     col.appendChild(formElement);
 
     all.appendChild(formContainer);
-    formContainer.appendChild(row);;
+    formContainer.appendChild(row);
+
+    let samples;
+    if (templateName === 'objectsvr') {
+      samples = [
+        '/objectsvr/?object=Bear_Brown&soundFile=bear2.mp3&color=black&',
+        '/objectsvr/?object=Cat&soundFile=Cat2.mp3&color=black&'
+      ];
+    } else if (templateName === 'rainvr') {
+      samples = [
+        '/rainvr/?rainImage=raindrop.png&pano=pano1.jpg&particleNumber=30000&',
+        '/rainvr/?rainImage=unicef.png&pano=pano1.jpg&particleNumber=1500&'
+      ]
+    }
+
+    let samplesDiv = document.createElement('div');
+    jumbotron.appendChild(samplesDiv);
+    let samplesHeading = document.createElement('h3');
+    samplesHeading.innerText = 'Samples';
+    samplesDiv.appendChild(samplesHeading);
+
+    for (let j = 0; j < samples.length; j++) {
+      let sampleItem = document.createElement('a');
+      sampleItem.href = samples[j];
+      sampleItem.target = '_blank';
+      sampleItem.innerText = 'Sample' + (j+1);
+      samplesDiv.appendChild(document.createElement('br'));
+      samplesDiv.appendChild(sampleItem);
+    }
 
     for (let i = 0; i < options.variables.length; i++) {
       var option = options.variables[i];
