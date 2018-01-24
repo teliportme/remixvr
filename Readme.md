@@ -23,3 +23,14 @@ It also contains `webvr-polyfill` script which provides keyboard and mouse contr
 `script.js` contains the code that creates the VR experience. It also contains the code to initialize **Enter VR** button when WebVR is ready. It also contains function to create the WebGL renderer using `three.js` and also sets up the scene for the VR experience.
 
 Template authors can write additional code to add custom logic on what to display on the scene.
+
+## How to use
+
+Open terminal on your computer and run the following.
+
+1. Clone the repo to your machine by running `git clone https://github.com/teliportme/remixVR.git remixVR`.
+2. Install [`node.js`](https://nodejs.org/) if you haven't done so already.
+3. Run `npm install -g serve`.
+4. Go inside the folder by running `cd remixVR`.
+5. Run `serve .`
+6. The application will be visible at `http://localhost:5000`.
