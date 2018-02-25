@@ -18,6 +18,8 @@ VR template contains all the necessary elements to initiate a VR enviornment in 
 
 It also contains `webvr-polyfill` script which provides keyboard and mouse controls when WebVR is not present on desktops and orientation controls on mobile.
 
+In case, you need addional scripts that you need to run for creating your VR experience, the library can be loaded from the commons folder. If the library is not present in the common folder, it should be requested to be added or added in a pull request. If the script doesn't follow the security and data requirements of the project, it'll not be included.
+
 ## What does script.js do?
 
 `script.js` contains the code that creates the VR experience. It also contains the code to initialize **Enter VR** button when WebVR is ready. It also contains function to create the WebGL renderer using `three.js` and also sets up the scene for the VR experience.
