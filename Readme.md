@@ -16,7 +16,7 @@ VR template contains all the necessary elements to initiate a VR enviornment in 
 
 `index.html` provides the necessary files to create VR experiences. It imports `three.js` which makes it easier to write WebGL code to create 3D experience and `WebVR.js` which will be used to check for VR availablity and add an **Enter VR** button to the page.
 
-It also contains `webvr-polyfill` script which provides keyboard and mouse controls when WebVR is not present on desktops and orientation controls on mobile.
+It also contains `webvr-polyfill` script which provides keyboard and mouse controls when WebVR is not present on desktops and orientation controls on mobile. `webvr-polyfill` adds supports for browsers that doesn't support WebVR API.
 
 In case, you need addional scripts that you need to run for creating your VR experience, the library can be loaded from the commons folder. If the library is not present in the common folder, it should be requested to be added or added in a pull request. If the script doesn't follow the security and data requirements of the project, it'll not be included.
 
@@ -36,3 +36,5 @@ Open terminal on your computer and run the following.
 4. Go inside the folder by running `cd remixVR`.
 5. Run `serve .`
 6. The application will be visible at `http://localhost:5000`.
+7. Select the options for the VR experience and click on submit.
+8. You can share the experience by sharing the url.
