@@ -81,7 +81,7 @@ scene.add(mars);
 var jupiterSize = 34.99;
 var jupiterOrbitRadius = sunSize + (AU * 5.2);
 var jupiterOrbitAngle = getRandomArbitrary(0, 360);
-var jupiterOrbitSpeed = 0.26;
+var jupiterOrbitSpeed = 0.22;
 var jupiterRotateSpeed = 0.05;
 
 var jupiterMaterial = new THREE.MeshLambertMaterial({
