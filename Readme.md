@@ -16,7 +16,7 @@ Python 3: [http.server](https://docs.python.org/3/library/http.server.html)
 
 python -m http.server 80
 
-## About Viewport
+## About RealityPipe
 
 [RealityPipe](https://realitypipe.com) enables developers to create VR apps easily across any platform.
 
