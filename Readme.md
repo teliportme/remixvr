@@ -18,4 +18,6 @@ python -m http.server 80
 
 ## About Viewport
 
-[ViewportVR](https://viewportvr.co) enables developers to create VR apps easily across any platform. Sign up for [Viewport docs](https://docs.viewportvr.co/) to get started.
+[RealityPipe](https://realitypipe.com) enables developers to create VR apps easily across any platform.
+
+Learn how to develop VR apps from [Tutorials for VR](https://tutorialsforvr.com).
