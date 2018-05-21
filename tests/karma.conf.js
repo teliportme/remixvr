@@ -10,7 +10,8 @@ module.exports = function (config) {
     },
     files: [
       'tests/index.js',
-      { pattern: 'packages/*/{*.test.js,!(node_modules)/**/*.test.js}' }
+      { pattern: 'packages/*/{*.test.js,!(node_modules)/**/*.test.js}' },
+      { pattern: 'objects/**/*', included: false, served: true }
     ],
     frameworks: ['mocha', 'sinon-chai', 'chai-shallow-deep-equal'],
     preprocessors: {
