@@ -1,3 +1,5 @@
+# RemixVR
+
 ## What does the VR template provide?
 
 VR template contains all the necessary elements to initiate a VR enviornment in web browsers. It also provides the basic structure to create custom VR templates.
@@ -8,9 +10,9 @@ VR template contains all the necessary elements to initiate a VR enviornment in 
 4. Only the scripts from the common folder should be included in the `index.html` page.
 5. The main js file should be named `script.js`.
 6. The options for the template will set using `options.json` in the template folder.
-7. The customisable variables should be present inside the *variables* attribute inside the options object.
+7. The customisable variables should be present inside the _variables_ attribute inside the options object.
 8. The options object will also provide the title, description and the author of the template.
-9. Each *variable* inside the options object can be of approved types like text and dropdown. If the current types doesn't fit the need, new type can be submitted for approval.
+9. Each _variable_ inside the options object can be of approved types like text and dropdown. If the current types doesn't fit the need, new type can be submitted for approval.
 
 ## What does index.html do?
 
@@ -38,3 +40,4 @@ Open terminal on your computer and run the following.
 6. The application will be visible at `http://localhost:5000`.
 7. Select the options for the VR experience and click on submit.
 8. You can share the experience by sharing the url.
+
