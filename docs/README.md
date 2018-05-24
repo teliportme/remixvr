@@ -1,3 +1,0 @@
-# RemixVR
-
-Documentation for RemixVR.
