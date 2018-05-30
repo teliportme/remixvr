@@ -45,7 +45,7 @@ Once the installation of is completed, you're ready to use the VR templates.
 
 The repo is setup as a monorepo using [yarn workspaces](https://yarnpkg.com/en/docs/workspaces). This conserves disk space by sharing common dependencies across different packages.
 
-### Starting a VR template
+### Running a VR template
 
 Once you have installed all the dependencies, to start a VR template, go to the template folder and in the terminal run `yarn start`.
 
