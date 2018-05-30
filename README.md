@@ -1,43 +1,101 @@
 # RemixVR
 
-## What does the VR template provide?
+RemixVR is a tool to collaboratively build editable VR experiences.
 
-VR template contains all the necessary elements to initiate a VR enviornment in web browsers. It also provides the basic structure to create custom VR templates.
+The editable VR experiences are called VR templates. Anyone can create a VR template. Each VR template will have configurable options that can be selected by the user. These options allow the user to create custom VR experiences from a single VR template.
 
-1. The template author can enter their VR enviornment logic inside the `init()` function in the `script.js` file.
-2. The initial contents of the `script.js` file should not be deleted.
-3. `index.html` file should not be edited unless you need to add extra scripts.
-4. Only the scripts from the common folder should be included in the `index.html` page.
-5. The main js file should be named `script.js`.
-6. The options for the template will set using `options.json` in the template folder.
-7. The customisable variables should be present inside the _variables_ attribute inside the options object.
-8. The options object will also provide the title, description and the author of the template.
-9. Each _variable_ inside the options object can be of approved types like text and dropdown. If the current types doesn't fit the need, new type can be submitted for approval.
+![RemixVR](https://media.giphy.com/media/KZfKUhK06Gc8KL0O6Y/giphy.gif)
 
-## What does index.html do?
+For example, let's look at the [ObjectsVR](https://github.com/teliportme/remixVR/tree/master/packages/objectsvr) template. It has three options. You can change the object, the 360 background and the sound it creates when hovering on the object.
 
-`index.html` provides the necessary files to create VR experiences. It imports `three.js` which makes it easier to write WebGL code to create 3D experience and `WebVR.js` which will be used to check for VR availablity and add an **Enter VR** button to the page.
+In the initial version, these options are updated by editing the code. However, as we continue to develop RemixVR, we'll be including a visual way to update the options.
 
-It also contains `webvr-polyfill` script which provides keyboard and mouse controls when WebVR is not present on desktops and orientation controls on mobile. `webvr-polyfill` adds supports for browsers that doesn't support WebVR API.
+## Getting Started
 
-In case, you need addional scripts that you need to run for creating your VR experience, the library can be loaded from the commons folder. If the library is not present in the common folder, it should be requested to be added or added in a pull request. If the script doesn't follow the security and data requirements of the project, it'll not be included.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-## What does script.js do?
+## Documentation
 
-`script.js` contains the code that creates the VR experience. It also contains the code to initialize **Enter VR** button when WebVR is ready. It also contains function to create the WebGL renderer using `three.js` and also sets up the scene for the VR experience.
+You can read [RemixVR docs](https://docs.remixvr.org/) to view all the documentation about the project.
 
-Template authors can write additional code to add custom logic on what to display on the scene.
+### Prerequisites
 
-## How to use
+To make sure the projects runs on your machine, you need to have the following items installed on your machine.
 
-Open terminal on your computer and run the following.
+[Install node.js](https://nodejs.org/en/download/package-manager/) on your machine. We'll be using node.js for running our development server and building our project using [webpack](https://webpack.js.org/).
 
-1. Clone the repo to your machine by running `git clone https://github.com/teliportme/remixVR.git remixVR`.
-2. Install [`node.js`](https://nodejs.org/) if you haven't done so already.
-3. Run `npm install -g serve`.
-4. Go inside the folder by running `cd remixVR`.
-5. Run `serve .`
-6. The application will be visible at `http://localhost:5000`.
-7. Select the options for the VR experience and click on submit.
-8. You can share the experience by sharing the url.
+We'll use [yarn](https://yarnpkg.com/en/) as our dependency manager. If you don't have `yarn` on your machine, make sure to [install yarn](https://yarnpkg.com/en/docs/install).
 
+### Installing
+
+First, we need to clone this Github repo and open the folder.
+
+```bash
+git clone https://github.com/teliportme/remixVR.git
+cd remixVR
+```
+
+Then we need to install the dependencies.
+
+```bash
+yarn install
+```
+
+Once the installation of is completed, you're ready to use the VR templates.
+
+The repo is setup as a monorepo using [yarn workspaces](https://yarnpkg.com/en/docs/workspaces). This conserves disk space by sharing common dependencies across different packages.
+
+### Starting a VR template
+
+Once you have installed all the dependencies, to start a VR template, go to the template folder and in the terminal run `yarn start`.
+
+For example, to start the ObjectsVR template, go to the template folder.
+
+```bash
+cd packages/objectsvr
+```
+
+Once you're inside the template folder, then start the development server.
+
+```bash
+yarn start
+```
+
+You can view the template by going to `http://localhost:8080/` on your browser.
+
+## Running the tests
+
+To run the test, navigate to the root folder of remixVR. Then run:
+
+```bash
+yarn run test
+```
+
+The test files are present inside the template folder. The test files ends with *.test.js* in their file name. You can look at [ObjectsVR test](packages/objectsvr/objectsvr.test.js) file to see an example.
+
+## Built With
+
+- [a-frame](https://aframe.io/)
+- [webpack](https://webpack.js.org/)
+- [karma](https://karma-runner.github.io/)
+- [mocha](https://mochajs.org/)
+- [chai](http://www.chaijs.com/)
+- [sinon](http://sinonjs.org/)
+
+## Contributing
+
+Please read [CODE OF CONDUCT](CODE_OF_CONDUCT.md) for details on our code of conduct. Please read [CONTRIBUTING GUIDE](CONTRIBUTING.md) before contributing.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning the VR templates.
+
+## Authors
+
+- **[Rison Simon](https://risonsimon.com)**
+
+See also the list of [contributors](https://github.com/teliportme/remixVR/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the GPL v3 License - see the [LICENSE.md](LICENSE.md) file for details.
