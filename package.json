@@ -3,6 +3,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "test": "karma start ./tests/karma.conf.js"
+  },
   "devDependencies": {
     "babel-loader": "^7.1.4",
     "chai": "^4.1.2",
