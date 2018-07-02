@@ -1,0 +1,9 @@
+# Everything the developer needs in addition to the production requirements
+-r prod.txt
+
+# Testing
+pytest==3.6.3
+WebTest==2.0.30
+factory-boy==2.11.1
+# For python 3
+Faker==0.8.16
