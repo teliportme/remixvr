@@ -16,10 +16,14 @@
     "lint": "semistandard -v | snazzy"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "semistandard": "^12.0.1",
     "snazzy": "^7.1.1",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.3"
+  },
+  "dependencies": {
+    "aframe": "^0.8.2"
   }
 }
