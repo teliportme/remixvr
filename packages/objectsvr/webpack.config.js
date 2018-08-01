@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let PLUGINS = [new HtmlWebpackPlugin({
   template: 'index.html',
+  inject: 'head'
 })];
 if (process.env.NODE_ENV === 'production') {
   PLUGINS.push(new webpack.optimize.UglifyJsPlugin());

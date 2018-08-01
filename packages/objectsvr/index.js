@@ -1,3 +1,5 @@
+import AFRAME from 'aframe';
+
 AFRAME.registerComponent('cursor-listener', {
   init: function () {
     this.el.addEventListener('mouseleave', function(event) {
