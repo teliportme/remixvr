@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>360 VR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <a-scene cursor="rayOrigin: mouse">
+    <a-assets>
+      <img id="pano1" src="images/pano1.jpg"/>
+      <img id="pano2" src="images/pano2.jpg"/>
+      <a-mixin id="hotspot-text" visible="false" text="font: exo2bold; width: 5" geometry="primitive: plane; width: 1; height: 0.4" material="color: black;"
+        position="0 -0.6 0"></a-mixin>
+      <a-mixin id="hotspot-target" face-camera geometry="primitive: octahedron; radius: 0.3;" material="flatShading: true; color: rgb(255, 0, 161)"></a-mixin>
+    </a-assets>
+    <a-sky src="#pano1" id="space"></a-sky>
+    <a-entity
+      mixin="hotspot-target"
+      position="5 0 0"
+      event-set__mouseenter="visible: true; _target:#pano1_text"
+      event-set__mouseleave="visible: false; _target:#pano1_text"
+      set-image="on:click;target: #space; src: #pano1">
+      <a-text id="pano1_text" align="center" baseline="center" value="test" mixin="hotspot-text" position="0 .5 0"></a-text>
+    </a-entity>
+     <a-entity
+      mixin="hotspot-target"
+      position="1 0 -5"
+      event-set__mouseenter="visible: true; _target:#pano2_text"
+      event-set__mouseleave="visible: false; _target:#pano2_text"
+      set-image="on:click;target: #space; src: #pano2">
+      <a-text id="pano2_text" align="center" baseline="center" value="test" mixin="hotspot-text" position="0 .5 0"></a-text>
+    </a-entity>
+    
+    <a-entity camera look-controls>
+      <a-cursor
+        id="cursor"
+        material="color: red"
+        animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+        animation__fusing="property: scale; startEvents: fusing; pauseEvents: mouseleave; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+        fuse="true"
+        raycaster="objects: [set-image]"
+      ></a-cursor>
+    </a-entity>
+  </a-scene>
+</body>
+</html>

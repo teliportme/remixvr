@@ -174,6 +174,20 @@ addressparser@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
 
+aframe-animation-component@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/aframe-animation-component/-/aframe-animation-component-5.1.0.tgz#b3821c59f4ad591010fc2582d16e2610a713abe7"
+  dependencies:
+    animejs "2.2.0"
+
+aframe-event-set-component@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/aframe-event-set-component/-/aframe-event-set-component-4.1.2.tgz#86bdadd26e20eea3e78b3fb257a0d278b4ab76b7"
+
+aframe-particle-system-component@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/aframe-particle-system-component/-/aframe-particle-system-component-1.0.11.tgz#ac1f3abef2307b238df58c9358982c987fb10016"
+
 aframe@^0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/aframe/-/aframe-0.8.2.tgz#435dd7c7d2f059316af87f4a9783427b0617e11f"
@@ -246,6 +260,10 @@ amqplib@^0.5.2:
 an-array@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/an-array/-/an-array-1.0.0.tgz#c125a5bb8257778e35f4b4f6aa9c7d0fa9e42665"
+
+animejs@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/animejs/-/animejs-2.2.0.tgz#35eefdfc535b81949c9cb06f0b3e60c02e6fdc80"
 
 ansi-escapes@^1.0.0:
   version "1.4.0"
