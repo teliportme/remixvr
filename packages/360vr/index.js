@@ -10,6 +10,7 @@ AFRAME.registerComponent('set-image', {
   schema: {
     on: { type: 'string' },
     target: { type: 'selector', default: '#space' },
+    spaceTarget: { type: 'selector' },
     src: { type: 'string' },
     dur: { type: 'number', default: 300 }
   },
@@ -22,6 +23,12 @@ AFRAME.registerComponent('set-image', {
 
     el.addEventListener(data.on, function() {
       data.target.emit('set-image-fade');
+      // hide all spaces and make the new space visible
+      var spaces = document.getElementsByClassName('space');
+      for (var i = 0; i < spaces.length; i++) {
+        spaces[i].setAttribute('visible', 'false')
+      }
+      data.spaceTarget.setAttribute('visible', 'true');
       setTimeout(function() {
         data.target.setAttribute('material', 'src', data.src);
       }, data.dur);

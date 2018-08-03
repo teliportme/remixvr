@@ -14,25 +14,28 @@
       <a-mixin id="hotspot-text" visible="false" text="font: exo2bold; width: 5" geometry="primitive: plane; width: 1; height: 0.4" material="color: black;"
         position="0 -0.6 0"></a-mixin>
       <a-mixin id="hotspot-target" face-camera geometry="primitive: octahedron; radius: 0.3;" material="flatShading: true; color: rgb(255, 0, 161)"></a-mixin>
+      <img crossorigin="anonymous" id="img-arrow-up" src="images/arrows/arrow-circle-up.png" />
+      <img crossorigin="anonymous" id="img-arrow-down" src="images/arrows/arrow-circle-down.png" />
+      <img crossorigin="anonymous" id="img-arrow-left" src="images/arrows/arrow-circle-left.png" />
+      <img crossorigin="anonymous" id="img-arrow-right" src="images/arrows/arrow-circle-right.png" />
+      <a-mixin id="arrow-up" face-camera material="src:#img-arrow-up;shader:flat; color:#fff; opacity: 0.9;" geometry="primitive: circle; radius: .2"></a-mixin>
+      <a-mixin id="arrow-down" face-camera material="src:#img-arrow-down; shader:flat; color:#fff; opacity:0.9;" geometry="primitive: circle; radius: 0.2"></a-mixin>
+      <a-mixin id="arrow-left" face-camera material="src:#img-arrow-left; shader:flat; color:#fff; opacity:0.9;" geometry="primitive: circle; radius: 0.2"></a-mixin>
+      <a-mixin id="arrow-right" face-camera material="src:#img-arrow-right; shader:flat; color:#fff; opacity:0.9;" geometry="primitive: circle; radius: 0.2"></a-mixin>
     </a-assets>
     <a-sky src="#pano1" id="space"></a-sky>
-    <a-entity
-      mixin="hotspot-target"
-      position="5 0 0"
-      event-set__mouseenter="visible: true; _target:#pano1_text"
-      event-set__mouseleave="visible: false; _target:#pano1_text"
-      set-image="on:click;target: #space; src: #pano1">
-      <a-text id="pano1_text" align="center" baseline="center" value="test" mixin="hotspot-text" position="0 .5 0"></a-text>
+    <a-entity id="pano1_space" class="space">
+      <a-entity mixin="arrow-up" position="5 0 0" event-set__mouseenter="visible: true; _target:#pano1_text" event-set__mouseleave="visible: false; _target:#pano1_text"
+        set-image="on:click;target: #space; spaceTarget: #pano2_space; src: #pano2">
+        <a-text id="pano1_text" align="center" baseline="center" value="test" mixin="hotspot-text" position="0 .5 0"></a-text>
+      </a-entity>
     </a-entity>
-     <a-entity
-      mixin="hotspot-target"
-      position="1 0 -5"
-      event-set__mouseenter="visible: true; _target:#pano2_text"
-      event-set__mouseleave="visible: false; _target:#pano2_text"
-      set-image="on:click;target: #space; src: #pano2">
-      <a-text id="pano2_text" align="center" baseline="center" value="test" mixin="hotspot-text" position="0 .5 0"></a-text>
+    <a-entity id="pano2_space" class="space" visible="false">
+      <a-entity mixin="arrow-down" position="1 0 -5" event-set__mouseenter="visible: true; _target:#pano2_text" event-set__mouseleave="visible: false; _target:#pano2_text"
+        set-image="on:click;target: #space; spaceTarget: #pano1_space; src: #pano1">
+        <a-text id="pano2_text" align="center" baseline="center" value="test" mixin="hotspot-text" position="0 .5 0"></a-text>
+      </a-entity>
     </a-entity>
-    
     <a-entity camera look-controls>
       <a-cursor
         id="cursor"
