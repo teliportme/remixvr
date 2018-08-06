@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bohr Model</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <a-scene>
+    <a-sphere position="0 1.5 -1" color="red" radius="0.1">
+      <a-torus segments-tubular="60" animation__1="property: rotation; from: 0 0 0; to:0 0 360;loop: true; dur: 3000; dir:reverse; easing: linear;" radius-inner="0.3" arc="360" radius="0.3" radius-tubular="0.001" color="red">
+        <a-sphere color="green" radius="0.01" position="-0.3 0 0"></a-sphere>
+      </a-torus>
+    </a-sphere>
+  </a-scene>
+</body>
+</html>
