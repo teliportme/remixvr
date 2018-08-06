@@ -1,5 +1,5 @@
 {
-  "name": "objectsvr",
+  "name": "remixvr-objectsvr",
   "version": "1.0.0",
   "description": "Add 3D objects in VR space.",
   "main": "index.js",

@@ -1,5 +1,5 @@
 {
-  "name": "360vr",
+  "name": "remixvr-360vr",
   "version": "1.0.0",
   "description": "Starter template for building VR templates with RemixVR",
   "main": "index.js",

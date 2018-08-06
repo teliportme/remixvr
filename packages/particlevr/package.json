@@ -1,5 +1,5 @@
 {
-  "name": "particlevr",
+  "name": "remixvr-particlevr",
   "version": "1.0.0",
   "description": "Add rain/snow like particle effects to 360 images",
   "main": "index.js",
