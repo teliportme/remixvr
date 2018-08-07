@@ -8,11 +8,18 @@
 </head>
 <body>
   <a-scene>
-    <a-sphere position="0 1.5 -1" color="red" radius="0.1">
-      <a-torus segments-tubular="60" animation__1="property: rotation; from: 0 0 0; to:0 0 360;loop: true; dur: 3000; dir:reverse; easing: linear;" radius-inner="0.3" arc="360" radius="0.3" radius-tubular="0.001" color="red">
-        <a-sphere color="green" radius="0.01" position="-0.3 0 0"></a-sphere>
-      </a-torus>
+    <a-sphere position="1.3 0 -1" color="red" radius="0.1" id="element" electron-rings="atomicNumber:1" rotation="0 -30 0">
+      
+      <a-plane color="gray" position="1 0 0" width="0.5" height="0.5" id="info">
+        <a-text align="center" width="1" id="elementName"></a-text>
+      </a-plane>
     </a-sphere>
+    <a-entity periodic-table position="-1 0.7 2" rotation="0 90 0"></a-entity>
+    <a-entity camera position="0 0 0" look-controls wasd-controls>
+      <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+        material="color: black; shader: flat">
+      </a-entity>
+    </a-entity>
   </a-scene>
 </body>
 </html>
