@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Project models."""
 
-from remixvr.database import (Model, SurrogatePK
+from remixvr.database import (Model, SurrogatePK,
                               relationship, reference_col,
                               Column, db)
 
@@ -20,6 +20,6 @@ class Project(Model, SurrogatePK):
   def projects_by_user(self, user_id):
     return self.query.join(Project.created_by).filter_by(user_id == user_id)
 
-      def __repr__(self):
-        """Represent instance as a unique string."""
-        return '<Project({name!r})>'.format(name=self.project_name)
+  def __repr__(self):
+    """Represent instance as a unique string."""
+    return '<Project({name!r})>'.format(name=self.project_name)

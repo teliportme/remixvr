@@ -35,6 +35,7 @@ class ProdConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',
                                              'postgresql://localhost/example')
+    UPLOAD_FOLDER = './uploads'
 
 
 class DevConfig(Config):
@@ -48,6 +49,7 @@ class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     JWT_EXPIRATION_DELTA = timedelta(10**6)
+    UPLOAD_FOLDER = './uploads'
 
 
 class TestConfig(Config):

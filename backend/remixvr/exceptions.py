@@ -10,6 +10,7 @@ USER_ALREADY_REGISTERED = template(['User already registered'], code=422)
 UKNOWN_ERROR = template([], code=500)
 ARTICLE_NOT_FOUND = template(['Article not found'], code=404)
 COMMENT_NOT_OWNED = template(['Not your article'], code=422)
+NO_FILES_FOUND = template(['No files found'], code=500)
 
 
 class InvalidUsage(Exception):
@@ -45,3 +46,7 @@ class InvalidUsage(Exception):
     @classmethod
     def comment_not_owned(cls):
         return cls(**COMMENT_NOT_OWNED)
+
+    @classmethod
+    def no_files_found(cls):
+        return cls(**NO_FILES_FOUND)
