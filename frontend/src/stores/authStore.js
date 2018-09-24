@@ -34,7 +34,7 @@ class AuthStore {
         .then(() => userStore.pullUser())
         .catch(action(error => {
           this.errors = error.response && error.response.body && error.response.body.errors;
-          throw err;
+          throw error;
         }))
         .finally(action(() => { this.inProgress = false; }));
       }),
@@ -46,7 +46,7 @@ class AuthStore {
           .then(() => userStore.pullUser())
           .catch(action(error => {
             this.errors = error.response && error.response.body && error.response.body.errors;
-            throw err;
+            throw error;
           }))
           .finally(action(() => { this.inProgress = false; }));
       }),
