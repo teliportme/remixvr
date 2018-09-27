@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ParticleVR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="build.js"></script></head>
+<body>
+  <a-scene>
+    <a-assets>
+      <audio id="rain" src="./rain.mp3"></audio>
+    </a-assets>
+    <a-sky src="./images/pano2.jpg"></a-sky>
+    <a-entity position="0 1.25 -15" particle-system="preset: rain; particleCount: 10000"></a-entity>
+    <!-- <a-entity position="0 1.25 -15" particle-system="preset: snow; particleCount: 10000"></a-entity> -->
+    <a-sound src="#rain" autoplay="true" position="0 2 5"></a-sound>
+  </a-scene>
+</body>
+</html>
