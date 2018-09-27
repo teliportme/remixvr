@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   entry: './index.js',
   output: {
-    path: __dirname,
+    path: __dirname + '/dist',
     filename: 'build.js'
   },
   module: {
