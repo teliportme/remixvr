@@ -9,6 +9,7 @@ import userStore from './stores/userStore';
 import commonStore from './stores/commonStore';
 import profileStore from './stores/profileStore';
 import authStore from './stores/authStore';
+import { Provider } from 'mobx-react';
 
 
 const stores = {
@@ -24,5 +25,9 @@ window._____APP_STATE_____ = stores;
 
 promiseFinally.shim();
  
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render((
+  <Provider {...stores}>
+    <App />
+  </Provider>
+), document.getElementById('root'));
 // registerServiceWorker();
