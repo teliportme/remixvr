@@ -7,7 +7,7 @@ class CommonStore {
       appName: 'RemixVR',
       token: window.localStorage.getItem('jwt'),
       appLoaded: false,
-      
+      setAppLoaded: action(() => this.appLoaded = true)
     });
 
     reaction(
