@@ -24,10 +24,22 @@ window._____APP_STATE_____ = stores;
 
 
 promiseFinally.shim();
- 
-ReactDOM.render((
-  <Provider {...stores}>
-    <App />
-  </Provider>
-), document.getElementById('root'));
+
+const render = Component => {
+  return ReactDOM.render(
+    <Provider {...stores}>
+      <Component />
+    </Provider>,
+    document.getElementById('root')
+  );
+};
+
+render(App);
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default;
+    render(NextApp);
+  });
+}
 // registerServiceWorker();
