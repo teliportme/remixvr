@@ -39,7 +39,7 @@ const VideoPlayer = styled.video.attrs({
 
 const Home = () => (
   <React.Fragment>
-    <div className="cf flex-ns items-center justify-between mt6-l">
+    <div className="cf items-center justify-between">
       <div className="fl w-100 w-50-l">
         <div className="center mt5-l mt4 mw7 pl3-ns tc tl-ns w-100">
           <button className="b--none bg-yellow black br-pill dib f6 fw6 mb2 no-underline outline-0 ph3 pv2 trackedine">Open Source</button>
