@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/teliportme/remixVR/branch/master/graph/badge.svg)](https://codecov.io/gh/teliportme/remixVR)
+
 # RemixVR
 
 RemixVR is a tool to collaboratively build editable VR experiences.
