@@ -2,6 +2,7 @@ import React from 'react';
 import video from './video.mp4'
 import TeliportmeLogo from './logos/teliportme-logo.png';
 import TutorialsforvrLogo from './logos/tutorialsforvr-logo.png';
+import Unicefinnovationfund from './logos/unicef2.png';
 import styled from 'styled-components';
 
 const BgObject = styled.div.attrs({
@@ -62,6 +63,7 @@ const Home = () => (
     <div className="mt5 ph7-l ph5-ns pv4 tc">
       <span className="ttu  tracked-mega relative bottom-1 fw6 light-silver f5">Supported By</span>
       <div className="mt3">
+        <a href="https://unicefinnovationfund.org" className="link"><img className="w-100 w-20-ns mw5 mw6-ns" src={Unicefinnovationfund} /></a>
         <a href="https://tutorialsforvr.com" className="link"><img className="w-100 w-20-ns mw5 mw6-ns" src={TutorialsforvrLogo} /></a>
         <a href="https://teliportme.com" className="link"><img className="w-100 w-20-ns mw5 mw6-ns" src={TeliportmeLogo} /></a>
       </div>
