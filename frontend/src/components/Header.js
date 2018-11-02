@@ -11,10 +11,10 @@ const Header = inject("commonStore")(observer(({ commonStore }) => {
     <div className="dtc v-mid w-75 tr">
       <ul>
         <li className="list dib pb2">
-          <a href="https://docs.remixvr.org" className="link dim f6 f5-ns dib mr3 mr4-ns pointer dark-gray">Docs</a>
+          <a href="https://docs.remixvr.org" target="_blank" className="link dim f6 f5-ns dib mr3 mr4-ns pointer dark-gray">Docs</a>
         </li>
         <li className="list dib pb2">
-          <a href="https://github.com/teliportme/remixvr" className="link dim f6 f5-ns dib mr3 mr4-ns pointer dark-gray">Github</a>
+          <a href="https://github.com/teliportme/remixvr" target="_blank" className="link dim f6 f5-ns dib mr3 mr4-ns pointer dark-gray">Github</a>
         </li>
       </ul>
     </div>
