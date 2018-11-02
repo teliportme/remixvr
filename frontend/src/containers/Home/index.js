@@ -40,7 +40,7 @@ const VideoPlayer = styled.video.attrs({
 
 const Home = () => (
   <React.Fragment>
-    <div className="cf items-center justify-between">
+    <div className="cf items-center justify-between ph2">
       <div className="fl w-100 w-50-l">
         <div className="center mt5-l mt4 mw7 pl3-ns tc tl-ns w-100">
           <button className="b--none bg-yellow black br-pill dib f6 fw6 mb2 no-underline outline-0 ph3 pv2 trackedine">Open Source</button>
@@ -56,14 +56,14 @@ const Home = () => (
           </div>
         </div>
       </div>
-      <div className="fl w-100 w-50-l tc">
+      <div className="fl w-100 w-50-l tc mt5-ns">
         <VideoPlayer />
       </div>
     </div>
     <div className="mt5 ph7-l ph5-ns pv4 tc">
       <span className="ttu  tracked-mega relative bottom-1 fw6 light-silver f5">Supported By</span>
       <div className="mt3">
-        <a href="https://unicefinnovationfund.org" className="link"><img className="w-100 w-20-ns mw5 mw6-ns" src={Unicefinnovationfund} /></a>
+        <a href="https://unicefinnovationfund.org" className="link"><img className="w-100 w-25-ns mw5 mw6-ns" src={Unicefinnovationfund} /></a>
         <a href="https://tutorialsforvr.com" className="link"><img className="w-100 w-20-ns mw5 mw6-ns" src={TutorialsforvrLogo} /></a>
         <a href="https://teliportme.com" className="link"><img className="w-100 w-20-ns mw5 mw6-ns" src={TeliportmeLogo} /></a>
       </div>
