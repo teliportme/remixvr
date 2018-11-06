@@ -4,6 +4,7 @@ import TeliportmeLogo from './logos/teliportme-logo.png';
 import TutorialsforvrLogo from './logos/tutorialsforvr-logo.png';
 import Unicefinnovationfund from './logos/unicef2.png';
 import styled from 'styled-components';
+import RightArrow from './arrow-right2.svg';
 
 const BgObject = styled.div.attrs({
   className: 'left-2-ns top--2'
@@ -40,11 +41,12 @@ const VideoPlayer = styled.video.attrs({
 
 const Home = () => (
   <React.Fragment>
+    <a href="http://unicefstories.org/2018/04/04/venturefundteliportme/" target="_blank" className="b tc bg-blue br-pill center dib f4-ns f5 link mb3 mt4 mt5-l mw7 ph3 pv2 white">
+      Proudly supported by UNICEF Innovation Fund
+      <img src={RightArrow} className="w1 h1 ml2 v-mid dn dib-ns" />
+    </a>
     <div className="cf items-center justify-between ph2">
       <div className="fl w-100 w-50-l pl5-ns">
-        <a href="http://unicefstories.org/2018/04/04/venturefundteliportme/" target="_blank" className="b bg-green br-pill dib mb3 mt4 mt5-l mw7 ph3 pv2 white">
-          Proudly supported by UNICEF Innovation Fund
-        </a>
         <div className="tc tl-ns w-100">
           <button className="b--none bg-yellow black br-pill dib f6 fw6 mb2 no-underline outline-0 ph3 pv2 trackedine">Open Source</button>
         </div>
