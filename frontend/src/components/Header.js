@@ -16,6 +16,9 @@ const Header = inject("commonStore")(observer(({ commonStore }) => {
         <li className="list dib pb2">
           <a href="https://github.com/teliportme/remixvr" target="_blank" className="link dim f6 f5-ns dib mr3 mr4-ns pointer dark-gray">Github</a>
         </li>
+        <li className="list dib pb2">
+          <a href="https://blog.teliportme.com/tag/remixvr/" target="_blank" className="link dim f6 f5-ns dib mr3 mr4-ns pointer dark-gray">Blog</a>
+        </li>
       </ul>
     </div>
   </nav>

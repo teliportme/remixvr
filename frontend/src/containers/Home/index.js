@@ -41,13 +41,16 @@ const VideoPlayer = styled.video.attrs({
 const Home = () => (
   <React.Fragment>
     <div className="cf items-center justify-between ph2">
-      <div className="fl w-100 w-50-l">
-        <div className="center mt5-l mt4 mw7 pl3-ns tc tl-ns w-100">
+      <div className="fl w-100 w-50-l pl5-ns">
+        <a href="http://unicefstories.org/2018/04/04/venturefundteliportme/" target="_blank" className="b bg-green br-pill dib mb3 mt4 mt5-l mw7 ph3 pv2 white">
+          Proudly supported by UNICEF Innovation Fund
+        </a>
+        <div className="tc tl-ns w-100">
           <button className="b--none bg-yellow black br-pill dib f6 fw6 mb2 no-underline outline-0 ph3 pv2 trackedine">Open Source</button>
         </div>
-        <span className="db f1 f-subheadline-l fw5 center mw7 tc tl-ns ph2 lh-title">Collaboratively build customizable<span style={{ color: '#216ef4' }}>VR experiences</span></span>
+        <span className="db f1-ns f2 fw5 lh-title tc tl-ns">Collaboratively build customizable<br/><span style={{ color: '#216ef4' }}>VR experiences</span></span>
         <BgObject />
-        <div className="cf center mt5-l mt4 mw7 pl3-ns tc tl-ns w-100 flex ph2 ph0-ns">
+        <div className="cf flex mt4 mt5-l ph0-ns ph2 tc tl-ns w-100">
           <div className="fl">
             <a href="https://github.com/teliportme/remixVR" className="link bg-red br2 ba bw1 dib dim f3 fw4 mb2 ph3 pv3 tracked white b--red">View on Github</a>
           </div>
