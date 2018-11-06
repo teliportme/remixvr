@@ -41,7 +41,7 @@ const VideoPlayer = styled.video.attrs({
 
 const Home = () => (
   <React.Fragment>
-    <a href="http://unicefstories.org/2018/04/04/venturefundteliportme/" target="_blank" className="b tc bg-blue br-pill center dib f4-ns f5 link mb3 mt4 mt5-l mw7 ph3 pv2 white">
+    <a href="http://unicefstories.org/2018/04/04/venturefundteliportme/" target="_blank" className="b bg-blue br-pill center dib f4-ns f5 link mb3 mt3 mw7 ph3 pv2 tc white">
       Proudly supported by UNICEF Innovation Fund
       <img src={RightArrow} className="w1 h1 ml2 v-mid dn dib-ns" />
     </a>
