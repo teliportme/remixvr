@@ -65,7 +65,7 @@ const Home = () => (
         <VideoPlayer />
       </div>
     </div>
-    <div className="mt5 ph7-l ph5-ns pv4 tc">
+    <div className="mt4 ph7-l ph5-ns pv4 tc">
       <span className="ttu  tracked-mega relative bottom-1 fw6 light-silver f5">Supported By</span>
       <div className="mt3">
         <a href="https://unicefinnovationfund.org" className="link"><img className="w-100 w-25-ns mw5 mw6-ns" src={Unicefinnovationfund} /></a>
