@@ -20,6 +20,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 You can read [RemixVR docs](https://docs.remixvr.org/) to view all the documentation about the project.
 
+## Demos
+
+- [Atomic Bohr Model](https://bohrmodel-remixvr.netlify.com/)
+- [360 VR](https://360vr-remixvr.netlify.com/)
+- [Particles VR](https://particlevr-remixvr.netlify.com/)
+- [Objects VR](https://objectsvr-remixvr.netlify.com/)
+
 ### Prerequisites
 
 To make sure the projects runs on your machine, you need to have the following items installed on your machine.
