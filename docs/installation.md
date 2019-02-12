@@ -11,8 +11,8 @@ There are couple of things you need to understand about how RemixVR is setup bef
 There are 3 main parts to RemixVR.
 
 1. [Frontend](installation.md#frontend)
-2. Backend
-3. Templates
+2. [Backend](installation.md#backend)
+3. [Templates](installation.md#templates)
 
 In the next section, you can see how to setup each part of RemixVR on your computer.
 
@@ -157,4 +157,47 @@ flask run --with-threads
 ```
 
 This will start the backend at [http://localhost:5000/](http://localhost:5000/)
+
+#### Templates
+
+Templates in RemixVR is what makes VR possible inside RemixVR. All the VR based code lives inside templates.
+
+To develop on templates shipped with RemixVR, you need to go inside _templates_ folder inside _remixvr_ directory.
+
+```bash
+cd templates
+```
+
+The templates in this directory share the dependencies in a common `node_modules` folder by using [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/).
+
+This reduces the amount of space used by dependencies when common dependencies are involved. 
+
+Once inside _templates_ folder, run the following command to install the dependencies.
+
+```bash
+yarn install
+```
+
+All the templates are placed inside _packages_ folder inside the _templates_ folder.
+
+```bash
+cd packages
+```
+
+Inside _packages_ folder, you can see the a folder for each of the template. You can go to any of the folder \(_for example, 360vr_\) and run the following command to open the template in development mode.
+
+```bash
+cd 360vr
+yarn start
+```
+
+This will open the VR template in development mode inside your browser.
+
+You can run the following command to build the template and get it ready for production.
+
+```bash
+yarn build
+```
+
+To learn more about templates and about how to create VR templates, you can learn them at [Template section](templates.md).
 
