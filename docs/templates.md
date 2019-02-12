@@ -1,4 +1,4 @@
-# VR Templates
+# Templates
 
 RemixVR offers VR templates to help you create VR experiences faster.
 
@@ -30,7 +30,7 @@ Let's create a simple VR template to see how it works. With this template, we'll
 
 In this tutorial, we'll be using Aframe.
 
-```html
+```markup
 <a-scene>
     <a-assets>
       <a-asset-item id="bear" src="./objects/Bear_Brown/Bear_Brown.obj"></a-asset-item>
