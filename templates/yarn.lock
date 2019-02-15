@@ -207,6 +207,27 @@ aframe@^0.8.2:
     three-bmfont-text "^2.1.0"
     webvr-polyfill "^0.10.5"
 
+aframe@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/aframe/-/aframe-0.9.0.tgz#da57790fe5a9d1d2cb5c7c05daaec20c34b30f35"
+  integrity sha512-nyRb1SdxmTDnj7Z6I4Q6SVnccxey6ukMMhyhZtzJPmIuHCEPLoISmCXEMxZGjpwhHq5H5JNH17SbW1z9zdjCdA==
+  dependencies:
+    animejs "^2.2.0"
+    browserify-css "^0.8.4"
+    custom-event-polyfill "^1.0.6"
+    debug ngokevin/debug#noTimestamp
+    deep-assign "^2.0.0"
+    document-register-element dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90
+    envify "^3.4.1"
+    load-bmfont "^1.2.3"
+    object-assign "^4.0.1"
+    present "0.0.6"
+    promise-polyfill "^3.1.0"
+    style-attr "^1.0.2"
+    super-three "^0.101.0"
+    three-bmfont-text "^2.1.0"
+    webvr-polyfill "^0.10.10"
+
 after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
@@ -261,7 +282,7 @@ an-array@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/an-array/-/an-array-1.0.0.tgz#c125a5bb8257778e35f4b4f6aa9c7d0fa9e42665"
 
-animejs@2.2.0:
+animejs@2.2.0, animejs@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/animejs/-/animejs-2.2.0.tgz#35eefdfc535b81949c9cb06f0b3e60c02e6fdc80"
 
@@ -1321,7 +1342,7 @@ browserify-cipher@^1.0.0:
     browserify-des "^1.0.0"
     evp_bytestokey "^1.0.0"
 
-browserify-css@^0.8.2:
+browserify-css@^0.8.2, browserify-css@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/browserify-css/-/browserify-css-0.8.4.tgz#1e4e2779dcbb072d09beaeb4e6f69501d544d7f3"
   dependencies:
@@ -1512,6 +1533,15 @@ cardboard-vr-display@1.0.11:
     gl-preserve-state "^1.0.0"
     nosleep.js "^0.7.0"
     webvr-polyfill-dpdb "^1.0.7"
+
+cardboard-vr-display@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/cardboard-vr-display/-/cardboard-vr-display-1.0.16.tgz#f91e2798e8fb70a348599638c6742c72dfeadabc"
+  integrity sha512-GFBWPMH/ixy4Ji014BAO1ryddGHphtJlA8gUR6UdKsOpPjUQukCKpgsx2XIJ5oBlqXnDQOcLVRqBWyuvTI32jQ==
+  dependencies:
+    gl-preserve-state "^1.0.0"
+    nosleep.js "^0.7.0"
+    webvr-polyfill-dpdb "^1.0.11"
 
 caseless@~0.11.0:
   version "0.11.0"
@@ -2061,6 +2091,11 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+custom-event-polyfill@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/custom-event-polyfill/-/custom-event-polyfill-1.0.6.tgz#6b026e81cd9f7bc896bd6b016a427407bb068db1"
+  integrity sha512-3FxpFlzGcHrDykwWu+xWVXZ8PfykM/9/bI3zXb953sh+AjInZWcQmrnmvPoZgiqNjmbtTm10PWvYqvRW527x6g==
+
 custom-event@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/custom-event/-/custom-event-1.0.1.tgz#5d02a46850adf1b4a317946a3928fccb5bfd0425"
@@ -2121,7 +2156,7 @@ debug@3.1.0, debug@^3.1.0, debug@~3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@ngokevin/debug#noTimestamp:
+"debug@github:ngokevin/debug#noTimestamp", debug@ngokevin/debug#noTimestamp:
   version "2.2.0"
   resolved "https://codeload.github.com/ngokevin/debug/tar.gz/ef5f8e66d49ce8bc64c6f282c15f8b7164409e3a"
 
@@ -2346,7 +2381,7 @@ doctrine@^2.0.2, doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-document-register-element@dmarcos/document-register-element#8ccc532b7:
+document-register-element@dmarcos/document-register-element#8ccc532b7, "document-register-element@github:dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90":
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7f3744be954574caf3072a5fd260ca90"
 
@@ -7398,6 +7433,11 @@ style-attr@^1.0.2:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/style-attr/-/style-attr-1.3.0.tgz#2c1997a4865e25d7dbcb216be0ad715f005b9b17"
 
+super-three@^0.101.0:
+  version "0.101.0"
+  resolved "https://registry.yarnpkg.com/super-three/-/super-three-0.101.0.tgz#81b64178b7ec2220bb23715dc61f7d3f1ba7ef74"
+  integrity sha512-GSqv5vNkNxSQ0FvFjOrqJFoUbMH5yltAe+wuPMrAUTzkzyDilwz7SAe4zGtWfS17VVYNfpdVeh81CYK/Pc6YsA==
+
 supports-color@4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.4.0.tgz#883f7ddabc165142b2a61427f3352ded195d1a3e"
@@ -8125,9 +8165,21 @@ websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
 
+webvr-polyfill-dpdb@^1.0.11:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/webvr-polyfill-dpdb/-/webvr-polyfill-dpdb-1.0.14.tgz#1c53093090b72f6613dafdefbb66dd065a29dd90"
+  integrity sha512-/B26Cn0DNvJm6VsqBuanASWCp/aYpLpmQUy+x/5BAEEpBWWCZfjfbXAba4d8CYqeIlRGFXUIuRDycGcf5HR1Tg==
+
 webvr-polyfill-dpdb@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/webvr-polyfill-dpdb/-/webvr-polyfill-dpdb-1.0.7.tgz#e00c69ef0d90a0bdf7ae848fa4a928bde4359775"
+
+webvr-polyfill@^0.10.10:
+  version "0.10.10"
+  resolved "https://registry.yarnpkg.com/webvr-polyfill/-/webvr-polyfill-0.10.10.tgz#f945759a37a2ada57211ed29cf55a80179e74d26"
+  integrity sha512-WdKQ1XR9X2Gj9RUtmr+DajvWBWPva75m1rm0Z7CibR7ZstCm913zHYToxw0p/EK342wAxGfiWKsBmb3Jd5OO0w==
+  dependencies:
+    cardboard-vr-display "^1.0.16"
 
 webvr-polyfill@^0.10.5:
   version "0.10.5"

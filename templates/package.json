@@ -23,5 +23,8 @@
     "sinon": "^5.0.7",
     "sinon-chai": "^3.0.0",
     "webpack": "^4.8.3"
+  },
+  "dependencies": {
+    "aframe": "^0.9.0"
   }
 }
