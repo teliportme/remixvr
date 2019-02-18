@@ -1,5 +1,4 @@
 import AFRAME from 'aframe';
-import 'aframe-animation-component';
 import 'aframe-event-set-component';
 
 document.addEventListener('loaded', function() {
