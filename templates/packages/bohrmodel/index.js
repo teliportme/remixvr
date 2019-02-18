@@ -1,5 +1,4 @@
 import AFRAME from 'aframe';
-import 'aframe-animation-component';
 
 var table = [
   "H", "Hydrogen", "1.00794", 1, 1,
