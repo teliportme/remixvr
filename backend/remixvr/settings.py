@@ -26,7 +26,7 @@ class Config(object):
         'http://0.0.0.0:4000',
         'http://localhost:4000',
     ]
-
+    JWT_HEADER_TYPE = 'Token'
 
 class ProdConfig(Config):
     """Production configuration."""
@@ -48,7 +48,7 @@ class DevConfig(Config):
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
-    JWT_EXPIRATION_DELTA = timedelta(10**6)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(10**6)
     UPLOAD_FOLDER = './uploads'
 
 
