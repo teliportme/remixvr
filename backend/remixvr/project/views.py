@@ -1,24 +1,120 @@
 """Project Views"""
-from flask import Blueprint
-from werkzeug.utils import secure_filename
 
-from .models import Project
+import datetime as dt
+
+from flask import Blueprint, jsonify
+from flask_apispec import use_kwargs, marshal_with
+from flask_jwt_extended import current_user, jwt_required, jwt_optional
+from marshmallow import fields
+
+from remixvr.user.models import User
 from remixvr.exceptions import InvalidUsage
+from .models import Project, Tags
+from .serializers import project_schema, projects_schema
 
-blueprint = Blueprint('project', __name__)
+blueprint = Blueprint('projects', __name__)
+
+##########
+# Projects
+##########
+
+@blueprint.route('/api/projects', methods=('GET',))
+@jwt_optional
+@use_kwargs({'tag': fields.Str(), 'author': fields.Str(),
+             'favorited': fields.Str(), 'limit': fields.Int(), 'offset': fields.Int()})
+@marshal_with(projects_schema)
+def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
+    res = Project.query
+    if tag:
+        res = res.filter(Project.tagList.any(Tags.tagname == tag))
+    if author:
+        res = res.join(Project.author).join(User).filter(User.username == author)
+    if favorited:
+        res = res.join(Project.favoriters).filter(User.username == favorited)
+    return res.offset(offset).limit(limit).all()
 
 @blueprint.route('/api/projects', methods=('POST',))
-def create_project(project_name, **kwargs):
-  try:
-    project = Project(project_name, **kwargs).save()
-    if request.method == 'POST':
-      if 'file' not in request.files:
-        raise InvalidUsage.no_files_found()
-      files = request.files['file']
-      if files.filename == '':
-        raise InvalidUsage.no_files_found()
-      if files:
-        filename = secure_filename(files.filename)
-        files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-  except:
-    raise InvalidUsage.uknown_error()
+@jwt_required
+@use_kwargs(project_schema)
+@marshal_with(projects_schema)
+def make_project(title, description, tagList=None):
+    project = Project(title=title, description=description,
+                      author=current_user.profile)
+    if tagList is not None:
+        for tag in tagList:
+            mtag = Tags.query.filter_by(tagname=tag).first()
+            if not mtag:
+                mtag = Tags(tag)
+                mtag.save()
+            project.add_tag(mtag)
+    project.save()
+    return project
+
+@blueprint.route('/api/projects/<slug>', methods=('PUT',))
+@jwt_required
+@use_kwargs(project_schema)
+@marshal_with(project_schema)
+def update_project(slug, **kwargs):
+    project = Project.query.filter_by(slug=slug, author_id=current_user.profile.id).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    project.update(updatedAt=dt.datetime.utcnow(), **kwargs)
+    project.save()
+    return project
+
+@blueprint.route('/api/projects/<slug>', methods=('DELETE',))
+@jwt_required
+def delete_project(slug):
+    project = Project.query.filter_by(slug=slug, author_id=current_user.profile.id).first()
+    project.delete()
+    return '', 200
+
+@blueprint.route('/api/projects/<slug>', methods=('GET',))
+@jwt_optional
+@marshal_with(project_schema)
+def get_project(slug):
+    project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    return project
+
+@blueprint.route('/api/projects/<slug>/favorite', methods=('POST',))
+@jwt_required
+@marshal_with(project_schema)
+def favorite_an_project(slug):
+    profile = current_user.profile
+    project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    project.favourite(profile)
+    project.save()
+    return project
+
+@blueprint.route('/api/projects/<slug>/favorite', methods=('DELETE',))
+@jwt_required
+@marshal_with(project_schema)
+def unfavorite_an_project(slug):
+    profile = current_user.profile
+    project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    project.unfavourite(profile)
+    project.save()
+    return project
+
+@blueprint.route('/api/projects/feed', methods=('GET',))
+@jwt_required
+@use_kwargs({'limit': fields.Int(), 'offset': fields.Int()})
+@marshal_with(projects_schema)
+def projects_feed(limit=20, offset=0):
+    return Project.query.join(current_user.profile.follows). \
+        order_by(Project.createdAt.desc()).offset(offset).limit(limit).all()
+
+
+######
+# Tags
+######
+
+@blueprint.route('/api/tags', methods=('GET',))
+def get_tags():
+    return jsonify({'tags': [tag.tagname for tag in Tags.query.all()]})
