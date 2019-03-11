@@ -18,7 +18,7 @@ favoriter_assoc = db.Table("favoritor_assoc",
 
 tag_assoc = db.Table("tag_assoc",
                      db.Column("tag", db.Integer, db.ForeignKey("tags.id")),
-                     db.Column("article", db.Integer, db.ForeignKey("project.id")))
+                     db.Column("project", db.Integer, db.ForeignKey("project.id")))
 
 class Tags(Model):
     __tablename__ = 'tags'
@@ -53,7 +53,7 @@ class Project(SurrogatePK, Model):
                     lazy='dynamic')
 
     tagList = relationship(
-                'Tags', secondary=tag_assoc, backref='articles')
+                'Tags', secondary=tag_assoc, backref='projects')
 
     def __init__(self, author, title, body, description, slug=None, **kwargs):
                 db.Model.__init__(self, author=author, title=title, description=description, body=body,
