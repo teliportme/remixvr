@@ -9,6 +9,7 @@ USER_NOT_FOUND = template(['User not found'], code=404)
 USER_ALREADY_REGISTERED = template(['User already registered'], code=422)
 UNKNOWN_ERROR = template([], code=500)
 PROJECT_NOT_FOUND = template(['Project not found'], code=404)
+THEME_NOT_FOUND = template(['Theme not found'], code=404)
 NO_FILES_FOUND = template(['No files found'], code=500)
 
 
@@ -41,6 +42,10 @@ class InvalidUsage(Exception):
     @classmethod
     def project_not_found(cls):
         return cls(**PROJECT_NOT_FOUND)
+
+    @classmethod
+    def theme_not_found(cls):
+        return cls(**THEME_NOT_FOUND)
 
     @classmethod
     def no_files_found(cls):
