@@ -4,8 +4,10 @@ from marshmallow import Schema, fields, pre_load, post_dump
 
 from remixvr.profile.serializers import ProfileSchema
 
+
 class TagSchema(Schema):
     tagname = fields.Str()
+
 
 class ProjectSchema(Schema):
     slug = fields.Str()
@@ -14,7 +16,8 @@ class ProjectSchema(Schema):
     created_at = fields.DateTime()
     updated_at = fields.DateTime(dump_only=True)
     author = fields.Nested(ProfileSchema)
-    project = fields.Nested('self', exclude=('project',), default=True, load_only=True)
+    project = fields.Nested('self', exclude=(
+        'project',), default=True, load_only=True)
     tagList = fields.List(fields.Str())
     favoritesCount = fields.Int(dump_only=True)
     favorited = fields.Bool(dump_only=True)
@@ -31,6 +34,7 @@ class ProjectSchema(Schema):
     class Meta:
         strict = True
 
+
 class ProjectSchemas(ProjectSchema):
 
     @post_dump
@@ -41,6 +45,7 @@ class ProjectSchemas(ProjectSchema):
     @post_dump(pass_many=True)
     def dump_projects(self, data, many):
         return {'projects': data, 'projectsCount': len(data)}
+
 
 project_schema = ProjectSchema()
 projects_schema = ProjectSchemas(many=True)

@@ -18,6 +18,7 @@ blueprint = Blueprint('projects', __name__)
 # Projects
 ##########
 
+
 @blueprint.route('/api/projects', methods=('GET',))
 @jwt_optional
 @use_kwargs({'tag': fields.Str(), 'author': fields.Str(),
@@ -28,15 +29,17 @@ def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
     if tag:
         res = res.filter(Project.tagList.any(Tags.tagname == tag))
     if author:
-        res = res.join(Project.author).join(User).filter(User.username == author)
+        res = res.join(Project.author).join(
+            User).filter(User.username == author)
     if favorited:
         res = res.join(Project.favoriters).filter(User.username == favorited)
     return res.offset(offset).limit(limit).all()
 
+
 @blueprint.route('/api/projects', methods=('POST',))
 @jwt_required
 @use_kwargs(project_schema)
-@marshal_with(projects_schema)
+@marshal_with(project_schema)
 def make_project(title, description, tagList=None):
     project = Project(title=title, description=description,
                       author=current_user.profile)
@@ -50,24 +53,29 @@ def make_project(title, description, tagList=None):
     project.save()
     return project
 
+
 @blueprint.route('/api/projects/<slug>', methods=('PUT',))
 @jwt_required
 @use_kwargs(project_schema)
 @marshal_with(project_schema)
 def update_project(slug, **kwargs):
-    project = Project.query.filter_by(slug=slug, author_id=current_user.profile.id).first()
+    project = Project.query.filter_by(
+        slug=slug, author_id=current_user.profile.id).first()
     if not project:
         raise InvalidUsage.project_not_found()
     project.update(updatedAt=dt.datetime.utcnow(), **kwargs)
     project.save()
     return project
 
+
 @blueprint.route('/api/projects/<slug>', methods=('DELETE',))
 @jwt_required
 def delete_project(slug):
-    project = Project.query.filter_by(slug=slug, author_id=current_user.profile.id).first()
+    project = Project.query.filter_by(
+        slug=slug, author_id=current_user.profile.id).first()
     project.delete()
     return '', 200
+
 
 @blueprint.route('/api/projects/<slug>', methods=('GET',))
 @jwt_optional
@@ -77,6 +85,7 @@ def get_project(slug):
     if not project:
         raise InvalidUsage.project_not_found()
     return project
+
 
 @blueprint.route('/api/projects/<slug>/favorite', methods=('POST',))
 @jwt_required
@@ -90,6 +99,7 @@ def favorite_an_project(slug):
     project.save()
     return project
 
+
 @blueprint.route('/api/projects/<slug>/favorite', methods=('DELETE',))
 @jwt_required
 @marshal_with(project_schema)
@@ -101,6 +111,7 @@ def unfavorite_an_project(slug):
     project.unfavourite(profile)
     project.save()
     return project
+
 
 @blueprint.route('/api/projects/feed', methods=('GET',))
 @jwt_required
