@@ -7,18 +7,20 @@ from flask_jwt_extended import current_user
 from slugify import slugify
 
 from remixvr.database import (Model, SurrogatePK,
-                            relationship, reference_col,
-                            Column, db)
+                              relationship, reference_col,
+                              Column, db)
 
 from remixvr.profile.models import UserProfile
 
 favoriter_assoc = db.Table("favoritor_assoc",
-                           db.Column("favoriter", db.Integer, db.ForeignKey("userprofile.id")),
+                           db.Column("favoriter", db.Integer,
+                                     db.ForeignKey("userprofile.id")),
                            db.Column("favorited_project", db.Integer, db.ForeignKey("project.id")))
 
 tag_assoc = db.Table("tag_assoc",
                      db.Column("tag", db.Integer, db.ForeignKey("tags.id")),
                      db.Column("project", db.Integer, db.ForeignKey("project.id")))
+
 
 class Tags(Model):
     __tablename__ = 'tags'
@@ -32,32 +34,39 @@ class Tags(Model):
     def __repr__(self):
         return self.tagname
 
+
 class Project(SurrogatePK, Model):
 
     __tablename__ = 'project'
     title = Column(db.String(100), unique=True, nullable=False)
     description = Column(db.Text, nullable=False)
     slug = Column(db.String(100), unique=True)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
-    updated_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+    created_at = Column(db.DateTime, nullable=False,
+                        default=dt.datetime.utcnow)
+    updated_at = Column(db.DateTime, nullable=False,
+                        default=dt.datetime.utcnow)
     author_id = reference_col('userprofile', nullable=False)
     author = relationship('UserProfile', backref=db.backref('projects'))
+    fields = relationship("Field", back_populates="project",
+                          cascade="all, delete-orphan")
+    theme_id = reference_col("theme", nullable=False)
+    theme = relationship("Theme", backref="projects")
 
     # draft=0, published=1, trash=2
     status = Column(db.Integer, nullable=False, default=0)
 
     favoriters = relationship(
-                    'UserProfile',
-                    secondary=favoriter_assoc,
-                    backref='favorites',
-                    lazy='dynamic')
+        'UserProfile',
+        secondary=favoriter_assoc,
+        backref='favorites',
+        lazy='dynamic')
 
     tagList = relationship(
-                'Tags', secondary=tag_assoc, backref='projects')
+        'Tags', secondary=tag_assoc, backref='projects')
 
     def __init__(self, author, title, body, description, slug=None, **kwargs):
-                db.Model.__init__(self, author=author, title=title, description=description, body=body,
-                slug=slug or slugify(title), **kwargs)
+        db.Model.__init__(self, author=author, title=title, description=description, body=body,
+                          slug=slug or slugify(title), **kwargs)
 
     def favourite(self, profile):
         if not self.is_favourite(profile):

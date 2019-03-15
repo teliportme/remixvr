@@ -16,8 +16,6 @@ class ProjectSchema(Schema):
     created_at = fields.DateTime()
     updated_at = fields.DateTime(dump_only=True)
     author = fields.Nested(ProfileSchema)
-    project = fields.Nested('self', exclude=(
-        'project',), default=True, load_only=True)
     tagList = fields.List(fields.Str())
     favoritesCount = fields.Int(dump_only=True)
     favorited = fields.Bool(dump_only=True)

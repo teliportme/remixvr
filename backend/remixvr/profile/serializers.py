@@ -8,8 +8,9 @@ class ProfileSchema(Schema):
     bio = fields.Str()
     image = fields.Url()
     following = fields.Boolean()
-    # ugly hack.
-    profile = fields.Nested('self', exclude=('profile',), default=True, load_only=True)
+    # ugly hack. https://marshmallow.readthedocs.io/en/2.x-line/nesting.html#nesting-a-schema-within-itself
+    profile = fields.Nested('self', exclude=(
+        'profile',), default=True, load_only=True)
 
     @pre_load
     def make_user(self, data):
