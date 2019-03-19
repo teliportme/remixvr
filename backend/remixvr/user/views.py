@@ -11,6 +11,7 @@ from remixvr.extensions import cors
 from remixvr.profile.models import UserProfile
 from .models import User
 from .serializers import user_schema
+import re
 
 blueprint = Blueprint('user', __name__)
 
@@ -33,8 +34,14 @@ def register_user(username, password, email, **kwargs):
 @jwt_optional
 @use_kwargs(user_schema)
 @marshal_with(user_schema)
-def login_user(email, password, **kwargs):
-    user = User.query.filter_by(email=email).first()
+def login_user(userid, password, **kwargs):
+
+    # supports logging in with either email or username
+    user = None
+    if re.match(r"[^@]+@[^@]+\.[^@]+", userid):
+        user = User.query.filter_by(email=userid).first()
+    else:
+        user = User.query.filter_by(username=userid).first()
     if user is not None and user.check_password(password):
         user.token = create_access_token(identity=user, fresh=True)
         return user

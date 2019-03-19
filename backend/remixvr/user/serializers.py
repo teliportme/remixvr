@@ -4,6 +4,7 @@ from marshmallow import Schema, fields, pre_load, post_dump
 
 
 class UserSchema(Schema):
+    userid = fields.Str(load_only=True)
     username = fields.Str()
     email = fields.Email()
     password = fields.Str(load_only=True)
