@@ -12,6 +12,8 @@ Model = db.Model
 
 # From Mike Bayer's "Building the app" talk
 # https://speakerdeck.com/zzzeek/building-the-app
+
+
 class SurrogatePK(object):
     """A mixin that adds a surrogate integer 'primary key' column named ``id`` \
         to any declarative-mapped class.

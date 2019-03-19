@@ -96,3 +96,6 @@ class ProjectFieldSchema(OneOfSchema):
 
     class Meta:
         strict = True
+
+field_schema = ProjectFieldSchema()
+field_schemas = ProjectFieldSchema(many=True)

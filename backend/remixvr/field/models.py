@@ -37,12 +37,12 @@ class Field(SurrogatePK, Model):
 class File(Model):
 
     __tablename__ = 'file'
-    id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(50))
-    uri = db.Column(db.String(512))
-    filemime = db.Column(db.String(255))
-    filesize = db.Column(db.Integer)
-    filename_original = db.Column(db.String(200))
+    id = Column(db.Integer, primary_key=True)
+    filename = Column(db.String(50))
+    uri = Column(db.String(512))
+    filemime = Column(db.String(255))
+    filesize = Column(db.Integer)
+    filename_original = Column(db.String(200))
     created_at = Column(db.DateTime, nullable=False,
                         default=dt.datetime.utcnow)
 
@@ -51,10 +51,10 @@ class Position(Field):
 
     __tablename__ = 'position'
     id = db.Column(db.ForeignKey("field.id"), primary_key=True)
-    x = Column(db.Integer, default=0)
-    y = Column(db.Integer, default=0)
-    z = Column(db.Integer, default=0)
-    w = Column(db.Integer, default=1)
+    x = Column(db.Decimal(25, 20), default=0)
+    y = Column(db.Decimal(25, 20), default=0)
+    z = Column(db.Decimal(25, 20), default=0)
+    w = Column(db.Decimal(25, 20), default=1)
 
     __mapper_args__ = {"polymorphic_identity": "position"}
 
@@ -62,7 +62,7 @@ class Position(Field):
 class Text(Field):
 
     __tablename__ = 'text'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     value = Column(db.String(200))
 
     __mapper_args__ = {"polymorphic_identity": "text"}
@@ -71,7 +71,7 @@ class Text(Field):
 class Number(Field):
 
     __tablename__ = 'number'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     value = Column(db.Integer)
 
     __mapper_args__ = {"polymorphic_identity": "number"}
@@ -80,7 +80,7 @@ class Number(Field):
 class Audio(Field):
 
     __tablename__ = 'audio'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     duration = Column(db.Integer)
     audio_format = Column(db.String(50))
@@ -91,7 +91,7 @@ class Audio(Field):
 class Video(Field):
 
     __tablename__ = 'video'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     duration = Column(db.Integer)
     width = Column(db.width)
@@ -103,7 +103,7 @@ class Video(Field):
 class VideoSphere(Field):
 
     __tablename__ = 'videosphere'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     duration = Column(db.Integer)
     width = Column(db.width)
@@ -115,7 +115,7 @@ class VideoSphere(Field):
 class Image(Field):
 
     __tablename__ = 'image'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     width = Column(db.width)
     height = Column(db.height)
@@ -126,7 +126,7 @@ class Image(Field):
 class PhotoSphere(Field):
 
     __tablename__ = 'photosphere'
-    id = db.Column(db.ForeignKey("field.id"), primary_key=True)
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     width = Column(db.width)
     height = Column(db.height)

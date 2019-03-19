@@ -6,7 +6,6 @@ from flask_jwt_extended import current_user, jwt_required, jwt_optional
 
 from .serializers import profile_schema
 from remixvr.exceptions import InvalidUsage
-from remixvr.extensions import cors
 from remixvr.user.models import User
 
 
