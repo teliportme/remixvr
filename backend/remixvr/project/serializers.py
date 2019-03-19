@@ -27,6 +27,7 @@ class ProjectSchema(Schema):
     @post_dump
     def dump_project(self, data):
         data['author'] = data['author']['profile']
+        data['theme'] = data['theme']['theme']
         return {'project': data}
 
     class Meta:
@@ -38,6 +39,7 @@ class ProjectSchemas(ProjectSchema):
     @post_dump
     def dump_project(self, data):
         data['author'] = data['author']['profile']
+        data['theme'] = data['theme']['theme']
         return data
 
     @post_dump(pass_many=True)
