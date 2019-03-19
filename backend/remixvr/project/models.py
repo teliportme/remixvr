@@ -2,6 +2,7 @@
 """Project models."""
 
 import datetime as dt
+import uuid
 
 from flask_jwt_extended import current_user
 from slugify import slugify
@@ -38,7 +39,7 @@ class Tags(Model):
 class Project(SurrogatePK, Model):
 
     __tablename__ = 'project'
-    title = Column(db.String(100), unique=True, nullable=False)
+    title = Column(db.String(100), nullable=False)
     description = Column(db.Text, nullable=False)
     slug = Column(db.String(100), unique=True)
     created_at = Column(db.DateTime, nullable=False,
@@ -52,9 +53,8 @@ class Project(SurrogatePK, Model):
                           cascade="all, delete-orphan")
     theme_id = reference_col("theme", nullable=False)
     theme = relationship("Theme", backref="projects")
-
-    # draft=0, published=1, trash=2
-    status = Column(db.Integer, nullable=False, default=0)
+    # can be draft, published, deleted
+    status = Column(db.String(15), nullable=False, default="draft")
 
     favoriters = relationship(
         'UserProfile',
@@ -67,7 +67,7 @@ class Project(SurrogatePK, Model):
 
     def __init__(self, author, title, description, slug=None, **kwargs):
         db.Model.__init__(self, author=author, title=title, description=description,
-                          slug=slug or slugify(title), **kwargs)
+                          slug=slug or slugify(title + "-" + str(uuid.uuid4().hex[:6].upper())), **kwargs)
 
     def favourite(self, profile):
         if not self.is_favourite(profile):

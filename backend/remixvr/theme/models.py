@@ -20,6 +20,7 @@ class Theme(SurrogatePK, Model):
                         default=dt.datetime.utcnow)
     author_id = reference_col('userprofile', nullable=False)
     author = relationship("UserProfile", backref="themes")
+    # can be draft, published, deleted
     status = Column(db.String(15), nullable=False, default="draft")
     config = Column(db.JSON)
 

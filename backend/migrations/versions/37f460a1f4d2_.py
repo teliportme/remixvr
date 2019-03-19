@@ -134,7 +134,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('author_id', sa.Integer(), nullable=False),
-    sa.Column('status', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(length=15), nullable=False),
     sa.Column('theme_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['author_id'], ['userprofile.id'], ),
     sa.ForeignKeyConstraint(['theme_id'], ['theme.id'], ),

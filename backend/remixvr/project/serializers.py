@@ -21,6 +21,7 @@ class ProjectSchema(Schema):
     favoritesCount = fields.Int(dump_only=True)
     favorited = fields.Bool(dump_only=True)
     theme_slug = fields.Str(load_only=True)
+    status = fields.Str()
     theme = fields.Nested(
         ThemeSchema, only=["slug", "title", "author"], dump_only=True)
 
