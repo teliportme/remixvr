@@ -11,6 +11,7 @@ from remixvr.user.models import User
 from remixvr.exceptions import InvalidUsage
 from .models import Project, Tags
 from .serializers import project_schema, projects_schema
+from remixvr.field.serializers import field_schemas
 
 blueprint = Blueprint('projects', __name__)
 
@@ -120,6 +121,16 @@ def unfavorite_an_project(slug):
 def projects_feed(limit=20, offset=0):
     return Project.query.join(current_user.profile.follows). \
         order_by(Project.createdAt.desc()).offset(offset).limit(limit).all()
+
+
+@blueprint.route('/api/projects/<slug>/fields', methods=('GET'),)
+@jwt_optional
+@marshal_with(field_schemas)
+def get_project_fields(slug):
+    project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    return project.fields
 
 
 ######
