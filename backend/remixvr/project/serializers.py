@@ -3,6 +3,7 @@
 from marshmallow import Schema, fields, pre_load, post_dump
 
 from remixvr.profile.serializers import ProfileSchema
+from remixvr.theme.serializers import ThemeSchema
 
 
 class TagSchema(Schema):
@@ -19,10 +20,9 @@ class ProjectSchema(Schema):
     tagList = fields.List(fields.Str())
     favoritesCount = fields.Int(dump_only=True)
     favorited = fields.Bool(dump_only=True)
-
-    @pre_load
-    def make_project(self, data):
-        return data['project']
+    theme_slug = fields.Str(load_only=True)
+    theme = fields.Nested(
+        ThemeSchema, only=["slug", "title", "author"], dump_only=True)
 
     @post_dump
     def dump_project(self, data):

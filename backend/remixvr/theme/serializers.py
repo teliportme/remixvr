@@ -10,7 +10,7 @@ class ThemeSchema(Schema):
     created_at = fields.DateTime()
     updated_at = fields.DateTime(dump_only=True)
     author = fields.Nested(ProfileSchema)
-    status = fields.Int()
+    status = fields.Str()
     config = fields.Raw()
 
     @post_dump

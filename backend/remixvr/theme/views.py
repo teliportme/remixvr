@@ -2,11 +2,13 @@
 
 import datetime as datetime
 
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
 from flask_jwt_extended import current_user, jwt_required, jwt_optional
 from marshmallow import fields
+from sqlalchemy.exc import IntegrityError
 
+from remixvr.database import db
 from remixvr.user.models import User
 from remixvr.exceptions import InvalidUsage
 from .models import Theme
@@ -21,7 +23,7 @@ blueprint = Blueprint('themes', __name__)
 
 @blueprint.route('/api/themes', methods=('GET',))
 @jwt_optional
-@use_kwargs({'author': fields.Str(), 'limit': fields.Int(), 'offset': fields.int()})
+@use_kwargs({'author': fields.Str(), 'limit': fields.Int(), 'offset': fields.Int()})
 @marshal_with(themes_schema)
 def get_themes(author=None, limit=20, offset=0):
     res = Theme.query
@@ -30,16 +32,17 @@ def get_themes(author=None, limit=20, offset=0):
     return res.offset(offset).limit(limit).all()
 
 
-@blueprint.route('/api/themes', methods=('POST'))
+@blueprint.route('/api/themes', methods=('POST',))
 @jwt_required
 @use_kwargs(theme_schema)
-marshal_with(theme_schema)
-
-
-def make_theme(title, description):
-    theme = Theme(title=title, description=description,
-                  author=current_user.profile)
-    theme.save()
+@marshal_with(theme_schema)
+def make_theme(title, description, **kwargs):
+    try:
+        theme = Theme(title=title, description=description,
+                      author=current_user.profile, **kwargs).save()
+    except IntegrityError:
+        db.session.rollback()
+        raise InvalidUsage.theme_already_exists()
     return theme
 
 

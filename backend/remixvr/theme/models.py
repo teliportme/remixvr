@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """Theme models."""
-import datatime as dt
+import datetime as dt
 
 from remixvr.database import (Model, SurrogatePK,
                               relationship, reference_col,
                               Column, db)
-from sqlalchemy.dialects.postgresql import JSONB
+from slugify import slugify
 
 
 class Theme(SurrogatePK, Model):
@@ -21,11 +21,11 @@ class Theme(SurrogatePK, Model):
     author_id = reference_col('userprofile', nullable=False)
     author = relationship("UserProfile", backref="themes")
     status = Column(db.String(15), nullable=False, default="draft")
-    config = Column(db.JSONB)
+    config = Column(db.JSON)
 
-    def __init__(self, author, title, description, status, slug=None, **kwargs):
+    def __init__(self, author, title, description, slug=None, **kwargs):
         db.Model.__init__(self, author=author, title=title, description=description,
-                          body=body, slug=slug or slugify(title), **kwargs)
+                          slug=slug or slugify(title), **kwargs)
 
     def update_status(self, status):
         """Update Status"""

@@ -12,8 +12,9 @@ class FieldSchema(Schema):
     project = fields.Nested(ProjectSchema)
     children = fields.Nested('self', exclude=('children', ), default=None)
 
-   class Meta:
+    class Meta:
         strict = True
+
 
 class FileSchema(Schema):
     filename = fields.Str()
@@ -23,22 +24,27 @@ class FileSchema(Schema):
     filename_original = fields.Str()
     created_at = fields.DateTime()
 
+
 class PositionSchema(FieldSchema):
     x = fields.Int()
     y = fields.Int()
     z = fields.Int()
     w = fields.Int()
 
+
 class TextSchema(FieldSchema):
     value = fields.Str()
 
+
 class NumberSchema(FieldSchema):
     value = fields.Int()
+
 
 class AudioSchema(FieldSchema):
     file = fields.Nested(FileSchema)
     duration = fields.Int()
     audio_format = fields.Str()
+
 
 class VideoSchema(FieldSchema):
     file = fields.Nested(FileSchema)
@@ -46,21 +52,25 @@ class VideoSchema(FieldSchema):
     width = fields.Int()
     height = fields.Int()
 
+
 class VideoSphereSchema(FieldSchema):
     file = fields.Nested(FileSchema)
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
+
 class ImageSchema(FieldSchema):
     file = fields.Nested(FileSchema)
     width = fields.Int()
     height = fields.Int()
 
+
 class PhotoSphereSchema(FieldSchema):
     file = fields.Nested(FileSchema)
     width = fields.Int()
     height = fields.Int()
+
 
 class ProjectFieldSchema(OneOfSchema):
     type_schemas = {
@@ -92,10 +102,11 @@ class ProjectFieldSchema(OneOfSchema):
         elif isinstance(obj, PhotoSphere):
             return 'photosphere'
         else:
-            raise Exception('Unknown object type: %s' %obj.__class__.__name__)
+            raise Exception('Unknown object type: %s' % obj.__class__.__name__)
 
     class Meta:
         strict = True
+
 
 field_schema = ProjectFieldSchema()
 field_schemas = ProjectFieldSchema(many=True)

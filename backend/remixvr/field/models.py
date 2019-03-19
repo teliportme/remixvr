@@ -1,18 +1,26 @@
 # -*- coding: utf-8 -*-
 """Theme models."""
-import datatime as dt
+import datetime as dt
+from sqlalchemy.orm.collections import attribute_mapped_collection
 
-from remixvr.database import Column, Model, SurrogatePK, db, reference_col
+from remixvr.database import (
+    Column, relationship, Model, SurrogatePK, db, reference_col)
 
 
 class Field(SurrogatePK, Model):
 
     __tablename__ = 'field'
+
+    # id is needed for primary join, it does work with SurrogatePK class
+    id = db.Column(db.Integer, primary_key=True)
     label = Column(db.String(100))
     type = Column(db.String(50))
     project_id = reference_col('project', nullable=False)
+
+    # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
     project = relationship('Project', back_populates='fields')
     parent_id = reference_col('field')
+
     # https://docs.sqlalchemy.org/en/latest/_modules/examples/adjacency_list/adjacency_list.html
     children = relationship(
         "Field",
@@ -27,7 +35,6 @@ class Field(SurrogatePK, Model):
         collection_class=attribute_mapped_collection("label"),
     )
 
-    # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
     __mapper_args__ = {
         "polymorphic_identity": "field",
         "polymorphic_on": type,
@@ -51,10 +58,10 @@ class Position(Field):
 
     __tablename__ = 'position'
     id = db.Column(db.ForeignKey("field.id"), primary_key=True)
-    x = Column(db.Decimal(25, 20), default=0)
-    y = Column(db.Decimal(25, 20), default=0)
-    z = Column(db.Decimal(25, 20), default=0)
-    w = Column(db.Decimal(25, 20), default=1)
+    x = Column(db.Numeric(25, 20), default=0)
+    y = Column(db.Numeric(25, 20), default=0)
+    z = Column(db.Numeric(25, 20), default=0)
+    w = Column(db.Numeric(25, 20), default=1)
 
     __mapper_args__ = {"polymorphic_identity": "position"}
 
@@ -94,8 +101,8 @@ class Video(Field):
     id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     duration = Column(db.Integer)
-    width = Column(db.width)
-    height = Column(db.height)
+    width = Column(db.Integer)
+    height = Column(db.Integer)
 
     __mapper_args__ = {"polymorphic_identity": "video"}
 
@@ -106,8 +113,8 @@ class VideoSphere(Field):
     id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
     duration = Column(db.Integer)
-    width = Column(db.width)
-    height = Column(db.height)
+    width = Column(db.Integer)
+    height = Column(db.Integer)
 
     __mapper_args__ = {"polymorphic_identity": "videosphere"}
 
@@ -117,8 +124,8 @@ class Image(Field):
     __tablename__ = 'image'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
-    width = Column(db.width)
-    height = Column(db.height)
+    width = Column(db.Integer)
+    height = Column(db.Integer)
 
     __mapper_args__ = {"polymorphic_identity": "image"}
 
@@ -128,7 +135,7 @@ class PhotoSphere(Field):
     __tablename__ = 'photosphere'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
     file_id = reference_col('file', nullable=False)
-    width = Column(db.width)
-    height = Column(db.height)
+    width = Column(db.Integer)
+    height = Column(db.Integer)
 
     __mapper_args__ = {"polymorphic_identity": "photosphere"}

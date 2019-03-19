@@ -2,16 +2,17 @@
 
 import datetime as dt
 
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
 from flask_jwt_extended import current_user, jwt_required, jwt_optional
 from marshmallow import fields
 
 from remixvr.user.models import User
+from remixvr.field.serializers import field_schemas
 from remixvr.exceptions import InvalidUsage
+from remixvr.theme.models import Theme
 from .models import Project, Tags
 from .serializers import project_schema, projects_schema
-from remixvr.field.serializers import field_schemas
 
 blueprint = Blueprint('projects', __name__)
 
@@ -41,9 +42,12 @@ def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
 @jwt_required
 @use_kwargs(project_schema)
 @marshal_with(project_schema)
-def make_project(title, description, tagList=None):
+def make_project(title, description, theme_slug, tagList=None):
+    theme = Theme.query.filter_by(slug=theme_slug).first()
+    if not theme:
+        raise InvalidUsage.theme_not_found()
     project = Project(title=title, description=description,
-                      author=current_user.profile)
+                      author=current_user.profile, theme=theme)
     if tagList is not None:
         for tag in tagList:
             mtag = Tags.query.filter_by(tagname=tag).first()
@@ -123,7 +127,7 @@ def projects_feed(limit=20, offset=0):
         order_by(Project.createdAt.desc()).offset(offset).limit(limit).all()
 
 
-@blueprint.route('/api/projects/<slug>/fields', methods=('GET'),)
+@blueprint.route('/api/projects/<slug>/fields', methods=('GET',))
 @jwt_optional
 @marshal_with(field_schemas)
 def get_project_fields(slug):

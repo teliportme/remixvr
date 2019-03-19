@@ -3,7 +3,7 @@
 from flask import Flask
 from remixvr.extensions import bcrypt, cache, db, migrate, jwt, cors
 
-from remixvr import commands, user, profile, project
+from remixvr import commands, user, profile, project, theme, field
 from remixvr.settings import ProdConfig
 from remixvr.exceptions import InvalidUsage
 
@@ -40,10 +40,14 @@ def register_blueprints(app):
     cors.init_app(user.views.blueprint, origins=origins)
     cors.init_app(profile.views.blueprint, origins=origins)
     cors.init_app(project.views.blueprint, origins=origins)
+    cors.init_app(theme.views.blueprint, origins=origins)
+    cors.init_app(field.views.blueprint, origins=origins)
 
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(profile.views.blueprint)
     app.register_blueprint(project.views.blueprint)
+    app.register_blueprint(theme.views.blueprint)
+    app.register_blueprint(field.views.blueprint)
 
 
 def register_errorhandlers(app):
@@ -65,6 +69,8 @@ def register_shellcontext(app):
             'User': user.models.User,
             'UserProfile': profile.models.UserProfile,
             'Project': project.models.Project,
+            'Theme': theme.models.Theme,
+            'Field': field.models.Field
         }
 
     app.shell_context_processor(shell_context)

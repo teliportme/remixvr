@@ -20,7 +20,8 @@ blueprint = Blueprint('user', __name__)
 @marshal_with(user_schema)
 def register_user(username, password, email, **kwargs):
     try:
-        userprofile = UserProfile(User(username, email, password=password, **kwargs).save()).save()
+        userprofile = UserProfile(
+            User(username, email, password=password, **kwargs).save()).save()
         userprofile.user.token = create_access_token(identity=userprofile.user)
     except IntegrityError:
         db.session.rollback()
@@ -47,7 +48,8 @@ def login_user(email, password, **kwargs):
 def get_user():
     user = current_user
     # Not sure about this
-    user.token = request.headers.environ['HTTP_AUTHORIZATION'].split('Token ')[1]
+    user.token = request.headers.environ['HTTP_AUTHORIZATION'].split('Token ')[
+        1]
     return current_user
 
 

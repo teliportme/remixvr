@@ -1,12 +1,14 @@
-# coding: utf-8
+"""
+Field Views
+"""
 
 from flask import Blueprint
 from flask_apispec import marshal_with
 from flask_jwt_extended import current_user, jwt_required, jwt_optional
 
-from .serializers import field_schema, field_schemas
-from .models import Field
 from remixvr.exceptions import InvalidUsage
+from .models import Field
+from .serializers import field_schema, field_schemas
 
 blueprint = Blueprint('fields', __name__)
 
@@ -21,7 +23,7 @@ def get_field(field_id):
     return field
 
 
-@blueprint.route('/api/fields/<field_id>', methods=('PUT'),)
+@blueprint.route('/api/fields/<field_id>', methods=('PUT',))
 @jwt_required
 @marshal_with(field_schema)
 def update_field(field_id, **kwargs):
@@ -34,7 +36,7 @@ def update_field(field_id, **kwargs):
     return field
 
 
-@blueprint.route('/api/fields/<field_id>', methods=('DELETE'),)
+@blueprint.route('/api/fields/<field_id>', methods=('DELETE',))
 @jwt_required
 @marshal_with(field_schema)
 def delete_field(field_id):
