@@ -16,10 +16,10 @@ class Field(SurrogatePK, Model):
     label = Column(db.String(100))
     type = Column(db.String(50))
     project_id = reference_col('project', nullable=False)
+    project = relationship('Project', back_populates='fields')
 
     # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
-    project = relationship('Project', back_populates='fields')
-    parent_id = reference_col('field')
+    parent_id = reference_col('field', nullable=True)
 
     # https://docs.sqlalchemy.org/en/latest/_modules/examples/adjacency_list/adjacency_list.html
     children = relationship(

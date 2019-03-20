@@ -13,7 +13,7 @@ class Theme(SurrogatePK, Model):
     __tablename__ = 'theme'
     title = Column(db.String(100), unique=True, nullable=False)
     description = Column(db.Text, nullable=False)
-    slug = Column(db.String(100), unique=True)
+    slug = Column(db.String(100), unique=True, nullable=False)
     created_at = Column(db.DateTime, nullable=False,
                         default=dt.datetime.utcnow)
     updated_at = Column(db.DateTime, nullable=False,

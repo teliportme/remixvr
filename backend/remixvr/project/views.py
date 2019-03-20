@@ -42,14 +42,14 @@ def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
 @jwt_required
 @use_kwargs(project_schema)
 @marshal_with(project_schema)
-def make_project(title, description, theme_slug, tagList=None):
+def make_project(title, description, theme_slug, tags=None):
     theme = Theme.query.filter_by(slug=theme_slug).first()
     if not theme:
         raise InvalidUsage.theme_not_found()
     project = Project(title=title, description=description,
                       author=current_user.profile, theme=theme)
-    if tagList is not None:
-        for tag in tagList:
+    if tags is not None:
+        for tag in tags:
             mtag = Tags.query.filter_by(tagname=tag).first()
             if not mtag:
                 mtag = Tags(tag)

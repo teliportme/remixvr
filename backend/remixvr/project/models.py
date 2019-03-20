@@ -41,7 +41,7 @@ class Project(SurrogatePK, Model):
     __tablename__ = 'project'
     title = Column(db.String(100), nullable=False)
     description = Column(db.Text, nullable=False)
-    slug = Column(db.String(100), unique=True)
+    slug = Column(db.String(100), nullable=False, unique=True)
     created_at = Column(db.DateTime, nullable=False,
                         default=dt.datetime.utcnow)
     updated_at = Column(db.DateTime, nullable=False,
