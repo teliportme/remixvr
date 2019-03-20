@@ -26,10 +26,10 @@ class FileSchema(Schema):
 
 
 class PositionSchema(FieldSchema):
-    x = fields.Int()
-    y = fields.Int()
-    z = fields.Int()
-    w = fields.Int()
+    x = fields.Decimal()
+    y = fields.Decimal()
+    z = fields.Decimal()
+    w = fields.Decimal()
 
 
 class TextSchema(FieldSchema):
