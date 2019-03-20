@@ -32,7 +32,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
-    sa.Column('slug', sa.String(length=100), nullable=True),
+    sa.Column('slug', sa.String(length=100), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('author_id', sa.Integer(), nullable=False),
@@ -48,7 +48,7 @@ def upgrade():
     sa.Column('label', sa.String(length=100), nullable=True),
     sa.Column('type', sa.String(length=50), nullable=True),
     sa.Column('project_id', sa.Integer(), nullable=False),
-    sa.Column('parent_id', sa.Integer(), nullable=False),
+    sa.Column('parent_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['parent_id'], ['field.id'], ),
     sa.ForeignKeyConstraint(['project_id'], ['project.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -130,7 +130,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
-    sa.Column('slug', sa.String(length=100), nullable=True),
+    sa.Column('slug', sa.String(length=100), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('author_id', sa.Integer(), nullable=False),
@@ -139,8 +139,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['author_id'], ['userprofile.id'], ),
     sa.ForeignKeyConstraint(['theme_id'], ['theme.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('slug'),
-    sa.UniqueConstraint('title')
+    sa.UniqueConstraint('slug')
     )
     op.create_table('favoritor_assoc',
     sa.Column('favoriter', sa.Integer(), nullable=True),
