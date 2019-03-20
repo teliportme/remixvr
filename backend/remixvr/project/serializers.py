@@ -17,7 +17,7 @@ class ProjectSchema(Schema):
     created_at = fields.DateTime()
     updated_at = fields.DateTime(dump_only=True)
     author = fields.Nested(ProfileSchema)
-    tagList = fields.List(fields.Str())
+    tags = fields.List(fields.Str(), attribute="tagList")
     favoritesCount = fields.Int(dump_only=True)
     favorited = fields.Bool(dump_only=True)
     theme_slug = fields.Str(load_only=True)
