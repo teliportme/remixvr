@@ -54,6 +54,7 @@ docs/_build
 .pytest_cache
 
 # Virtualenvs
+*.env
 env/
 dev.db
 .cache/v/cache
