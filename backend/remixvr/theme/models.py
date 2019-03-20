@@ -6,6 +6,7 @@ from remixvr.database import (Model, SurrogatePK,
                               relationship, reference_col,
                               Column, db)
 from slugify import slugify
+from sqlalchemy.dialects.postgresql import JSONB
 
 
 class Theme(SurrogatePK, Model):
@@ -22,7 +23,7 @@ class Theme(SurrogatePK, Model):
     author = relationship("UserProfile", backref="themes")
     # can be draft, published, deleted
     status = Column(db.String(15), nullable=False, default="draft")
-    config = Column(db.JSON)
+    config = Column(JSONB)
 
     def __init__(self, author, title, description, slug=None, **kwargs):
         db.Model.__init__(self, author=author, title=title, description=description,

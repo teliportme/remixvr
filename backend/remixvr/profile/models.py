@@ -5,7 +5,8 @@ from remixvr.database import (Model, SurrogatePK, db,
 
 
 followers_assoc = db.Table("followers_assoc",
-                           db.Column("follower", db.Integer, db.ForeignKey("userprofile.user_id")),
+                           db.Column("follower", db.Integer,
+                                     db.ForeignKey("userprofile.user_id")),
                            db.Column("followed_by", db.Integer, db.ForeignKey("userprofile.user_id")))
 
 
@@ -15,7 +16,7 @@ class UserProfile(Model, SurrogatePK):
     # id is needed for primary join, it does work with SurrogatePK class
     id = db.Column(db.Integer, primary_key=True)
 
-    user_id = reference_col('users', nullable=False)
+    user_id = reference_col('users', nullable=False, unique=True)
     user = relationship('User', backref=db.backref('profile', uselist=False))
     follows = relationship('UserProfile',
                            secondary=followers_assoc,

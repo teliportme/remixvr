@@ -7,6 +7,7 @@ Create Date: 2019-02-28 14:53:48.334389
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy.dialects.postgresql import JSONB
 
 
 # revision identifiers, used by Alembic.
@@ -37,11 +38,26 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.Column('author_id', sa.Integer(), nullable=False),
     sa.Column('status', sa.String(length=15), nullable=False),
-    sa.Column('config', sa.JSON(), nullable=True),
+    sa.Column('config', JSONB(), nullable=True),
     sa.ForeignKeyConstraint(['author_id'], ['userprofile.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('slug'),
     sa.UniqueConstraint('title')
+    )
+    op.create_table('project',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('description', sa.Text(), nullable=False),
+    sa.Column('slug', sa.String(length=100), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.Column('author_id', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(length=15), nullable=False),
+    sa.Column('theme_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['author_id'], ['userprofile.id'], ),
+    sa.ForeignKeyConstraint(['theme_id'], ['theme.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('slug')
     )
     op.create_table('field',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -125,21 +141,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('tagname', sa.String(length=100), nullable=True),
     sa.PrimaryKeyConstraint('id')
-    )
-    op.create_table('project',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=100), nullable=False),
-    sa.Column('description', sa.Text(), nullable=False),
-    sa.Column('slug', sa.String(length=100), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.Column('author_id', sa.Integer(), nullable=False),
-    sa.Column('status', sa.String(length=15), nullable=False),
-    sa.Column('theme_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['author_id'], ['userprofile.id'], ),
-    sa.ForeignKeyConstraint(['theme_id'], ['theme.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('slug')
     )
     op.create_table('favoritor_assoc',
     sa.Column('favoriter', sa.Integer(), nullable=True),
