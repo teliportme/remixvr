@@ -70,7 +70,14 @@ def register_shellcontext(app):
             'UserProfile': profile.models.UserProfile,
             'Project': project.models.Project,
             'Theme': theme.models.Theme,
-            'Field': field.models.Field
+            'Position': field.models.Position,
+            'Text': field.models.Text,
+            'Number': field.models.Number,
+            'Audio': field.models.Audio,
+            'Video': field.models.Video,
+            'VideoSphere': field.models.VideoSphere,
+            'Image': field.models.Image,
+            'PhotoSphere': field.models.PhotoSphere,
         }
 
     app.shell_context_processor(shell_context)
