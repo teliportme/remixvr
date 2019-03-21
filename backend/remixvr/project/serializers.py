@@ -29,7 +29,8 @@ class ProjectSchema(Schema):
 
     @pre_load
     def make_project(self, data):
-        return data['project']
+        if 'project' in data:
+            return data['project']
 
     @post_dump
     def dump_project(self, data):

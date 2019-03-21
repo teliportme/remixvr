@@ -17,6 +17,8 @@ class Field(SurrogatePK, Model):
     type = Column(db.String(50))
     project_id = reference_col('project', nullable=False)
     project = relationship('Project', back_populates='fields')
+    author_id = reference_col('userprofile', nullable=False)
+    author = relationship("UserProfile", backref="fields")
 
     # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
     parent_id = reference_col('field', nullable=True)
@@ -58,10 +60,10 @@ class Position(Field):
 
     __tablename__ = 'position'
     id = db.Column(db.ForeignKey("field.id"), primary_key=True)
-    x = Column(db.Numeric(25, 20), default=0)
-    y = Column(db.Numeric(25, 20), default=0)
-    z = Column(db.Numeric(25, 20), default=0)
-    w = Column(db.Numeric(25, 20), default=1)
+    x = Column(db.Numeric(), default=0)
+    y = Column(db.Numeric(), default=0)
+    z = Column(db.Numeric(), default=0)
+    w = Column(db.Numeric(), default=1)
 
     __mapper_args__ = {"polymorphic_identity": "position"}
 
@@ -79,7 +81,7 @@ class Number(Field):
 
     __tablename__ = 'number'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    value = Column(db.Integer)
+    value = Column(db.Numeric())
 
     __mapper_args__ = {"polymorphic_identity": "number"}
 

@@ -7,11 +7,13 @@ from .models import (Position, Text, Number, Audio, Video,
 
 
 class FieldSchema(Schema):
+    id = fields.Int()
     label = fields.Str()
     type = fields.Str()
     project_name = fields.Str(load_only=True)
     project = fields.Nested(ProjectSchema, only=["slug"])
-    children = fields.Nested('self', exclude=('children', ), default=None)
+    children = fields.Nested('self', exclude=(
+        'children', ), default=None, many=True)
 
     class Meta:
         strict = True

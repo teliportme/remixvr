@@ -63,21 +63,29 @@ def create_field(label, project_name, type, **kwargs):
     field = None
     try:
         if type == 'position':
-            field = Position(label=label, project=project, **kwargs).save()
+            field = Position(label=label, project=project,
+                             author=project.author, **kwargs).save()
         elif type == 'text':
-            field = Text(label=label, project=project, **kwargs).save()
+            field = Text(label=label, project=project,
+                         author=project.author, ** kwargs).save()
         elif type == 'number':
-            field = Number(label=label, project=project, **kwargs)
+            field = Number(label=label, project=project,
+                           author=project.author, **kwargs).save()
         elif type == 'audio':
-            field = Audio(label=label, project=project, **kwargs).save()
+            field = Audio(label=label, project=project,
+                          author=project.author, ** kwargs).save()
         elif type == 'video':
-            field = Video(label=label, project=project, **kwargs).save()
+            field = Video(label=label, project=project,
+                          author=project.author, ** kwargs).save()
         elif type == 'videosphere':
-            field = VideoSphere(label=label, project=project, **kwargs).save()
+            field = VideoSphere(label=label, project=project,
+                                author=project.author, ** kwargs).save()
         elif type == 'image':
-            field = Image(label=label, project=project, **kwargs).save()
+            field = Image(label=label, project=project,
+                          author=project.author, ** kwargs).save()
         elif type == 'photosphere':
-            field = PhotoSphere(label=label, project=project, **kwargs).save()
+            field = PhotoSphere(label=label, project=project,
+                                author=project.author, ** kwargs).save()
         else:
             raise Exception(("Field type - {} not found").format(type))
             return

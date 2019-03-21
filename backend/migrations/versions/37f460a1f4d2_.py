@@ -65,8 +65,10 @@ def upgrade():
     sa.Column('type', sa.String(length=50), nullable=True),
     sa.Column('project_id', sa.Integer(), nullable=False),
     sa.Column('parent_id', sa.Integer(), nullable=True),
+    sa.Column('author_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['parent_id'], ['field.id'], ),
     sa.ForeignKeyConstraint(['project_id'], ['project.id'], ),
+    sa.ForeignKeyConstraint(['author_id'], ['userprofile.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('audio',
@@ -89,7 +91,7 @@ def upgrade():
     )
     op.create_table('number',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('value', sa.Integer(), nullable=True),
+    sa.Column('value', sa.Numeric(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['field.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -104,10 +106,10 @@ def upgrade():
     )
     op.create_table('position',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('x', sa.Numeric(precision=25, scale=20), nullable=True),
-    sa.Column('y', sa.Numeric(precision=25, scale=20), nullable=True),
-    sa.Column('z', sa.Numeric(precision=25, scale=20), nullable=True),
-    sa.Column('w', sa.Numeric(precision=25, scale=20), nullable=True),
+    sa.Column('x', sa.Numeric(), nullable=True),
+    sa.Column('y', sa.Numeric(), nullable=True),
+    sa.Column('z', sa.Numeric(), nullable=True),
+    sa.Column('w', sa.Numeric(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['field.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
