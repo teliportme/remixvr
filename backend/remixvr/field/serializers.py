@@ -9,11 +9,17 @@ from .models import (Position, Text, Number, Audio, Video,
 class FieldSchema(Schema):
     label = fields.Str()
     type = fields.Str()
-    project = fields.Nested(ProjectSchema)
+    project_name = fields.Str(load_only=True)
+    project = fields.Nested(ProjectSchema, only=["slug"])
     children = fields.Nested('self', exclude=('children', ), default=None)
 
     class Meta:
         strict = True
+
+    @post_dump
+    def make_field(self, data):
+        if 'project' in data:
+            data['project'] = data['project']['project']
 
 
 class FileSchema(Schema):
@@ -33,11 +39,12 @@ class PositionSchema(FieldSchema):
 
 
 class TextSchema(FieldSchema):
-    value = fields.Str()
+    text_value = fields.Str(attribute="value")
 
 
 class NumberSchema(FieldSchema):
-    value = fields.Int()
+    # number_value and text_value and not value to distinguish the fields by type while serializing in the view using combined_schema
+    number_value = fields.Int(attribute="value")
 
 
 class AudioSchema(FieldSchema):
@@ -73,6 +80,7 @@ class PhotoSphereSchema(FieldSchema):
 
 
 class ProjectFieldSchema(OneOfSchema):
+    type_field_remove = False
     type_schemas = {
         'position': PositionSchema,
         'text': TextSchema,
@@ -108,5 +116,11 @@ class ProjectFieldSchema(OneOfSchema):
         strict = True
 
 
+class CombinedSchema(PositionSchema, TextSchema, NumberSchema,                          AudioSchema, VideoSchema, VideoSphereSchema,                       ImageSchema, PhotoSphereSchema):
+    pass
+
+
+# workaround for @use_kwargs to accept polymorphic field
+combined_schema = CombinedSchema()
 field_schema = ProjectFieldSchema()
 field_schemas = ProjectFieldSchema(many=True)

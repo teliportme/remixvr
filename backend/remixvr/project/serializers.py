@@ -24,11 +24,19 @@ class ProjectSchema(Schema):
     status = fields.Str()
     theme = fields.Nested(
         ThemeSchema, only=["slug", "title", "author"], dump_only=True)
+    project = fields.Nested('self', exclude=(
+        'project',), default=True, load_only=True)
+
+    @pre_load
+    def make_project(self, data):
+        return data['project']
 
     @post_dump
     def dump_project(self, data):
-        data['author'] = data['author']['profile']
-        data['theme'] = data['theme']['theme']
+        if 'author' in data:
+            data['author'] = data['author']['profile']
+        if 'theme' in data:
+            data['theme'] = data['theme']['theme']
         return {'project': data}
 
     class Meta:
@@ -39,8 +47,10 @@ class ProjectSchemas(ProjectSchema):
 
     @post_dump
     def dump_project(self, data):
-        data['author'] = data['author']['profile']
-        data['theme'] = data['theme']['theme']
+        if 'author' in data:
+            data['author'] = data['author']['profile']
+        if 'theme' in data:
+            data['theme'] = data['theme']['theme']
         return data
 
     @post_dump(pass_many=True)

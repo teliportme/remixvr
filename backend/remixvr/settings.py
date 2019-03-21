@@ -47,6 +47,7 @@ class DevConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',
                                              'postgresql://localhost/remixvr')
+    # SQLALCHEMY_ECHO = True
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(10**6)
     UPLOAD_FOLDER = './uploads'
