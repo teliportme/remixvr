@@ -70,6 +70,7 @@ def register_shellcontext(app):
             'UserProfile': profile.models.UserProfile,
             'Project': project.models.Project,
             'Theme': theme.models.Theme,
+            'Field': field.models.Field,
             'Position': field.models.Position,
             'Text': field.models.Text,
             'Number': field.models.Number,

@@ -11,7 +11,7 @@ from sqlalchemy.exc import IntegrityError
 from remixvr.database import db
 from remixvr.exceptions import InvalidUsage
 from remixvr.project.models import Project
-from .models import (Position, Text, Number, Audio, Video,
+from .models import (Field, Position, Text, Number, Audio, Video,
                      VideoSphere, Image, PhotoSphere)
 from .serializers import field_schema, field_schemas, combined_schema
 
@@ -64,34 +64,41 @@ def create_field(label, project_name, type, **kwargs):
     try:
         if type == 'position':
             field = Position(label=label, project=project,
-                             author=project.author, **kwargs).save()
+                             author=project.author, **kwargs)
         elif type == 'text':
             field = Text(label=label, project=project,
-                         author=project.author, ** kwargs).save()
+                         author=project.author, ** kwargs)
         elif type == 'number':
             field = Number(label=label, project=project,
-                           author=project.author, **kwargs).save()
+                           author=project.author, **kwargs)
         elif type == 'audio':
             field = Audio(label=label, project=project,
-                          author=project.author, ** kwargs).save()
+                          author=project.author, ** kwargs)
         elif type == 'video':
             field = Video(label=label, project=project,
-                          author=project.author, ** kwargs).save()
+                          author=project.author, ** kwargs)
         elif type == 'videosphere':
             field = VideoSphere(label=label, project=project,
-                                author=project.author, ** kwargs).save()
+                                author=project.author, ** kwargs)
         elif type == 'image':
             field = Image(label=label, project=project,
-                          author=project.author, ** kwargs).save()
+                          author=project.author, ** kwargs)
         elif type == 'photosphere':
             field = PhotoSphere(label=label, project=project,
-                                author=project.author, ** kwargs).save()
+                                author=project.author, ** kwargs)
         else:
             raise Exception(("Field type - {} not found").format(type))
             return
+        if 'parent_id' in kwargs:
+            parent_field = Field.get_by_id(kwargs['parent_id'])
+            if parent_field:
+                field.parent = parent_field
+        field.save()
+
     except IntegrityError:
         db.session.rollback()
         raise InvalidUsage.no_files_found()
-    except Exception:
-        raise InvalidUsage.field_type_not_found()
+    except Exception as e:
+        print(e)
+        raise InvalidUsage.field_error()
     return field

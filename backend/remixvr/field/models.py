@@ -20,10 +20,8 @@ class Field(SurrogatePK, Model):
     author_id = reference_col('userprofile', nullable=False)
     author = relationship("UserProfile", backref="fields")
 
-    # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
-    parent_id = reference_col('field', nullable=True)
-
     # https://docs.sqlalchemy.org/en/latest/_modules/examples/adjacency_list/adjacency_list.html
+    parent_id = reference_col('field', nullable=True)
     children = relationship(
         "Field",
         # cascade deletions
@@ -34,9 +32,10 @@ class Field(SurrogatePK, Model):
         backref=db.backref("parent", remote_side=id),
         # children will be represented as a dictionary
         # on the "label" attribute.
-        collection_class=attribute_mapped_collection("label"),
+        collection_class=attribute_mapped_collection("id"),
     )
 
+    # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
     __mapper_args__ = {
         "polymorphic_identity": "field",
         "polymorphic_on": type,
