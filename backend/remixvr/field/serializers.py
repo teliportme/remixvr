@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, pre_load, post_dump
+from marshmallow import Schema, fields, pre_load, post_dump, pre_dump
 from marshmallow_oneofschema import OneOfSchema
 
 from remixvr.project.serializers import ProjectSchema
@@ -12,8 +12,7 @@ class FieldSchema(Schema):
     type = fields.Str()
     project_name = fields.Str(load_only=True)
     project = fields.Nested(ProjectSchema, only=["slug"])
-    children = fields.Nested('self', exclude=(
-        'children', ), default=None, many=True)
+    children = fields.Nested('self', default=None, many=True)
 
     class Meta:
         strict = True

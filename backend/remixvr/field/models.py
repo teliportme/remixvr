@@ -31,8 +31,8 @@ class Field(SurrogatePK, Model):
         # column in the join condition.
         backref=db.backref("parent", remote_side=id),
         # children will be represented as a dictionary
-        # on the "label" attribute.
-        collection_class=attribute_mapped_collection("id"),
+        # on the "id" attribute.
+        # collection_class=attribute_mapped_collection("id"),
     )
 
     # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
