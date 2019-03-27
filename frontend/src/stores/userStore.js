@@ -45,4 +45,6 @@ decorate(UserStore, {
   forgetUser: action
 });
 
-export default createContext(new UserStore());
+export const userStore = new UserStore();
+
+export default createContext(userStore);

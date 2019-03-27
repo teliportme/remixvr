@@ -1,37 +1,47 @@
-import { action, extendObservable } from 'mobx';
+import { createContext } from 'react';
+import { action, decorate, observable } from 'mobx';
 import agent from '../agent';
 
 class ProfileStore {
+  profile = undefined;
+  isLoadingProfile = false;
 
-  constructor() {
-    extendObservable(this, {
-      profile: undefined,
-      isLoadingProfile: false,
-
-      loadProfile: action(username => {
-        this.isLoadingProfile = true;
-        agent.Profile.get(username)
-          .then(action(({ profile }) => { this.profile = profile; }))
-          .finally(action(() => { this.isLoadingProfile = false; }));
-      }),
-
-      follow: action(() => {
-        if (this.profile && !this.profile.following) {
-          this.profile.following = true;
-          agent.Profile.follow(this.profile.username)
-            .catch(action(() => { this.profile.following = false; }));
-        }
-      }),
-
-      unfollow: action(() => {
-        if (this.profile && this.profile.following) {
-          this.profile.following = false;
-          agent.Profile.unfollow(this.profile.username)
-            .catch(action(() => { this.profile.following = true; }));
-        }
+  loadProfile(username) {
+    this.isLoadingProfile = true;
+    agent.Profile.get(username)
+      .then(({ profile }) => {
+        this.profile = profile;
       })
-    });
+      .finally(() => {
+        this.isLoadingProfile = false;
+      });
+  }
+
+  follow() {
+    if (this.profile && !this.profile.following) {
+      this.profile.following = true;
+      agent.Profile.follow(this.profile.username).catch(() => {
+        this.profile.following = false;
+      });
+    }
+  }
+
+  unfollow() {
+    if (this.profile && this.profile.following) {
+      this.profile.following = false;
+      agent.Profile.unfollow(this.profile.username).catch(() => {
+        this.profile.following = true;
+      });
+    }
   }
 }
 
-export default new ProfileStore();
+decorate(ProfileStore, {
+  profile: observable,
+  isLoadingProfile: observable,
+  loadProfile: action,
+  follow: action,
+  unfollow: action
+});
+
+export default createContext(new ProfileStore());

@@ -1,12 +1,15 @@
 import { createContext } from 'react';
 import { action, reaction, decorate, observable } from 'mobx';
 
-export class CommonStore {
+class CommonStore {
   appName = 'RemixVR';
   token = window.localStorage.getItem('jwt');
   appLoaded = false;
   setAppLoaded() {
     this.appLoaded = true;
+  }
+  setToken(token) {
+    this.token = token;
   }
 
   constructor() {
@@ -27,7 +30,10 @@ decorate(CommonStore, {
   appName: observable,
   token: observable,
   appLoaded: observable,
-  setAppLoaded: action
+  setAppLoaded: action,
+  setToken: action
 });
 
-export default createContext(new CommonStore());
+export const commonStore = new CommonStore();
+
+export default createContext(commonStore);
