@@ -1,11 +1,10 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
-import commonStore from './stores/commonStore';
 import authStore from './stores/authStore';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'http://localhost:3000';
+const API_ROOT = 'http://localhost:5000/api';
 
 const handleErrors = error => {
   if (error && error.response && error.response.status === 401) {
@@ -17,8 +16,9 @@ const handleErrors = error => {
 const responseBody = res => res.body;
 
 const tokenPlugin = req => {
-  if (commonStore.token) {
-    req.set('authorization', `Token ${commonStore.token}`);
+  const token = window.localStorage.getItem('jwt');
+  if (token) {
+    req.set('authorization', `Token ${token}`);
   }
 };
 
@@ -46,9 +46,10 @@ const requests = {
       .post(`${API_ROOT}${url}`, body)
       .use(tokenPlugin)
       .end(handleErrors)
-      .then(responseBody),
+      .then(responseBody)
 };
 
+// prettier-ignore
 const Auth = {
   current: () =>
     requests.get('/user'),
@@ -60,8 +61,10 @@ const Auth = {
     requests.put('/user', { user })
 };
 
+// prettier-ignore
 const limit = (count, page) => `limit=${count}&offset=${page ? page * count : 0}`;
 
+// prettier-ignore
 const Profile = {
   follow: username =>
     requests.post(`/profiles/${username}/follow`),
@@ -71,7 +74,16 @@ const Profile = {
     requests.get(`/profiles/${username}`)
 };
 
+// prettier-ignore
+const Theme = {
+  get: (page, lim = 20) =>
+    requests.get(`/themes?${limit(lim, page)}`),
+  getTheme: slug =>
+    requests.get(`/themes/${slug}`)
+}
+
 export default {
   Auth,
-  Profile
-}
+  Profile,
+  Theme
+};
