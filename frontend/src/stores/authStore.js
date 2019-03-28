@@ -13,14 +13,10 @@ class AuthStore {
     return isUserLoggedIn;
   }
 
-  reset() {
-    this.errors = undefined;
-  }
-
-  login(email, password) {
+  login(userid, password) {
     this.inProgress = true;
     this.errors = undefined;
-    return agent.Auth.login(email, password)
+    return agent.Auth.login(userid, password)
       .then(({ user }) => {
         commonStore.setToken(user.token);
       })
@@ -38,7 +34,7 @@ class AuthStore {
   }
   register(username, email, password) {
     this.inProgress = true;
-    this.errors = true;
+    this.errors = undefined;
     return agent.Auth.register(username, email, password)
       .then(({ user }) => {
         commonStore.setToken(user.token);
@@ -68,7 +64,6 @@ decorate(AuthStore, {
   setUsername: action,
   setEmail: action,
   setPassword: action,
-  reset: action,
   clearPassword: action,
   login: action,
   register: action,

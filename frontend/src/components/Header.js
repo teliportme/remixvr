@@ -159,6 +159,14 @@ const Header = observer(() => {
           <React.Fragment>
             <MenuLi>
               <Link
+                to="/signup"
+                className="link dim f6 f5-ns db  pointer dark-gray"
+              >
+                Sign Up
+              </Link>
+            </MenuLi>
+            <MenuLi>
+              <Link
                 to="/login"
                 className="link dim f6 f5-ns db  pointer dark-gray"
               >

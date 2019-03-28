@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
+import AuthStore from '../stores/authStore';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import AuthStore from '../stores/authStore';
 import useRouter from '../components/useRouter';
 import ErrorMessage from '../components/ErrorMessage';
 
-const Login = observer(() => {
+const Signup = observer(() => {
   const authStore = useContext(AuthStore);
-  const router = useRouter();
+  const { history } = useRouter();
 
-  const [userid, setUserid] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nextUrl, setNextUrl] = useState('/dashboard');
 
@@ -17,35 +18,52 @@ const Login = observer(() => {
 
   useEffect(() => {
     if (authStore.isUserLoggedIn) {
-      router.history.push(nextUrl);
+      history.push(nextUrl);
     }
   }, []);
 
   const handleSubmitForm = event => {
     event.preventDefault();
-    authStore.login(userid, password).then(() => {
-      router.history.push(nextUrl);
+    authStore.register(username, email, password).then(() => {
+      history.push(nextUrl);
     });
   };
 
   return (
     <div className="bg-near-white center measure mb4 pb4 ph3">
-      <h3 className="f3 f2-ns dark-gray tc">Log in to your account</h3>
+      <h3 className="f3 f2-ns dark-gray tc">Sign up for an account</h3>
       <form onSubmit={handleSubmitForm}>
         <div className="mb3">
-          <label htmlFor="userid" className="b mid-gray">
-            Username / Email address
+          <label htmlFor="email" className="b mid-gray">
+            Email address
+          </label>
+          <input
+            type="email"
+            className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100"
+            id="email"
+            placeholder="Email"
+            autoComplete="username"
+            required
+            value={email}
+            onChange={e => {
+              setEmail(e.target.value);
+            }}
+          />
+        </div>
+        <div className="mb3">
+          <label htmlFor="username" className="b mid-gray">
+            Username
           </label>
           <input
             type="text"
             className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100"
-            id="userid"
-            placeholder="Username / Email"
+            id="username"
+            placeholder="Username"
             autoComplete="username"
             required
-            value={userid}
+            value={username}
             onChange={e => {
-              setUserid(e.target.value);
+              setUsername(e.target.value);
             }}
           />
         </div>
@@ -66,17 +84,6 @@ const Login = observer(() => {
             }}
           />
         </div>
-        <div className="tl fl mt2">
-          <Link
-            to="/forgot-password"
-            className="f6 db link silver underline-hover"
-          >
-            Forgot the password?
-          </Link>
-          <Link to="/signup" className="f6 db link mt1 silver underline-hover">
-            Need an account?
-          </Link>
-        </div>
         <div className="tr">
           <button
             type="submit"
@@ -84,7 +91,7 @@ const Login = observer(() => {
             // disabled={inProgress}
             // isLoading={inProgress}
           >
-            Login
+            Sign Up
           </button>
         </div>
       </form>
@@ -93,4 +100,4 @@ const Login = observer(() => {
   );
 });
 
-export default Login;
+export default Signup;
