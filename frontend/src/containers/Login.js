@@ -21,7 +21,7 @@ const Login = observer(() => {
   const [nextUrl, setNextUrl] = useState('/dashboard');
   useEffect(() => {
     if (authStore.isUserLoggedIn) {
-      router.history.push('/');
+      router.history.push(nextUrl);
     }
 
     return () => {

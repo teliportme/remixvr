@@ -8,6 +8,7 @@ import UserStore from './stores/userStore';
 const Header = lazy(() => import('./components/Header'));
 const Home = lazy(() => import('./containers/Home'));
 const Login = lazy(() => import('./containers/Login'));
+const Page404 = lazy(() => import('./containers/Page404'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -40,7 +41,8 @@ const App = () => {
         <div className="App w-100 center h-100 flex flex-column">
           <Switch>
             <DefaultLayout path="/login" component={Login} />
-            <DefaultLayout path="/" component={Home} />
+            <DefaultLayout exact path="/" component={Home} />
+            <DefaultLayout component={Page404} />
           </Switch>
         </div>
       </Suspense>
