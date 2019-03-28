@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import RemixvrLogo from './logos/remixvr-logo.png';
 import styled from 'styled-components';
+import { observer } from 'mobx-react-lite';
+import AuthStore from '../stores/authStore';
+import useRouter from '../components/useRouter';
 
 const MenuIcon = styled.label`
   cursor: pointer;
@@ -72,19 +75,30 @@ const MenuButton = styled.input`
 `;
 
 const MenuLi = styled.li`
-  a {
+  a,
+  button {
     padding: 20px 20px;
   }
   @media (min-width: 48em) {
     float: left;
 
-    a {
+    a,
+    button {
       padding: 20px 30px;
     }
   }
 `;
 
-const Header = () => {
+const Header = observer(() => {
+  const authStore = useContext(AuthStore);
+  const isUserLoggedIn = authStore.isUserLoggedIn;
+  const { history } = useRouter();
+
+  const logout = () => {
+    authStore.logout().then(() => {
+      history.push('/');
+    });
+  };
   return (
     <nav className="w-100 border-box pa2 ph5-ns center b--near-white">
       <Link className="fl pv2 ph3 v-mid mid-gray link dim" to="/">
@@ -95,11 +109,21 @@ const Header = () => {
         <NavIcon />
       </MenuIcon>
       <MenuUl className="ma0 pa0 list overflow-hidden bg-white cb">
+        {isUserLoggedIn && (
+          <MenuLi>
+            <Link
+              to="/dashboard"
+              className="link dim f6 f5-ns db  pointer dark-gray"
+            >
+              Dashboard
+            </Link>
+          </MenuLi>
+        )}
         <MenuLi>
           <a
             href="https://docs.remixvr.org"
             target="_blank"
-            className="link dim f6 f5-ns db mr3 mr4-ns pointer dark-gray"
+            className="link dim f6 f5-ns db  pointer dark-gray"
           >
             Docs
           </a>
@@ -108,7 +132,7 @@ const Header = () => {
           <a
             href="https://github.com/teliportme/remixvr"
             target="_blank"
-            className="link dim f6 f5-ns db mr3 mr4-ns pointer dark-gray"
+            className="link dim f6 f5-ns db  pointer dark-gray"
           >
             Github
           </a>
@@ -117,14 +141,35 @@ const Header = () => {
           <a
             href="https://blog.teliportme.com/tag/remixvr/"
             target="_blank"
-            className="link dim f6 f5-ns db mr3 mr4-ns pointer dark-gray"
+            className="link dim f6 f5-ns db  pointer dark-gray"
           >
             Blog
           </a>
         </MenuLi>
+        {isUserLoggedIn ? (
+          <MenuLi>
+            <button
+              onClick={logout}
+              className="link dim f6 f5-ns db  pointer dark-gray bn"
+            >
+              Logout
+            </button>
+          </MenuLi>
+        ) : (
+          <React.Fragment>
+            <MenuLi>
+              <Link
+                to="/login"
+                className="link dim f6 f5-ns db  pointer dark-gray"
+              >
+                Login
+              </Link>
+            </MenuLi>
+          </React.Fragment>
+        )}
       </MenuUl>
     </nav>
   );
-};
+});
 
 export default Header;

@@ -9,8 +9,8 @@ class AuthStore {
   errors = undefined;
 
   get isUserLoggedIn() {
-    const token = window.localStorage.getItem('jwt');
-    return token;
+    const isUserLoggedIn = userStore.currentUser ? true : false;
+    return isUserLoggedIn;
   }
 
   reset() {
