@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import AuthStore from '../stores/authStore';
 import useRouter from '../components/useRouter';
 import ErrorMessage from '../components/ErrorMessage';
+import { Helmet } from 'react-helmet';
 
 const Login = observer(() => {
   const authStore = useContext(AuthStore);
@@ -30,6 +31,9 @@ const Login = observer(() => {
 
   return (
     <div className="bg-near-white center measure mb4 pb4 ph3">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <h3 className="f3 f2-ns dark-gray tc">Log in to your account</h3>
       <form onSubmit={handleSubmitForm}>
         <div className="mb3">

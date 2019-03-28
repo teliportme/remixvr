@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import LoadingSpinner from './components/LoadingSpinner';
 import CustomBrowsingRouter from './components/CustomBrowserRouter';
+import MetaTags from './components/DefaultMetaTags';
 import CommonStore from './stores/commonStore';
 import UserStore from './stores/userStore';
 const Header = lazy(() => import('./components/Header'));
@@ -40,6 +41,7 @@ const App = () => {
     <CustomBrowsingRouter>
       <Suspense fallback={<LoadingSpinner />}>
         <div className="App w-100 center h-100 flex flex-column">
+          <MetaTags />
           <Switch>
             <DefaultLayout path="/signup" component={Signup} />
             <DefaultLayout path="/login" component={Login} />

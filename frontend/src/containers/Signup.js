@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthStore from '../stores/authStore';
-import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import { Helmet } from 'react-helmet';
 import useRouter from '../components/useRouter';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -31,6 +31,9 @@ const Signup = observer(() => {
 
   return (
     <div className="bg-near-white center measure mb4 pb4 ph3">
+      <Helmet>
+        <title>Sign Up</title>
+      </Helmet>
       <h3 className="f3 f2-ns dark-gray tc">Sign up for an account</h3>
       <form onSubmit={handleSubmitForm}>
         <div className="mb3">
