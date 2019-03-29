@@ -11,6 +11,7 @@ const Home = lazy(() => import('./containers/Home'));
 const Page404 = lazy(() => import('./containers/Page404'));
 const Login = lazy(() => import('./containers/Login'));
 const Signup = lazy(() => import('./containers/Signup'));
+const Dashboard = lazy(() => import('./containers/Dashboard'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -45,6 +46,7 @@ const App = () => {
           <Switch>
             <DefaultLayout path="/signup" component={Signup} />
             <DefaultLayout path="/login" component={Login} />
+            <DefaultLayout path="/dashboard" component={Dashboard} />
             <DefaultLayout exact path="/" component={Home} />
             <DefaultLayout component={Page404} />
           </Switch>

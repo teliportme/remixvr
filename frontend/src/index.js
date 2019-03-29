@@ -9,12 +9,14 @@ import userStore from './stores/userStore';
 import commonStore from './stores/commonStore';
 import profileStore from './stores/profileStore';
 import authStore from './stores/authStore';
+import projectStore from './stores/projectStore';
 
 const stores = {
   userStore,
   commonStore,
   profileStore,
-  authStore
+  authStore,
+  projectStore
 };
 
 // For easier debugging

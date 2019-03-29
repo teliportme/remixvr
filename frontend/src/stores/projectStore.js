@@ -7,11 +7,16 @@ class ProjectStore {
   hasNextPage = true;
   count = 0;
   page = 0;
-  projectRegistry = observable.map();
+  projectRegistry = new Map();
   predicate = {};
 
   get projects() {
-    return this.projectRegistry.values();
+    const projects = [];
+    console.log('here');
+    for (let [key, value] of this.projectRegistry) {
+      projects.push(value);
+    }
+    return projects;
   }
 
   clear() {
@@ -46,7 +51,7 @@ class ProjectStore {
     if (this.page === 0) {
       this.projectRegistry.clear();
     }
-    return this.$req
+    return this.$req()
       .then(({ projects, projectsCount }) => {
         if (projects.length === 0) {
           this.hasNextPage = false;
@@ -68,7 +73,7 @@ decorate(ProjectStore, {
   hasNextPage: observable,
   count: observable,
   page: observable,
-  projectRegistry: observable,
+  projects: observable,
   predicate: observable,
   projects: computed,
   setPage: action,
