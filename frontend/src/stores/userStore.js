@@ -1,4 +1,4 @@
-import { action, extendObservable, decorate, observable } from 'mobx';
+import { action, decorate, observable } from 'mobx';
 import { createContext } from 'react';
 import agent from '../agent';
 

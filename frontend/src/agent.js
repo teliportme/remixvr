@@ -75,15 +75,35 @@ const Profile = {
 };
 
 // prettier-ignore
-const Theme = {
-  get: (page, lim = 20) =>
-    requests.get(`/themes?${limit(lim, page)}`),
-  getTheme: slug =>
-    requests.get(`/themes/${slug}`)
+const Project = {
+  all: (page, lim = 20) =>
+    requests.get(`/projects?${limit(lim, page)}`),
+  byAuthor: (username, page, lim=20) =>
+    requests.get(`/projects?${limit(lim, page)}&author=${username}`),
+  byFavorited: (username, page, lim=20) =>
+    requests.get(`/projects?${limit(lim,page)}&favorited=${username}`),
+  byTag: (tag, page, lim=20) =>
+    requests.get(`/projects?${limit(lim, page)}$tag=${tag}`),
+  get: slug =>
+    requests.get(`/projects/${slug}`),
+  edit: (slug, data) =>
+    requests.put(`/projects/${slug}`, data),
+  delete: slug =>
+    requests.delete(`/projects/${slug}`),
+  create: data =>
+    requests.post('/projects', data),
+  feed: (page, lim=20) =>
+    requests.get(`/projects/feed?${limit(lim, page)}`),
+  favorite: slug =>
+    requests.post(`/projects/${slug}/favorite`),
+  unfavorite: slug =>
+    requests.delete(`/projects/${slug}/favorite`),
+  fields: slug =>
+    requests.get(`projects/${slug}/fields`)
 }
 
 export default {
   Auth,
   Profile,
-  Theme
+  Project
 };
