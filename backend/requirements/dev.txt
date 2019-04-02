@@ -1,0 +1,11 @@
+# Everything the developer needs in addition to the production requirements
+-r prod.txt
+
+flask-shell-ipython=0.4.0
+# Testing
+pytest==3.6.3
+WebTest==2.0.30
+coverage==4.5.1
+factory-boy==2.11.1
+# For python 3
+Faker==0.8.16

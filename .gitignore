@@ -1,0 +1,61 @@
+.DS_Store
+.cache
+gh-pages/
+node_modules
+npm-debug.log*
+yarn-debug.log*
+*.wav
+*.bat
+.vs
+
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+.webassets-cache
+.pytest_cache
+
+# Virtualenvs
+*.env
+env/
+dev.db
+.cache/v/cache
+.vscode

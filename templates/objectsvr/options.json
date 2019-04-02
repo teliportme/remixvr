@@ -1,0 +1,25 @@
+{
+  "title": "Objects in VR",
+  "directory": "objectsvr",
+  "description": "This template allows you to load different objects in VR, set a color for the background and play a sound when interacted with it.",
+  "author": "RemixVR",
+  "variables": [
+    {
+      "name": "object",
+      "type": "dropdown",
+      "value": "Bear_Brown",
+      "options": ["Bear_Brown", "Cat"]
+    },
+    {
+      "name": "soundFile",
+      "type": "dropdown",
+      "value": "bear2.mp3",
+      "options": ["bear2.mp3", "Cat2.mp3"]
+    },
+    {
+      "name": "color",
+      "type": "text",
+      "value": "black"
+    }
+  ]
+}

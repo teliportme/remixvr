@@ -1,0 +1,25 @@
+{
+  "title": "Rain Effect in VR",
+  "directory": "rainvr",
+  "description": "This template allows you to load different a 360 image, set the image for the rain drops, control number of drops.",
+  "author": "RemixVR",
+  "variables": [
+    {
+      "name": "rainImage",
+      "type": "dropdown",
+      "value": "raindrop.png",
+      "options": ["raindrop.png", "snowflake1.png", "unicef.png"]
+    },
+    {
+      "name": "pano",
+      "type": "dropdown",
+      "value": "pano1.jpg",
+      "options": ["pano1.jpg", "pano2.jpg"]
+    },
+    {
+      "name": "particleNumber",
+      "type": "number",
+      "value": 30000
+    }
+  ]
+}

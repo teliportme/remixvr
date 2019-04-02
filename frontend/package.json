@@ -1,0 +1,53 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "mobx": "^5.9.0",
+    "mobx-react-lite": "^1.2.0",
+    "prettier": "^1.16.4",
+    "promise.prototype.finally": "^3.1.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "styled-components": "^4.2.0",
+    "superagent": "^4.1.0",
+    "superagent-promise": "^1.1.0",
+    "tachyons": "^4.11.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "css": "tachyons src/css/app.css > src/index.css --minify",
+    "prestart": "npm run css",
+    "prebuild": "npm run css"
+  },
+  "devDependencies": {
+    "tachyons-cli": "^1.3.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "prettier": {
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  }
+}
