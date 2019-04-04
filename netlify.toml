@@ -4,3 +4,8 @@
 
 [context.production]
   environment = { API_URL = "https://api.remixvr.org/api" }
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
