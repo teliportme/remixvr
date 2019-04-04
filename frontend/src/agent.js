@@ -4,7 +4,7 @@ import { authStore } from './stores/authStore';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = process.env.API_URL || 'http://localhost:5000/api';
+const API_ROOT = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const handleErrors = error => {
   if (error && error.response && error.response.status === 401) {

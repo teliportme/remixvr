@@ -1,9 +1,9 @@
 [build]
   base = "frontend"
-  environment = { API_URL = "https://api.staging.remixvr.org/api" }
+  environment = { REACT_APP_API_URL = "https://api.staging.remixvr.org/api" }
 
 [context.production]
-  environment = { API_URL = "https://api.remixvr.org/api" }
+  environment = { REACT_APP_API_URL = "https://api.remixvr.org/api" }
 
 [[redirects]]
   from = "/*"
