@@ -1,2 +1,6 @@
 [build]
   base = "frontend"
+  environment = { API_URL = "https://api.staging.remixvr.org/api" }
+
+[context.production]
+  environment = { API_URL = "https://api.remixvr.org/api" }

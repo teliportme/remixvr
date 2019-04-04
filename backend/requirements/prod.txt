@@ -7,7 +7,7 @@ Flask_SQLAlchemy==2.3.2
 click==6.7
 marshmallow==2.15.3
 Flask_Bcrypt==0.7.1
-Flask-JWT-Extended=3.17.0
+Flask-JWT-Extended==3.17.0
 flask_apispec==0.7.0
 Flask==1.0.2
 PyJWT==1.6.4
@@ -17,5 +17,5 @@ Flask-Migrate==2.2.1
 gunicorn>=19.9.0
 Flask-Cors==3.0.6
 marshmallow-oneofschema==1.0.5
-python-dotenv=0.10.1
-simplejson=3.16.0
+python-dotenv==0.10.1
+simplejson==3.16.0
