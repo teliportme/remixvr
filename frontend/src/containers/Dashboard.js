@@ -9,10 +9,12 @@ const Dashboard = observer(() => {
   const userStore = useContext(UserStore);
 
   useEffect(() => {
-    projectStore.setPredicate({ author: userStore.currentUser.username });
-    projectStore.loadProjects().then(() => {
-      console.log(projectStore.projects);
-    });
+    if (userStore.currentUser) {
+      projectStore.setPredicate({ author: userStore.currentUser.username });
+      projectStore.loadProjects().then(() => {
+        console.log(projectStore.projects);
+      });
+    }
   }, [projectStore]);
 
   return (

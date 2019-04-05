@@ -31,9 +31,7 @@ const Login = observer(() => {
 
   return (
     <div className="bg-near-white center measure mb4 pb4 ph3">
-      <Helmet>
-        <title>Login</title>
-      </Helmet>
+      <Helmet title="Login" />
       <h3 className="f3 f2-ns dark-gray tc">Log in to your account</h3>
       <form onSubmit={handleSubmitForm}>
         <div className="mb3">
