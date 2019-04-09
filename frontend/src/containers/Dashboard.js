@@ -19,9 +19,7 @@ const Dashboard = observer(() => {
 
   return (
     <div>
-      <Helmet>
-        <title>Dashboard</title>
-      </Helmet>
+      <Helmet title="Dashboard" />
       {projectStore.count > 0 &&
         projectStore.projects.map(project => (
           <div key={project.slug}>{project.title}</div>
