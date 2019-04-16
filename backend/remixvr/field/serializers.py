@@ -1,6 +1,8 @@
 from marshmallow import Schema, fields, pre_load, post_dump, pre_dump
 from marshmallow_oneofschema import OneOfSchema
 
+from flask import current_app as app
+
 from remixvr.project.serializers import ProjectSchema
 from .models import (Position, Text, Number, Audio, Video,
                      VideoSphere, Image, PhotoSphere)
@@ -49,35 +51,40 @@ class NumberSchema(FieldSchema):
 
 
 class AudioSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['uri'])
     duration = fields.Int()
     audio_format = fields.Str()
 
 
 class VideoSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['uri'])
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
 
 class VideoSphereSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['uri'])
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
 
 class ImageSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['uri'])
     width = fields.Int()
     height = fields.Int()
 
 
 class PhotoSphereSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['uri'])
     width = fields.Int()
     height = fields.Int()
+
+
+# added to be included in combined schema to extract file while uploading
+class FileLoadSchema(FieldSchema):
+    file = fields.Field(location="files", load_only=True)
 
 
 class ProjectFieldSchema(OneOfSchema):
@@ -117,7 +124,9 @@ class ProjectFieldSchema(OneOfSchema):
         strict = True
 
 
-class CombinedSchema(PositionSchema, TextSchema, NumberSchema,                          AudioSchema, VideoSchema, VideoSphereSchema,                       ImageSchema, PhotoSphereSchema):
+class CombinedSchema(PositionSchema, TextSchema, NumberSchema, FileLoadSchema,
+                     AudioSchema, VideoSchema, VideoSphereSchema,
+                     ImageSchema, PhotoSphereSchema):
     pass
 
 

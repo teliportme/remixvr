@@ -1,10 +1,13 @@
 """
 Field Views
 """
-
+import os
+import uuid
 from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
 from flask_jwt_extended import current_user, jwt_required, jwt_optional
+from flask import current_app as app
+from werkzeug.utils import secure_filename
 from marshmallow import fields
 from sqlalchemy.exc import IntegrityError
 
@@ -12,7 +15,7 @@ from remixvr.database import db
 from remixvr.exceptions import InvalidUsage
 from remixvr.project.models import Project
 from .models import (Field, Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere)
+                     VideoSphere, Image, PhotoSphere, File)
 from .serializers import field_schema, field_schemas, combined_schema
 
 blueprint = Blueprint('fields', __name__)
@@ -52,6 +55,18 @@ def delete_field(field_id):
     return '', 200
 
 
+def check_file_extension_for_type(type, file_extension):
+    if type == 'image' or type == 'photosphere':
+        if file_extension not in ['.png', '.jpg', '.jpeg']:
+            raise InvalidUsage.invalid_file_type()
+    elif type == 'audio':
+        if file_extension not in ['.mp3']:
+            raise InvalidUsage.invalid_file_type()
+    elif type == 'video' or type == 'videosphere':
+        if file_extension not in ['.mp4']:
+            raise InvalidUsage.invalid_file_type()
+
+
 @blueprint.route('/api/fields', methods=('POST',))
 @jwt_required
 @use_kwargs(combined_schema)
@@ -60,6 +75,23 @@ def create_field(label, project_name, type, **kwargs):
     project = Project.query.filter_by(slug=project_name).first()
     if not project:
         raise InvalidUsage.project_not_found()
+    if 'file' in kwargs:
+        uploaded_file = kwargs.pop('file')
+        if uploaded_file.filename == '':
+            raise InvalidUsage.no_files_found()
+        filename_original, file_extension = os.path.splitext(
+            secure_filename(uploaded_file.filename))
+        check_file_extension_for_type(type, file_extension)
+        filename = '{}{}'.format(uuid.uuid4().hex, file_extension)
+        uploaded_file.save(os.path.join(app.root_path,
+                                        app.config['UPLOAD_FOLDER'], filename))
+        file_url = '/uploads/{}'.format(filename)
+        file_size = os.path.getsize(os.path.join(app.root_path,
+                                                 app.config['UPLOAD_FOLDER'], filename))
+        file_object = File(filename=filename, uri=file_url,
+                           filemime=uploaded_file.mimetype, filename_original=uploaded_file.filename, filesize=file_size)
+        file_object.save()
+
     field = None
     try:
         if type == 'position':
@@ -73,19 +105,19 @@ def create_field(label, project_name, type, **kwargs):
                            author=project.author, **kwargs)
         elif type == 'audio':
             field = Audio(label=label, project=project,
-                          author=project.author, ** kwargs)
+                          author=project.author, file=file_object, ** kwargs)
         elif type == 'video':
             field = Video(label=label, project=project,
-                          author=project.author, ** kwargs)
+                          author=project.author, file=file_object, ** kwargs)
         elif type == 'videosphere':
             field = VideoSphere(label=label, project=project,
-                                author=project.author, ** kwargs)
+                                author=project.author, file=file_object, ** kwargs)
         elif type == 'image':
             field = Image(label=label, project=project,
-                          author=project.author, ** kwargs)
+                          author=project.author, file=file_object, ** kwargs)
         elif type == 'photosphere':
             field = PhotoSphere(label=label, project=project,
-                                author=project.author, ** kwargs)
+                                author=project.author, file=file_object, ** kwargs)
         else:
             raise Exception(("Field type - {} not found").format(type))
             return
