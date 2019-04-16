@@ -15,6 +15,7 @@ THEME_ALREADY_EXISTS = template(
 FIELD_NOT_FOUND = template(['Field not found'], code=404)
 FIELD_ERROR = template(['Error while updating field'], code=422)
 NO_FILES_FOUND = template(['No files found'], code=422)
+INVALID_FILETYPE = template(['Invalid file type found'], code=422)
 
 
 class InvalidUsage(Exception):
@@ -66,3 +67,7 @@ class InvalidUsage(Exception):
     @classmethod
     def no_files_found(cls):
         return cls(**NO_FILES_FOUND)
+
+    @classmethod
+    def invalid_file_type(cls):
+        return cls(**INVALID_FILETYPE)
