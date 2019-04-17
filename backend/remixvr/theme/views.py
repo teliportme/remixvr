@@ -55,7 +55,7 @@ def update_theme(slug, **kwargs):
         slug=slug, author_id=current_user.profile.id).first()
     if not theme:
         raise InvalidUsage.theme_not_found()
-    theme.update(udpatedAt=dt.datetime.utcnow(), **kwargs)
+    theme.update(udpatedAt=datetime.datetime.utcnow(), **kwargs)
     theme.save()
     return theme
 
