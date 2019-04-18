@@ -47,10 +47,9 @@ def update_field(field_id, **kwargs):
 
 @blueprint.route('/api/fields/<field_id>', methods=('DELETE',))
 @jwt_required
-@marshal_with(field_schema)
 def delete_field(field_id):
     field = Field.query.filter(
-        Field.id == field_id, Field.project.author_id == current_user.profile.id).first()
+        Field.id == field_id, Field.author_id == current_user.profile.id).first()
     field.delete()
     return '', 200
 
@@ -75,7 +74,7 @@ def create_field(label, project_name, type, **kwargs):
     project = Project.query.filter_by(slug=project_name).first()
     if not project:
         raise InvalidUsage.project_not_found()
-    if 'file' in kwargs:
+    if 'file' in kwargs and kwargs['file'] is not None:
         uploaded_file = kwargs.pop('file')
         if uploaded_file.filename == '':
             raise InvalidUsage.no_files_found()
