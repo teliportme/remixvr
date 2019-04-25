@@ -9,6 +9,7 @@ from marshmallow import fields
 
 from remixvr.user.models import User
 from remixvr.field.serializers import field_schemas
+from remixvr.space.serializers import space_schemas
 from remixvr.exceptions import InvalidUsage
 from remixvr.theme.models import Theme
 from .models import Project, Tags
@@ -127,19 +128,19 @@ def projects_feed(limit=20, offset=0):
         order_by(Project.createdAt.desc()).offset(offset).limit(limit).all()
 
 
-@blueprint.route('/api/projects/<slug>/fields', methods=('GET',))
+@blueprint.route('/api/projects/<slug>/spaces', methods=('GET',))
 @jwt_optional
-@marshal_with(field_schemas)
-def get_project_fields(slug):
+@marshal_with(space_schemas)
+def get_project_spaces(slug):
     project = Project.query.filter_by(slug=slug).first()
     if not project:
         raise InvalidUsage.project_not_found()
-    return project.fields
-
+    return project.spaces
 
 ######
 # Tags
 ######
+
 
 @blueprint.route('/api/tags', methods=('GET',))
 def get_tags():

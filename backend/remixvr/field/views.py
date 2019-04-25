@@ -13,7 +13,7 @@ from sqlalchemy.exc import IntegrityError
 
 from remixvr.database import db
 from remixvr.exceptions import InvalidUsage
-from remixvr.project.models import Project
+from remixvr.space.models import Space
 from .models import (Field, Position, Text, Number, Audio, Video,
                      VideoSphere, Image, PhotoSphere, File)
 from .serializers import field_schema, field_schemas, combined_schema
@@ -70,9 +70,9 @@ def check_file_extension_for_type(type, file_extension):
 @jwt_required
 @use_kwargs(combined_schema)
 @marshal_with(field_schema)
-def create_field(label, project_name, type, **kwargs):
-    project = Project.query.filter_by(slug=project_name).first()
-    if not project:
+def create_field(label, project_name, space_id, type, **kwargs):
+    space = Space.get_by_id(space_id)
+    if not space:
         raise InvalidUsage.project_not_found()
     if 'file' in kwargs and kwargs['file'] is not None:
         uploaded_file = kwargs.pop('file')
@@ -94,29 +94,29 @@ def create_field(label, project_name, type, **kwargs):
     field = None
     try:
         if type == 'position':
-            field = Position(label=label, project=project,
-                             author=project.author, **kwargs)
+            field = Position(label=label, space=space,
+                             author=current_user.profile, **kwargs)
         elif type == 'text':
-            field = Text(label=label, project=project,
-                         author=project.author, ** kwargs)
+            field = Text(label=label, space=space,
+                         author=current_user.profile, ** kwargs)
         elif type == 'number':
-            field = Number(label=label, project=project,
-                           author=project.author, **kwargs)
+            field = Number(label=label, space=space,
+                           author=current_user.profile, **kwargs)
         elif type == 'audio':
-            field = Audio(label=label, project=project,
-                          author=project.author, file=file_object, ** kwargs)
+            field = Audio(label=label, space=space,
+                          author=current_user.profile, file=file_object, ** kwargs)
         elif type == 'video':
-            field = Video(label=label, project=project,
-                          author=project.author, file=file_object, ** kwargs)
+            field = Video(label=label, space=space,
+                          author=current_user.profile, file=file_object, ** kwargs)
         elif type == 'videosphere':
-            field = VideoSphere(label=label, project=project,
-                                author=project.author, file=file_object, ** kwargs)
+            field = VideoSphere(label=label, space=space,
+                                author=current_user.profile, file=file_object, ** kwargs)
         elif type == 'image':
-            field = Image(label=label, project=project,
-                          author=project.author, file=file_object, ** kwargs)
+            field = Image(label=label, space=space,
+                          author=current_user.profile, file=file_object, ** kwargs)
         elif type == 'photosphere':
-            field = PhotoSphere(label=label, project=project,
-                                author=project.author, file=file_object, ** kwargs)
+            field = PhotoSphere(label=label, space=space,
+                                author=current_user.profile, file=file_object, ** kwargs)
         else:
             raise Exception(("Field type - {} not found").format(type))
             return

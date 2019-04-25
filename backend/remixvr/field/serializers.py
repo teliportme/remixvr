@@ -12,8 +12,7 @@ class FieldSchema(Schema):
     id = fields.Int()
     label = fields.Str()
     type = fields.Str()
-    project_name = fields.Str(load_only=True)
-    project = fields.Nested(ProjectSchema, only=["slug"], load_only=True)
+    space_id = fields.Int(load_only=True)
     children = fields.Nested('self', default=None, many=True)
 
     class Meta:

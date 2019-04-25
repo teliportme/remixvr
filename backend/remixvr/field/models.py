@@ -15,8 +15,8 @@ class Field(SurrogatePK, Model):
     id = db.Column(db.Integer, primary_key=True)
     label = Column(db.String(100))
     type = Column(db.String(50))
-    project_id = reference_col('project', nullable=False)
-    project = relationship('Project', back_populates='fields')
+    space_id = reference_col('space', nullable=True)
+    space = relationship('Space', back_populates='fields')
     author_id = reference_col('userprofile', nullable=False)
     author = relationship("UserProfile", backref="fields")
 

@@ -12,6 +12,7 @@ from remixvr.database import (Model, SurrogatePK,
                               Column, db)
 
 from remixvr.profile.models import UserProfile
+from remixvr.space.models import Space
 
 favoriter_assoc = db.Table("favoritor_assoc",
                            db.Column("favoriter", db.Integer,
@@ -48,9 +49,6 @@ class Project(SurrogatePK, Model):
                         default=dt.datetime.utcnow)
     author_id = reference_col('userprofile', nullable=False)
     author = relationship('UserProfile', backref=db.backref('projects'))
-    # https://docs.sqlalchemy.org/en/latest/_modules/examples/inheritance/joined.html
-    fields = relationship('Field', back_populates="project",
-                          cascade="all, delete-orphan")
     theme_id = reference_col("theme", nullable=False)
     theme = relationship("Theme", backref="projects")
     # can be draft, published, deleted
@@ -93,6 +91,19 @@ class Project(SurrogatePK, Model):
     def remove_tag(self, tag):
         if tag in self.tagList:
             self.tagList.remove(tag)
+            return True
+        return False
+
+    # spaces are added using backref in space models
+    def add_space(self, space):
+        if space not in self.spaces:
+            self.spaces.append(space)
+            return True
+        return False
+
+    def remove_space(self, space):
+        if space in self.spaces:
+            self.spaces.remove(space)
             return True
         return False
 
