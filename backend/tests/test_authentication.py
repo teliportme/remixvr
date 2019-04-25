@@ -6,11 +6,9 @@ from remixvr.exceptions import USER_ALREADY_REGISTERED
 
 def _register_user(testapp, **kwargs):
     return testapp.post_json(url_for("user.register_user"), {
-        "user": {
-            "username": "mo",
-            "email": "mo@mo.mo",
-            "password": "momo"
-        }
+        "username": "mo",
+        "email": "mo@mo.mo",
+        "password": "momo"
     }, **kwargs)
 
 
@@ -24,11 +22,9 @@ class TestAuthenticate:
 
     def test_user_login(self, testapp):
         _register_user(testapp)
-
-        resp = testapp.post_json(url_for('user.login_user'), {'user': {
-            'email': 'mo@mo.mo',
-            'password': 'momo'
-        }})
+        resp = testapp.post_json(url_for('user.login_user'), {
+            'userid': 'mo@mo.mo',
+            'password': 'momo'})
 
         assert resp.json['user']['email'] == 'mo@mo.mo'
         assert resp.json['user']['token'] != 'None'
@@ -53,11 +49,9 @@ class TestAuthenticate:
         resp = _register_user(testapp)
         token = str(resp.json['user']['token'])
         resp = testapp.put_json(url_for('user.update_user'), {
-            'user': {
-                'email': 'meh@mo.mo',
-                'bio': 'I\'m a simple man',
-                'password': 'hmm'
-            }
+            'email': 'meh@mo.mo',
+            'bio': 'I\'m a simple man',
+            'password': 'hmm'
         }, headers={
             'Authorization': 'Token {}'.format(token)
         })
