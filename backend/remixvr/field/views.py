@@ -70,7 +70,7 @@ def check_file_extension_for_type(type, file_extension):
 @jwt_required
 @use_kwargs(combined_schema)
 @marshal_with(field_schema)
-def create_field(label, project_name, space_id, type, **kwargs):
+def create_field(label, space_id, type, **kwargs):
     space = Space.get_by_id(space_id)
     if not space:
         raise InvalidUsage.project_not_found()
