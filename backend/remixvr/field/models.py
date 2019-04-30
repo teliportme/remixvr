@@ -36,6 +36,7 @@ class Field(SurrogatePK, Model):
     )
 
     # https://docs.sqlalchemy.org/en/latest/orm/inheritance.html#joined-table-inheritance
+    # https://docs.sqlalchemy.org/en/13/_modules/examples/inheritance/joined.html
     __mapper_args__ = {
         "polymorphic_identity": "field",
         "polymorphic_on": type,
