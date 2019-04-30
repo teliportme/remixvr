@@ -13,7 +13,8 @@ class FieldSchema(Schema):
     label = fields.Str()
     type = fields.Str()
     space_id = fields.Int(load_only=True)
-    children = fields.Nested('self', default=None, many=True)
+    # https://marshmallow.readthedocs.io/en/2.x-line/nesting.html#two-way-nesting
+    children = fields.Nested('CombinedSchema', default=None, many=True)
     parent_id = fields.Int(load_only=True)
 
     class Meta:

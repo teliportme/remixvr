@@ -156,3 +156,5 @@ class Link(Field):
     linked_space_id = reference_col('space', nullable=False)
     linked_space = relationship(
         'Space', backref=db.backref('link', uselist=False))
+
+    __mapper_args__ = {"polymorphic_identity": "link"}
