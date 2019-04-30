@@ -2,7 +2,7 @@
 
 from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
-from flask_jwt_extended import jwt_required, jwt_optional
+from flask_jwt_extended import jwt_required, jwt_optional, current_user
 from marshmallow import fields
 
 from remixvr.project.models import Project
@@ -27,11 +27,12 @@ def get_space(space_id):
 @jwt_required
 @use_kwargs(space_schema)
 @marshal_with(space_schema)
-def create_space(project_id):
-    project = Project.get_by_id(project_id)
+def create_space(project_slug):
+    project = Project.query.filter_by(
+        slug=project_slug, author_id=current_user.profile.id).first()
     if not project:
         raise InvalidUsage.project_not_found()
-    space = Space()
+    space = Space(author=current_user.profile)
     space.save()
     project.add_space(space)
     project.save()
