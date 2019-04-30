@@ -147,3 +147,12 @@ class PhotoSphere(Field):
     height = Column(db.Integer)
 
     __mapper_args__ = {"polymorphic_identity": "photosphere"}
+
+
+class Link(Field):
+
+    __tablename__ = 'link'
+    id = Column(db.ForeignKey('field.id'), primary_key=True)
+    linked_space_id = reference_col('space', nullable=False)
+    linked_space = relationship(
+        'Space', backref=db.backref('link', uselist=False))

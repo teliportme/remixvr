@@ -15,7 +15,7 @@ from remixvr.database import db
 from remixvr.exceptions import InvalidUsage
 from remixvr.space.models import Space
 from .models import (Field, Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere, File)
+                     VideoSphere, Image, PhotoSphere, File, Link)
 from .serializers import field_schema, field_schemas, combined_schema
 
 blueprint = Blueprint('fields', __name__)
@@ -117,6 +117,9 @@ def create_field(label, space_id, type, **kwargs):
         elif type == 'photosphere':
             field = PhotoSphere(label=label, space=space,
                                 author=current_user.profile, file=file_object, ** kwargs)
+        elif type == 'link':
+            field = Link(label=label, space=space,
+                         author=current_user.profile, **kwargs)
         else:
             raise Exception(("Field type - {} not found").format(type))
             return

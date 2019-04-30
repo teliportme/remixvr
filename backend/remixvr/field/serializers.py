@@ -5,7 +5,7 @@ from flask import current_app as app
 
 from remixvr.project.serializers import ProjectSchema
 from .models import (Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere)
+                     VideoSphere, Image, PhotoSphere, Link)
 
 
 class FieldSchema(Schema):
@@ -14,6 +14,7 @@ class FieldSchema(Schema):
     type = fields.Str()
     space_id = fields.Int(load_only=True)
     children = fields.Nested('self', default=None, many=True)
+    parent_id = fields.Int(load_only=True)
 
     class Meta:
         strict = True
@@ -81,7 +82,12 @@ class PhotoSphereSchema(FieldSchema):
     height = fields.Int()
 
 
+class LinkSchema(FieldSchema):
+    linked_space_id = fields.Int()
+
 # added to be included in combined schema to extract file while uploading
+
+
 class FileLoadSchema(FieldSchema):
     file = fields.Field(location="files", load_only=True)
 
@@ -96,7 +102,8 @@ class ProjectFieldSchema(OneOfSchema):
         'video': VideoSchema,
         'videosphere': VideoSphereSchema,
         'image': ImageSchema,
-        'photosphere': PhotoSphereSchema
+        'photosphere': PhotoSphereSchema,
+        'link': LinkSchema
     }
 
     def get_obj_type(self, obj):
@@ -116,6 +123,8 @@ class ProjectFieldSchema(OneOfSchema):
             return 'image'
         elif isinstance(obj, PhotoSphere):
             return 'photosphere'
+        elif isinstance(obj, Link):
+            return 'link'
         else:
             raise Exception('Unknown object type: %s' % obj.__class__.__name__)
 
@@ -125,7 +134,7 @@ class ProjectFieldSchema(OneOfSchema):
 
 class CombinedSchema(PositionSchema, TextSchema, NumberSchema, FileLoadSchema,
                      AudioSchema, VideoSchema, VideoSphereSchema,
-                     ImageSchema, PhotoSphereSchema):
+                     ImageSchema, PhotoSphereSchema, LinkSchema):
     pass
 
 
