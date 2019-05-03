@@ -28,7 +28,7 @@ class FieldSchema(Schema):
 
 class FileSchema(Schema):
     filename = fields.Str()
-    uri = fields.Str()
+    url = fields.Str()
     filemime = fields.Str()
     filesize = fields.Int()
     filename_original = fields.Str()
@@ -52,33 +52,33 @@ class NumberSchema(FieldSchema):
 
 
 class AudioSchema(FieldSchema):
-    file = fields.Nested(FileSchema, only=['uri'])
+    file = fields.Nested(FileSchema, only=['url'])
     duration = fields.Int()
     audio_format = fields.Str()
 
 
 class VideoSchema(FieldSchema):
-    file = fields.Nested(FileSchema, only=['uri'])
+    file = fields.Nested(FileSchema, only=['url'])
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
 
 class VideoSphereSchema(FieldSchema):
-    file = fields.Nested(FileSchema, only=['uri'])
+    file = fields.Nested(FileSchema, only=['url'])
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
 
 class ImageSchema(FieldSchema):
-    file = fields.Nested(FileSchema, only=['uri'])
+    file = fields.Nested(FileSchema, only=['url'])
     width = fields.Int()
     height = fields.Int()
 
 
 class PhotoSphereSchema(FieldSchema):
-    file = fields.Nested(FileSchema, only=['uri'])
+    file = fields.Nested(FileSchema, only=['url'])
     width = fields.Int()
     height = fields.Int()
 

@@ -48,7 +48,7 @@ class File(Model):
     __tablename__ = 'file'
     id = Column(db.Integer, primary_key=True)
     filename = Column(db.String(50))
-    uri = Column(db.String(512))
+    url = Column(db.String(512))
     filemime = Column(db.String(255))
     filesize = Column(db.Integer)
     filename_original = Column(db.String(200))
