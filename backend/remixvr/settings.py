@@ -33,11 +33,12 @@ class Config(object):
         'http://localhost:4200',
         'http://0.0.0.0:4000',
         'http://localhost:4000',
+        'http://localhost:8080',
         'https://remixvr.org',
         os.environ.get('WHITELIST', '')
     ]
     JWT_HEADER_TYPE = 'Token'
-    UPLOAD_FOLDER = './uploads'
+    UPLOAD_FOLDER = 'uploads'
     MAX_CONTENT_LENGTH = 1024*1024*1024  # limit max upload size
 
 
@@ -48,6 +49,7 @@ class ProdConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',
                                              'postgresql://localhost/remixvr')
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=180)
 
 
 class DevConfig(Config):

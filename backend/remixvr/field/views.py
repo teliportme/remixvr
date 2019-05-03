@@ -87,7 +87,7 @@ def create_field(label, space_id, type, **kwargs):
         file_url = '/uploads/{}'.format(filename)
         file_size = os.path.getsize(os.path.join(app.root_path,
                                                  app.config['UPLOAD_FOLDER'], filename))
-        file_object = File(filename=filename, uri=file_url,
+        file_object = File(filename=filename, url=file_url,
                            filemime=uploaded_file.mimetype, filename_original=uploaded_file.filename, filesize=file_size)
         file_object.save()
 
