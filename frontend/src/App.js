@@ -35,8 +35,10 @@ const App = () => {
   useEffect(() => {
     if (commonStore.token) {
       userStore.pullUser().finally(() => commonStore.setAppLoaded());
+    } else {
+      commonStore.setAppLoaded();
     }
-  });
+  }, [commonStore]);
 
   return (
     <CustomBrowsingRouter>

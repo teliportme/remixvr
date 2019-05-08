@@ -73,6 +73,7 @@ decorate(ProjectStore, {
   hasNextPage: observable,
   count: observable,
   page: observable,
+  projectRegistry: observable,
   projects: observable,
   predicate: observable,
   projects: computed,

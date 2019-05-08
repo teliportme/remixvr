@@ -19,9 +19,7 @@ class AuthStore {
     return agent.Auth.login(userid, password)
       .then(({ user }) => {
         commonStore.setToken(user.token);
-      })
-      .then(() => {
-        userStore.pullUser();
+        userStore.setUser(user);
       })
       .catch(error => {
         this.errors =
@@ -38,9 +36,7 @@ class AuthStore {
     return agent.Auth.register(username, email, password)
       .then(({ user }) => {
         commonStore.setToken(user.token);
-      })
-      .then(() => {
-        userStore.pullUser();
+        userStore.setUser(user);
       })
       .catch(error => {
         this.errors =
