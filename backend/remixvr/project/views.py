@@ -14,6 +14,7 @@ from remixvr.exceptions import InvalidUsage
 from remixvr.theme.models import Theme
 from .models import Project, Tags
 from .serializers import project_schema, projects_schema
+from remixvr.theme.serializers import theme_schema
 
 blueprint = Blueprint('projects', __name__)
 
@@ -136,6 +137,17 @@ def get_project_spaces(slug):
     if not project:
         raise InvalidUsage.project_not_found()
     return project.spaces
+
+
+@blueprint.route('/api/projects/<slug>/theme', methods=('GET',))
+@jwt_optional
+@marshal_with(theme_schema)
+def get_project_theme(slug):
+    project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    return project.theme
+
 
 ######
 # Tags
