@@ -23,6 +23,7 @@ class Theme(SurrogatePK, Model):
     author = relationship("UserProfile", backref="themes")
     # can be draft, published, deleted
     status = Column(db.String(15), nullable=False, default="draft")
+    cover_image = Column(db.String(512))
     config = Column(JSONB)
 
     def __init__(self, author, title, description, slug=None, **kwargs):

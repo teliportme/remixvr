@@ -11,6 +11,7 @@ class ThemeSchema(Schema):
     updated_at = fields.DateTime(dump_only=True)
     author = fields.Nested(ProfileSchema)
     status = fields.Str()
+    cover_image = fields.Str()
     config = fields.Raw()
 
     @post_dump
