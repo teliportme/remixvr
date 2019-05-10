@@ -1,0 +1,25 @@
+{
+  "spaces": [
+    {
+      "title": "Virtual Tour",
+      "maxCount": "infinite",
+      "fields": [
+        {
+          "type": "photosphere",
+          "label": "photosphere",
+          "children": [
+            {
+              "type": "position",
+              "label": "hotspot",
+              "children": [
+                {
+                  "type": "link"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
