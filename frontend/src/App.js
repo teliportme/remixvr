@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense, useContext, useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import LoadingSpinner from './components/LoadingSpinner';
 import CustomBrowsingRouter from './components/CustomBrowserRouter';
@@ -12,6 +12,7 @@ const Page404 = lazy(() => import('./containers/Page404'));
 const Login = lazy(() => import('./containers/Login'));
 const Signup = lazy(() => import('./containers/Signup'));
 const Dashboard = lazy(() => import('./containers/Dashboard'));
+const ProjectEdit = lazy(() => import('./containers/ProjectEdit'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -25,6 +26,23 @@ const DefaultLayout = observer(props => {
     <React.Fragment>
       <AsyncHeader />
       <Route {...props} />
+    </React.Fragment>
+  );
+});
+
+const PrivateRoute = observer(props => {
+  const commonStore = useContext(CommonStore);
+  const userStore = useContext(UserStore);
+  return (
+    <React.Fragment>
+      {commonStore.appLoaded && userStore.currentUser ? (
+        <React.Fragment>
+          <AsyncHeader />
+          <Route {...props} />
+        </React.Fragment>
+      ) : (
+        commonStore.appLoaded && <Redirect to="/404" />
+      )}
     </React.Fragment>
   );
 });
@@ -49,6 +67,7 @@ const App = () => {
             <DefaultLayout path="/signup" component={Signup} />
             <DefaultLayout path="/login" component={Login} />
             <DefaultLayout path="/dashboard" component={Dashboard} />
+            <PrivateRoute path="/project/:slug/edit" component={ProjectEdit} />
             <DefaultLayout exact path="/" component={Home} />
             <DefaultLayout component={Page404} />
           </Switch>

@@ -11,7 +11,7 @@ class ProjectStore {
   projectRegistry = new Map();
   predicate = {};
   spacesRegistry = new Map();
-  projectTheme = undefined;
+  projectTheme = { config: {} };
 
   get projects() {
     const projects = [];
@@ -34,7 +34,7 @@ class ProjectStore {
     this.spacesRegistry.clear();
     this.projectPage = 0;
     this.hasNextPage = true;
-    this.projectTheme = undefined;
+    this.projectTheme = { config: {} };
     this.count = 0;
   }
 
@@ -115,7 +115,7 @@ class ProjectStore {
   }
 
   getProjectTheme(slug) {
-    if (this.projectTheme) return this.projectTheme;
+    // if (this.projectTheme) return this.projectTheme;
     return agent.Project.getTheme(slug).then(({ theme }) => {
       this.projectTheme = theme;
       return theme;
