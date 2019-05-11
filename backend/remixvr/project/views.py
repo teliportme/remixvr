@@ -1,6 +1,7 @@
 """Project Views"""
 
 import datetime as dt
+import json
 
 from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
@@ -10,6 +11,8 @@ from marshmallow import fields
 from remixvr.user.models import User
 from remixvr.field.serializers import field_schemas
 from remixvr.space.serializers import space_schemas
+from remixvr.space.models import Space
+from remixvr.field.models import PhotoSphere, Image
 from remixvr.exceptions import InvalidUsage
 from remixvr.theme.models import Theme
 from .models import Project, Tags
@@ -57,6 +60,23 @@ def make_project(title, description, theme_slug, tags=None):
                 mtag = Tags(tag)
                 mtag.save()
             project.add_tag(mtag)
+
+    space = Space(author=current_user.profile)
+    space.save()
+
+    config = theme.config
+
+    if len(config['spaces']) == 1:
+        fields_to_generate = config['spaces'][0]['fields']
+        for field in fields_to_generate:
+            if field['type'] == 'photosphere':
+                new_field = PhotoSphere(
+                    space=space, author=current_user.profile)
+            if field['type'] == 'image':
+                new_field = Image(space=space, author=current_user.profile)
+            new_field.save()
+
+    project.add_space(space)
     project.save()
     return project
 
