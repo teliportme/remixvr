@@ -16,14 +16,12 @@ function flatten(ary) {
   return ret;
 }
 
-const FieldsGenerate = observer(({ config }) => {
-  const space = config.spaces[0];
-  const fields = space.fields;
-  var fieldsFlat = flatten(fields);
-  console.log(fieldsFlat);
-  return fieldsFlat.map(field => {
+const FieldsGenerate = observer(({ fields }) => {
+  return fields.map(field => {
     if (field.type === 'photosphere') {
-      return <PhotoSphere />;
+      return <PhotoSphere key={field.id} field={field} />;
+    } else {
+      return null;
     }
   });
 });

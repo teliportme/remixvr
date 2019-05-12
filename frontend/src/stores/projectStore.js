@@ -62,6 +62,10 @@ class ProjectStore {
     return agent.Project.all(this.projectPage);
   }
 
+  createProject(title, description, theme_slug, tags) {
+    return agent.Project.create({ title, description, theme_slug, tags });
+  }
+
   loadProjects() {
     this.isLoading = true;
     if (this.projectPage === 0) {

@@ -16,12 +16,19 @@ const ProjectEdit = observer(props => {
   const projectStore = useContext(ProjectStore);
 
   const [ready, setReady] = useState(false);
+  const [currentSpace, setCurrentSpace] = useState(0);
 
   useEffect(() => {
     const projectSlug = props.match.params.slug;
+    const currentSpace = props.match.params.space;
+    if (!currentSpace) setCurrentSpace(0);
     projectStore.getProjectTheme(projectSlug).then(() => {
       projectStore.loadSpaces(projectSlug).then(() => {
         setReady(true);
+        if (projectStore.spaces.length > currentSpace) {
+          setCurrentSpace(0);
+          console.log('space', currentSpace);
+        }
       });
     });
   }, [projectStore]);
@@ -30,10 +37,9 @@ const ProjectEdit = observer(props => {
     ready && (
       <React.Fragment>
         <StyledDiv className="cf">
-          <div className="fl w-100 w-80-ns h-100">Main content</div>
-          <div className="fl w-100 w-20-ns h-100">
-            Sidebar
-            <FieldsGenerate config={projectStore.projectTheme.config} />
+          {/* <div className="fl w-100 w-80-ns h-100">Main content</div> */}
+          <div className="fl w-100 w-80-ns h-100 center pa2">
+            <FieldsGenerate fields={projectStore.spaces[currentSpace].fields} />
           </div>
         </StyledDiv>
         <SpacesCarousel spaces={projectStore.spaces} />
