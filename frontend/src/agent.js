@@ -127,10 +127,17 @@ const Space = {
     requests.del(`/spaces/${spaceId}`)
 }
 
+// prettier-ignore
+const Theme = {
+  all: () =>
+    requests.get('/themes')
+}
+
 export default {
   Auth,
   Profile,
   Project,
   Space,
-  Field
+  Field,
+  Theme
 };
