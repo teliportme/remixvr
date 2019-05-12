@@ -141,7 +141,7 @@ class PhotoSphere(Field):
 
     __tablename__ = 'photosphere'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    file_id = reference_col('file', nullable=False)
+    file_id = reference_col('file')
     file = relationship("File", backref=db.backref(
         "photosphere", uselist=False))
     width = Column(db.Integer)
