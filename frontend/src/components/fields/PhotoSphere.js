@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
+import FieldStore from '../../stores/fieldStore';
 
-const PhotoSphere = observer(({ field }) => {
-  const [file, setFile] = useState('');
+const PhotoSphere = observer(({ field, spaceId }) => {
+  const [file, setFile] = useState(field.file);
+  const fieldStore = useContext(FieldStore);
+
+  const uploadFile = event => {
+    const file = event.target.files[0];
+    const data = {};
+    fieldStore.updateField(field.id, data, file);
+  };
 
   return (
     <React.Fragment>
@@ -15,10 +23,7 @@ const PhotoSphere = observer(({ field }) => {
         id="file"
         placeholder={field.label}
         required
-        value={file}
-        onChange={e => {
-          setFile(e.target.value);
-        }}
+        onChange={uploadFile}
       />
     </React.Fragment>
   );
