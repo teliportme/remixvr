@@ -33,14 +33,34 @@ def get_field(field_id):
 
 @blueprint.route('/api/fields/<field_id>', methods=('PUT',))
 @jwt_required
-@use_kwargs(field_schema)
+@use_kwargs(combined_schema)
 @marshal_with(field_schema)
 def update_field(field_id, **kwargs):
     field = Field.query.filter(
-        Field.id == field_id, Field.project.author_id == current_user.profile.id).first()
+        Field.id == field_id, Field.author_id == current_user.profile.id).first()
     if not field:
         raise InvalidUsage.field_not_found()
-    field.update(**kwargs)
+
+    if 'file' in kwargs and kwargs['file'] is not None:
+        uploaded_file = kwargs.pop('file')
+        if uploaded_file.filename == '':
+            raise InvalidUsage.no_files_found()
+        filename_original, file_extension = os.path.splitext(
+            secure_filename(uploaded_file.filename))
+        check_file_extension_for_type(type, file_extension)
+        filename = '{}{}'.format(uuid.uuid4().hex, file_extension)
+        uploaded_file.save(os.path.join(app.root_path,
+                                        app.config['UPLOAD_FOLDER'], filename))
+        file_url = '/uploads/{}'.format(filename)
+        file_size = os.path.getsize(os.path.join(app.root_path,
+                                                 app.config['UPLOAD_FOLDER'], filename))
+        file_object = File(filename=filename, url=file_url,
+                           filemime=uploaded_file.mimetype, filename_original=uploaded_file.filename, filesize=file_size)
+        file_object.save()
+
+        field.update(file=file_object, **kwargs)
+    else:
+        field.update(**kwargs)
     field.save()
     return field
 
