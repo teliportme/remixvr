@@ -184,6 +184,13 @@ aframe-event-set-component@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/aframe-event-set-component/-/aframe-event-set-component-4.1.2.tgz#86bdadd26e20eea3e78b3fb257a0d278b4ab76b7"
 
+aframe-event-set-component@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/aframe-event-set-component/-/aframe-event-set-component-5.0.0.tgz#6b855605de5097f713a7adcb0c6e371322efb5fd"
+  integrity sha512-O9Bhs8Qu2cEilXQ6F2xUxxJIbaZEA2atdIxTwq5qPHRHaIa+8ZghkirUBicNs92aHR9QQwk6ZnRx+SmBXi+B9Q==
+  dependencies:
+    debug "^2.6.9"
+
 aframe-particle-system-component@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/aframe-particle-system-component/-/aframe-particle-system-component-1.0.11.tgz#ac1f3abef2307b238df58c9358982c987fb10016"
