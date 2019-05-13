@@ -1,6 +1,5 @@
-export function fetchProjectData(callback) {
-  const slug = '360-virtual-tour-771d3e';
-  const url = `https://api.staging.remixvr.org/api/projects/${slug}/spaces`;
+export function fetchProjectData(projectSlug, callback) {
+  const url = `https://api.staging.remixvr.org/api/projects/${projectSlug}/spaces`;
   const xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
@@ -44,4 +43,18 @@ export function fetchSpace(id, callback) {
     return;
   }
   callback(existingSpace);
+}
+
+export function getValues(data, key, value) {
+  const results = [];
+  // iterate over each element in the array
+  for (var i = 0; i < data.length; i++) {
+    // look for the entry with a matching `code` value
+    if (data[i][key] == value) {
+      // we found it
+      // obj[i].name is the matched result
+      results.push(data[i]);
+    }
+  }
+  return results;
 }

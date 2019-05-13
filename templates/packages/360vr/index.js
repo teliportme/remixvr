@@ -1,22 +1,12 @@
 import AFRAME from 'aframe';
 import 'aframe-event-set-component';
-import { fetchProjectData, fetchSpace } from './remixvr';
+import { fetchProjectData, fetchSpace, getValues } from './remixvr';
 
-function getValues(data, key, value) {
-  const results = [];
-  // iterate over each element in the array
-  for (var i = 0; i < data.length; i++) {
-    // look for the entry with a matching `code` value
-    if (data[i][key] == value) {
-      // we found it
-      // obj[i].name is the matched result
-      results.push(data[i]);
-    }
-  }
-  return results;
-}
+const regex = /project\/(.*)\/view/g;
+const match = regex.exec(window.location.href);
+const projectSlug = match[1];
 
-fetchProjectData(function(spaces) {
+fetchProjectData(projectSlug, function(spaces) {
   // for (let i = 0; i < spaces.length; i++) {
   const space = spaces[0];
   const fields = space.fields;
