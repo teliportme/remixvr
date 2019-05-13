@@ -3,10 +3,10 @@ import { observer } from 'mobx-react-lite';
 
 const SpacesCarousel = observer(({ spaces }) => {
   return (
-    spaces.length > 0 && (
+    spaces.length > 1 && (
       <div className="column flex justify-center w-100">
-        {spaces.map(space => (
-          <div key={space.id}>{space.id}</div>
+        {spaces.map((space, index) => (
+          <div key={space.id}>{index}</div>
         ))}
         <div>Add new space</div>
       </div>
