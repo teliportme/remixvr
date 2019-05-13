@@ -104,17 +104,10 @@ const Project = {
 
 // prettier-ignore
 const Field = {
-  create: (label, spaceId, type, ...rest) =>
-    requests.post('/fields', {
-      label,
-      spaceId,
-      type,
-      ...rest
-    }),
-  edit: (fieldId, ...items) =>
-    requests.put(`/fields/${fieldId}`, {
-      ...items
-    })
+  create: formData =>
+    requests.post('/fields', formData),
+  edit: (fieldId, formData) =>
+    requests.put(`/fields/${fieldId}`, formData)
 }
 
 // prettier-ignore

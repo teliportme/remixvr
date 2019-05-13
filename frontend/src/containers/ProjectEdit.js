@@ -39,7 +39,10 @@ const ProjectEdit = observer(props => {
         <StyledDiv className="cf">
           {/* <div className="fl w-100 w-80-ns h-100">Main content</div> */}
           <div className="fl w-100 w-80-ns h-100 center pa2">
-            <FieldsGenerate fields={projectStore.spaces[currentSpace].fields} />
+            <FieldsGenerate
+              fields={projectStore.spaces[currentSpace].fields}
+              spaceId={currentSpace}
+            />
           </div>
         </StyledDiv>
         <SpacesCarousel spaces={projectStore.spaces} />

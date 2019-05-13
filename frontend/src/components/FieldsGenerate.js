@@ -16,10 +16,10 @@ function flatten(ary) {
   return ret;
 }
 
-const FieldsGenerate = observer(({ fields }) => {
+const FieldsGenerate = observer(({ fields, spaceId }) => {
   return fields.map(field => {
     if (field.type === 'photosphere') {
-      return <PhotoSphere key={field.id} field={field} />;
+      return <PhotoSphere key={field.id} field={field} spaceId={spaceId} />;
     } else {
       return null;
     }
