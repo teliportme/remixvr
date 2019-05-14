@@ -1,10 +1,12 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-let PLUGINS = [new HtmlWebpackPlugin({
-  template: 'index.html',
-  inject: 'head'
-})];
+let PLUGINS = [
+  new HtmlWebpackPlugin({
+    template: 'index.html',
+    inject: 'head'
+  })
+];
 if (process.env.NODE_ENV === 'production') {
   PLUGINS.push(new webpack.optimize.UglifyJsPlugin());
 }
@@ -12,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   entry: './index.js',
   output: {
-    path: __dirname,
+    path: __dirname + '/dist',
     filename: 'build.js'
   },
   module: {
