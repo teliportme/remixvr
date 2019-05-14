@@ -90,7 +90,7 @@ class Audio(Field):
 
     __tablename__ = 'audio'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    file_id = reference_col('file', nullable=False)
+    file_id = reference_col('file', nullable=True)
     file = relationship("File", backref=db.backref("audio", uselist=False))
     duration = Column(db.Integer)
     audio_format = Column(db.String(50))
@@ -102,7 +102,7 @@ class Video(Field):
 
     __tablename__ = 'video'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    file_id = reference_col('file', nullable=False)
+    file_id = reference_col('file', nullable=True)
     file = relationship("File", backref=db.backref("video", uselist=False))
     duration = Column(db.Integer)
     width = Column(db.Integer)
@@ -115,7 +115,7 @@ class VideoSphere(Field):
 
     __tablename__ = 'videosphere'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    file_id = reference_col('file', nullable=False)
+    file_id = reference_col('file', nullable=True)
     file = relationship("File", backref=db.backref(
         "videosphere", uselist=False))
     duration = Column(db.Integer)
@@ -129,7 +129,7 @@ class Image(Field):
 
     __tablename__ = 'image'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    file_id = reference_col('file', nullable=False)
+    file_id = reference_col('file', nullable=True)
     file = relationship("File", backref=db.backref("image", uselist=False))
     width = Column(db.Integer)
     height = Column(db.Integer)
@@ -141,7 +141,7 @@ class PhotoSphere(Field):
 
     __tablename__ = 'photosphere'
     id = Column(db.ForeignKey("field.id"), primary_key=True)
-    file_id = reference_col('file')
+    file_id = reference_col('file', nullable=True)
     file = relationship("File", backref=db.backref(
         "photosphere", uselist=False))
     width = Column(db.Integer)

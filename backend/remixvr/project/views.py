@@ -117,7 +117,7 @@ def get_project(slug):
 @blueprint.route('/api/projects/<slug>/favorite', methods=('POST',))
 @jwt_required
 @marshal_with(project_schema)
-def favorite_an_project(slug):
+def favorite_a_project(slug):
     profile = current_user.profile
     project = Project.query.filter_by(slug=slug).first()
     if not project:
@@ -130,7 +130,7 @@ def favorite_an_project(slug):
 @blueprint.route('/api/projects/<slug>/favorite', methods=('DELETE',))
 @jwt_required
 @marshal_with(project_schema)
-def unfavorite_an_project(slug):
+def unfavorite_a_project(slug):
     profile = current_user.profile
     project = Project.query.filter_by(slug=slug).first()
     if not project:
@@ -151,12 +151,15 @@ def projects_feed(limit=20, offset=0):
 
 @blueprint.route('/api/projects/<slug>/spaces', methods=('GET',))
 @jwt_optional
+@use_kwargs({'slug': fields.Str()})
 @marshal_with(space_schemas)
 def get_project_spaces(slug):
     project = Project.query.filter_by(slug=slug).first()
     if not project:
         raise InvalidUsage.project_not_found()
-    return project.spaces
+
+    result = {'spaces': project.spaces, 'theme-url': project.theme.url}
+    return result
 
 
 @blueprint.route('/api/projects/<slug>/theme', methods=('GET',))
