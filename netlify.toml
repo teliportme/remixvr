@@ -6,17 +6,6 @@
   environment = { REACT_APP_API_URL = "https://api.remixvr.org/api" }
 
 [[redirects]]
-  from = "/1/project/*/view/"
-  to = "/1/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/1/project/*/view/*"
-  to = "/1/:splat"
-  status = 301
-
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
