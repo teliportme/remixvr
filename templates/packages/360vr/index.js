@@ -2,11 +2,7 @@ import AFRAME from 'aframe';
 import 'aframe-event-set-component';
 import { fetchProjectData, fetchSpace, getValues } from './remixvr';
 
-const regex = /project\/(.*)\/view/g;
-const match = regex.exec(window.location.href);
-const projectSlug = match[1];
-
-fetchProjectData(projectSlug, function(spaces) {
+fetchProjectData(function(spaces) {
   // for (let i = 0; i < spaces.length; i++) {
   const space = spaces[0];
   const fields = space.fields;

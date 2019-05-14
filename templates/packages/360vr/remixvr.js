@@ -1,15 +1,21 @@
-export function fetchProjectData(projectSlug, callback) {
-  const url = `https://api.staging.remixvr.org/api/projects/${projectSlug}/spaces`;
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-      const spaces = JSON.parse(xmlHttp.responseText);
-      window.remixvrspaces = spaces;
-      callback(spaces);
-    }
-  };
-  xmlHttp.open('GET', url, true); // true for asynchronous
-  xmlHttp.send(null);
+export function fetchProjectData(callback) {
+  const regex = /project\/(.*)\/view/g;
+  const match = regex.exec(window.location.href);
+  const projectSlug = match[1];
+
+  if (projectSlug) {
+    const url = `https://api.staging.remixvr.org/api/projects/${projectSlug}/spaces`;
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        const spaces = JSON.parse(xmlHttp.responseText);
+        window.remixvrspaces = spaces;
+        callback(spaces);
+      }
+    };
+    xmlHttp.open('GET', url, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
 }
 
 function findSpace(id) {
