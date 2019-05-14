@@ -1,0 +1,14 @@
+{
+  "spaces": [
+    {
+      "title": "360 Image",
+      "maxCount": 1,
+      "fields": [
+        {
+          "type": "photosphere",
+          "label": "photosphere"
+        }
+      ]
+    }
+  ]
+}
