@@ -1,10 +1,11 @@
+const API_ROOT = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 export function fetchProjectData(callback) {
-  const regex = /project\/(.*)\/view/g;
-  const match = regex.exec(window.location.href);
-  const projectSlug = match[1];
+  const urlParams = new URLSearchParams(window.location.search);
+  const projectSlug = urlParams.get('project');
 
   if (projectSlug) {
-    const url = `https://api.staging.remixvr.org/api/projects/${projectSlug}/spaces`;
+    const url = `${API_ROOT}/projects/${projectSlug}/spaces`;
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
@@ -36,7 +37,7 @@ function findSpace(id) {
 export function fetchSpace(id, callback) {
   const existingSpace = window.remixvrspaces && findSpace(parseInt(id));
   if (!existingSpace) {
-    const url = `https://api.staging.remixvr.org/api/spaces/${id}`;
+    const url = `${API_ROOT}/spaces/${id}`;
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {

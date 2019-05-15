@@ -2,6 +2,8 @@ import AFRAME from 'aframe';
 import 'aframe-event-set-component';
 import { fetchProjectData, fetchSpace, getValues } from './remixvr';
 
+const API_ROOT = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 fetchProjectData(function(spaces) {
   // for (let i = 0; i < spaces.length; i++) {
   const space = spaces[0];
@@ -18,7 +20,7 @@ function createPhotoSphereSpace(photosphereUrl) {
   sky.setAttribute(
     'material',
     'src',
-    `https://api.staging.remixvr.org` + photosphereUrl
+    API_ROOT + photosphereUrl
   );
 }
 
