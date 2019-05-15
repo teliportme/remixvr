@@ -1,12 +1,12 @@
-let API_ROOT = 'http://localhost:5000/api';
+let API_ROOT = 'http://localhost:5000';
 
 const urlParams = new URLSearchParams(window.location.search);
 const root = urlParams.get('root');
 
 if (root === 's') {
-  API_ROOT = 'https://api.staging.remixvr.org/api';
+  API_ROOT = 'https://api.staging.remixvr.org';
 } else if (root === 'p') {
-  API_ROOT = 'https://api.remixvr.org/api';
+  API_ROOT = 'https://api.remixvr.org';
 }
 
 export { API_ROOT };
@@ -17,7 +17,7 @@ export function fetchProjectData(callback) {
   const root = urlParams.get('root');
 
   if (projectSlug) {
-    const url = `${API_ROOT}/projects/${projectSlug}/spaces`;
+    const url = `${API_ROOT}/api/projects/${projectSlug}/spaces`;
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
