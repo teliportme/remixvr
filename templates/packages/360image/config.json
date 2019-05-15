@@ -7,6 +7,10 @@
         {
           "type": "photosphere",
           "label": "photosphere"
+        },
+        {
+          "type": "text",
+          "label": "Title"
         }
       ]
     }

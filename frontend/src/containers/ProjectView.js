@@ -13,7 +13,10 @@ const ProjectView = observer(props => {
 
   return (
     projectStore.projectTheme.slug && (
-      <div className="w-100 h-100 overflow-hidden">
+      <div
+        className="w-100 h-100 overflow-hidden"
+        style={{ background: '#111' }}
+      >
         <iframe
           className="bn"
           width="100%"
