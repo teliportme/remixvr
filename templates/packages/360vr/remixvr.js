@@ -4,9 +4,9 @@ const urlParams = new URLSearchParams(window.location.search);
 const root = urlParams.get('root');
 
 if (root === 's') {
-  API_ROOT = 'https://api.staging.remixvr.org';
+  API_ROOT = 'https://api.staging.remixvr.org/api';
 } else if (root === 'p') {
-  API_ROOT = 'https://api.remixvr.org';
+  API_ROOT = 'https://api.remixvr.org/api';
 }
 
 export { API_ROOT };

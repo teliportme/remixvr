@@ -19,7 +19,9 @@ const ProjectView = observer(props => {
         allowvr="yes"
         allowFullScreen="yes"
         scrolling="no"
-        src={`${projectStore.projectTheme.url}?project=${projectSlug}`}
+        src={`${projectStore.projectTheme.url}?project=${projectSlug}&root=${
+          process.env.REACT_APP_API_ROOT
+        }`}
       />
     )
   );
