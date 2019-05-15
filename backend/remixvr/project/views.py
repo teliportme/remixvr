@@ -158,8 +158,7 @@ def get_project_spaces(slug):
     if not project:
         raise InvalidUsage.project_not_found()
 
-    result = {'spaces': project.spaces, 'theme-url': project.theme.url}
-    return result
+    return project.spaces
 
 
 @blueprint.route('/api/projects/<slug>/theme', methods=('GET',))
