@@ -13,16 +13,19 @@ const ProjectView = observer(props => {
 
   return (
     projectStore.projectTheme.slug && (
-      <iframe
-        width="100%"
-        height="100%"
-        allowvr="yes"
-        allowFullScreen="yes"
-        scrolling="no"
-        src={`${projectStore.projectTheme.url}?project=${projectSlug}&root=${
-          process.env.REACT_APP_API_ROOT
-        }`}
-      />
+      <div className="w-100 h-100 overflow-hidden">
+        <iframe
+          className="bn"
+          width="100%"
+          height="100%"
+          allowvr="yes"
+          allowFullScreen="yes"
+          scrolling="no"
+          src={`${projectStore.projectTheme.url}?project=${projectSlug}&root=${
+            process.env.REACT_APP_API_ROOT
+          }`}
+        />
+      </div>
     )
   );
 });
