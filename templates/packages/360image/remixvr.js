@@ -1,19 +1,34 @@
-export function fetchProjectData(callback) {
-  const regex = /project\/(.*)\/view/g;
-  const match = regex.exec(window.location.href);
-  const projectSlug = match ? match[1] : '360-virtual-tour-771d3e';
+let API_ROOT = 'http://localhost:5000';
 
-  const url = `https://api.staging.remixvr.org/api/projects/${projectSlug}/spaces`;
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-      const spaces = JSON.parse(xmlHttp.responseText);
-      window.remixvrspaces = spaces;
-      callback(spaces);
-    }
-  };
-  xmlHttp.open('GET', url, true); // true for asynchronous
-  xmlHttp.send(null);
+const urlParams = new URLSearchParams(window.location.search);
+const root = urlParams.get('root');
+
+if (root === 's') {
+  API_ROOT = 'https://api.staging.remixvr.org';
+} else if (root === 'p') {
+  API_ROOT = 'https://api.remixvr.org';
+}
+
+export { API_ROOT };
+
+export function fetchProjectData(callback) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const projectSlug = urlParams.get('project');
+  const root = urlParams.get('root');
+
+  if (projectSlug) {
+    const url = `${API_ROOT}/api/projects/${projectSlug}/spaces`;
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        const spaces = JSON.parse(xmlHttp.responseText);
+        window.remixvrspaces = spaces;
+        callback(spaces);
+      }
+    };
+    xmlHttp.open('GET', url, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
 }
 
 function findSpace(id) {
@@ -34,7 +49,7 @@ function findSpace(id) {
 export function fetchSpace(id, callback) {
   const existingSpace = window.remixvrspaces && findSpace(parseInt(id));
   if (!existingSpace) {
-    const url = `https://api.staging.remixvr.org/api/spaces/${id}`;
+    const url = `${API_ROOT}/spaces/${id}`;
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {

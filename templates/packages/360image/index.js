@@ -1,5 +1,5 @@
 import AFRAME from 'aframe';
-import { fetchProjectData, getValues } from './remixvr';
+import { fetchProjectData, getValues, API_ROOT } from './remixvr';
 
 fetchProjectData(function(spaces) {
   const space = spaces[0];
@@ -10,9 +10,5 @@ fetchProjectData(function(spaces) {
 
 function createPhotoSphereSpace(photosphereUrl) {
   const sky = document.getElementById('sky');
-  sky.setAttribute(
-    'material',
-    'src',
-    `https://api.staging.remixvr.org` + photosphereUrl
-  );
+  sky.setAttribute('material', 'src', API_ROOT + photosphereUrl);
 }
