@@ -10,13 +10,17 @@ import commonStore from './stores/commonStore';
 import profileStore from './stores/profileStore';
 import authStore from './stores/authStore';
 import projectStore from './stores/projectStore';
+import fieldStore from './stores/fieldStore';
+import themeStore from './stores/themeStore';
 
 const stores = {
   userStore,
   commonStore,
   profileStore,
   authStore,
-  projectStore
+  projectStore,
+  fieldStore,
+  themeStore
 };
 
 // For easier debugging

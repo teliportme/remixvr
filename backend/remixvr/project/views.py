@@ -12,7 +12,7 @@ from remixvr.user.models import User
 from remixvr.field.serializers import field_schemas
 from remixvr.space.serializers import space_schemas
 from remixvr.space.models import Space
-from remixvr.field.models import PhotoSphere, Image
+from remixvr.field.models import PhotoSphere, Image, Text
 from remixvr.exceptions import InvalidUsage
 from remixvr.theme.models import Theme
 from .models import Project, Tags
@@ -71,9 +71,13 @@ def make_project(title, description, theme_slug, tags=None):
         for field in fields_to_generate:
             if field['type'] == 'photosphere':
                 new_field = PhotoSphere(
-                    space=space, author=current_user.profile)
+                    space=space, author=current_user.profile, label=field['label'])
+            if field['type'] == 'text':
+                new_field = Text(
+                    space=space, author=current_user.profile, label=field['label'])
             if field['type'] == 'image':
-                new_field = Image(space=space, author=current_user.profile)
+                new_field = Image(
+                    space=space, author=current_user.profile, label=field['label'])
             new_field.save()
 
     project.add_space(space)

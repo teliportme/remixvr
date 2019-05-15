@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import PhotoSphere from '../components/fields/PhotoSphere';
+import Text from '../components/fields/Text';
 
 // https://stackoverflow.com/a/27267762/1291535
 function flatten(ary) {
@@ -20,6 +21,8 @@ const FieldsGenerate = observer(({ fields, spaceId }) => {
   return fields.map(field => {
     if (field.type === 'photosphere') {
       return <PhotoSphere key={field.id} field={field} spaceId={spaceId} />;
+    } else if (field.type === 'text') {
+      return <Text key={field.id} field={field} spaceId={spaceId} />;
     } else {
       return null;
     }
