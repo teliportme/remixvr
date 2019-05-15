@@ -5,8 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>360 Image Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      @-webkit-keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+      @-moz-keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+      @-o-keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+
+      #loading {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        position: relative;
+        border: 5px solid #ddd;
+        border-top: 5px solid #42a5f5;
+        transform: translateZ(0);
+        animation: loadingSpinner 1s infinite linear;
+      }
+      #loading-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+      }
+    </style>
   </head>
   <body>
+    <div id="loading-wrapper">
+      <div id="loading"></div>
+    </div>
     <a-scene
       cursor="rayOrigin: mouse"
       loading-screen="dotsColor: red; backgroundColor: black"

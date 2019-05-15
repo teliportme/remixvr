@@ -23,6 +23,8 @@ export function fetchProjectData(callback) {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         const spaces = JSON.parse(xmlHttp.responseText);
         window.remixvrspaces = spaces;
+        const loadingWrapper = document.getElementById('loading-wrapper');
+        loadingWrapper.style.display = 'none';
         callback(spaces);
       }
     };
