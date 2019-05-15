@@ -1,8 +1,6 @@
 import AFRAME from 'aframe';
 import 'aframe-event-set-component';
-import { fetchProjectData, fetchSpace, getValues } from './remixvr';
-
-const API_ROOT = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import { fetchProjectData, fetchSpace, getValues, API_ROOT } from './remixvr';
 
 fetchProjectData(function(spaces) {
   // for (let i = 0; i < spaces.length; i++) {
@@ -17,11 +15,7 @@ fetchProjectData(function(spaces) {
 
 function createPhotoSphereSpace(photosphereUrl) {
   const sky = document.getElementById('sky');
-  sky.setAttribute(
-    'material',
-    'src',
-    API_ROOT + photosphereUrl
-  );
+  sky.setAttribute('material', 'src', API_ROOT + photosphereUrl);
 }
 
 function createHotspots(hotspots) {

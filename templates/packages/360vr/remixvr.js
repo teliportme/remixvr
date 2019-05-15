@@ -1,8 +1,20 @@
-const API_ROOT = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+let API_ROOT = 'http://localhost:5000/api';
+
+const urlParams = new URLSearchParams(window.location.search);
+const root = urlParams.get('root');
+
+if (root === 's') {
+  API_ROOT = 'https://api.staging.remixvr.org';
+} else if (root === 'p') {
+  API_ROOT = 'https://api.remixvr.org';
+}
+
+export { API_ROOT };
 
 export function fetchProjectData(callback) {
   const urlParams = new URLSearchParams(window.location.search);
   const projectSlug = urlParams.get('project');
+  const root = urlParams.get('root');
 
   if (projectSlug) {
     const url = `${API_ROOT}/projects/${projectSlug}/spaces`;
