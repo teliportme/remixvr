@@ -18,6 +18,7 @@ const ProjectView = observer(props => {
         style={{ background: '#111' }}
       >
         <iframe
+          title={projectSlug}
           className="bn"
           width="100%"
           height="100%"

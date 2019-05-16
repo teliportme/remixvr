@@ -1,5 +1,5 @@
-import React, { Component, lazy, Suspense, useContext, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React, { lazy, Suspense, useContext, useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import LoadingSpinner from './components/LoadingSpinner';
 import CustomBrowsingRouter from './components/CustomBrowserRouter';
@@ -23,7 +23,6 @@ const AsyncHeader = props => (
 );
 
 const DefaultLayout = observer(props => {
-  const commonStore = useContext(CommonStore);
   return (
     <React.Fragment>
       <AsyncHeader />

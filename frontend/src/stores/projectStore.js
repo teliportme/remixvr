@@ -13,17 +13,19 @@ class ProjectStore {
   spacesRegistry = new Map();
   projectTheme = { config: {} };
 
+  // prettier-ignore
   get projects() {
     const projects = [];
-    for (let [key, value] of this.projectRegistry) {
+    for (let [key, value] of this.projectRegistry) { // eslint-disable-line no-unused-vars
       projects.push(value);
     }
     return projects;
   }
 
+  // prettier-ignore
   get spaces() {
     const spaces = [];
-    for (let [key, value] of this.spacesRegistry) {
+    for (let [key, value] of this.spacesRegistry) { // eslint-disable-line no-unused-vars
       spaces.push(value);
     }
     return spaces;
@@ -135,7 +137,6 @@ decorate(ProjectStore, {
   projectPage: observable,
   projectRegistry: observable,
   spacesRegistry: observable,
-  projects: observable,
   predicate: observable,
   projectTheme: observable,
 

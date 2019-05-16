@@ -44,7 +44,9 @@ const PhotoSphere = observer(({ field }) => {
           </SavingButton>
         </div>
         <div className="fl">
-          {file && file.url && <img src={apiUrl + file.url} />}
+          {file && file.url && (
+            <img alt="photosphere" src={apiUrl + file.url} />
+          )}
         </div>
       </FieldInput>
       {/* {

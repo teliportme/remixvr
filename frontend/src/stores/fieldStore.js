@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { observable, decorate, computed, action } from 'mobx';
+import { observable, decorate, action } from 'mobx';
 import agent from '../agent';
 
 class FieldStore {

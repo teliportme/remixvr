@@ -69,7 +69,7 @@ const CreateProject = observer(({ history }) => {
               <img
                 src={theme.cover_image}
                 className="db w-100 br2 br--top"
-                alt="Theme preview image"
+                alt="Theme preview"
               />
               <div className="pa2 ph3-ns pb3-ns">
                 <div className="dt w-100 mt1">
@@ -84,7 +84,7 @@ const CreateProject = observer(({ history }) => {
                 <p className="f6 lh-copy measure mt2 mid-gray">
                   {theme.description}
                 </p>
-                {theme.slug == selectedTheme ? (
+                {theme.slug === selectedTheme ? (
                   <button
                     onClick={() => setTheme('')}
                     className="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-gray"

@@ -100,7 +100,7 @@ const Header = observer(() => {
     });
   };
   return (
-    <nav className="w-100 border-box pa2 ph5-ns center b--near-white">
+    <nav className="w-100 border-box pa2 ph5-ns center b--near-white shadow-2">
       <Link className="fl pv2 ph3 v-mid mid-gray link dim" to="/">
         <img src={RemixvrLogo} className="dib h2" alt="RemixVR" />
       </Link>
@@ -123,6 +123,7 @@ const Header = observer(() => {
           <a
             href="https://docs.remixvr.org"
             target="_blank"
+            rel="noopener noreferrer"
             className="link dim f6 f5-ns db  pointer dark-gray"
           >
             Docs
@@ -132,6 +133,7 @@ const Header = observer(() => {
           <a
             href="https://github.com/teliportme/remixvr"
             target="_blank"
+            rel="noopener noreferrer"
             className="link dim f6 f5-ns db  pointer dark-gray"
           >
             Github
@@ -141,6 +143,7 @@ const Header = observer(() => {
           <a
             href="https://blog.teliportme.com/tag/remixvr/"
             target="_blank"
+            rel="noopener noreferrer"
             className="link dim f6 f5-ns db  pointer dark-gray"
           >
             Blog

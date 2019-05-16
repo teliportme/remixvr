@@ -12,9 +12,9 @@ const Login = observer(() => {
 
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
-  const [nextUrl, setNextUrl] = useState('/dashboard');
+  const [nextUrl] = useState('/dashboard');
 
-  const { errors, inProgress } = authStore;
+  const { errors } = authStore;
 
   useEffect(() => {
     if (authStore.isUserLoggedIn) {
@@ -40,7 +40,7 @@ const Login = observer(() => {
           </label>
           <input
             type="text"
-            className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100"
+            className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 ba br2 w-100"
             id="userid"
             placeholder="Username / Email"
             autoComplete="username"
@@ -57,7 +57,7 @@ const Login = observer(() => {
           </label>
           <input
             type="password"
-            className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100"
+            className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 ba br2 w-100"
             id="password"
             placeholder="Password"
             autoComplete="current-password"

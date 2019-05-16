@@ -9,9 +9,10 @@ class ThemeStore {
   hasNextPage = 0;
   themeRegistry = new Map();
 
+  // prettier-ignore
   get themes() {
     const themes = [];
-    for (let [key, value] of this.themeRegistry) {
+    for (let [key, value] of this.themeRegistry) { // eslint-disable-line no-unused-vars
       themes.push(value);
     }
     return themes;

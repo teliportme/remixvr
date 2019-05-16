@@ -13,9 +13,7 @@ const Dashboard = observer(() => {
   useEffect(() => {
     if (userStore.currentUser) {
       projectStore.setPredicate({ author: userStore.currentUser.username });
-      projectStore.loadProjects().then(() => {
-        console.log(projectStore.projects);
-      });
+      projectStore.loadProjects();
     }
   }, [projectStore]);
 

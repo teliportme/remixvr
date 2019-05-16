@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import SpacesCarousel from '../components/SpacesCarousel';
 import FieldsGenerate from '../components/FieldsGenerate';
 import ProjectStore from '../stores/projectStore';
-import styled from 'styled-components';
 
 // const StyledDiv = styled.div`
 //   display: flex;
