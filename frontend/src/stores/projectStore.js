@@ -65,6 +65,7 @@ class ProjectStore {
   }
 
   createProject(title, description, theme_slug, tags) {
+    this.clear();
     return agent.Project.create({ title, description, theme_slug, tags });
   }
 
@@ -127,6 +128,43 @@ class ProjectStore {
       return theme;
     });
   }
+
+  createField(label, spaceId, data, file) {
+    let formData = new FormData();
+    formData.set('label', label);
+    formData.set('space_id', spaceId);
+    for (let [key, value] of Object.entries(data)) {
+      formData.set(key, value);
+    }
+    if (file) {
+      formData.append('file', file);
+    }
+    return agent.Field.create(formData).then(field => {
+      const space = this.spacesRegistry.get(spaceId);
+      space.fields.push(field);
+      this.spacesRegistry.set(space.id, space);
+    });
+  }
+
+  updateField(spaceId, fieldId, data, file) {
+    let formData = new FormData();
+    for (let [key, value] of Object.entries(data)) {
+      formData.set(key, value);
+    }
+    if (file) {
+      formData.append('file', file);
+    }
+    return agent.Field.edit(fieldId, formData).then(field => {
+      const space = this.spacesRegistry.get(spaceId);
+      let fields = space.fields;
+
+      // https://stackoverflow.com/a/37585362/1291535
+      space.fields = fields.map(
+        obj => [field].find(o => o.id === obj.id) || obj
+      );
+      this.spacesRegistry.set(space.id, space);
+    });
+  }
 }
 
 decorate(ProjectStore, {
@@ -148,7 +186,9 @@ decorate(ProjectStore, {
   loadProject: action,
   loadSpaces: action,
   createSpace: action,
-  getProjectTheme: action
+  getProjectTheme: action,
+  createField: action,
+  updateField: action
 });
 
 export const projectStore = new ProjectStore();

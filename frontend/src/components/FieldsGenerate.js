@@ -22,18 +22,18 @@ const FieldWrapper = styled.div.attrs({
   className: 'mv2'
 })``;
 
-const FieldsGenerate = observer(({ fields }) => {
+const FieldsGenerate = observer(({ fields, spaceId }) => {
   return fields.map(field => {
     if (field.type === 'photosphere') {
       return (
         <FieldWrapper key={field.id}>
-          <PhotoSphere field={field} />
+          <PhotoSphere field={field} spaceId={spaceId} />
         </FieldWrapper>
       );
     } else if (field.type === 'text') {
       return (
         <FieldWrapper key={field.id}>
-          <Text field={field} />
+          <Text field={field} spaceId={spaceId} />
         </FieldWrapper>
       );
     } else {

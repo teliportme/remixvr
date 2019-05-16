@@ -10,7 +10,6 @@ import commonStore from './stores/commonStore';
 import profileStore from './stores/profileStore';
 import authStore from './stores/authStore';
 import projectStore from './stores/projectStore';
-import fieldStore from './stores/fieldStore';
 import themeStore from './stores/themeStore';
 
 const stores = {
@@ -19,7 +18,6 @@ const stores = {
   profileStore,
   authStore,
   projectStore,
-  fieldStore,
   themeStore
 };
 

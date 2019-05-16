@@ -26,7 +26,6 @@ const ProjectEdit = observer(props => {
         setReady(true);
         if (projectStore.spaces.length > currentSpace) {
           setCurrentSpace(0);
-          console.log('space', currentSpace);
         }
       });
     });
@@ -38,7 +37,10 @@ const ProjectEdit = observer(props => {
         {/* <StyledDiv className="cf"> */}
         {/* <div className="fl w-100 w-80-ns h-100">Main content</div> */}
         <div className="w-100 w-80-ns h-100 center pa2 measure">
-          <FieldsGenerate fields={projectStore.spaces[currentSpace].fields} />
+          <FieldsGenerate
+            fields={projectStore.spaces[currentSpace].fields}
+            spaceId={projectStore.spaces[currentSpace].id}
+          />
         </div>
         {/* </StyledDiv> */}
         <SpacesCarousel spaces={projectStore.spaces} />

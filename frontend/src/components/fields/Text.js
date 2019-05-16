@@ -1,16 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import FieldStore from '../../stores/fieldStore';
+import ProjectStore from '../../stores/projectStore';
 import FieldLabel from '../FieldLabel';
 import FieldInput from '../FieldInput';
 
-const Text = observer(({ field }) => {
+const Text = observer(({ field, spaceId }) => {
   const fieldValue = field.text_value || '';
   const [text, setText] = useState(fieldValue);
-  const fieldStore = useContext(FieldStore);
+  const projectStore = useContext(ProjectStore);
 
   const updateText = event => {
-    fieldStore.updateField(field.id, { text_value: event.target.value });
+    projectStore.updateField(spaceId, field.id, {
+      text_value: event.target.value
+    });
   };
 
   return (
