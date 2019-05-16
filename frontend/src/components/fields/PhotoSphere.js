@@ -1,30 +1,56 @@
 import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
+import SavingButton from '../SavingButton';
 import FieldStore from '../../stores/fieldStore';
+import FieldLabel from '../FieldLabel';
+import FieldInput from '../FieldInput';
+import getAPIUrl from '../GetAPIUrl';
 
-const PhotoSphere = observer(({ field, spaceId }) => {
-  const [file, setFile] = useState(field.file);
+const PhotoSphere = observer(({ field }) => {
+  const [file] = useState(field.file);
+  const [enableUpload, setEnabled] = useState(true);
   const fieldStore = useContext(FieldStore);
+  const apiUrl = getAPIUrl();
 
   const uploadFile = event => {
     const file = event.target.files[0];
     const data = {};
-    fieldStore.updateField(field.id, data, file);
+    setEnabled(false);
+    fieldStore.updateField(field.id, data, file).then(() => setEnabled(true));
   };
 
   return (
     <React.Fragment>
-      <label htmlFor="file" className="b mid-gray">
+      <FieldLabel htmlFor="file" className="f4 db ttc">
         {field.label}
-      </label>
-      <input
-        type="file"
-        className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100"
-        id="file"
-        placeholder={field.label}
-        required
-        onChange={uploadFile}
-      />
+      </FieldLabel>
+      <FieldInput className="cf">
+        <div className="fl">
+          <input
+            type="file"
+            id="file"
+            disabled={!enableUpload}
+            onChange={uploadFile}
+            style={{ visibility: 'hidden', width: 0 }}
+          />
+          <SavingButton
+            label
+            htmlFor="file"
+            disabled={!enableUpload}
+            isLoading={!enableUpload}
+            className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"
+          >
+            {file && enableUpload ? `Replace` : 'Upload'}
+          </SavingButton>
+        </div>
+        <div className="fl">
+          {file && file.url && <img src={apiUrl + file.url} />}
+        </div>
+      </FieldInput>
+      {/* {
+        logo && enabled &&
+        <img src={logo.url} className="mw4 br1 pa2 bg-white-60 db" />
+      } */}
     </React.Fragment>
   );
 });

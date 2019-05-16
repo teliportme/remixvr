@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import styled from 'styled-components';
 import PhotoSphere from '../components/fields/PhotoSphere';
 import Text from '../components/fields/Text';
 
@@ -17,12 +18,24 @@ function flatten(ary) {
   return ret;
 }
 
-const FieldsGenerate = observer(({ fields, spaceId }) => {
+const FieldWrapper = styled.div.attrs({
+  className: 'mv2'
+})``;
+
+const FieldsGenerate = observer(({ fields }) => {
   return fields.map(field => {
     if (field.type === 'photosphere') {
-      return <PhotoSphere key={field.id} field={field} spaceId={spaceId} />;
+      return (
+        <FieldWrapper key={field.id}>
+          <PhotoSphere field={field} />
+        </FieldWrapper>
+      );
     } else if (field.type === 'text') {
-      return <Text key={field.id} field={field} spaceId={spaceId} />;
+      return (
+        <FieldWrapper key={field.id}>
+          <Text field={field} />
+        </FieldWrapper>
+      );
     } else {
       return null;
     }

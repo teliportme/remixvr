@@ -5,12 +5,12 @@ import FieldsGenerate from '../components/FieldsGenerate';
 import ProjectStore from '../stores/projectStore';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
-  display: flex;
-  flex: 1 1 auto;
-  overflow-y: auto;
-  flex-flow: row;
-`;
+// const StyledDiv = styled.div`
+//   display: flex;
+//   flex: 1 1 auto;
+//   overflow-y: auto;
+//   flex-flow: row;
+// `;
 
 const ProjectEdit = observer(props => {
   const projectStore = useContext(ProjectStore);
@@ -36,15 +36,12 @@ const ProjectEdit = observer(props => {
   return (
     ready && (
       <React.Fragment>
-        <StyledDiv className="cf">
-          {/* <div className="fl w-100 w-80-ns h-100">Main content</div> */}
-          <div className="fl w-100 w-80-ns h-100 center pa2">
-            <FieldsGenerate
-              fields={projectStore.spaces[currentSpace].fields}
-              spaceId={currentSpace}
-            />
-          </div>
-        </StyledDiv>
+        {/* <StyledDiv className="cf"> */}
+        {/* <div className="fl w-100 w-80-ns h-100">Main content</div> */}
+        <div className="w-100 w-80-ns h-100 center pa2 measure">
+          <FieldsGenerate fields={projectStore.spaces[currentSpace].fields} />
+        </div>
+        {/* </StyledDiv> */}
         <SpacesCarousel spaces={projectStore.spaces} />
       </React.Fragment>
     )
