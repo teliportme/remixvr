@@ -57,7 +57,7 @@ const MenuUl = styled.ul`
 const MenuButton = styled.input`
   display: none;
   &:checked ~ ${MenuUl} {
-    max-height: 240px;
+    max-height: 400px;
   }
   &:checked ~ ${MenuIcon} ${NavIcon} {
     background: transparent;
@@ -153,7 +153,7 @@ const Header = observer(() => {
           <MenuLi>
             <button
               onClick={logout}
-              className="link dim f6 f5-ns db  pointer dark-gray bn"
+              className="link dim f6 f5-ns db  pointer dark-gray bn bg-white"
             >
               Logout
             </button>
