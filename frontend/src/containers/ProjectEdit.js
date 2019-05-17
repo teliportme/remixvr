@@ -4,13 +4,6 @@ import SpacesCarousel from '../components/SpacesCarousel';
 import FieldsGenerate from '../components/FieldsGenerate';
 import ProjectStore from '../stores/projectStore';
 
-// const StyledDiv = styled.div`
-//   display: flex;
-//   flex: 1 1 auto;
-//   overflow-y: auto;
-//   flex-flow: row;
-// `;
-
 const ProjectEdit = observer(props => {
   const projectStore = useContext(ProjectStore);
 
@@ -34,15 +27,25 @@ const ProjectEdit = observer(props => {
   return (
     ready && (
       <React.Fragment>
-        {/* <StyledDiv className="cf"> */}
-        {/* <div className="fl w-100 w-80-ns h-100">Main content</div> */}
-        <div className="w-100 w-80-ns h-100 center pa2 measure">
+        <div className="w-100 w-80-ns h-100 center ph3 ph0-ns measure-ns">
+          <h2 className="fw7 f2 mb0">Enter project fields</h2>
+          <p className="f5 gray lh-copy">
+            Fill the value for each field. These values will be used for
+            creating and viewing your project.
+          </p>
           <FieldsGenerate
             fields={projectStore.spaces[currentSpace].fields}
             spaceId={projectStore.spaces[currentSpace].id}
           />
+          <a
+            class="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
+            target="_blank"
+            href={`/project/${props.match.params.slug}/view`}
+            rel="noopener noreferrer"
+          >
+            View Project
+          </a>
         </div>
-        {/* </StyledDiv> */}
         <SpacesCarousel spaces={projectStore.spaces} />
       </React.Fragment>
     )
