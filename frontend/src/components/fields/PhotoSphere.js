@@ -25,7 +25,7 @@ const PhotoSphere = observer(({ field, spaceId }) => {
       <FieldLabel htmlFor="file" className="f4 db ttc">
         {field.label}
       </FieldLabel>
-      <FieldInput className="cf">
+      <FieldInput className="cf overflow-hidden">
         <div className="fl">
           <input
             type="file"
