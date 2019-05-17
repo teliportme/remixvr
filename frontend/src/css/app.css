@@ -1,26 +1,26 @@
 @import 'tachyons';
 
-/* nunito-regular - latin */
+/* karla-regular - latin */
 @font-face {
-  font-family: 'Nunito';
+  font-family: 'Karla';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Nunito Regular'), local('Nunito-Regular'),
-    url('/fonts/nunito-v10-latin-regular.woff2') format('woff2'),
+  src: local('Karla'), local('Karla-Regular'),
+    url('/fonts/karla-v7-latin-regular.woff2') format('woff2'),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('/fonts/nunito-v10-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url('/fonts/karla-v7-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* nunito-700 - latin */
+/* karla-700 - latin */
 @font-face {
-  font-family: 'Nunito';
+  font-family: 'Karla';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: local('Nunito Bold'), local('Nunito-Bold'),
-    url('/fonts/nunito-v10-latin-700.woff2') format('woff2'),
+  src: local('Karla Bold'), local('Karla-Bold'),
+    url('/fonts/karla-v7-latin-700.woff2') format('woff2'),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('/fonts/nunito-v10-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url('/fonts/karla-v7-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 html,
@@ -31,7 +31,7 @@ body,
 }
 
 body {
-  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'avenir next',
-    avenir, 'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial,
+  font-family: 'Karla', -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
+    'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial,
     sans-serif;
 }

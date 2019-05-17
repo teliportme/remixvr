@@ -2878,22 +2878,22 @@ code {
     repeat 0 0;
 }
 @font-face {
-  font-family: Nunito;
+  font-family: Karla;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Nunito Regular'), local('Nunito-Regular'),
-    url(/fonts/nunito-v10-latin-regular.woff2) format('woff2'),
-    url(/fonts/nunito-v10-latin-regular.woff) format('woff');
+  src: local('Karla'), local('Karla-Regular'),
+    url(/fonts/karla-v7-latin-regular.woff2) format('woff2'),
+    url(/fonts/karla-v7-latin-regular.woff) format('woff');
 }
 @font-face {
-  font-family: Nunito;
+  font-family: Karla;
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: local('Nunito Bold'), local('Nunito-Bold'),
-    url(/fonts/nunito-v10-latin-700.woff2) format('woff2'),
-    url(/fonts/nunito-v10-latin-700.woff) format('woff');
+  src: local('Karla Bold'), local('Karla-Bold'),
+    url(/fonts/karla-v7-latin-700.woff2) format('woff2'),
+    url(/fonts/karla-v7-latin-700.woff) format('woff');
 }
 #root,
 body,
@@ -2902,7 +2902,7 @@ html {
   height: 100%;
 }
 body {
-  font-family: Nunito, -apple-system, BlinkMacSystemFont, avenir next, avenir,
+  font-family: Karla, -apple-system, BlinkMacSystemFont, avenir next, avenir,
     helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
 }
 @media screen and (min-width: 30em) {
