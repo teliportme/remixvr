@@ -62,7 +62,7 @@ const App = () => {
   return (
     <CustomBrowsingRouter>
       <Suspense fallback={<LoadingSpinner />}>
-        <div className="App w-100 center h-100 flex flex-column">
+        <div className="App w-100 center h-100 flex flex-column bt bw2 b--blue">
           <MetaTags />
           <Switch>
             <DefaultLayout path="/signup" component={Signup} />

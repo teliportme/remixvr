@@ -100,7 +100,7 @@ const Header = observer(() => {
     });
   };
   return (
-    <nav className="w-100 border-box pa2 ph5-ns center b--near-white shadow-2">
+    <nav className="b--black-10 bb border-box center pa2 ph5-ns w-100">
       <Link className="fl pv2 ph3 v-mid mid-gray link dim" to="/">
         <img src={RemixvrLogo} className="dib h2" alt="RemixVR" />
       </Link>
@@ -108,7 +108,7 @@ const Header = observer(() => {
       <MenuIcon htmlFor="menu-btn">
         <NavIcon />
       </MenuIcon>
-      <MenuUl className="ma0 pa0 list overflow-hidden bg-white cb">
+      <MenuUl className="ma0 pa0 list overflow-hidden cb">
         {isUserLoggedIn && (
           <MenuLi>
             <Link
@@ -153,7 +153,7 @@ const Header = observer(() => {
           <MenuLi>
             <button
               onClick={logout}
-              className="link dim f6 f5-ns db  pointer dark-gray bn bg-white"
+              className="link dim f6 f5-ns db  pointer dark-gray bn bg-transparent"
             >
               Logout
             </button>

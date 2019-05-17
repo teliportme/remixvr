@@ -42,16 +42,22 @@ const VideoPlayer = styled.video.attrs({
 `;
 
 const Home = () => (
-  <React.Fragment>
-    <a
-      href="http://unicefstories.org/2018/04/04/venturefundteliportme/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="b bg-blue br-pill center dib f4-ns f5 link mb3 mt3 mw7 ph3 pv2 tc white"
-    >
-      Proudly supported by UNICEF Innovation Fund
-      <img src={RightArrow} className="w1 h1 ml2 v-mid dn dib-ns" alt="right" />
-    </a>
+  <div className="center w-80-ns w-100">
+    <div className="tc">
+      <a
+        href="http://unicefstories.org/2018/04/04/venturefundteliportme/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="b b--light-green ba bg-washed-green br-pill center dib f4-ns f5 green link mb3 mt3 mw7 ph3 pv2 tc"
+      >
+        Proudly supported by UNICEF Innovation Fund
+        <img
+          src={RightArrow}
+          className="w1 h1 ml2 v-mid dn dib-ns"
+          alt="right"
+        />
+      </a>
+    </div>
     <div className="cf items-center justify-between ph2">
       <div className="fl w-100 w-50-l pl5-ns">
         <div className="tc tl-ns w-100">
@@ -65,18 +71,18 @@ const Home = () => (
           <span style={{ color: '#216ef4' }}>VR experiences</span>
         </span>
         <BgObject />
-        <div className="cf flex mt4 mt5-l ph0-ns ph2 tc tl-ns w-100">
+        <div className="cf flex justify-center mt4 mt5-l ph0-ns ph2 tc tl-ns w-100 justify-start-ns">
           <div className="fl">
             <a
               href="https://github.com/teliportme/remixVR"
-              className="link bg-red br2 ba bw1 dib dim f3 fw4 mb2 ph3 pv3 tracked white b--red"
+              className="b--red ba bg-red br2 bw1 dib dim link mb2 ph3 pv2 tracked white"
             >
               View on Github
             </a>
           </div>
           <div className="fl">
             <a
-              className="link ml3 ba bw1 br2 dib dim f3 fw4 mb2 ph3 pv3 tracked red b--red"
+              className="b--red ba br2 bw1 dib dim fw4 link mb2 ml3 ph3 pv2 red tracked"
               href="https://blog.teliportme.com/remixvr/"
             >
               Learn More
@@ -120,7 +126,7 @@ const Home = () => (
         </a>
       </div>
     </div>
-  </React.Fragment>
+  </div>
 );
 
 export default Home;
