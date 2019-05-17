@@ -33,7 +33,7 @@ const Dashboard = observer(() => {
         <ul className="list pl0 ml0 mw6 bn">
           {projectStore.projects.map(project => (
             <li key={project.slug} className="bt pt3 b--light-green">
-              <button class="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
+              <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
                 {`${project.theme.title} Theme`}
               </button>
               <Link
