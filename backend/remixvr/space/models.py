@@ -14,6 +14,7 @@ project_space_assoc = db.Table('project_space_assoc',
 class Space(SurrogatePK, Model):
 
     __tablename__ = 'space'
+    type = Column(db.String(50), nullable=False, default='default')
     fields = relationship('Field', back_populates="space",
                           cascade="all, delete-orphan")
     projects = relationship(

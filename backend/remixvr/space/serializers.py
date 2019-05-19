@@ -6,6 +6,7 @@ from .models import Space
 
 class SpaceSchema(Schema):
     id = fields.Int()
+    type = fields.Str(allow_none=True)
     project_slug = fields.Str(load_only=True)
     fields = fields.Nested(ProjectFieldSchema, many=True)
 
