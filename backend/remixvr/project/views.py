@@ -18,6 +18,7 @@ from remixvr.theme.models import Theme
 from .models import Project, Tags
 from .serializers import project_schema, projects_schema
 from remixvr.theme.serializers import theme_schema
+from remixvr.field.utils import generate_fields
 
 blueprint = Blueprint('projects', __name__)
 
@@ -61,26 +62,16 @@ def make_project(title, description, theme_slug, tags=None):
                 mtag.save()
             project.add_tag(mtag)
 
-    space = Space(author=current_user.profile)
-    space.save()
-
     config = theme.config
 
     if len(config['spaces']) == 1:
-        fields_to_generate = config['spaces'][0]['fields']
-        for field in fields_to_generate:
-            if field['type'] == 'photosphere':
-                new_field = PhotoSphere(
-                    space=space, author=current_user.profile, label=field['label'])
-            if field['type'] == 'text':
-                new_field = Text(
-                    space=space, author=current_user.profile, label=field['label'])
-            if field['type'] == 'image':
-                new_field = Image(
-                    space=space, author=current_user.profile, label=field['label'])
-            new_field.save()
+        space = Space(author=current_user.profile)
+        space.save()
 
-    project.add_space(space)
+        fields_to_generate = config['spaces'][0]['fields']
+        generate_fields(space, fields_to_generate)
+        project.add_space(space)
+
     project.save()
     return project
 

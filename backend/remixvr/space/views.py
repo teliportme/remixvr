@@ -9,6 +9,7 @@ from remixvr.project.models import Project
 from remixvr.exceptions import InvalidUsage
 from .serializers import space_schema, space_schemas
 from .models import Space
+from remixvr.field.utils import generate_fields
 
 blueprint = Blueprint('spaces', __name__)
 
@@ -27,13 +28,23 @@ def get_space(space_id):
 @jwt_required
 @use_kwargs(space_schema)
 @marshal_with(space_schema)
-def create_space(project_slug):
+def create_space(project_slug, type):
     project = Project.query.filter_by(
         slug=project_slug, author_id=current_user.profile.id).first()
+
     if not project:
         raise InvalidUsage.project_not_found()
-    space = Space(author=current_user.profile)
+    if type is None:
+        type = 'default'
+    space = Space(author=current_user.profile, type=type)
     space.save()
+
+    config = project.theme.config
+    space_to_create = next(
+        (item for item in config['spaces'] if item['type'] == type), None)
+    fields_to_generate = space_to_create['fields']
+    generate_fields(space, fields_to_generate)
+
     project.add_space(space)
     project.save()
     return space
