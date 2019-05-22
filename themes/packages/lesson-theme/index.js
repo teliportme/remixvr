@@ -80,7 +80,7 @@ function setupSpace() {
         const titleElement = document.getElementById('title');
         titleElement.setAttribute('text', 'value', text[0].text_value);
         maskEl.emit('fade');
-      }, 200);
+      }, 300);
     } else if (spaceType === '360video') {
       const fields = space.fields;
       const videospheres = getValues(fields, 'type', 'videosphere');
@@ -95,7 +95,7 @@ function setupSpace() {
       setTimeout(function() {
         createVideoSphereSpace(videospheres[0].file.url);
         maskEl.emit('fade');
-      }, 200);
+      }, 300);
       // const text = getValues(fields, 'type', 'text');
       // const titleElement = document.getElementById('title');
       // titleElement.setAttribute('text', 'value', text[0].text_value);
