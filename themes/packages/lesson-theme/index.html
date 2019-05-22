@@ -87,25 +87,34 @@
         layout="type: line; margin: 1"
       >
         <a-plane
-          width=".8"
-          height="0.4"
-          color="#111"
-          material="opacity: 0.7; transparent: true"
-          cursor-listener
-          id="next"
-          ><a-text value="Next" align="center"></a-text
-        ></a-plane>
-        <a-plane
           width=".9"
           height="0.4"
           color="#111"
           id="previous"
+          bind="visible: hasPrevious"
           material="opacity: 0.7; transparent: true"
           cursor-listener
         >
           <a-text value="Previous" align="center"></a-text>
         </a-plane>
+        <a-plane
+          width=".8"
+          height="0.4"
+          color="#111"
+          material="opacity: 0.7; transparent: true"
+          cursor-listener
+          bind="visible: hasNext"
+          id="next"
+        >
+          <a-text value="Next" align="center"></a-text>
+        </a-plane>
       </a-entity>
+      <a-sky
+        id="mask"
+        color="#111"
+        radius="2"
+        animation="property:material.opacity; startEvents: fade; from: 0; to: 1; dur:200;dir:alternate; loop:1;"
+      ></a-sky>
       <a-entity camera look-controls>
         <a-cursor
           id="cursor"
