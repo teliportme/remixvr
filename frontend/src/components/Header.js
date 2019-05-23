@@ -149,7 +149,7 @@ const Header = observer(() => {
             Blog
           </a>
         </MenuLi>
-        {/* {isUserLoggedIn ? (
+        {isUserLoggedIn ? (
           <MenuLi>
             <button
               onClick={logout}
@@ -177,7 +177,7 @@ const Header = observer(() => {
               </Link>
             </MenuLi>
           </React.Fragment>
-        )} */}
+        )}
       </MenuUl>
     </nav>
   );
