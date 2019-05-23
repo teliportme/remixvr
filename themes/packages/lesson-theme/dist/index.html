@@ -70,7 +70,8 @@
         background: #111;
       }
     </style>
-  <script type="text/javascript" src="build.js"></script></head>
+    <script type="text/javascript" src="build.js"></script>
+  </head>
   <body>
     <div id="loading-wrapper">
       <div id="loading"></div>
@@ -80,7 +81,10 @@
       loading-screen="dotsColor: red; backgroundColor: black"
     >
       <a-assets>
-        <a-entity oculus-go-controls></a-entity>
+        <a-entity
+          laser-controls
+          raycaster="objects: [cursor-listener];"
+        ></a-entity>
         <script id="image360" type="html">
           <a-entity>
             <a-sky id="sky" />
