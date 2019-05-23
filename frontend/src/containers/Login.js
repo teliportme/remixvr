@@ -68,7 +68,7 @@ const Login = observer(() => {
             }}
           />
         </div>
-        <div className="tl fl mt2">
+        {/* <div className="tl fl mt2">
           <Link
             to="/forgot-password"
             className="f6 db link silver underline-hover"
@@ -78,7 +78,7 @@ const Login = observer(() => {
           <Link to="/signup" className="f6 db link mt1 silver underline-hover">
             Need an account?
           </Link>
-        </div>
+        </div> */}
         <div className="tr">
           <button
             type="submit"
