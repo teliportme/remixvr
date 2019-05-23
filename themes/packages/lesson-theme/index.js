@@ -11,8 +11,8 @@ AFRAME.registerState({
     hasPrevious: false,
     totalSpaces: 0,
     templates: {
-      '360image': 'scenes/360image.html',
-      '360video': 'scenes/360video.html'
+      '360image': '#image360',
+      '360video': '#video360'
     }
   },
 
@@ -80,7 +80,7 @@ function setupSpace() {
         const titleElement = document.getElementById('title');
         titleElement.setAttribute('text', 'value', text[0].text_value);
         maskEl.emit('fade');
-      }, 300);
+      }, 200);
     } else if (spaceType === '360video') {
       const fields = space.fields;
       const videospheres = getValues(fields, 'type', 'videosphere');
@@ -95,7 +95,7 @@ function setupSpace() {
       setTimeout(function() {
         createVideoSphereSpace(videospheres[0].file.url);
         maskEl.emit('fade');
-      }, 300);
+      }, 200);
       // const text = getValues(fields, 'type', 'text');
       // const titleElement = document.getElementById('title');
       // titleElement.setAttribute('text', 'value', text[0].text_value);

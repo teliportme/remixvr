@@ -76,10 +76,29 @@
       <div id="loading"></div>
     </div>
     <a-scene
-      background="color: #111"
       cursor="rayOrigin: mouse"
       loading-screen="dotsColor: red; backgroundColor: black"
     >
+      <a-assets>
+        <script id="image360" type="html">
+          <a-entity>
+            <a-sky id="sky" />
+            <a-entity
+              id="title"
+              geometry="primitive: plane; width: 3; height: auto;"
+              material="color: #111;side:back"
+              text="align: center;wrapCount:25;side:back;zOffset:-0.001;"
+              position="0 -1.2 -3"
+              rotation="30 180 0"
+            />
+          </a-entity>;
+        </script>
+        <script id="video360" type="html">
+          <a-entity>
+            <a-videosphere src="" id="videosphere" />
+          </a-entity>;
+        </script>
+      </a-assets>
       <a-entity id="template" load-data></a-entity>
       <a-entity
         position="-0.356 -1.936 -1.878"
