@@ -22,7 +22,7 @@ blueprint = Blueprint('user', __name__)
 def register_user(username, password, email, **kwargs):
     try:
         userprofile = UserProfile(
-            User(username, email, password=password, **kwargs).save()).save()
+            User(username.lower(), email.lower(), password=password, **kwargs).save()).save()
         userprofile.user.token = create_access_token(identity=userprofile.user)
     except IntegrityError:
         db.session.rollback()
@@ -39,9 +39,9 @@ def login_user(userid, password, **kwargs):
     # supports logging in with either email or username
     user = None
     if re.match(r"[^@]+@[^@]+\.[^@]+", userid):
-        user = User.query.filter_by(email=userid).first()
+        user = User.query.filter_by(email=userid.lower()).first()
     else:
-        user = User.query.filter_by(username=userid).first()
+        user = User.query.filter_by(username=userid.lower()).first()
     if user is not None and user.check_password(password):
         user.token = create_access_token(identity=user, fresh=True)
         return user

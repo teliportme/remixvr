@@ -28,8 +28,9 @@ blueprint = Blueprint('themes', __name__)
 def get_themes(author=None, limit=20, offset=0):
     res = Theme.query
     if author:
-        res = res.join(Theme.author).join(User).filter(User.username == author)
-    return res.offset(offset).limit(limit).all()
+        return res.join(Theme.author).join(User).filter(
+            User.username == author).offset(offset).limit(limit).all()
+    return res.filter(Theme.status == 'published').offset(offset).limit(limit).all()
 
 
 @blueprint.route('/api/themes', methods=('POST',))
@@ -55,7 +56,7 @@ def update_theme(slug, **kwargs):
         slug=slug, author_id=current_user.profile.id).first()
     if not theme:
         raise InvalidUsage.theme_not_found()
-    theme.update(udpatedAt=dt.datetime.utcnow(), **kwargs)
+    theme.update(udpatedAt=datetime.datetime.utcnow(), **kwargs)
     theme.save()
     return theme
 

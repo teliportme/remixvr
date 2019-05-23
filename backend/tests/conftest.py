@@ -26,6 +26,8 @@ def app():
 
     yield _app
 
+    _db.session.close()
+    _db.drop_all()
     ctx.pop()
 
 

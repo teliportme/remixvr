@@ -1,6 +1,7 @@
 """Project Views"""
 
 import datetime as dt
+import json
 
 from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
@@ -9,10 +10,15 @@ from marshmallow import fields
 
 from remixvr.user.models import User
 from remixvr.field.serializers import field_schemas
+from remixvr.space.serializers import space_schemas
+from remixvr.space.models import Space
+from remixvr.field.models import PhotoSphere, Image, Text
 from remixvr.exceptions import InvalidUsage
 from remixvr.theme.models import Theme
 from .models import Project, Tags
 from .serializers import project_schema, projects_schema
+from remixvr.theme.serializers import theme_schema
+from remixvr.field.utils import generate_fields
 
 blueprint = Blueprint('projects', __name__)
 
@@ -55,6 +61,17 @@ def make_project(title, description, theme_slug, tags=None):
                 mtag = Tags(tag)
                 mtag.save()
             project.add_tag(mtag)
+
+    config = theme.config
+
+    if len(config['spaces']) == 1:
+        space = Space(author=current_user.profile)
+        space.save()
+
+        fields_to_generate = config['spaces'][0]['fields']
+        generate_fields(space, fields_to_generate)
+        project.add_space(space)
+
     project.save()
     return project
 
@@ -95,7 +112,7 @@ def get_project(slug):
 @blueprint.route('/api/projects/<slug>/favorite', methods=('POST',))
 @jwt_required
 @marshal_with(project_schema)
-def favorite_an_project(slug):
+def favorite_a_project(slug):
     profile = current_user.profile
     project = Project.query.filter_by(slug=slug).first()
     if not project:
@@ -108,7 +125,7 @@ def favorite_an_project(slug):
 @blueprint.route('/api/projects/<slug>/favorite', methods=('DELETE',))
 @jwt_required
 @marshal_with(project_schema)
-def unfavorite_an_project(slug):
+def unfavorite_a_project(slug):
     profile = current_user.profile
     project = Project.query.filter_by(slug=slug).first()
     if not project:
@@ -127,19 +144,32 @@ def projects_feed(limit=20, offset=0):
         order_by(Project.createdAt.desc()).offset(offset).limit(limit).all()
 
 
-@blueprint.route('/api/projects/<slug>/fields', methods=('GET',))
+@blueprint.route('/api/projects/<slug>/spaces', methods=('GET',))
 @jwt_optional
-@marshal_with(field_schemas)
-def get_project_fields(slug):
+@use_kwargs({'slug': fields.Str()})
+@marshal_with(space_schemas)
+def get_project_spaces(slug):
     project = Project.query.filter_by(slug=slug).first()
     if not project:
         raise InvalidUsage.project_not_found()
-    return project.fields
+
+    return project.spaces
+
+
+@blueprint.route('/api/projects/<slug>/theme', methods=('GET',))
+@jwt_optional
+@marshal_with(theme_schema)
+def get_project_theme(slug):
+    project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    return project.theme
 
 
 ######
 # Tags
 ######
+
 
 @blueprint.route('/api/tags', methods=('GET',))
 def get_tags():

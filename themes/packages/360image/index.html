@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>360 Image Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        background: #111;
+      }
+      @-webkit-keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+      @-moz-keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+      @-o-keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes loadingSpinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          border-top-color: #ec407a;
+          transform: rotate(360deg);
+        }
+      }
+
+      #loading {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        position: relative;
+        border: 5px solid #ddd;
+        border-top: 5px solid #42a5f5;
+        transform: translateZ(0);
+        animation: loadingSpinner 1s infinite linear;
+      }
+      #loading-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-wrapper">
+      <div id="loading"></div>
+    </div>
+    <a-scene
+      background="color: #111"
+      cursor="rayOrigin: mouse"
+      loading-screen="dotsColor: red; backgroundColor: black"
+    >
+      <a-plane
+        position="0 0 -3"
+        color="#111"
+        height="2"
+        width="3"
+        id="info-board"
+      >
+        <a-entity
+          id="project-title"
+          geometry="primitive: plane; width: 3; height: auto;"
+          material="color: #111"
+          text="align: center;wrapCount:25"
+          position="0 0.343 0"
+        >
+        </a-entity>
+        <a-circle
+          color="#096e00"
+          radius="0.3"
+          position="0 -0.469 0.1"
+          cursor-listener
+        >
+          <a-entity
+            text="value: Start;align: center;width:2.7;"
+            position="0 0.03 0.1 "
+          >
+          </a-entity>
+        </a-circle>
+      </a-plane>
+      <a-entity camera look-controls>
+        <a-cursor
+          id="cursor"
+          material="color: red"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: scale; startEvents: fusing; pauseEvents: mouseleave; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          fuse="true"
+          raycaster="objects: [cursor-listener]"
+        ></a-cursor>
+      </a-entity>
+      <a-sky id="sky"></a-sky>
+    </a-scene>
+  </body>
+</html>

@@ -1,18 +1,21 @@
 from marshmallow import Schema, fields, pre_load, post_dump, pre_dump
 from marshmallow_oneofschema import OneOfSchema
 
+from flask import current_app as app
+
 from remixvr.project.serializers import ProjectSchema
 from .models import (Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere)
+                     VideoSphere, Image, PhotoSphere, Link)
 
 
 class FieldSchema(Schema):
     id = fields.Int()
     label = fields.Str()
     type = fields.Str()
-    project_name = fields.Str(load_only=True)
-    project = fields.Nested(ProjectSchema, only=["slug"])
-    children = fields.Nested('self', default=None, many=True)
+    space_id = fields.Int(load_only=True)
+    # https://marshmallow.readthedocs.io/en/2.x-line/nesting.html#two-way-nesting
+    children = fields.Nested('CombinedSchema', default=None, many=True)
+    parent_id = fields.Int(load_only=True)
 
     class Meta:
         strict = True
@@ -25,7 +28,7 @@ class FieldSchema(Schema):
 
 class FileSchema(Schema):
     filename = fields.Str()
-    uri = fields.Str()
+    url = fields.Str()
     filemime = fields.Str()
     filesize = fields.Int()
     filename_original = fields.Str()
@@ -49,35 +52,45 @@ class NumberSchema(FieldSchema):
 
 
 class AudioSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['url'])
     duration = fields.Int()
     audio_format = fields.Str()
 
 
 class VideoSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['url'])
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
 
 class VideoSphereSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['url'])
     duration = fields.Int()
     width = fields.Int()
     height = fields.Int()
 
 
 class ImageSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['url'])
     width = fields.Int()
     height = fields.Int()
 
 
 class PhotoSphereSchema(FieldSchema):
-    file = fields.Nested(FileSchema)
+    file = fields.Nested(FileSchema, only=['url'])
     width = fields.Int()
     height = fields.Int()
+
+
+class LinkSchema(FieldSchema):
+    linked_space_id = fields.Int()
+
+# added to be included in combined schema to extract file while uploading
+
+
+class FileLoadSchema(FieldSchema):
+    file = fields.Field(location="files", load_only=True)
 
 
 class ProjectFieldSchema(OneOfSchema):
@@ -90,7 +103,8 @@ class ProjectFieldSchema(OneOfSchema):
         'video': VideoSchema,
         'videosphere': VideoSphereSchema,
         'image': ImageSchema,
-        'photosphere': PhotoSphereSchema
+        'photosphere': PhotoSphereSchema,
+        'link': LinkSchema
     }
 
     def get_obj_type(self, obj):
@@ -110,6 +124,8 @@ class ProjectFieldSchema(OneOfSchema):
             return 'image'
         elif isinstance(obj, PhotoSphere):
             return 'photosphere'
+        elif isinstance(obj, Link):
+            return 'link'
         else:
             raise Exception('Unknown object type: %s' % obj.__class__.__name__)
 
@@ -117,7 +133,9 @@ class ProjectFieldSchema(OneOfSchema):
         strict = True
 
 
-class CombinedSchema(PositionSchema, TextSchema, NumberSchema,                          AudioSchema, VideoSchema, VideoSphereSchema,                       ImageSchema, PhotoSphereSchema):
+class CombinedSchema(PositionSchema, TextSchema, NumberSchema, FileLoadSchema,
+                     AudioSchema, VideoSchema, VideoSphereSchema,
+                     ImageSchema, PhotoSphereSchema, LinkSchema):
     pass
 
 

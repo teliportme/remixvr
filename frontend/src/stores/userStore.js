@@ -8,6 +8,10 @@ class UserStore {
   updatingUser = false;
   updatingUserErrors = false;
 
+  setUser(user) {
+    this.currentUser = user;
+  }
+
   pullUser() {
     this.loadingUser = true;
     return agent.Auth.current()
@@ -42,7 +46,8 @@ decorate(UserStore, {
   updatingUserErrors: observable,
   pullUser: action,
   updateUser: action,
-  forgetUser: action
+  forgetUser: action,
+  setUser: action
 });
 
 export const userStore = new UserStore();

@@ -98,12 +98,39 @@ const Project = {
     requests.post(`/projects/${slug}/favorite`),
   unfavorite: slug =>
     requests.delete(`/projects/${slug}/favorite`),
-  fields: slug =>
-    requests.get(`projects/${slug}/fields`)
+  getTheme: slug =>
+    requests.get(`/projects/${slug}/theme`)
+}
+
+// prettier-ignore
+const Field = {
+  create: formData =>
+    requests.post('/fields', formData),
+  edit: (fieldId, formData) =>
+    requests.put(`/fields/${fieldId}`, formData)
+}
+
+// prettier-ignore
+const Space = {
+  allSpaces: slug =>
+     requests.get(`/projects/${slug}/spaces`),
+  create: slug =>
+    requests.post(`/spaces`, { project_slug: slug }),
+  delete: spaceId =>
+    requests.del(`/spaces/${spaceId}`)
+}
+
+// prettier-ignore
+const Theme = {
+  all: () =>
+    requests.get('/themes')
 }
 
 export default {
   Auth,
   Profile,
-  Project
+  Project,
+  Space,
+  Field,
+  Theme
 };

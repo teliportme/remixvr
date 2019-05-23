@@ -1,0 +1,34 @@
+{
+  "spaces": [
+    {
+      "title": "360 Image",
+      "type": "360image",
+      "maxCount": 1,
+      "fields": [
+        {
+          "type": "photosphere",
+          "label": "photosphere"
+        },
+        {
+          "type": "text",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "title": "360 Video",
+      "type": "360video",
+      "maxCount": 1,
+      "fields": [
+        {
+          "type": "videosphere",
+          "label": "videosphere"
+        },
+        {
+          "type": "text",
+          "label": "Title"
+        }
+      ]
+    }
+  ]
+}

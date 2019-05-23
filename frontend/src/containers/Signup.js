@@ -12,9 +12,9 @@ const Signup = observer(() => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nextUrl, setNextUrl] = useState('/dashboard');
+  const [nextUrl] = useState('/dashboard');
 
-  const { errors, inProgress } = authStore;
+  const { errors } = authStore;
 
   useEffect(() => {
     if (authStore.isUserLoggedIn) {
