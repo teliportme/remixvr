@@ -36,7 +36,7 @@ class ProjectStore {
     this.spacesRegistry.clear();
     this.projectPage = 0;
     this.hasNextPage = true;
-    this.projectTheme = { config: {} };
+    this.projectTheme = { config: { spaces: [] } };
     this.count = 0;
   }
 

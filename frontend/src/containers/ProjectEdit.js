@@ -38,7 +38,7 @@ const ProjectEdit = observer(props => {
             spaceId={projectStore.spaces[currentSpace].id}
           />
           <a
-            class="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
+            className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
             target="_blank"
             href={`/project/${props.match.params.slug}/view`}
             rel="noopener noreferrer"
@@ -46,7 +46,10 @@ const ProjectEdit = observer(props => {
             View Project
           </a>
         </div>
-        <SpacesCarousel spaces={projectStore.spaces} />
+        <SpacesCarousel
+          spaces={projectStore.spaces}
+          spacesLength={projectStore.projectTheme.config.spaces.length}
+        />
       </React.Fragment>
     )
   );
