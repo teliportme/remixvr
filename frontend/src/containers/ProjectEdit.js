@@ -12,13 +12,20 @@ const ProjectEdit = observer(props => {
 
   useEffect(() => {
     const projectSlug = props.match.params.slug;
-    const currentSpace = props.match.params.space;
-    if (!currentSpace) setCurrentSpace(0);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let spaceNumber = urlParams.get('s');
+    if (!spaceNumber) spaceNumber = 0;
+
     projectStore.getProjectTheme(projectSlug).then(() => {
       projectStore.loadSpaces(projectSlug).then(() => {
         setReady(true);
-        if (projectStore.spaces.length > currentSpace) {
-          setCurrentSpace(0);
+
+        if (
+          spaceNumber - 1 < projectStore.spaces.length &&
+          spaceNumber - 1 > 0
+        ) {
+          setCurrentSpace(spaceNumber - 1);
         }
       });
     });
