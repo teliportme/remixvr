@@ -114,8 +114,8 @@ class ProjectStore {
       });
   }
 
-  createSpace(slug) {
-    return agent.Space.create(slug).then(space => {
+  createSpace(slug, type) {
+    return agent.Space.create(slug, type).then(space => {
       this.spacesRegistry.set(space.id, space);
       return space;
     });

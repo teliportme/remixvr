@@ -21,11 +21,8 @@ const ProjectEdit = observer(props => {
       projectStore.loadSpaces(projectSlug).then(() => {
         setReady(true);
 
-        if (
-          spaceNumber - 1 < projectStore.spaces.length &&
-          spaceNumber - 1 > 0
-        ) {
-          setCurrentSpace(spaceNumber - 1);
+        if (spaceNumber < projectStore.spaces.length && spaceNumber > 0) {
+          setCurrentSpace(spaceNumber);
         }
       });
     });
@@ -54,6 +51,8 @@ const ProjectEdit = observer(props => {
           </a>
         </div>
         <SpacesCarousel
+          projectSlug={props.match.params.slug}
+          config={projectStore.projectTheme.config}
           spaces={projectStore.spaces}
           spacesLength={projectStore.projectTheme.config.spaces.length}
         />
