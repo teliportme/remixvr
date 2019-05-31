@@ -2,6 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import PhotoSphere from '../components/fields/PhotoSphere';
+import VideoSphere from '../components/fields/VideoSphere';
 import Text from '../components/fields/Text';
 
 // https://stackoverflow.com/a/27267762/1291535
@@ -34,6 +35,12 @@ const FieldsGenerate = observer(({ fields, spaceId }) => {
       return (
         <FieldWrapper key={field.id}>
           <Text field={field} spaceId={spaceId} />
+        </FieldWrapper>
+      );
+    } else if (field.type === 'videosphere') {
+      return (
+        <FieldWrapper key={field.id}>
+          <VideoSphere field={field} spaceId={spaceId} />
         </FieldWrapper>
       );
     } else {
