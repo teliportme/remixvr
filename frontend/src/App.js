@@ -68,7 +68,10 @@ const App = () => {
             <DefaultLayout path="/signup" component={Signup} />
             <DefaultLayout path="/login" component={Login} />
             <DefaultLayout path="/dashboard" component={Dashboard} />
-            <PrivateRoute path="/project/:slug/edit" component={ProjectEdit} />
+            <PrivateRoute
+              path="/project/:slug/edit/s/:spaceId"
+              component={ProjectEdit}
+            />
             <Route path="/project/:slug/view" component={ProjectView} />
             <PrivateRoute path="/create" component={CreateProject} />
             <DefaultLayout exact path="/" component={Home} />

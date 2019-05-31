@@ -12,21 +12,26 @@ const ProjectEdit = observer(props => {
 
   useEffect(() => {
     const projectSlug = props.match.params.slug;
+    let spaceNumber = props.match.params.spaceId;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    let spaceNumber = urlParams.get('s');
     if (!spaceNumber) spaceNumber = 0;
 
     projectStore.getProjectTheme(projectSlug).then(() => {
       projectStore.loadSpaces(projectSlug).then(() => {
         setReady(true);
-
         if (spaceNumber < projectStore.spaces.length && spaceNumber > 0) {
           setCurrentSpace(spaceNumber);
         }
       });
     });
   }, [projectStore]);
+
+  useEffect(() => {
+    let spaceNumber = props.match.params.spaceId;
+    if (!spaceNumber) spaceNumber = 0;
+
+    setCurrentSpace(spaceNumber);
+  }, [props.match.params]);
 
   return (
     ready && (
@@ -55,6 +60,7 @@ const ProjectEdit = observer(props => {
           config={projectStore.projectTheme.config}
           spaces={projectStore.spaces}
           spacesLength={projectStore.projectTheme.config.spaces.length}
+          history={props.history}
         />
       </React.Fragment>
     )

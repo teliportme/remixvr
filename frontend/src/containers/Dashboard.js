@@ -37,7 +37,7 @@ const Dashboard = observer(() => {
                 {`${project.theme.title} Theme`}
               </button>
               <Link
-                to={`/project/${project.slug}/edit`}
+                to={`/project/${project.slug}/edit/s/0`}
                 className="db f3 fw7 link near-black pt2"
               >
                 {project.title}
