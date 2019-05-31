@@ -27,11 +27,11 @@ const SpacesCarousel = observer(
           {spaces.map((space, index) => (
             <NavLink
               activeClassName="bg-blue"
-              className="w3 h3 bg-gray flex justify-center items-center ma2 br3 outline-0 pointer"
+              className="b--dark-blue ba br3 bw1 dark-blue flex h3 items-center justify-center no-underline ma2 outline-0 pointer w3 b f4 outline-0"
               key={space.id}
               to={`/project/${projectSlug}/edit/s/${index}`}
             >
-              {index}
+              {index + 1}
             </NavLink>
           ))}
           <button

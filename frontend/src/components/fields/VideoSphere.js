@@ -46,7 +46,12 @@ const VideoSphere = observer(({ field, spaceId }) => {
         </div>
         <div className="fl">
           {field.file && field.file.url && (
-            <video alt="videosphere" src={apiUrl + field.file.url} />
+            <video
+              alt="videosphere"
+              src={apiUrl + field.file.url}
+              controls
+              className="w-100 outline-0 pointer"
+            />
           )}
         </div>
       </FieldInput>
