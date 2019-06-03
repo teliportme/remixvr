@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import SpacesCarousel from '../components/SpacesCarousel';
 import FieldsGenerate from '../components/FieldsGenerate';
 import ProjectStore from '../stores/projectStore';
+import SpaceList from '../components/SpaceList';
 
 const ProjectEdit = observer(props => {
   const projectStore = useContext(ProjectStore);
@@ -34,7 +35,16 @@ const ProjectEdit = observer(props => {
   }, [props.match.params]);
 
   return (
-    ready && (
+    ready &&
+    (projectStore.spaces.length === 0 ? (
+      <div className="pa2 flex justify-center">
+        <SpaceList
+          spaces={projectStore.projectTheme.config.spaces}
+          projectSlug={props.match.params.slug}
+          history={props.history}
+        />
+      </div>
+    ) : (
       <React.Fragment>
         <div className="w-100 w-80-ns h-100 center ph3 ph0-ns measure-ns">
           <h2 className="fw7 f2 mb0">Enter project fields</h2>
@@ -63,7 +73,7 @@ const ProjectEdit = observer(props => {
           history={props.history}
         />
       </React.Fragment>
-    )
+    ))
   );
 });
 
