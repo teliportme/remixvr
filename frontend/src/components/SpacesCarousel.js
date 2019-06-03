@@ -1,22 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
-import ProjectStore from '../stores/projectStore';
 import ReactModal from 'react-modal';
 import SpaceList from '../components/SpaceList';
 
 const SpacesCarousel = observer(
   ({ config, spaces, spacesLength, projectSlug, history }) => {
     const [showModal, setModal] = useState(false);
-    const projectStore = useContext(ProjectStore);
-
-    const createSpace = spaceType => {
-      projectStore.createSpace(projectSlug, spaceType).then(() => {
-        history.push(
-          `/project/${projectSlug}/edit/s/${projectStore.spaces.length - 1}`
-        );
-      });
-    };
 
     function closeModal() {
       setModal(false);

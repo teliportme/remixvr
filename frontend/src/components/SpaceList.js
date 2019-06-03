@@ -22,9 +22,7 @@ const SpaceList = observer(({ spaces, projectSlug, history, closeModal }) => {
           >
             <div className="flex flex-column mr4">
               <span className="f4 b ttc dark-gray">{space.title}</span>
-              <span className="pt1 dark-gray">
-                Add 360 images and text description.
-              </span>
+              <span className="pt1 dark-gray">{space.description}</span>
             </div>
             <button
               className="f6 link dim br2 ph3 pv2 dib white bg-purple br3 ba bw2 bl-0 br-0 bt-0 b--black pointer"
