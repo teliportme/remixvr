@@ -12,7 +12,8 @@ AFRAME.registerState({
     totalSpaces: 0,
     templates: {
       '360image': '#image360',
-      '360video': '#video360'
+      '360video': '#video360',
+      banner: '#banner'
     }
   },
 
@@ -99,6 +100,31 @@ function setupSpace() {
       // const text = getValues(fields, 'type', 'text');
       // const titleElement = document.getElementById('title');
       // titleElement.setAttribute('text', 'value', text[0].text_value);
+    } else if (spaceType === 'banner') {
+      const fields = space.fields;
+      const title = getValues(fields, 'label', 'title');
+      const description = getValues(fields, 'label', 'description');
+
+      document
+        .getElementById('template')
+        .setAttribute(
+          'template',
+          'src',
+          AFRAME.scenes[0].systems.state.state.templates[spaceType]
+        );
+      setTimeout(function() {
+        const titleElement = document.getElementById('title');
+        titleElement.setAttribute('text', 'value', title[0].text_value);
+
+        const descriptionElement = document.getElementById('description');
+        descriptionElement.setAttribute(
+          'text',
+          'value',
+          description[0].text_value
+        );
+
+        maskEl.emit('fade');
+      }, 200);
     }
   });
 }

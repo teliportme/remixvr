@@ -1,34 +1,52 @@
 {
   "spaces": [
     {
-      "title": "360 Image",
-      "type": "360image",
-      "maxCount": 1,
+      "description": "Add 360 image and text description.",
       "fields": [
         {
-          "type": "photosphere",
-          "label": "photosphere"
+          "label": "photosphere",
+          "type": "photosphere"
         },
         {
-          "type": "text",
-          "label": "Title"
+          "label": "Title",
+          "type": "text"
         }
-      ]
+      ],
+      "maxCount": 0,
+      "title": "360 Image",
+      "type": "360image"
     },
     {
-      "title": "360 Video",
-      "type": "360video",
-      "maxCount": 1,
+      "description": "Add 360 video and text description.",
       "fields": [
         {
-          "type": "videosphere",
-          "label": "videosphere"
+          "label": "videosphere",
+          "type": "videosphere"
         },
         {
-          "type": "text",
-          "label": "Title"
+          "label": "Title",
+          "type": "text"
         }
-      ]
+      ],
+      "maxCount": 0,
+      "title": "360 Video",
+      "type": "360video"
+    },
+    {
+      "description": "Add a banner with title & description.",
+      "fields": [
+        {
+          "label": "title",
+          "type": "text"
+        },
+        {
+          "label": "description",
+          "type": "text"
+        }
+      ],
+      "maxCount": 0,
+      "title": "Banner",
+      "type": "banner"
     }
   ]
 }
