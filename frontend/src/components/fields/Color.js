@@ -5,7 +5,7 @@ import FieldLabel from '../FieldLabel';
 import FieldInput from '../FieldInput';
 
 const Color = observer(({ field, spaceId }) => {
-  const fieldValue = field.color_code || '#fff';
+  const fieldValue = field.color_code || '#ffffff';
   const [text, setText] = useState(fieldValue);
   const projectStore = useContext(ProjectStore);
 
