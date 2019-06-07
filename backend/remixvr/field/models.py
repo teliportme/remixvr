@@ -159,3 +159,12 @@ class Link(Field):
         'Space', backref=db.backref('link', uselist=False))
 
     __mapper_args__ = {"polymorphic_identity": "link"}
+
+
+class Color(Field):
+
+    __tablename__ = 'color'
+    id = Column(db.ForeignKey('field.id'), primary_key=True)
+    color_code = Column(db.String)
+
+    __mapper_args__ = {"polymorphic_identity": "color"}

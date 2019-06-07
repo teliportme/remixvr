@@ -1,5 +1,5 @@
 from .models import (Field, Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere, File, Link)
+                     VideoSphere, Image, PhotoSphere, File, Link, Color)
 from flask_jwt_extended import current_user
 
 
@@ -16,5 +16,8 @@ def generate_fields(space, fields):
                 space=space, author=current_user.profile, label=field['label'])
         if field['type'] == 'videosphere':
             new_field = VideoSphere(
+                space=space, author=current_user.profile, label=field['label'])
+        if field['type'] == 'color':
+            new_field = Color(
                 space=space, author=current_user.profile, label=field['label'])
         new_field.save()
