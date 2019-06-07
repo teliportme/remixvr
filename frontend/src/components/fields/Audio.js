@@ -36,7 +36,7 @@ const Audio = observer(({ field, spaceId }) => {
           />
           <SavingButton
             label
-            htmlFor="file"
+            htmlFor="audioFile"
             disabled={!enableUpload}
             isLoading={!enableUpload}
             className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"
