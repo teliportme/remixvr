@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PhotoSphere from '../components/fields/PhotoSphere';
 import VideoSphere from '../components/fields/VideoSphere';
 import Text from '../components/fields/Text';
+import Color from '../components/fields/Color';
 
 // https://stackoverflow.com/a/27267762/1291535
 // function flatten(ary) {
@@ -41,6 +42,12 @@ const FieldsGenerate = observer(({ fields, spaceId }) => {
       return (
         <FieldWrapper key={field.id}>
           <VideoSphere field={field} spaceId={spaceId} />
+        </FieldWrapper>
+      );
+    } else if (field.type === 'color') {
+      return (
+        <FieldWrapper key={field.id}>
+          <Color field={field} spaceId={spaceId} />
         </FieldWrapper>
       );
     } else {

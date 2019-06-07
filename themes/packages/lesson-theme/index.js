@@ -104,6 +104,7 @@ function setupSpace() {
       const fields = space.fields;
       const title = getValues(fields, 'label', 'title');
       const description = getValues(fields, 'label', 'description');
+      const backgroundColor = getValues(fields, 'type', 'color');
 
       document
         .getElementById('template')
@@ -113,6 +114,9 @@ function setupSpace() {
           AFRAME.scenes[0].systems.state.state.templates[spaceType]
         );
       setTimeout(function() {
+        const sky = document.getElementById('sky');
+        sky.setAttribute('color', backgroundColor[0].color_code);
+
         const titleElement = document.getElementById('title');
         titleElement.setAttribute('text', 'value', title[0].text_value);
 
