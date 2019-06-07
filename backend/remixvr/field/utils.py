@@ -20,4 +20,7 @@ def generate_fields(space, fields):
         if field['type'] == 'color':
             new_field = Color(
                 space=space, author=current_user.profile, label=field['label'])
+        if field['type'] == 'audio':
+            new_field = Audio(
+                space=space, author=current_user.profile, label=field['label'])
         new_field.save()
