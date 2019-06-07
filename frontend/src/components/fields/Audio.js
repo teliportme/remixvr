@@ -22,14 +22,14 @@ const Audio = observer(({ field, spaceId }) => {
 
   return (
     <React.Fragment>
-      <FieldLabel htmlFor="file" className="f4 db ttc">
+      <FieldLabel htmlFor="audioFile" className="f4 db ttc">
         {field.label}
       </FieldLabel>
       <FieldInput className="cf overflow-hidden">
         <div className="fl">
           <input
             type="file"
-            id="file"
+            id="audioFile"
             disabled={!enableUpload}
             onChange={uploadFile}
             style={{ visibility: 'hidden', width: 0 }}
