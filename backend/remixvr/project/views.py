@@ -41,7 +41,7 @@ def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
             User).filter(User.username == author)
     if favorited:
         res = res.join(Project.favoriters).filter(User.username == favorited)
-    return res.offset(offset).limit(limit).all()
+    return res.order_by(Project.created_at.desc()).offset(offset).limit(limit).all()
 
 
 @blueprint.route('/api/projects', methods=('POST',))
@@ -141,7 +141,7 @@ def unfavorite_a_project(slug):
 @marshal_with(projects_schema)
 def projects_feed(limit=20, offset=0):
     return Project.query.join(current_user.profile.follows). \
-        order_by(Project.createdAt.desc()).offset(offset).limit(limit).all()
+        order_by(Project.created_at.desc()).offset(offset).limit(limit).all()
 
 
 @blueprint.route('/api/projects/<slug>/spaces', methods=('GET',))
