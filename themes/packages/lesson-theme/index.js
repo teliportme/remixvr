@@ -70,7 +70,7 @@ function setupSpace() {
     const spaceType = space.type;
     const fields = space.fields;
     const soundField = getValues(fields, 'type', 'audio');
-    if (soundField && soundField.file) {
+    if (soundField && soundField[0].file) {
       soundElement.setAttribute(
         'sound',
         'src',
