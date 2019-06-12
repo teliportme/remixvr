@@ -1,34 +1,68 @@
 {
   "spaces": [
     {
+      "fields": [
+        {
+          "label": "photosphere",
+          "type": "photosphere"
+        },
+        {
+          "label": "Title",
+          "type": "text"
+        },
+        {
+          "label": "Audio (Optional)",
+          "type": "audio"
+        }
+      ],
+      "maxCount": 0,
       "title": "360 Image",
       "type": "360image",
-      "maxCount": 1,
-      "fields": [
-        {
-          "type": "photosphere",
-          "label": "photosphere"
-        },
-        {
-          "type": "text",
-          "label": "Title"
-        }
-      ]
+      "description": "Add 360 image and text description."
     },
     {
-      "title": "360 Video",
-      "type": "360video",
-      "maxCount": 1,
       "fields": [
         {
-          "type": "videosphere",
-          "label": "videosphere"
+          "label": "videosphere",
+          "type": "videosphere"
         },
         {
-          "type": "text",
-          "label": "Title"
+          "label": "Title",
+          "type": "text"
+        },
+        {
+          "label": "Audio (Optional)",
+          "type": "audio"
         }
-      ]
+      ],
+      "maxCount": 0,
+      "title": "360 Video",
+      "type": "360video",
+      "description": "Add 360 video and text description."
+    },
+    {
+      "fields": [
+        {
+          "label": "title",
+          "type": "text"
+        },
+        {
+          "label": "description",
+          "type": "text"
+        },
+        {
+          "label": "background",
+          "type": "color"
+        },
+        {
+          "label": "Audio (Optional)",
+          "type": "audio"
+        }
+      ],
+      "maxCount": 0,
+      "title": "Banner",
+      "type": "banner",
+      "description": "Add a banner with title & description."
     }
   ]
 }

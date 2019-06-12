@@ -70,8 +70,7 @@
         background: #111;
       }
     </style>
-    <script type="text/javascript" src="build.js"></script>
-  </head>
+  <script type="text/javascript" src="build.js"></script></head>
   <body>
     <div id="loading-wrapper">
       <div id="loading"></div>
@@ -81,20 +80,16 @@
       loading-screen="dotsColor: red; backgroundColor: black"
     >
       <a-assets>
-        <a-entity
-          laser-controls
-          raycaster="objects: [cursor-listener];"
-        ></a-entity>
         <script id="image360" type="html">
           <a-entity>
-            <a-sky id="sky" />
+            <a-sky id="sky" ></a-sky>
             <a-entity
               id="title"
               geometry="primitive: plane; width: 3; height: auto;"
-              material="color: #111;side:back"
-              text="align: center;wrapCount:25;side:back;zOffset:-0.001;"
+              material="color: #111"
+              text="align: center;wrapCount:25;"
               position="0 -1.2 -3"
-              rotation="30 180 0"
+              rotation="-30 0 0"
             />
           </a-entity>;
         </script>
@@ -103,8 +98,28 @@
             <a-videosphere src="" id="videosphere" />
           </a-entity>;
         </script>
+        <script id="banner" type="html">
+          <a-entity>
+            <a-sky id="sky"></a-sky>
+            <a-entity
+              id="title"
+              geometry="primitive: plane; width: 3; height: auto;"
+              material="color: #111;"
+              text="align: center;wrapCount:25;"
+              position="0 0.457 -3"
+            ></a-entity>
+            <a-entity
+              id="description"
+              geometry="primitive: plane; width: 3; height: auto;"
+              material="color: #111"
+              text="align: center;wrapCount:35;"
+              position="0 0.126 -3"
+            ></a-entity>
+          </a-entity>;
+        </script>
       </a-assets>
       <a-entity id="template" load-data></a-entity>
+      <a-entity id="sound" bind="visible: playSound"></a-entity>
       <a-entity
         position="-0.356 -1.936 -1.878"
         rotation="-43.650 0 0"

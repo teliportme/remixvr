@@ -23,7 +23,7 @@ const CreateProject = observer(({ history }) => {
     projectStore
       .createProject(title, description, selectedTheme)
       .then(({ project }) => {
-        history.push(`/project/${project.slug}/edit`);
+        history.push(`/project/${project.slug}/edit/s/0`);
       });
   };
 

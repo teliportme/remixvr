@@ -5,7 +5,7 @@ from flask import current_app as app
 
 from remixvr.project.serializers import ProjectSchema
 from .models import (Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere, Link)
+                     VideoSphere, Image, PhotoSphere, Link, Color)
 
 
 class FieldSchema(Schema):
@@ -86,6 +86,10 @@ class PhotoSphereSchema(FieldSchema):
 class LinkSchema(FieldSchema):
     linked_space_id = fields.Int()
 
+
+class ColorSchema(FieldSchema):
+    color_code = fields.Str()
+
 # added to be included in combined schema to extract file while uploading
 
 
@@ -104,7 +108,8 @@ class ProjectFieldSchema(OneOfSchema):
         'videosphere': VideoSphereSchema,
         'image': ImageSchema,
         'photosphere': PhotoSphereSchema,
-        'link': LinkSchema
+        'link': LinkSchema,
+        'color': ColorSchema
     }
 
     def get_obj_type(self, obj):
@@ -126,6 +131,8 @@ class ProjectFieldSchema(OneOfSchema):
             return 'photosphere'
         elif isinstance(obj, Link):
             return 'link'
+        elif isinstance(obj, Color):
+            return 'color'
         else:
             raise Exception('Unknown object type: %s' % obj.__class__.__name__)
 
@@ -135,7 +142,7 @@ class ProjectFieldSchema(OneOfSchema):
 
 class CombinedSchema(PositionSchema, TextSchema, NumberSchema, FileLoadSchema,
                      AudioSchema, VideoSchema, VideoSphereSchema,
-                     ImageSchema, PhotoSphereSchema, LinkSchema):
+                     ImageSchema, PhotoSphereSchema, LinkSchema, ColorSchema):
     pass
 
 

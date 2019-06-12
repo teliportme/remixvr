@@ -10,9 +10,11 @@ AFRAME.registerState({
     hasNext: true,
     hasPrevious: false,
     totalSpaces: 0,
+    playSound: false,
     templates: {
       '360image': '#image360',
-      '360video': '#video360'
+      '360video': '#video360',
+      banner: '#banner'
     }
   },
 
@@ -53,6 +55,9 @@ AFRAME.registerState({
 
 function setupSpace() {
   var maskEl = document.querySelector('#mask');
+  var soundElement = document.getElementById('sound');
+  // stop sounds
+  if (soundElement.components.sound) soundElement.components.sound.stopSound();
   fetchProjectData(function(spaces) {
     const spaceLength = spaces.length - 1; // zero index
     AFRAME.scenes[0].systems.state.state.totalSpaces = spaceLength;
@@ -63,8 +68,18 @@ function setupSpace() {
       document.getElementById('video-element').pause();
     const space = spaces[AFRAME.scenes[0].systems.state.state.currentSpace];
     const spaceType = space.type;
+    const fields = space.fields;
+    const soundField = getValues(fields, 'type', 'audio');
+    if (soundField && soundField[0].file) {
+      soundElement.setAttribute(
+        'sound',
+        'src',
+        API_ROOT + soundField[0].file.url
+      );
+      soundElement.setAttribute('sound', 'autoplay', true);
+      soundElement.components.sound.playSound();
+    }
     if (spaceType === '360image') {
-      const fields = space.fields;
       const photospheres = getValues(fields, 'type', 'photosphere');
       document
         .getElementById('template')
@@ -82,7 +97,6 @@ function setupSpace() {
         maskEl.emit('fade');
       }, 200);
     } else if (spaceType === '360video') {
-      const fields = space.fields;
       const videospheres = getValues(fields, 'type', 'videosphere');
 
       document
@@ -99,6 +113,34 @@ function setupSpace() {
       // const text = getValues(fields, 'type', 'text');
       // const titleElement = document.getElementById('title');
       // titleElement.setAttribute('text', 'value', text[0].text_value);
+    } else if (spaceType === 'banner') {
+      const title = getValues(fields, 'label', 'title');
+      const description = getValues(fields, 'label', 'description');
+      const backgroundColor = getValues(fields, 'type', 'color');
+
+      document
+        .getElementById('template')
+        .setAttribute(
+          'template',
+          'src',
+          AFRAME.scenes[0].systems.state.state.templates[spaceType]
+        );
+      setTimeout(function() {
+        const sky = document.getElementById('sky');
+        sky.setAttribute('color', backgroundColor[0].color_code);
+
+        const titleElement = document.getElementById('title');
+        titleElement.setAttribute('text', 'value', title[0].text_value);
+
+        const descriptionElement = document.getElementById('description');
+        descriptionElement.setAttribute(
+          'text',
+          'value',
+          description[0].text_value
+        );
+
+        maskEl.emit('fade');
+      }, 200);
     }
   });
 }

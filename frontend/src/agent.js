@@ -114,8 +114,8 @@ const Field = {
 const Space = {
   allSpaces: slug =>
      requests.get(`/projects/${slug}/spaces`),
-  create: slug =>
-    requests.post(`/spaces`, { project_slug: slug }),
+  create: (slug, type) =>
+    requests.post(`/spaces`, { project_slug: slug, type }),
   delete: spaceId =>
     requests.del(`/spaces/${spaceId}`)
 }
