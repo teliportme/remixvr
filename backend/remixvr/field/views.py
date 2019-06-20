@@ -15,8 +15,9 @@ from remixvr.database import db
 from remixvr.exceptions import InvalidUsage
 from remixvr.space.models import Space
 from .models import (Field, Position, Text, Number, Audio, Video,
-                     VideoSphere, Image, PhotoSphere, File, Link, Color)
+                     VideoSphere, Image, PhotoSphere, File, Link, Color, Object)
 from .serializers import field_schema, field_schemas, combined_schema
+from .utils import check_file_extension_for_type, save_object_files
 
 blueprint = Blueprint('fields', __name__)
 
@@ -59,6 +60,10 @@ def update_field(field_id, **kwargs):
         file_object.save()
 
         field.update(file=file_object, **kwargs)
+    elif field.type == 'object':
+        folder_path, object_filename = save_object_files(
+            kwargs['object_name'], kwargs['main_object_file'], kwargs['object_files'])
+        field.update(folder=folder_path, object_filename=object_filename)
     else:
         field.update(**kwargs)
     field.save()
@@ -72,18 +77,6 @@ def delete_field(field_id):
         Field.id == field_id, Field.author_id == current_user.profile.id).first()
     field.delete()
     return '', 200
-
-
-def check_file_extension_for_type(type, file_extension):
-    if type == 'image' or type == 'photosphere':
-        if file_extension not in ['.png', '.jpg', '.jpeg']:
-            raise InvalidUsage.invalid_file_type()
-    elif type == 'audio':
-        if file_extension not in ['.mp3']:
-            raise InvalidUsage.invalid_file_type()
-    elif type == 'video' or type == 'videosphere':
-        if file_extension not in ['.mp4']:
-            raise InvalidUsage.invalid_file_type()
 
 
 @blueprint.route('/api/fields', methods=('POST',))
@@ -143,6 +136,9 @@ def create_field(label, space_id, type, **kwargs):
         elif type == 'color':
             field = Color(label=label, space=space,
                           author=current_user.profile, **kwargs)
+        elif type == 'object':
+            field = Object(label=label, space=space,
+                           author=current_user.profile, **kwargs)
         else:
             raise Exception(("Field type - {} not found").format(type))
             return
