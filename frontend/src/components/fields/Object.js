@@ -8,7 +8,7 @@ import FieldInput from '../FieldInput';
 import getAPIUrl from '../GetAPIUrl';
 
 const ObjectGooglePoly = observer(({ field, spaceId }) => {
-  const [enableUpload, setEnabled] = useState(true);
+  const [savingModel, setSavingModel] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [assets, setAssets] = useState([]);
@@ -16,7 +16,8 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
   const apiUrl = getAPIUrl();
 
   const modelSelect = asset => {
-    console.log(asset);
+    closeModal();
+    setSavingModel(true);
     const format = asset.formats.find(format => {
       return format.formatType === 'GLTF2';
     });
@@ -31,7 +32,7 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
       };
       projectStore
         .updateField(spaceId, field.id, data)
-        .then(() => setShowModal(false));
+        .then(() => setSavingModel(false));
     }
   };
 
@@ -67,8 +68,8 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
           <SavingButton
             label
             htmlFor="file"
-            disabled={!enableUpload}
-            isLoading={!enableUpload}
+            disabled={savingModel}
+            isLoading={savingModel}
             className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"
             onClick={openModal}
           >
