@@ -15,13 +15,24 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
   const projectStore = useContext(ProjectStore);
   const apiUrl = getAPIUrl();
 
-  const uploadFile = event => {
-    const file = event.target.files[0];
-    const data = {};
-    setEnabled(false);
-    projectStore
-      .updateField(spaceId, field.id, data, file)
-      .then(() => setEnabled(true));
+  const modelSelect = asset => {
+    console.log(asset);
+    const format = asset.formats.find(format => {
+      return format.formatType === 'GLTF2';
+    });
+
+    if (format !== 'undefined') {
+      const mainObjectItemUrl = format.root.url;
+      const objectResources = format.resources.map(item => item.url);
+      const data = {
+        object_name: asset.displayName,
+        main_object_file: mainObjectItemUrl,
+        object_files: objectResources
+      };
+      projectStore
+        .updateField(spaceId, field.id, data)
+        .then(() => setShowModal(false));
+    }
   };
 
   function openModal() {
@@ -35,7 +46,7 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
   const searchGooglePoly = event => {
     event.preventDefault();
     const API_KEY = '';
-    const url = `https://poly.googleapis.com/v1/assets?keywords=${searchTerm}&format=OBJ&key=${API_KEY}`;
+    const url = `https://poly.googleapis.com/v1/assets?keywords=${searchTerm}&format=GLTF2&key=${API_KEY}`;
 
     const request = new XMLHttpRequest();
     request.open('GET', url, true);
@@ -53,12 +64,16 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
       </FieldLabel>
       <FieldInput className="cf overflow-hidden">
         <div className="fl">
-          <button
+          <SavingButton
+            label
+            htmlFor="file"
+            disabled={!enableUpload}
+            isLoading={!enableUpload}
             className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"
             onClick={openModal}
           >
             Select Model
-          </button>
+          </SavingButton>
           <ReactModal
             appElement={document.body}
             isOpen={showModal}
@@ -96,20 +111,12 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
                     src={asset.thumbnail.url}
                     key={index}
                     className="w4 h4 ma2"
+                    onClick={modelSelect.bind(null, asset)}
                   />
                 ))}
               </div>
             </React.Fragment>
           </ReactModal>
-          <SavingButton
-            label
-            htmlFor="file"
-            disabled={!enableUpload}
-            isLoading={!enableUpload}
-            className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"
-          >
-            {field.file && enableUpload ? `Replace` : 'Upload'}
-          </SavingButton>
         </div>
         <div className="fl">
           {field.file && field.file.url && (

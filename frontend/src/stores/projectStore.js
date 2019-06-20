@@ -147,11 +147,13 @@ class ProjectStore {
   }
 
   updateField(spaceId, fieldId, data, file) {
-    let formData = new FormData();
-    for (let [key, value] of Object.entries(data)) {
-      formData.set(key, value);
-    }
+    let formData = data;
+
     if (file) {
+      formData = new FormData();
+      for (let [key, value] of Object.entries(data)) {
+        formData.set(key, value);
+      }
       formData.append('file', file);
     }
     return agent.Field.edit(fieldId, formData).then(field => {
