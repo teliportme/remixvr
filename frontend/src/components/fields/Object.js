@@ -46,7 +46,7 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
 
   const searchGooglePoly = event => {
     event.preventDefault();
-    const API_KEY = '';
+    const API_KEY = process.env.REACT_APP_POLY_API_KEY;
     const url = `https://poly.googleapis.com/v1/assets?keywords=${searchTerm}&format=GLTF2&key=${API_KEY}`;
 
     const request = new XMLHttpRequest();
@@ -109,6 +109,7 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
               <div>
                 {assets.map((asset, index) => (
                   <img
+                    alt={asset.displayName || 'object'}
                     src={asset.thumbnail.url}
                     key={index}
                     className="w4 h4 ma2"
@@ -120,11 +121,11 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
           </ReactModal>
         </div>
         <div className="fl">
-          {field.file && field.file.url && (
-            <video
-              alt="videosphere"
-              src={apiUrl + field.file.url}
-              controls
+          {field.folder && field.object_filename && (
+            <a-entity
+              gltf-model={`url(${apiUrl +
+                field.folder +
+                field.object_filename})`}
               className="w-100 outline-0 pointer"
             />
           )}
