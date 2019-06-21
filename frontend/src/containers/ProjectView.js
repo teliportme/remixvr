@@ -8,7 +8,6 @@ const ProjectView = observer(props => {
 
   useEffect(() => {
     projectStore.getProjectTheme(projectSlug);
-    console.log(props.match);
   }, []);
 
   return (

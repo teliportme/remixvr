@@ -17,6 +17,7 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
 
   const modelSelect = asset => {
     closeModal();
+    setAssets([]);
     setSavingModel(true);
     const format = asset.formats.find(format => {
       return format.formatType === 'GLTF2';
@@ -28,7 +29,9 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
       const data = {
         object_name: asset.displayName,
         main_object_file: mainObjectItemUrl,
-        object_files: objectResources
+        object_files: objectResources,
+        thumbnail: asset.thumbnail.url,
+        attribute: asset.authorName
       };
       projectStore
         .updateField(spaceId, field.id, data)
@@ -42,6 +45,8 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
 
   function closeModal() {
     setShowModal(false);
+    setAssets([]);
+    setSearchTerm('');
   }
 
   const searchGooglePoly = event => {
@@ -122,19 +127,13 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
         </div>
         <div className="fl">
           {field.folder && field.object_filename && (
-            <a-entity
-              gltf-model={`url(${apiUrl +
-                field.folder +
-                field.object_filename})`}
-              className="w-100 outline-0 pointer"
+            <img
+              alt="photosphere"
+              src={apiUrl + field.folder + field.thumbnail}
             />
           )}
         </div>
       </FieldInput>
-      {/* {
-        logo && enabled &&
-        <img src={logo.url} className="mw4 br1 pa2 bg-white-60 db" />
-      } */}
     </React.Fragment>
   );
 });
