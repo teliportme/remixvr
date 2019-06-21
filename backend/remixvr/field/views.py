@@ -62,8 +62,9 @@ def update_field(field_id, **kwargs):
         field.update(file=file_object, **kwargs)
     elif field.type == 'object':
         folder_path, object_filename = save_object_files(
-            kwargs['object_name'], kwargs['main_object_file'], kwargs['object_files'])
-        field.update(folder=folder_path, object_filename=object_filename)
+            kwargs['object_name'], kwargs['main_object_file'], kwargs['object_files'], kwargs['thumbnail'])
+        field.update(folder=folder_path,
+                     object_filename=object_filename, thumbnail='thumbnail.png', attribute=kwargs['attribute'])
     else:
         field.update(**kwargs)
     field.save()

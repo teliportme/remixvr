@@ -176,5 +176,7 @@ class Object(Field):
     id = Column(db.ForeignKey('field.id'), primary_key=True)
     folder = Column(db.String(512))
     object_filename = Column(db.String(100))
+    thumbnail = Column(db.String(100))
+    attribute = Column(db.String(200))
 
     __mapper_args__ = {"polymorphic_identity": "object"}

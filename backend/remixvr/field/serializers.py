@@ -98,6 +98,8 @@ class ObjectSchema(FieldSchema):
     object_files = fields.List(
         fields.String(), load_only=True)
     object_filename = fields.Str()
+    thumbnail = fields.Str()
+    attribute = fields.Str()
 
 # added to be included in combined schema to extract file while uploading
 

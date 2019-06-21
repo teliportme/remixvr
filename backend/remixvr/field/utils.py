@@ -47,7 +47,7 @@ def check_file_extension_for_type(type, file_extension):
             raise InvalidUsage.invalid_file_type()
 
 
-def save_object_files(folder, main_object_file, object_files):
+def save_object_files(folder, main_object_file, object_files, thumbnail):
     folder_path = os.path.join(app.root_path,
                                app.config['UPLOAD_FOLDER'], folder)
     if not os.path.exists(folder_path):
@@ -57,12 +57,22 @@ def save_object_files(folder, main_object_file, object_files):
     main_parsed_url = urlparse(main_object_file)
     main_filename = unquote(os.path.basename(main_parsed_url.path))
 
+    object_files.append(main_object_file)
+
+    if thumbnail is not None:
+        saved_file = urllib.request.urlretrieve(thumbnail, 'thumbnail.png')
+        url = '/uploads/{}/{}'.format(folder, 'thumbnail.png')
+        file_object = File(filename='thumbnail.png', url=url,
+                           filesize=saved_file[1]['Content-Length'])
+        file_object.save()
+
     for object_file in object_files:
         parsed_url = urlparse(object_file)
         filename = unquote(os.path.basename(parsed_url.path))
         saved_file = urllib.request.urlretrieve(object_file, filename)
-        url = '{}/{}'.format(folder_path, filename)
+        url = '/uploads/{}/{}'.format(folder, filename)
         file_object = File(filename=filename, url=url,
                            filesize=saved_file[1]['Content-Length'])
         file_object.save()
-    return folder_path, main_filename
+    object_path = '/uploads/{}/'.format(folder)
+    return object_path, main_filename
