@@ -157,11 +157,12 @@ function setupSpace() {
           'gltf-model',
           `url(${API_ROOT}${object[0].folder}${object[0].object_filename})`
         );
-        // objectEntity.setAttribute('scale', '0.1 0.1 0.1');
 
-        // const text = getValues(fields, 'type', 'text');
-        // const titleElement = document.getElementById('title');
-        // titleElement.setAttribute('text', 'value', text[0].text_value);
+        const text = getValues(fields, 'type', 'text');
+        if (text.length > 0) {
+          const titleElement = document.getElementById('title');
+          titleElement.setAttribute('text', 'value', text[0].text_value);
+        }
         maskEl.emit('fade');
       }, 200);
     }
