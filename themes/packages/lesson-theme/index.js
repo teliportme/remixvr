@@ -14,7 +14,8 @@ AFRAME.registerState({
     templates: {
       '360image': '#image360',
       '360video': '#video360',
-      banner: '#banner'
+      banner: '#banner',
+      object: '#object'
     }
   },
 
@@ -70,7 +71,7 @@ function setupSpace() {
     const spaceType = space.type;
     const fields = space.fields;
     const soundField = getValues(fields, 'type', 'audio');
-    if (soundField && soundField[0].file) {
+    if (soundField.length > 0 && soundField[0].file) {
       soundElement.setAttribute(
         'sound',
         'src',
@@ -141,6 +142,28 @@ function setupSpace() {
 
         maskEl.emit('fade');
       }, 200);
+    } else if (spaceType === 'object') {
+      const object = getValues(fields, 'type', 'object');
+      document
+        .getElementById('template')
+        .setAttribute(
+          'template',
+          'src',
+          AFRAME.scenes[0].systems.state.state.templates[spaceType]
+        );
+      setTimeout(function() {
+        const objectEntity = document.getElementById('object-gltf');
+        objectEntity.setAttribute(
+          'gltf-model',
+          `url(${API_ROOT}${object[0].folder}${object[0].object_filename})`
+        );
+        // objectEntity.setAttribute('scale', '0.1 0.1 0.1');
+
+        // const text = getValues(fields, 'type', 'text');
+        // const titleElement = document.getElementById('title');
+        // titleElement.setAttribute('text', 'value', text[0].text_value);
+        maskEl.emit('fade');
+      }, 200);
     }
   });
 }
@@ -203,5 +226,31 @@ AFRAME.registerComponent('cursor-listener', {
 AFRAME.registerComponent('load-data', {
   init: function() {
     setupSpace();
+  }
+});
+
+AFRAME.registerComponent('autoscale', {
+  schema: { type: 'number', default: 1 },
+  init: function() {
+    this.scale();
+    this.el.addEventListener('object3dset', () => this.scale());
+  },
+  scale: function() {
+    const el = this.el;
+    const span = this.data;
+    const mesh = el.getObject3D('mesh');
+
+    if (!mesh) return;
+
+    // Compute bounds.
+    const bbox = new THREE.Box3().setFromObject(mesh);
+
+    // Normalize scale.
+    const scale = span / bbox.getSize().length();
+    mesh.scale.set(scale, scale, scale);
+
+    // Recenter.
+    const offset = bbox.getCenter().multiplyScalar(scale);
+    mesh.position.sub(offset);
   }
 });
