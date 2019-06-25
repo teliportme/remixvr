@@ -143,6 +143,8 @@ function setupSpace() {
       }, 200);
     } else if (spaceType === 'object') {
       const object = getValues(fields, 'type', 'object');
+      const backgroundColor = getValues(fields, 'type', 'color');
+
       document
         .getElementById('template')
         .setAttribute(
@@ -151,6 +153,11 @@ function setupSpace() {
           AFRAME.scenes[0].systems.state.state.templates[spaceType]
         );
       setTimeout(function() {
+        if (backgroundColor[0]) {
+          const sky = document.getElementById('sky');
+          sky.setAttribute('color', backgroundColor[0].color_code);
+        }
+
         const objectEntity = document.getElementById('object-gltf');
         objectEntity.setAttribute(
           'gltf-model',
