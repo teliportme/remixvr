@@ -81,8 +81,12 @@ def remix_project(slug, title, description, **kwargs):
         for field_item in fields:
             field = Field.query.filter_by(id=field_item.id).first()
             # accessing the relations seems to keep item in the new field
-            if field.file:
+            if hasattr(field, 'file'):
                 file = field.file
+            # added since first text in a multi space lesson is not taking
+            # the value unless it's accessed, not sure why
+            if hasattr(field, 'value'):
+                value = field.value
             db.session.expunge(field)
             make_transient(field)
             field.id = None
