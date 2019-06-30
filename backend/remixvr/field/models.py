@@ -165,6 +165,18 @@ class Color(Field):
 
     __tablename__ = 'color'
     id = Column(db.ForeignKey('field.id'), primary_key=True)
-    color_code = Column(db.String)
+    color_code = Column(db.String(10))
 
     __mapper_args__ = {"polymorphic_identity": "color"}
+
+
+class Object(Field):
+
+    __tablename__ = 'object'
+    id = Column(db.ForeignKey('field.id'), primary_key=True)
+    folder = Column(db.String(512))
+    object_filename = Column(db.String(100))
+    thumbnail = Column(db.String(100))
+    attribute = Column(db.String(200))
+
+    __mapper_args__ = {"polymorphic_identity": "object"}

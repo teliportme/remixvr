@@ -7,23 +7,23 @@ import 'aframe-layout-component';
 AFRAME.registerState({
   initialState: {
     currentSpace: 0,
-    hasNext: true,
+    hasNext: false,
     hasPrevious: false,
     totalSpaces: 0,
     playSound: false,
     templates: {
       '360image': '#image360',
       '360video': '#video360',
-      banner: '#banner'
+      banner: '#banner',
+      object: '#object'
     }
   },
 
   handlers: {
     nextSpace: function(state) {
+      setupSpace();
       const cs = state.currentSpace;
       state.currentSpace = state.totalSpaces > cs ? cs + 1 : cs;
-
-      setupSpace();
 
       // hide next button if current space is last one
       if (state.currentSpace === state.totalSpaces) {
@@ -37,10 +37,10 @@ AFRAME.registerState({
     },
 
     previousSpace: function(state) {
+      setupSpace();
       const cs = state.currentSpace;
       state.currentSpace = cs > 0 ? cs - 1 : cs;
 
-      setupSpace();
       if (state.currentSpace === 0) {
         state.hasPrevious = false;
       } else if (state.currentSpace <= state.totalSpaces) {
@@ -61,8 +61,8 @@ function setupSpace() {
   fetchProjectData(function(spaces) {
     const spaceLength = spaces.length - 1; // zero index
     AFRAME.scenes[0].systems.state.state.totalSpaces = spaceLength;
-    if (spaceLength === 0) {
-      AFRAME.scenes[0].systems.state.state.hasNext = false;
+    if (spaceLength > 0) {
+      AFRAME.scenes[0].systems.state.state.hasNext = true;
     }
     document.getElementById('video-element') &&
       document.getElementById('video-element').pause();
@@ -70,7 +70,7 @@ function setupSpace() {
     const spaceType = space.type;
     const fields = space.fields;
     const soundField = getValues(fields, 'type', 'audio');
-    if (soundField && soundField[0].file) {
+    if (soundField.length > 0 && soundField[0].file) {
       soundElement.setAttribute(
         'sound',
         'src',
@@ -141,6 +141,36 @@ function setupSpace() {
 
         maskEl.emit('fade');
       }, 200);
+    } else if (spaceType === 'object') {
+      const object = getValues(fields, 'type', 'object');
+      const backgroundColor = getValues(fields, 'type', 'color');
+
+      document
+        .getElementById('template')
+        .setAttribute(
+          'template',
+          'src',
+          AFRAME.scenes[0].systems.state.state.templates[spaceType]
+        );
+      setTimeout(function() {
+        if (backgroundColor[0]) {
+          const sky = document.getElementById('sky');
+          sky.setAttribute('color', backgroundColor[0].color_code);
+        }
+
+        const objectEntity = document.getElementById('object-gltf');
+        objectEntity.setAttribute(
+          'gltf-model',
+          `url(${API_ROOT}${object[0].folder}${object[0].object_filename})`
+        );
+
+        const text = getValues(fields, 'type', 'text');
+        if (text.length > 0) {
+          const titleElement = document.getElementById('title');
+          titleElement.setAttribute('text', 'value', text[0].text_value);
+        }
+        maskEl.emit('fade');
+      }, 200);
     }
   });
 }
@@ -203,5 +233,31 @@ AFRAME.registerComponent('cursor-listener', {
 AFRAME.registerComponent('load-data', {
   init: function() {
     setupSpace();
+  }
+});
+
+AFRAME.registerComponent('autoscale', {
+  schema: { type: 'number', default: 1 },
+  init: function() {
+    this.scale();
+    this.el.addEventListener('object3dset', () => this.scale());
+  },
+  scale: function() {
+    const el = this.el;
+    const span = this.data;
+    const mesh = el.getObject3D('mesh');
+
+    if (!mesh) return;
+
+    // Compute bounds.
+    const bbox = new THREE.Box3().setFromObject(mesh);
+
+    // Normalize scale.
+    const scale = span / bbox.getSize().length();
+    mesh.scale.set(scale, scale, scale);
+
+    // Recenter.
+    const offset = bbox.getCenter().multiplyScalar(scale);
+    mesh.position.sub(offset);
   }
 });

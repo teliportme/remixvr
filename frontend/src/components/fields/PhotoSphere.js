@@ -50,10 +50,6 @@ const PhotoSphere = observer(({ field, spaceId }) => {
           )}
         </div>
       </FieldInput>
-      {/* {
-        logo && enabled &&
-        <img src={logo.url} className="mw4 br1 pa2 bg-white-60 db" />
-      } */}
     </React.Fragment>
   );
 });

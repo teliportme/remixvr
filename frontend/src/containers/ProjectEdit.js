@@ -62,7 +62,7 @@ const ProjectEdit = observer(props => {
             href={`/project/${props.match.params.slug}/view`}
             rel="noopener noreferrer"
           >
-            View Project
+            Save & View Project
           </a>
         </div>
         <SpacesCarousel
