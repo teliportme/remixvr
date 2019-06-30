@@ -15,6 +15,8 @@ const Dashboard = lazy(() => import('./containers/Dashboard'));
 const ProjectEdit = lazy(() => import('./containers/ProjectEdit'));
 const CreateProject = lazy(() => import('./containers/CreateProject'));
 const ProjectView = lazy(() => import('./containers/ProjectView'));
+const ProjectDetail = lazy(() => import('./containers/ProjectDetail'));
+const Expo2020 = lazy(() => import('./containers/Expo2020'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -73,7 +75,9 @@ const App = () => {
               component={ProjectEdit}
             />
             <Route path="/project/:slug/view" component={ProjectView} />
+            <DefaultLayout path="/project/:slug" component={ProjectDetail} />
             <PrivateRoute path="/create" component={CreateProject} />
+            <Route path="/expo2020" component={Expo2020} />
             <DefaultLayout exact path="/" component={Home} />
             <DefaultLayout component={Page404} />
           </Switch>
