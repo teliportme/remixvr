@@ -21,6 +21,7 @@ const Expo2020 = () => (
         We use VR to improve engagement in classroom and provide quality
         education. We integrate VR into Global Citizenship Education to promote
         peace and non-violence, inclusivity and diversity in human cultures.
+        We're supported by UNICEF Innovation.
       </p>
       <div className="flex items-center justify-center">
         <img src={Unicef} alt="unicef innovation" className="w4 w5-ns mr3" />
@@ -77,8 +78,9 @@ const Expo2020 = () => (
       <p className="dark-gray f4 lh-copy">
         In this demo, we look at a lesson created about Taj Mahal. This VR
         lesson is viewable on any VR headset. It is also viewable on laptops on
-        mobiles even without a VR headset. We use this technology so that any
-        learner can access these lessons regardless of which device they use.
+        mobiles even without a VR headset. (VR headset provides a more immerisve
+        experience.) We use this technology so that any learner can access these
+        lessons regardless of which device they use.
       </p>
       <iframe
         width="100%"
