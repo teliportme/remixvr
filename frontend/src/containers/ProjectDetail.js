@@ -36,7 +36,7 @@ const ProjectDetail = observer(props => {
       <div className="w-100 w-80-ns h-100 center ph3 ph0-ns measure-ns">
         <h1 className="ttc">{project.title}</h1>
         <a
-          className="b--dark-gray ba bg-gray bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
+          className="b--dark-gray ba bg-gray bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white pointer"
           target="_blank"
           href={`/project/${project.slug}/view`}
           rel="noopener noreferrer"
@@ -44,7 +44,7 @@ const ProjectDetail = observer(props => {
           View Project
         </a>
         <button
-          className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white ml3"
+          className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white ml3 pointer"
           onClick={() => {
             setModal(true);
           }}
@@ -86,7 +86,7 @@ const ProjectDetail = observer(props => {
                 // disabled={inProgress}
                 // isLoading={inProgress}
               >
-                Login
+                Remix & Create Project
               </button>
             </div>
           </form>
