@@ -34,6 +34,7 @@ const Expo2020 = () => (
         programming.
       </p>
       <iframe
+        title="remixvr easy vr lessons"
         width="560"
         height="315"
         className="mw-100"
@@ -57,6 +58,7 @@ const Expo2020 = () => (
         </div>
       </article>
       <iframe
+        title="remixvr feedback 1"
         width="560"
         height="315"
         className="mw-100"
@@ -66,6 +68,7 @@ const Expo2020 = () => (
         allowFullScreen
       />
       <iframe
+        title="remixvr feedback 2"
         width="560"
         height="315"
         className="mw-100"
@@ -83,6 +86,7 @@ const Expo2020 = () => (
         lessons regardless of which device they use.
       </p>
       <iframe
+        title="remixvr demo"
         width="100%"
         style={{ height: '27rem' }}
         allowvr="yes"

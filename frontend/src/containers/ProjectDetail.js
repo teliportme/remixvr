@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import ReactModal from 'react-modal';
 import ProjectStore from '../stores/projectStore';
+import useRouter from '../components/useRouter';
 
 const ProjectDetail = observer(props => {
   const projectStore = useContext(ProjectStore);
@@ -10,6 +11,7 @@ const ProjectDetail = observer(props => {
   const [project, setProject] = useState();
   const [showModal, setModal] = useState(false);
   const [title, setTitle] = useState('');
+  const { history } = useRouter();
 
   useEffect(() => {
     projectStore.loadProject(projectSlug).then(project => {
@@ -23,8 +25,9 @@ const ProjectDetail = observer(props => {
 
   function remixProject(event) {
     event.preventDefault();
-    projectStore.remixProject(project.slug, { title }).then(project => {
+    projectStore.remixProject(project.slug, { title }).then(({ project }) => {
       console.log(project);
+      history.push(`/project/${project.slug}/edit/s/0`);
     });
   }
 
@@ -33,7 +36,7 @@ const ProjectDetail = observer(props => {
       <div className="w-100 w-80-ns h-100 center ph3 ph0-ns measure-ns">
         <h1 className="ttc">{project.title}</h1>
         <a
-          className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
+          className="b--dark-gray ba bg-gray bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
           target="_blank"
           href={`/project/${project.slug}/view`}
           rel="noopener noreferrer"
@@ -41,7 +44,7 @@ const ProjectDetail = observer(props => {
           View Project
         </a>
         <button
-          className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
+          className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white ml3"
           onClick={() => {
             setModal(true);
           }}
