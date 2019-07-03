@@ -7,7 +7,7 @@ import 'aframe-layout-component';
 AFRAME.registerState({
   initialState: {
     currentSpace: 0,
-    hasNext: false,
+    hasNext: true,
     hasPrevious: false,
     totalSpaces: 0,
     playSound: false,
@@ -61,8 +61,8 @@ function setupSpace() {
   fetchProjectData(function(spaces) {
     const spaceLength = spaces.length - 1; // zero index
     AFRAME.scenes[0].systems.state.state.totalSpaces = spaceLength;
-    if (spaceLength > 0) {
-      AFRAME.scenes[0].systems.state.state.hasNext = true;
+    if (spaceLength == 0) {
+      AFRAME.scenes[0].systems.state.state.hasNext = false;
     }
     document.getElementById('video-element') &&
       document.getElementById('video-element').pause();

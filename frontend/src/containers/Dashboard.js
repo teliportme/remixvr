@@ -15,7 +15,7 @@ const Dashboard = observer(() => {
       projectStore.setPredicate({ author: userStore.currentUser.username });
       projectStore.loadProjects();
     }
-  }, [projectStore]);
+  }, [projectStore, userStore.currentUser]);
 
   return (
     <div className="w-80-ns w-100 pa3 center">

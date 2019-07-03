@@ -49,11 +49,11 @@ def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
     return res.order_by(Project.created_at.desc()).offset(offset).limit(limit).all()
 
 
-@blueprint.route('/api/projects/remix', methods=('POST',))
+@blueprint.route('/api/projects/<slug>/remix', methods=('POST',))
 @jwt_required
 @use_kwargs(project_schema)
 @marshal_with(project_schema)
-def remix_project(slug, title, description, **kwargs):
+def remix_project(slug, title, **kwargs):
     project = Project.query.filter_by(slug=slug).first()
     spaces = project.spaces
     if not project:
@@ -67,7 +67,6 @@ def remix_project(slug, title, description, **kwargs):
     project.created_at = None
     project.updated_at = None
     project.slug = slugify(title + "-" + str(uuid.uuid4().hex[:6].upper()))
-    project.description = description
 
     for space_item in spaces:
         space = Space.query.filter_by(id=space_item.id).first()

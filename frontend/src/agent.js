@@ -99,7 +99,9 @@ const Project = {
   unfavorite: slug =>
     requests.delete(`/projects/${slug}/favorite`),
   getTheme: slug =>
-    requests.get(`/projects/${slug}/theme`)
+    requests.get(`/projects/${slug}/theme`),
+  remix: (slug, data) =>
+    requests.post(`/projects/${slug}/remix`, data)
 }
 
 // prettier-ignore

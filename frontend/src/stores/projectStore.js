@@ -101,6 +101,10 @@ class ProjectStore {
     });
   }
 
+  remixProject(slug, data) {
+    return agent.Project.remix(slug, data);
+  }
+
   loadSpaces(slug) {
     this.isLoadingSpaces = true;
     return agent.Space.allSpaces(slug)
