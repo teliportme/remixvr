@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import LoadingSpinner from './components/LoadingSpinner';
 import CustomBrowsingRouter from './components/CustomBrowserRouter';
 import MetaTags from './components/DefaultMetaTags';
+import withTracker from './components/withTracker';
 import CommonStore from './stores/commonStore';
 import UserStore from './stores/userStore';
 const Header = lazy(() => import('./components/Header'));
@@ -67,19 +68,31 @@ const App = () => {
         <div className="App w-100 center h-100 flex flex-column bt bw2 b--blue">
           <MetaTags />
           <Switch>
-            <DefaultLayout path="/signup" component={Signup} />
-            <DefaultLayout path="/login" component={Login} />
-            <DefaultLayout path="/dashboard" component={Dashboard} />
+            <DefaultLayout path="/signup" component={withTracker(Signup)} />
+            <DefaultLayout path="/login" component={withTracker(Login)} />
+            <DefaultLayout
+              path="/dashboard"
+              component={withTracker(Dashboard)}
+            />
             <PrivateRoute
               path="/project/:slug/edit/s/:spaceId"
-              component={ProjectEdit}
+              component={withTracker(ProjectEdit)}
             />
-            <Route path="/project/:slug/view" component={ProjectView} />
-            <DefaultLayout path="/project/:slug" component={ProjectDetail} />
-            <PrivateRoute path="/create" component={CreateProject} />
-            <Route path="/expo2020" component={Expo2020} />
-            <DefaultLayout exact path="/" component={Home} />
-            <DefaultLayout component={Page404} />
+            <Route
+              path="/project/:slug/view"
+              component={withTracker(ProjectView)}
+            />
+            <DefaultLayout
+              path="/project/:slug"
+              component={withTracker(ProjectDetail)}
+            />
+            <PrivateRoute
+              path="/create"
+              component={withTracker(CreateProject)}
+            />
+            <Route path="/expo2020" component={withTracker(Expo2020)} />
+            <DefaultLayout exact path="/" component={withTracker(Home)} />
+            <DefaultLayout component={withTracker(Page404)} />
           </Switch>
         </div>
       </Suspense>
