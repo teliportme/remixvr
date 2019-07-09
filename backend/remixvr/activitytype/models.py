@@ -15,6 +15,6 @@ class ActivityType(SurrogatePK, Model):
     instructions = Column(db.Text, nullable=False)
     pdf_link = Column(db.String(512), nullable=False)
 
-    def __init__(self, title, slug=None, instructions, pdf_link, **kwargs):
+    def __init__(self, title, instructions, pdf_link, slug=None, ** kwargs):
         db.Model.__init__(self, title=title, slug=slugify(
             title), instructions=instructions, pdf_link=pdf_link)

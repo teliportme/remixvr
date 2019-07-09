@@ -1,4 +1,4 @@
-import datetime as datetime
+import datetime as dt
 
 from slugify import slugify
 
@@ -17,7 +17,7 @@ class Activity(SurrogatePK, Model):
     code = Column(db.String(100))
     reaction_to_id = reference_col("activity", nullable=True)
     reactions = relationship(
-        "Activity", backref=db.backref('reaction_to', remote_side=[id])
+        "Activity", backref=db.backref('reaction_to', remote_side=id)
     )
 
     created_at = Column(db.DateTime, nullable=False,

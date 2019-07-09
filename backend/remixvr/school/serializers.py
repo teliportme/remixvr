@@ -24,4 +24,4 @@ class SchoolSchemas(SchoolSchema):
 
 
 school_schema = SchoolSchema()
-schools_schame = SchoolSchemas(many=True)
+schools_schema = SchoolSchemas(many=True)

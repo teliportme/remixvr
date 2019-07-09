@@ -1,4 +1,4 @@
-import datetime as datetime
+import datetime as dt
 
 from slugify import slugify
 

@@ -3,7 +3,8 @@
 from flask import Flask
 from remixvr.extensions import bcrypt, cache, db, migrate, jwt, cors
 
-from remixvr import commands, user, profile, project, theme, field, space
+from remixvr import (commands, user, profile, project, theme, field,
+                     space, activity, activitytype, classroom, school, submission)
 from remixvr.settings import ProdConfig
 from remixvr.exceptions import InvalidUsage
 
@@ -43,6 +44,11 @@ def register_blueprints(app):
     cors.init_app(theme.views.blueprint, origins=origins)
     cors.init_app(field.views.blueprint, origins=origins)
     cors.init_app(space.views.blueprint, origins=origins)
+    cors.init_app(activity.views.blueprint, origins=origins)
+    cors.init_app(activitytype.views.blueprint, origins=origins)
+    cors.init_app(classroom.views.blueprint, origins=origins)
+    cors.init_app(school.views.blueprint, origins=origins)
+    cors.init_app(submission.views.blueprint, origins=origins)
 
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(profile.views.blueprint)
@@ -50,6 +56,11 @@ def register_blueprints(app):
     app.register_blueprint(theme.views.blueprint)
     app.register_blueprint(field.views.blueprint)
     app.register_blueprint(space.views.blueprint)
+    app.register_blueprint(activity.views.blueprint)
+    app.register_blueprint(activitytype.views.blueprint)
+    app.register_blueprint(classroom.views.blueprint)
+    app.register_blueprint(school.views.blueprint)
+    app.register_blueprint(submission.views.blueprint)
 
 
 def register_errorhandlers(app):

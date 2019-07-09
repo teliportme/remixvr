@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields, pre_load, post_dump
 
 from remixvr.activity.serializers import ActivitySchema
+from remixvr.field.serializers import FileSchema
 
 
 class SubmissionSchema(Schema):
