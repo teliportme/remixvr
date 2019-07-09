@@ -12,9 +12,13 @@ class Activity(SurrogatePK, Model):
     __tablename__ = 'activity'
     activity_type_id = reference_col("activity_type", nullable=False)
     activity_type = relationship("ActivityType", backref="activities")
-    class_id = reference_col("class", nullable=False)
-    class_ref = relationship("Class", backref="activities")
-    upload_link = Column(db.String(512))
+    classroom_id = reference_col("classroom", nullable=False)
+    classroom = relationship("Classroom", backref="activities")
+    code = Column(db.String(100))
+    reaction_to_id = reference_col("activity", nullable=True)
+    reactions = relationship(
+        "Activity", backref=db.backref('reaction_to', remote_side=[id])
+    )
 
     created_at = Column(db.DateTime, nullable=False,
                         default=dt.datetime.utcnow)
