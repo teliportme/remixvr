@@ -19,3 +19,17 @@ blueprint = Blueprint('activitytypes', __name__)
 @marshal_with(activity_types_schema)
 def get_activity_types():
     activity_types = ActivityType.query.all()
+
+
+@blueprint.route('/api/activitytype', methods=('POST',))
+@jwt_required
+@use_kwargs(activity_type_schema)
+@marshal_with(activity_type_schema)
+def create_activity_type(title, instructions, pdf_link, **kwargs):
+    try:
+        activity_type = ActivityType(
+            title=title, instructions=instructions, pdf_link=pdf_link, **kwargs).save()
+    except IntegrityError:
+        db.session.rollback()
+        raise InvalidUsage.item_already_exists()
+    return activity_type

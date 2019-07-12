@@ -4,7 +4,7 @@ from marshmallow import Schema, fields, pre_load, post_dump
 class ActivityTypeSchema(Schema):
     title = fields.Str()
     slug = fields.Str()
-    instruction = fields.Str()
+    instructions = fields.Str()
     pdf_link = fields.Str()
 
     class Meta:
