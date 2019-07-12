@@ -17,7 +17,7 @@ class Activity(SurrogatePK, Model):
     code = Column(db.String(100))
     reaction_to_id = reference_col("activity", nullable=True)
     reactions = relationship(
-        "Activity", backref=db.backref('reaction_to', remote_side=id)
+        "Activity", backref=db.backref('reaction_to', remote_side='Activity.id')
     )
 
     created_at = Column(db.DateTime, nullable=False,
