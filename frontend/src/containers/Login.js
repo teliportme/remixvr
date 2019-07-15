@@ -6,13 +6,16 @@ import useRouter from '../components/useRouter';
 import ErrorMessage from '../components/ErrorMessage';
 import { Helmet } from 'react-helmet';
 
-const Login = observer(() => {
+const Login = observer(props => {
   const authStore = useContext(AuthStore);
   const router = useRouter();
 
   const [userid, setUserid] = useState('');
   const [password, setPassword] = useState('');
-  const [nextUrl] = useState('/dashboard');
+
+  const urlParams = new URLSearchParams(props.location.search);
+  const redirectTo = urlParams.get('to') || '/dashboard';
+  const [nextUrl] = useState(redirectTo);
 
   const { errors } = authStore;
 
