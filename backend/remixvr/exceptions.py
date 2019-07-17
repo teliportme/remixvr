@@ -90,5 +90,5 @@ class InvalidUsage(Exception):
         return cls(**ITEM_ALREADY_EXISTS)
 
     @classmethod
-    def not_associated_school(cls):
+    def no_associated_school(cls):
         return cls(**NOT_ASSOCIATED_WITH_ANY_SCHOOL)

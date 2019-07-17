@@ -26,7 +26,7 @@ class ProfileSchema(Schema):
         strict = True
 
 
-# added for including in SchoolSchema
+# added for using in teacher fields
 class OnlyUsernameSchema(Schema):
     username = fields.Str()
 
