@@ -18,6 +18,8 @@ const CreateProject = lazy(() => import('./containers/CreateProject'));
 const ProjectView = lazy(() => import('./containers/ProjectView'));
 const ProjectDetail = lazy(() => import('./containers/ProjectDetail'));
 const Expo2020 = lazy(() => import('./containers/Expo2020'));
+const GCEDDashboard = lazy(() => import('./containers/GCEDDashboard'));
+const ActivityTypes = lazy(() => import('./containers/ActivityTypes'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -45,7 +47,7 @@ const PrivateRoute = observer(props => {
           <Route {...props} />
         </React.Fragment>
       ) : (
-        commonStore.appLoaded && <Redirect to="/404" />
+        commonStore.appLoaded && <Redirect to={`/login?to=${props.path}`} />
       )}
     </React.Fragment>
   );
@@ -70,7 +72,7 @@ const App = () => {
           <Switch>
             <DefaultLayout path="/signup" component={withTracker(Signup)} />
             <DefaultLayout path="/login" component={withTracker(Login)} />
-            <DefaultLayout
+            <PrivateRoute
               path="/dashboard"
               component={withTracker(Dashboard)}
             />
@@ -91,6 +93,14 @@ const App = () => {
               component={withTracker(CreateProject)}
             />
             <Route path="/expo2020" component={withTracker(Expo2020)} />
+            <PrivateRoute
+              path="/gced-dashboard"
+              component={withTracker(GCEDDashboard)}
+            />
+            <DefaultLayout
+              path="/activities"
+              component={withTracker(ActivityTypes)}
+            />
             <DefaultLayout exact path="/" component={withTracker(Home)} />
             <DefaultLayout component={withTracker(Page404)} />
           </Switch>

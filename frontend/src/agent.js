@@ -128,11 +128,17 @@ const Theme = {
     requests.get('/themes')
 }
 
+// prettier-ignore
+const ActivityType = {
+  all: () => requests.get('/activitytypes')
+};
+
 export default {
   Auth,
   Profile,
   Project,
   Space,
   Field,
-  Theme
+  Theme,
+  ActivityType
 };
