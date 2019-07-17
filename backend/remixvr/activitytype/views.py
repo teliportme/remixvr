@@ -18,7 +18,7 @@ blueprint = Blueprint('activitytypes', __name__)
 @jwt_optional
 @marshal_with(activity_types_schema)
 def get_activity_types():
-    activity_types = ActivityType.query.all()
+    return ActivityType.query.all()
 
 
 @blueprint.route('/api/activitytype', methods=('POST',))

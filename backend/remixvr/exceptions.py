@@ -19,6 +19,8 @@ NO_FILES_FOUND = template(['No files found'], code=422)
 INVALID_FILETYPE = template(['Invalid file type found'], code=422)
 ITEM_NOT_FOUND = template(['Item not found'], code=404)
 ITEM_ALREADY_EXISTS = template(['Item already exists'], code=422)
+NOT_ASSOCIATED_WITH_ANY_SCHOOL = template(
+    ['Not associated with any school'], code=422)
 
 
 class InvalidUsage(Exception):
@@ -86,3 +88,7 @@ class InvalidUsage(Exception):
     @classmethod
     def item_already_exists(cls):
         return cls(**ITEM_ALREADY_EXISTS)
+
+    @classmethod
+    def not_associated_school(cls):
+        return cls(**NOT_ASSOCIATED_WITH_ANY_SCHOOL)

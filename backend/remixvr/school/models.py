@@ -10,7 +10,7 @@ from remixvr.database import (Model, SurrogatePK,
 class School(SurrogatePK, Model):
 
     __tablename__ = 'school'
-    name = Column(db.String(200), nullable=False, unique=True)
+    name = Column(db.String(200), nullable=False)
     country = Column(db.String(100), nullable=False)
     region = Column(db.String)
     slug = Column(db.String(100), nullable=False, unique=True)
@@ -19,6 +19,6 @@ class School(SurrogatePK, Model):
     updated_at = Column(db.DateTime, nullable=False,
                         default=dt.datetime.utcnow)
 
-    def __init__(self, author, name, country, region, slug=None, **kwargs):
-        db.Model.__init__(self, author=author, name=name, country=country,
-                          region=region, slug=slug or slugify(name), **kwargs)
+    def __init__(self, name, country, region, slug=None, **kwargs):
+        db.Model.__init__(self, name=name, country=country,
+                          region=region, slug=slug or slugify(name + '-' + country + '-' + region), **kwargs)
