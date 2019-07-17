@@ -1,14 +1,15 @@
 from marshmallow import Schema, fields, pre_load, post_dump
 
-from remixvr.profile.serializers import ProfileSchema
-
 
 class SchoolSchema(Schema):
+    id = fields.Int()
     name = fields.Str()
     country = fields.Str()
     region = fields.Str()
     slug = fields.Str()
-    teachers = fields.Nested(ProfileSchema, many=True)
+    # https://marshmallow.readthedocs.io/en/stable/nesting.html#two-way-nesting
+    teachers = fields.Nested(
+        'remixvr.profile.serializers.OnlyUsernameSchema', many=True, only=['username'])
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
 
