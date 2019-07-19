@@ -14,7 +14,7 @@ class Activity(SurrogatePK, Model):
     activity_type = relationship("ActivityType", backref="activities")
     classroom_id = reference_col("classroom", nullable=False)
     classroom = relationship("Classroom", backref="activities")
-    code = Column(db.String(100))
+    code = Column(db.String(100), nullable=False, unique=True)
     reaction_to_id = reference_col("activity", nullable=True)
     reactions = relationship(
         "Activity", backref=db.backref('reaction_to', remote_side='Activity.id')
@@ -24,3 +24,7 @@ class Activity(SurrogatePK, Model):
                         default=dt.datetime.utcnow)
     updated_at = Column(db.DateTime, nullable=False,
                         default=dt.datetime.utcnow)
+
+    def __init__(self, activity_type_id, classroom, code, **kwargs):
+        db.Model.__init__(self, activity_type_id=activity_type_id,
+                          classroom=classroom, code=code)

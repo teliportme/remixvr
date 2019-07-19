@@ -21,6 +21,7 @@ ITEM_NOT_FOUND = template(['Item not found'], code=404)
 ITEM_ALREADY_EXISTS = template(['Item already exists'], code=422)
 NOT_ASSOCIATED_WITH_ANY_SCHOOL = template(
     ['Not associated with any school'], code=422)
+CLASSROOM_NOT_FOUND = template(['Classroom not found'], code=404)
 
 
 class InvalidUsage(Exception):
@@ -92,3 +93,7 @@ class InvalidUsage(Exception):
     @classmethod
     def no_associated_school(cls):
         return cls(**NOT_ASSOCIATED_WITH_ANY_SCHOOL)
+
+    @classmethod
+    def classroom_not_found(cls):
+        return cls(**CLASSROOM_NOT_FOUND)

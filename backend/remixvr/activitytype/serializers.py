@@ -2,6 +2,7 @@ from marshmallow import Schema, fields, pre_load, post_dump
 
 
 class ActivityTypeSchema(Schema):
+    id = fields.Int()
     title = fields.Str()
     slug = fields.Str()
     instructions = fields.Str()
