@@ -20,6 +20,7 @@ const ProjectDetail = lazy(() => import('./containers/ProjectDetail'));
 const Expo2020 = lazy(() => import('./containers/Expo2020'));
 const GCEDDashboard = lazy(() => import('./containers/GCEDDashboard'));
 const ActivityTypes = lazy(() => import('./containers/ActivityTypes'));
+const CreateClassroom = lazy(() => import('./containers/CreateClassroom'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -91,6 +92,10 @@ const App = () => {
             <PrivateRoute
               path="/create"
               component={withTracker(CreateProject)}
+            />
+            <PrivateRoute
+              path="/create-classroom"
+              component={withTracker(CreateClassroom)}
             />
             <Route path="/expo2020" component={withTracker(Expo2020)} />
             <PrivateRoute

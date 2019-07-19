@@ -10,6 +10,7 @@ class ClassroomSchema(Schema):
     school = fields.Nested(SchoolSchema, only=[
                            'country', 'region', 'slug', 'name'])
     teacher = fields.Nested(OnlyUsernameSchema)
+    teacher_id = fields.Int(load_only=True)
     created_at = fields.DateTime()
     school_slug = fields.Str()
 

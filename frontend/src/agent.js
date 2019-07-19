@@ -133,6 +133,19 @@ const ActivityType = {
   all: () => requests.get('/activitytypes')
 };
 
+// prettier-ignore
+const Activity = {
+  // all: () => requests.get
+}
+
+// prettier-ignore
+const Classroom = {
+  all: () =>
+    requests.get('/classrooms'),
+  create: classname => 
+    requests.post(`/classroom`, { classname })
+}
+
 export default {
   Auth,
   Profile,
@@ -140,5 +153,6 @@ export default {
   Space,
   Field,
   Theme,
-  ActivityType
+  ActivityType,
+  Classroom
 };
