@@ -49,7 +49,7 @@ def create_activity(classroom_slug, activity_type_id):
     return activity
 
 
-@blueprint.route('/api/activities', methods=('GET',))
+@blueprint.route('/api/activities/classroom/<classroom_slug>', methods=('GET',))
 @jwt_required
 @use_kwargs(activity_schema)
 @marshal_with(activities_schema)

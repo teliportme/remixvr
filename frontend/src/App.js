@@ -21,6 +21,7 @@ const Expo2020 = lazy(() => import('./containers/Expo2020'));
 const GCEDDashboard = lazy(() => import('./containers/GCEDDashboard'));
 const ActivityTypes = lazy(() => import('./containers/ActivityTypes'));
 const CreateClassroom = lazy(() => import('./containers/CreateClassroom'));
+const ActivityPage = lazy(() => import('./containers/ActivitiesPage'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -101,6 +102,10 @@ const App = () => {
             <PrivateRoute
               path="/gced-dashboard"
               component={withTracker(GCEDDashboard)}
+            />
+            <PrivateRoute
+              path="/classroom/:classSlug/activities"
+              component={withTracker(ActivityPage)}
             />
             <DefaultLayout
               path="/activities"

@@ -135,7 +135,10 @@ const ActivityType = {
 
 // prettier-ignore
 const Activity = {
-  // all: () => requests.get
+  all: classroom_slug =>
+    requests.get(`/activities/classroom/${classroom_slug}`),
+  create: (classroom_slug, activity_type_id) =>
+    requests.post('/activity', { classroom_slug, activity_type_id })
 }
 
 // prettier-ignore
@@ -153,6 +156,7 @@ export default {
   Space,
   Field,
   Theme,
+  Activity,
   ActivityType,
   Classroom
 };
