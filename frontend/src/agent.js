@@ -149,6 +149,12 @@ const Classroom = {
     requests.post(`/classroom`, { classname })
 }
 
+// prettier-ignore
+const Submission = {
+  all: code =>
+    requests.get(`/submission/activity/${code}`)
+};
+
 export default {
   Auth,
   Profile,
@@ -158,5 +164,6 @@ export default {
   Theme,
   Activity,
   ActivityType,
-  Classroom
+  Classroom,
+  Submission
 };

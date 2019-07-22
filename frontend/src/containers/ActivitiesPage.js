@@ -22,7 +22,7 @@ const Activities = observer(props => {
       <h2 className="fw7 f2">My Activities</h2>
       <div>
         <Link
-          to="/create-activity"
+          to={`/classroom/${props.match.params.classSlug}/create-activity`}
           className="f5 link dim br2 ph3 pv2 mb2 dib white bg-blue bb bw2 b--dark-blue"
         >
           New Activity

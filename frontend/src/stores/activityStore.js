@@ -7,10 +7,10 @@ class ActivityStore {
 
   activityRegistry = new Map();
 
+  // prettier-ignore
   get activities() {
     const activitiesArray = [];
-    for (let [key, value] of this.activityRegistry) {
-      // eslint-disable-line no-unused-vars
+    for (let [key, value] of this.activityRegistry) { // eslint-disable-line no-unused-vars
       activitiesArray.push(value);
     }
     return activitiesArray;
@@ -31,11 +31,7 @@ class ActivityStore {
   }
 
   createActivity(classroom_slug, activity_type_id) {
-    return agent.Activity.create(classroom_slug, activity_type_id).then(
-      activity => {
-        this.activityRegistry.set(activity.slug, activity);
-      }
-    );
+    return agent.Activity.create(classroom_slug, activity_type_id);
   }
 }
 

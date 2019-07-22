@@ -5,6 +5,7 @@ from remixvr.field.serializers import FileSchema
 
 
 class SubmissionSchema(Schema):
+    id = fields.Int()
     author = fields.Str()
     file = fields.Nested(FileSchema)
     activity = fields.Nested(ActivitySchema)

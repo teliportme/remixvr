@@ -92,7 +92,12 @@ def register_shellcontext(app):
             'VideoSphere': field.models.VideoSphere,
             'Image': field.models.Image,
             'PhotoSphere': field.models.PhotoSphere,
-            'Space': space.models.Space
+            'Space': space.models.Space,
+            'Activity': activity.models.Activity,
+            'ActivityType': activitytype.models.ActivityType,
+            'Classroom': classroom.models.Classroom,
+            'School': school.models.School,
+            'Submission': submission.models.Submission
         }
 
     app.shell_context_processor(shell_context)
