@@ -7,8 +7,9 @@ from remixvr.field.serializers import FileSchema
 class SubmissionSchema(Schema):
     id = fields.Int()
     author = fields.Str()
-    file = fields.Nested(FileSchema)
-    activity = fields.Nested(ActivitySchema)
+    file = fields.Nested(FileSchema, only=['url'], dump_only=True)
+    submitted_file = fields.Field(location="files", load_only=True)
+    activity = fields.Nested(ActivitySchema, only=['code'])
     created_at = fields.DateTime()
     code = fields.Str(load_only=True)
 

@@ -16,10 +16,10 @@ class SubmissionStore {
     return submissionArray;
   }
 
-  loadSubmissions(activity_code) {
+  loadSubmissions(classroom_slug, activity_code) {
     this.isLoading = true;
     this.submissionRegistry.clear();
-    return agent.Submission.all(activity_code)
+    return agent.Submission.all(classroom_slug, activity_code)
       .then(({ submissions, activity }) => {
         this.activity = activity;
         submissions.forEach(submission => {

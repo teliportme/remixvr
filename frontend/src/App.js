@@ -118,7 +118,7 @@ const App = () => {
               path="/classroom/:classSlug/activity/:code"
               component={withTracker(Submissions)}
             />
-            <PrivateRoute
+            <DefaultLayout
               path="/activity/submit"
               component={withTracker(UploadSubmission)}
             />
