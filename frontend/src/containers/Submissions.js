@@ -9,7 +9,10 @@ const Submissions = observer(props => {
   const submissionStore = useContext(SubmissionStore);
 
   useEffect(() => {
-    submissionStore.loadSubmissions(props.match.params.code);
+    submissionStore.loadSubmissions(
+      props.match.params.classSlug,
+      props.match.params.code
+    );
   }, []);
 
   return (

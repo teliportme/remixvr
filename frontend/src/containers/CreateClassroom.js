@@ -47,7 +47,7 @@ const CreateClassroom = observer(({ history }) => {
             // disabled={inProgress}
             // isLoading={inProgress}
           >
-            Create Project
+            Create Classroom
           </button>
         </div>
       </form>
