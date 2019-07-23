@@ -42,12 +42,13 @@ const Submissions = observer(props => {
         <ul className="list pl0 ml0 mw6 bn">
           {submissionStore.submissions.map(submission => (
             <li key={submission.id} className="bt pt3 b--light-green">
-              <Link
-                to={apiUrl + submission.file.url}
+              <a
+                target="_blank"
+                href={apiUrl + submission.file.url}
                 className="db f3 fw7 link near-black pt2"
               >
                 Submission by {submission.author}
-              </Link>
+              </a>
               <span className="db f6 gray pv2 truncate">
                 {dayjs(submission.created_at).format('MMM D, YYYY')}
               </span>
