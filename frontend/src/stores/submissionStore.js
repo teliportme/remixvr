@@ -5,11 +5,12 @@ import agent from '../agent';
 class SubmissionStore {
   isLoading = false;
   submissionRegistry = new Map();
+  activity = undefined;
 
   // prettier-ignore
   get submissions() {
     const submissionArray = [];
-    for (let [key, value] of this.submissionRegistry) {// eslint-disable-line no-unused-vars
+    for (let [key, value] of this.submissionRegistry) { // eslint-disable-line no-unused-vars
       submissionArray.push(value);
     }
     return submissionArray;
@@ -19,7 +20,8 @@ class SubmissionStore {
     this.isLoading = true;
     this.submissionRegistry.clear();
     return agent.Submission.all(activity_code)
-      .then(({ submissions }) => {
+      .then(({ submissions, activity }) => {
+        this.activity = activity;
         submissions.forEach(submission => {
           this.submissionRegistry.set(submission.id, submission);
         });

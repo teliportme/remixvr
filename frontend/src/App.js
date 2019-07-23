@@ -24,6 +24,7 @@ const CreateClassroom = lazy(() => import('./containers/CreateClassroom'));
 const ActivityPage = lazy(() => import('./containers/ActivitiesPage'));
 const CreateActivity = lazy(() => import('./containers/CreateActivity'));
 const Submissions = lazy(() => import('./containers/Submissions'));
+const UploadSubmission = lazy(() => import('./containers/UploadSubmission'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -116,6 +117,10 @@ const App = () => {
             <PrivateRoute
               path="/classroom/:classSlug/activity/:code"
               component={withTracker(Submissions)}
+            />
+            <PrivateRoute
+              path="/activity/submit"
+              component={withTracker(UploadSubmission)}
             />
             <DefaultLayout
               path="/activities"

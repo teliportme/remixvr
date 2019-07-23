@@ -15,7 +15,16 @@ const Submissions = observer(props => {
   return (
     <div className="w-80-ns w-100 pa3 center">
       <Helmet title="Submissions" />
-      <h2 className="fw7 f2">Submissions</h2>
+      <h2 className="fw7 f2 mb0">Submissions</h2>
+      {submissionStore.activity && (
+        <div className="gray mb4">
+          Activity created at{' '}
+          {dayjs(submissionStore.activity.created_at).format('MMM D, YYYY')} for{' '}
+          <span className="i">
+            {submissionStore.activity.classroom.classname}
+          </span>
+        </div>
+      )}
       <div>
         <Link
           to={`/activity/submit?code=${props.match.params.code}`}

@@ -10,6 +10,7 @@ class SubmissionSchema(Schema):
     file = fields.Nested(FileSchema)
     activity = fields.Nested(ActivitySchema)
     created_at = fields.DateTime()
+    code = fields.Str(load_only=True)
 
     class Meta:
         strict = True
@@ -22,5 +23,12 @@ class SubmissionSchemas(SubmissionSchema):
         return {'submissions': data, 'submissionsCount': len(data)}
 
 
+class SubmissionsWithActivity(Schema):
+
+    activity = fields.Nested(ActivitySchema)
+    submissions = fields.Nested(SubmissionSchema, many=True)
+
+
 submission_schema = SubmissionSchema()
+submission_with_activity = SubmissionsWithActivity()
 submissions_schema = SubmissionSchemas(many=True)

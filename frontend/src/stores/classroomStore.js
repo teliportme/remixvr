@@ -6,10 +6,10 @@ class ClassroomStore {
   isLoading = false;
   classroomRegistry = new Map();
 
+  // prettier-ignore
   get classrooms() {
     const classroomArray = [];
-    for (let [key, value] of this.classroomRegistry) {
-      // eslint-disable-line no-unused-vars
+    for (let [key, value] of this.classroomRegistry) { // eslint-disable-line no-unused-vars
       classroomArray.push(value);
     }
     return classroomArray;
