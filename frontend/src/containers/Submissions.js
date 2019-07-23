@@ -44,6 +44,7 @@ const Submissions = observer(props => {
             <li key={submission.id} className="bt pt3 b--light-green">
               <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href={apiUrl + submission.file.url}
                 className="db f3 fw7 link near-black pt2"
               >

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import 'filepond/dist/filepond.min.css';
@@ -7,10 +7,11 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
-import EXIF from '../components/Exif';
-import FieldLabel from '../components/FieldLabel';
-import FieldInput from '../components/FieldInput';
-import { mobilecheck } from '../utils';
+import EXIF from '../../components/Exif';
+import FieldLabel from '../../components/FieldLabel';
+import FieldInput from '../../components/FieldInput';
+import { mobilecheck } from '../../utils';
+import './utils.css';
 
 registerPlugin(
   FilePondPluginImagePreview,
@@ -80,11 +81,13 @@ const UploadSubmission = observer(props => {
               dropOnElement={false}
               instantUpload={false}
               allowMultiple={false}
+              allowRevert={false}
               allowImagePreview={mobilecheck() ? false : true}
               maxFiles={1}
               acceptedFileTypes={['image/png', 'image/jpg', 'image/jpeg']}
               maxFileSize={'500MB'}
               labelMaxFileSizeExceeded={`File is too large.`}
+              labelTapToRetry={'Submit again to retry'}
               labelIdle={`Drag & Drop your files or <span class="blue underline pointer"> Browse </span> to upload`}
               ref={pond}
               onprocessfile={(error, file) => {

@@ -1,0 +1,4 @@
+/* to hide upload button in file pond */
+.filepond--action-process-item {
+  visibility: hidden;
+}
