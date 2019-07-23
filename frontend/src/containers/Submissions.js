@@ -4,9 +4,11 @@ import SubmissionStore from '../stores/submissionStore';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
+import getAPIUrl from '../components/GetAPIUrl';
 
 const Submissions = observer(props => {
   const submissionStore = useContext(SubmissionStore);
+  const apiUrl = getAPIUrl();
 
   useEffect(() => {
     submissionStore.loadSubmissions(
@@ -41,7 +43,7 @@ const Submissions = observer(props => {
           {submissionStore.submissions.map(submission => (
             <li key={submission.id} className="bt pt3 b--light-green">
               <Link
-                to={submission.file.url}
+                to={apiUrl + submission.file.url}
                 className="db f3 fw7 link near-black pt2"
               >
                 Submission by {submission.author}
