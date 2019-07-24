@@ -152,7 +152,9 @@ const Classroom = {
 // prettier-ignore
 const Submission = {
   all: (class_slug, code) =>
-    requests.get(`/submission/classroom/${class_slug}/activity/${code}`)
+    requests.get(`/submission/classroom/${class_slug}/activity/${code}`),
+  allWithCode: code =>
+    requests.get(`/submission/activity/${code}`)
 };
 
 export default {

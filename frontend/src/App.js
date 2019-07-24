@@ -25,6 +25,7 @@ const ActivityPage = lazy(() => import('./containers/ActivitiesPage'));
 const CreateActivity = lazy(() => import('./containers/CreateActivity'));
 const Submissions = lazy(() => import('./containers/Submissions'));
 const UploadSubmission = lazy(() => import('./containers/UploadSubmission'));
+const SubmissionViewer = lazy(() => import('./containers/SubmissionViewer'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -121,6 +122,10 @@ const App = () => {
             <DefaultLayout
               path="/activity/submit"
               component={withTracker(UploadSubmission)}
+            />
+            <Route
+              path="/activity/view"
+              component={withTracker(SubmissionViewer)}
             />
             <DefaultLayout
               path="/activities"

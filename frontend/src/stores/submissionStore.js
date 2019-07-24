@@ -30,6 +30,21 @@ class SubmissionStore {
         this.isLoading = false;
       });
   }
+
+  loadSubmissionsWithCode(activity_code) {
+    this.isLoading = true;
+    this.submissionRegistry.clear();
+    return agent.Submission.allWithCode(activity_code)
+      .then(({ submissions, activity }) => {
+        this.activity = activity;
+        submissions.forEach(submission => {
+          this.submissionRegistry.set(submission.id, submission);
+        });
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
+  }
 }
 
 decorate(SubmissionStore, {
