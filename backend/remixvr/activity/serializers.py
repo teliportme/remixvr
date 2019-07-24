@@ -8,7 +8,8 @@ class ActivitySchema(Schema):
     activity_type = fields.Nested(ActivityTypeSchema, only=[
                                   'pdf_link', 'slug', 'title'])
     activity_type_id = fields.Int(load_only=True)
-    classroom = fields.Nested(ClassroomSchema, only=['classname', 'slug'])
+    classroom = fields.Nested(ClassroomSchema, only=[
+                              'classname', 'slug', 'school'])
     classroom_slug = fields.Str(load_only=True)
     code = fields.Str()
     reactions = fields.Nested('self', default=None, many=True)

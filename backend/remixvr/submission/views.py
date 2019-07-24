@@ -38,6 +38,22 @@ def get_activity_submissions(code, classroom_slug):
     }
 
 
+@blueprint.route('/api/submission/activity/<code>', methods=('GET',))
+@jwt_optional
+@use_kwargs({'code': fields.Str()})
+@marshal_with(submission_with_activity)
+def get_activity_submissions_by_code(code):
+    activity = Activity.query.filter_by(code=code).first()
+    if not activity:
+        raise InvalidUsage.item_not_found()
+    submissions = Submission.query.filter_by(
+        activity=activity).order_by(Submission.created_at.desc()).all()
+    return {
+        'activity': activity,
+        'submissions': submissions
+    }
+
+
 @blueprint.route('/api/submission/activity/<code>', methods=('POST',))
 @jwt_optional
 @use_kwargs(submission_schema)
@@ -61,6 +77,12 @@ def submit_submission(code, author, **kwargs):
         file_object.save()
     else:
         raise InvalidUsage.no_files_found()
+    file_type = kwargs.get('file_type')
+    if not file_type:
+        if file_extension in ['.png', '.jpg', '.gif']:
+            file_type = 'image'
+        elif file_extension in ['.mp4']:
+            file_type = 'video'
     submission = Submission(
-        author=author, file=file_object, activity=activity).save()
+        author=author, file=file_object, activity=activity, file_type=file_type).save()
     return submission

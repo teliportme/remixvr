@@ -8,6 +8,7 @@ class SubmissionSchema(Schema):
     id = fields.Int()
     author = fields.Str()
     file = fields.Nested(FileSchema, only=['url'], dump_only=True)
+    file_type = fields.Str()
     submitted_file = fields.Field(location="files", load_only=True)
     activity = fields.Nested(ActivitySchema, only=['code'])
     created_at = fields.DateTime()

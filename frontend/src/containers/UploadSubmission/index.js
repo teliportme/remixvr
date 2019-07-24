@@ -29,10 +29,6 @@ const UploadSubmission = observer(props => {
   const urlParams = new URLSearchParams(props.location.search);
   const activity_code = urlParams.get('code');
 
-  const getLatLng = coords => {
-    return coords[0] + coords[1] / 60 + coords[2] / 3600;
-  };
-
   function getFileArrayBuffer(file) {
     return new Promise(function(resolve, reject) {
       var reader = new FileReader();
@@ -98,19 +94,7 @@ const UploadSubmission = observer(props => {
                   let hasXmpData = false;
 
                   getFileArrayBuffer(file.source).then(fileBuffer => {
-                    const imageExif = EXIF.readFromBinaryFile(
-                      fileBuffer.buffer
-                    );
                     const imageXmp = EXIF.findXMPinJPEG(fileBuffer.buffer);
-
-                    const latCoords = imageExif.GPSLatitude;
-                    const lngCoords = imageExif.GPSLongitude;
-
-                    const lat = latCoords ? getLatLng(latCoords) : null;
-                    const lng = lngCoords ? getLatLng(lngCoords) : null;
-
-                    file.setMetadata('lat', lat);
-                    file.setMetadata('lng', lng);
 
                     if (
                       imageXmp &&
@@ -162,10 +146,7 @@ const UploadSubmission = observer(props => {
                   const formData = new FormData();
                   formData.append('submitted_file', file, file.name);
                   formData.append('author', author);
-                  if (metadata.isPano)
-                    formData.append('isPano', metadata.isPano);
-                  if (metadata.lat) formData.append('lat', metadata.lat);
-                  if (metadata.lng) formData.append('lng', metadata.lng);
+                  if (metadata.isPano) formData.append('file_type', 'pano');
 
                   const request = new XMLHttpRequest();
                   const url = `${API_ROOT}/submission/activity/${activity_code}`;
