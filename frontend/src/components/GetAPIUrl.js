@@ -1,7 +1,7 @@
 const getAPIUrl = () => {
   const url = window.location.href;
   if (url.includes('localhost')) {
-    return 'https://api.staging.remixvr.org';
+    return 'http://localhost:5000';
   } else if (url.includes('staging--remixvr')) {
     return 'https://api.staging.remixvr.org';
   } else {

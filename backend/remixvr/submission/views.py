@@ -60,6 +60,8 @@ def get_activity_submissions_by_code(code):
 @marshal_with(submission_schema)
 def submit_submission(code, author, **kwargs):
     activity = Activity.query.filter_by(code=code).first()
+    if not activity:
+        raise InvalidUsage.item_not_found()
     if 'submitted_file' in kwargs and kwargs['submitted_file'] is not None:
         uploaded_file = kwargs.pop('submitted_file')
         if uploaded_file.filename == '':

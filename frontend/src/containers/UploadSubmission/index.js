@@ -47,12 +47,22 @@ const UploadSubmission = observer(props => {
   };
 
   return (
-    <div>
+    <div className="h-100 ph2">
       <Helmet>
         <title>Upload Activity Submission</title>
       </Helmet>
       {submitted ? (
-        <div>Your submitted successfully</div>
+        <div className="flex h-75 items-center justify-center f3 flex-column">
+          Your submitted successfully
+          <button
+            onClick={() => {
+              setSubmitted(false);
+            }}
+            className="bg-dark-blue br-pill dib f5 mt3 no-underline ph3 pv2 white pointer"
+          >
+            Submit Another
+          </button>
+        </div>
       ) : (
         <form className="center mt5 w-100 w-50-ns" onSubmit={handleSubmitForm}>
           <FieldLabel htmlFor="userid" className="b mid-gray mt3 db">
