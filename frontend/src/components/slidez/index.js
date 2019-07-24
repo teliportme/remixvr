@@ -16,8 +16,7 @@ class Slideshow extends Component {
       showArrows: props.showArrows,
       effect: props.effect,
       autoplay: props.autoplay,
-      enableKeyboard: props.enableKeyboard,
-      slides: props.slides.length > 0 ? props.slides : props.children
+      enableKeyboard: props.enableKeyboard
     };
 
     this.runSlideShow = this.runSlideShow.bind(this);
@@ -57,7 +56,7 @@ class Slideshow extends Component {
 
   autoSlideshow() {
     this.setState({
-      currentSlide: (this.state.currentSlide + 1) % this.state.slides.length
+      currentSlide: (this.state.currentSlide + 1) % this.props.children.length
     });
   }
 
@@ -79,7 +78,7 @@ class Slideshow extends Component {
 
     this.state.autoplay ? this.restartSlideshow() : null;
     this.setState({
-      currentSlide: (this.state.currentSlide + 1) % this.state.slides.length
+      currentSlide: (this.state.currentSlide + 1) % this.props.children.length
     });
   }
 
@@ -99,7 +98,7 @@ class Slideshow extends Component {
     let currentSlide;
     currentSlide =
       this.state.currentSlide === 0
-        ? this.state.slides.length - 1
+        ? this.props.children.length - 1
         : (currentSlide = this.state.currentSlide - 1);
     this.setState({
       currentSlide
@@ -107,43 +106,26 @@ class Slideshow extends Component {
   }
 
   render() {
-    const { slides, showIndex, useDotIndex, effect, showArrows } = this.state;
-
+    const { showIndex, useDotIndex, effect, showArrows } = this.state;
     let slideEffect = effect === undefined ? 'fade' : effect;
     let slideShowSlides;
     let slideShowIndex;
 
-    if (!this.props.children) {
-      slideShowSlides = slides.map((slide, i) => {
-        return (
-          <li
-            className={`slide ${effect} ${
-              this.state.currentSlide === i ? 'showing-' + slideEffect : ''
-            }`}
-            key={i}
-            style={{ backgroundImage: `url(${slide})` }}
-          />
-        );
-      });
-    } else {
-      slideShowSlides = slides.map((slide, i) => {
-        return (
-          <li
-            className={`slide ${effect} ${
-              this.state.currentSlide === i ? 'showing-' + slideEffect : ''
-            }`}
-            key={i}
-          >
-            {slide}
-          </li>
-        );
-      });
-    }
+    slideShowSlides = this.props.children.map((slide, i) => (
+      <li
+        className={`flex items-center justify-around bg-black slide ${effect} ${
+          this.state.currentSlide === i ? 'showing-' + slideEffect : ''
+        }`}
+        key={i}
+      >
+        {slide}
+      </li>
+    ));
 
     if (useDotIndex) {
       slideShowIndex = (
         <div className="show-index is-dot">
-          {slides.map((slide, i) => {
+          {this.props.children.map((slide, i) => {
             return (
               <span
                 className={`dot ${
@@ -158,7 +140,9 @@ class Slideshow extends Component {
     } else {
       slideShowIndex = (
         <div className="show-index is-text">
-          <p>{`${this.state.currentSlide + 1} / ${slides.length}`}</p>
+          <p>{`${this.state.currentSlide + 1} / ${
+            this.props.children.length
+          }`}</p>
         </div>
       );
     }

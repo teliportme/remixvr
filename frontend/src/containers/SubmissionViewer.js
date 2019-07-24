@@ -19,18 +19,17 @@ const SubmissionViewer = observer(props => {
 
   return (
     submissionStore.submissions.length > 0 && (
-      <Slideshow autoplay={false} showIndex={true}>
-        {submissionStore.submissions.map(submission => {
-          if (submission.file_type === 'image') {
-            return (
+      <Slideshow autoplay={false} showIndex>
+        {submissionStore.submissions.map(
+          submission =>
+            submission.file_type === 'image' && (
               <img
                 key={submission.id}
                 src={apiUrl + submission.file.url}
                 alt="submission"
               />
-            );
-          }
-        })}
+            )
+        )}
       </Slideshow>
     )
   );

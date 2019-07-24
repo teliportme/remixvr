@@ -45,6 +45,15 @@ const DefaultLayout = observer(props => {
 const PrivateRoute = observer(props => {
   const commonStore = useContext(CommonStore);
   const userStore = useContext(UserStore);
+
+  useEffect(() => {
+    if (commonStore.token) {
+      userStore.pullUser().finally(() => commonStore.setAppLoaded());
+    } else {
+      commonStore.setAppLoaded();
+    }
+  }, [commonStore]);
+
   return (
     <React.Fragment>
       {commonStore.appLoaded && userStore.currentUser ? (
@@ -60,16 +69,6 @@ const PrivateRoute = observer(props => {
 });
 
 const App = () => {
-  const commonStore = useContext(CommonStore);
-  const userStore = useContext(UserStore);
-  useEffect(() => {
-    if (commonStore.token) {
-      userStore.pullUser().finally(() => commonStore.setAppLoaded());
-    } else {
-      commonStore.setAppLoaded();
-    }
-  }, [commonStore]);
-
   return (
     <CustomBrowsingRouter>
       <Suspense fallback={<LoadingSpinner />}>
