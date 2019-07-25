@@ -45,13 +45,22 @@ class SubmissionStore {
         this.isLoading = false;
       });
   }
+
+  toggleSubmissionApproval(code, submissionId) {
+    return agent.Submission.toggleApproval(code, submissionId).then(
+      submission => {
+        this.submissionRegistry.set(submission.id, submission);
+      }
+    );
+  }
 }
 
 decorate(SubmissionStore, {
   isLoading: observable,
   submissionRegistry: observable,
   submissions: computed,
-  loadSubmissions: action
+  loadSubmissions: action,
+  toggleSubmissionApproval: action
 });
 
 export const submissionStore = new SubmissionStore();

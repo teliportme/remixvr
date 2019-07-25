@@ -154,7 +154,9 @@ const Submission = {
   all: (class_slug, code) =>
     requests.get(`/submission/classroom/${class_slug}/activity/${code}`),
   allWithCode: code =>
-    requests.get(`/submission/activity/${code}`)
+    requests.get(`/submission/activity/${code}`),
+  toggleApproval: (code, submissionId) =>
+    requests.post(`/submission/${submissionId}`, { code })
 };
 
 export default {

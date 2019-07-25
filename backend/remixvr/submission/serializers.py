@@ -7,6 +7,7 @@ from remixvr.field.serializers import FileSchema
 class SubmissionSchema(Schema):
     id = fields.Int()
     author = fields.Str()
+    approved = fields.Bool()
     file = fields.Nested(FileSchema, only=['url'], dump_only=True)
     file_type = fields.Str()
     submitted_file = fields.Field(location="files", load_only=True)

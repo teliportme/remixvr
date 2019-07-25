@@ -88,3 +88,21 @@ def submit_submission(code, author, **kwargs):
     submission = Submission(
         author=author, file=file_object, activity=activity, file_type=file_type).save()
     return submission
+
+
+@blueprint.route('/api/submission/<submission_id>', methods=('POST',))
+@jwt_required
+@use_kwargs({'submission_id': fields.Int(), 'code': fields.Str()})
+@marshal_with(submission_schema)
+def toggle_approval_submission(code, submission_id):
+    activity = Activity.query.filter_by(code=code).first()
+    if not activity:
+        raise InvalidUsage.item_not_found()
+    submission = Submission.query.filter_by(
+        activity=activity, id=submission_id).first()
+    if not submission:
+        raise InvalidUsage.item_not_found()
+    new_approved_state = not submission.approved
+    submission.update(approved=new_approved_state)
+    submission.save()
+    return submission

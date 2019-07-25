@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
 import getAPIUrl from '../components/GetAPIUrl';
+import ApproveCheckbox from '../components/ApproveCheckbox';
 
 const Submissions = observer(props => {
   const submissionStore = useContext(SubmissionStore);
@@ -16,6 +17,13 @@ const Submissions = observer(props => {
       props.match.params.code
     );
   }, []);
+
+  const toggleApproval = submissionId => {
+    submissionStore.toggleSubmissionApproval(
+      props.match.params.code,
+      submissionId
+    );
+  };
 
   return (
     <div className="w-80-ns w-100 pa3 center">
@@ -42,6 +50,11 @@ const Submissions = observer(props => {
         <ul className="list pl0 ml0 mw6 bn">
           {submissionStore.submissions.map(submission => (
             <li key={submission.id} className="bt pt3 b--light-green">
+              <ApproveCheckbox
+                id={submission.id}
+                checked={submission.approved}
+                onCheckboxClick={toggleApproval}
+              />
               <a
                 target="_blank"
                 rel="noopener noreferrer"
