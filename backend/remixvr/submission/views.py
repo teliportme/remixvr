@@ -47,7 +47,7 @@ def get_activity_submissions_by_code(code):
     if not activity:
         raise InvalidUsage.item_not_found()
     submissions = Submission.query.filter_by(
-        activity=activity).order_by(Submission.created_at.desc()).all()
+        activity=activity, approved=True).order_by(Submission.created_at.desc()).all()
     return {
         'activity': activity,
         'submissions': submissions

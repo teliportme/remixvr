@@ -45,6 +45,14 @@ const Submissions = observer(props => {
         >
           Upload Submissions
         </Link>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`/activity/view?code=${props.match.params.code}`}
+          className="f5 link dim br2 ph3 pv2 mb2 dib white bb bw2 ml3 bg-gray b--dark-gray"
+        >
+          View Submissions
+        </a>
       </div>
       {submissionStore.submissions.length > 0 ? (
         <ul className="list pl0 ml0 mw6 bn">
