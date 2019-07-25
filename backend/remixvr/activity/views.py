@@ -17,6 +17,17 @@ from .serializers import activity_schema, activities_schema
 blueprint = Blueprint('activities', __name__)
 
 
+@blueprint.route('/api/activities', methods=('GET',))
+@jwt_required
+@marshal_with(activities_schema)
+def get_activities_by_reactions():
+    profile = current_user.profile
+    activities = Activity.query.all()
+    # activities = Activity.query.join(Activity.classroom).filter(
+    #     Classroom.teacher != profile).all()
+    return activities
+
+
 @blueprint.route('/api/activity/<code>', methods=('GET',))
 @jwt_optional
 @marshal_with(activity_schema)

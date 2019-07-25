@@ -138,7 +138,9 @@ const Activity = {
   all: classroom_slug =>
     requests.get(`/activities/classroom/${classroom_slug}`),
   create: (classroom_slug, activity_type_id) =>
-    requests.post('/activity', { classroom_slug, activity_type_id })
+    requests.post('/activity', { classroom_slug, activity_type_id }),
+  allForReactions: () =>
+    requests.get('/activities')
 }
 
 // prettier-ignore

@@ -30,6 +30,16 @@ class ActivityStore {
       });
   }
 
+  loadAllActivitiesForReactions() {
+    this.isLoading = true;
+    this.activityRegistry.clear();
+    return agent.Activity.allForReactions().then(({ activities }) => {
+      activities.forEach(activity => {
+        this.activityRegistry.set(activity.code, activity);
+      });
+    });
+  }
+
   createActivity(classroom_slug, activity_type_id) {
     return agent.Activity.create(classroom_slug, activity_type_id);
   }
