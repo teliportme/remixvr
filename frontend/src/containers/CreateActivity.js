@@ -21,7 +21,6 @@ const CreateActivity = observer(({ history, match }) => {
     activityStore
       .createActivity(match.params.classSlug, selectedActivityType)
       .then(activity => {
-        console.log(activity);
         history.push(
           `/classroom/${match.params.classSlug}/activity/${activity.code}`
         );

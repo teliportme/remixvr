@@ -3,14 +3,26 @@ import ActivityStore from '../stores/activityStore';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
 
-const ReactToActivities = observer(() => {
+const ReactToActivities = observer(props => {
   const activityStore = useContext(ActivityStore);
 
   useEffect(() => {
     activityStore.loadAllActivitiesForReactions();
   }, []);
 
-  const createReactActivity = () => {};
+  const createReactActivity = activity => {
+    activityStore
+      .createActivity(
+        props.match.params.classSlug,
+        activity.activity_type.id,
+        activity.id
+      )
+      .then(activity => {
+        props.history.push(
+          `/classroom/${props.match.params.classSlug}/activity/${activity.code}`
+        );
+      });
+  };
 
   return (
     <div className="w-80-ns w-100 pa3 center">
@@ -31,7 +43,7 @@ const ReactToActivities = observer(() => {
                 </div>
               </div>
               <button
-                onClick={createReactActivity}
+                onClick={createReactActivity.bind(null, activity)}
                 className="b--dark-blue bb bg-blue bl-0 br-0 br2 bt-0 bw2 dib dim f5 link mv3 mt3 ph3 pv2 white pointer"
               >
                 React To This

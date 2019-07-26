@@ -5,13 +5,17 @@ from remixvr.classroom.serializers import ClassroomSchema
 
 
 class ActivitySchema(Schema):
+    id = fields.Int()
     activity_type = fields.Nested(ActivityTypeSchema, only=[
-                                  'pdf_link', 'slug', 'title'])
+                                  'pdf_link', 'slug', 'title', 'id'])
     activity_type_id = fields.Int(load_only=True)
     classroom = fields.Nested(ClassroomSchema, only=[
                               'classname', 'slug', 'school'])
     classroom_slug = fields.Str(load_only=True)
     code = fields.Str()
+    is_reaction = fields.Bool()
+    submissions_count = fields.Int()
+    reaction_to_id = fields.Int(load_only=True)
     reactions = fields.Nested('self', default=None, many=True)
     created_at = fields.DateTime()
     updated_at = fields.DateTime(dump_only=True)

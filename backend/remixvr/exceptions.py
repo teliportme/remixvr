@@ -22,6 +22,8 @@ ITEM_ALREADY_EXISTS = template(['Item already exists'], code=422)
 NOT_ASSOCIATED_WITH_ANY_SCHOOL = template(
     ['Not associated with any school'], code=422)
 CLASSROOM_NOT_FOUND = template(['Classroom not found'], code=404)
+REACTION_ACTIVITY_NOT_PROVIDED = template(
+    ['Reaction activity not provided'], code=422)
 
 
 class InvalidUsage(Exception):
@@ -97,3 +99,7 @@ class InvalidUsage(Exception):
     @classmethod
     def classroom_not_found(cls):
         return cls(**CLASSROOM_NOT_FOUND)
+
+    @classmethod
+    def reaction_activity_not_found(cls):
+        return cls(**REACTION_ACTIVITY_NOT_PROVIDED)

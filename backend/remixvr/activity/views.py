@@ -22,7 +22,7 @@ blueprint = Blueprint('activities', __name__)
 @marshal_with(activities_schema)
 def get_activities_by_reactions():
     profile = current_user.profile
-    activities = Activity.query.all()
+    activities = Activity.query.filter_by(is_reaction=False).all()
     # activities = Activity.query.join(Activity.classroom).filter(
     #     Classroom.teacher != profile).all()
     return activities
@@ -42,7 +42,7 @@ def get_activity(code):
 @jwt_required
 @use_kwargs(activity_schema)
 @marshal_with(activity_schema)
-def create_activity(classroom_slug, activity_type_id):
+def create_activity(classroom_slug, activity_type_id, **kwargs):
     classroom = Classroom.query.filter_by(slug=classroom_slug).first()
     if not classroom:
         raise InvalidUsage.classroom_not_found()
@@ -53,11 +53,32 @@ def create_activity(classroom_slug, activity_type_id):
             break
     try:
         activity = Activity(activity_type_id=activity_type_id,
-                            classroom=classroom, code=code).save()
+                            classroom=classroom, code=code)
+        if 'reaction_to_id' in kwargs:
+            reaction_to = Activity.get_by_id(kwargs['reaction_to_id'])
+            activity.reaction_to = reaction_to
+            activity.is_reaction = True
+        else:
+            raise InvalidUsage.reaction_activity_not_found()
+        activity.save()
     except IntegrityError:
         db.session.rollback()
         raise InvalidUsage.item_already_exists()
     return activity
+
+
+@blueprint.route('/api/activity/classroom/<classroom_slug>/activity/<code>/reactions', methods=('GET',))
+@jwt_required
+@use_kwargs(activity_schema)
+@marshal_with(activities_schema)
+def get_activity_reactions(classroom_slug, code):
+    classroom = Classroom.query.filter_by(slug=classroom_slug).first()
+    if not classroom:
+        raise InvalidUsage.classroom_not_found()
+    activity = Activity.query.filter_by(classroom=classroom, code=code).first()
+    if not activity:
+        raise InvalidUsage.item_not_found()
+    return activity.reactions
 
 
 @blueprint.route('/api/activities/classroom/<classroom_slug>', methods=('GET',))

@@ -44,6 +44,16 @@ const Activities = observer(props => {
               </Link>
               <span className="db f6 gray pv2 truncate">
                 {dayjs(activity.created_at).format('MMM D, YYYY')}
+                {activity.reactions.activities.length > 0 && (
+                  <Link
+                    to={`/classroom/${props.match.params.classSlug}/activity/${
+                      activity.code
+                    }/reactions`}
+                    className="ml3 bg-green white br2 ph2 link"
+                  >
+                    Reactions: {activity.reactions.activities.length}
+                  </Link>
+                )}
               </span>
             </li>
           ))}
