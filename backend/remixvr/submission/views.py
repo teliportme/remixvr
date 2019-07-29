@@ -81,7 +81,7 @@ def submit_submission(code, author, **kwargs):
         raise InvalidUsage.no_files_found()
     file_type = kwargs.get('file_type')
     if not file_type:
-        if file_extension in ['.png', '.jpg', '.gif']:
+        if file_extension in ['.png', '.jpg', '.gif', '.jpeg']:
             file_type = 'image'
         elif file_extension in ['.mp4']:
             file_type = 'video'

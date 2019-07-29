@@ -22,9 +22,9 @@ blueprint = Blueprint('activities', __name__)
 @marshal_with(activities_schema)
 def get_activities_by_reactions():
     profile = current_user.profile
-    activities = Activity.query.filter_by(is_reaction=False).all()
-    # activities = Activity.query.join(Activity.classroom).filter(
-    #     Classroom.teacher != profile).all()
+    # activities = Activity.query.filter_by(is_reaction=False).all()
+    activities = Activity.query.join(Activity.classroom).filter(
+        Classroom.teacher != profile).all()
     return activities
 
 
@@ -58,8 +58,6 @@ def create_activity(classroom_slug, activity_type_id, **kwargs):
             reaction_to = Activity.get_by_id(kwargs['reaction_to_id'])
             activity.reaction_to = reaction_to
             activity.is_reaction = True
-        else:
-            raise InvalidUsage.reaction_activity_not_found()
         activity.save()
     except IntegrityError:
         db.session.rollback()

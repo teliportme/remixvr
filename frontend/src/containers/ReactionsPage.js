@@ -24,7 +24,7 @@ const Reactions = observer(props => {
           {activityStore.reactions.map(activity => (
             <li key={activity.code} className="bt pt3 b--light-green">
               <Link
-                to={`/activity/view?code=${props.match.params.code}`}
+                to={`/activity/view?code=${activity.code}`}
                 className="db f3 fw7 link near-black pt2"
                 target="_blank"
               >
