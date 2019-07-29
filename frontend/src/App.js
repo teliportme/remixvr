@@ -64,7 +64,9 @@ const PrivateRoute = observer(props => {
           <Route {...props} />
         </React.Fragment>
       ) : (
-        commonStore.appLoaded && <Redirect to={`/login?to=${props.path}`} />
+        commonStore.appLoaded && (
+          <Redirect to={`/login?to=${props.location.pathname}`} />
+        )
       )}
     </React.Fragment>
   );
