@@ -57,6 +57,7 @@ class SubmissionStore {
 
 decorate(SubmissionStore, {
   isLoading: observable,
+  activity: observable,
   submissionRegistry: observable,
   submissions: computed,
   loadSubmissions: action,

@@ -16,6 +16,7 @@ class ActivitySchema(Schema):
     is_reaction = fields.Bool()
     submissions_count = fields.Int()
     reaction_to_id = fields.Int(load_only=True)
+    reaction_to = fields.Nested('self', only=['code', 'classroom.school'])
     reactions = fields.Nested('self', default=None, many=True)
     created_at = fields.DateTime()
     updated_at = fields.DateTime(dump_only=True)

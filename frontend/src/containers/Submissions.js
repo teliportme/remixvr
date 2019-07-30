@@ -36,6 +36,35 @@ const Submissions = observer(props => {
           <span className="i">
             {submissionStore.activity.classroom.classname}
           </span>
+          {submissionStore.activity.is_reaction && (
+            <div>
+              <span className="f4 db mt3 mb2 dark-gray">
+                You have to react to the following activity
+              </span>
+              <div className="mb2">
+                <div>
+                  School:{' '}
+                  {submissionStore.activity.reaction_to.classroom.school.name}
+                </div>
+                <div>
+                  Country:{' '}
+                  {
+                    submissionStore.activity.reaction_to.classroom.school
+                      .country
+                  }
+                </div>
+              </div>
+              <Link
+                target="_blank"
+                to={`/activity/view?code=${
+                  submissionStore.activity.reaction_to.code
+                }`}
+                className="b--gold bb bg-yellow black br2 bw2 dib dim f5 link mb2 ph3 pv2"
+              >
+                View Activity
+              </Link>
+            </div>
+          )}
         </div>
       )}
       <div>
