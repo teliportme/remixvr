@@ -93,7 +93,10 @@ const CreateProject = observer(({ history }) => {
                   </p>
                   {theme.slug === selectedTheme ? (
                     <button
-                      onClick={() => setTheme('')}
+                      onClick={event => {
+                        event.preventDefault();
+                        setTheme('');
+                      }}
                       className="bg-dark-green b--green bb bl-0 br-0 br1 br2 bt-0 bw2 dib f6 link mb2 pv1 white pointer"
                     >
                       Theme Selected

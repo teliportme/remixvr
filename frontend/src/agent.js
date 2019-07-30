@@ -128,11 +128,55 @@ const Theme = {
     requests.get('/themes')
 }
 
+// prettier-ignore
+const ActivityType = {
+  all: () => requests.get('/activitytypes')
+};
+
+// prettier-ignore
+const Activity = {
+  all: classroom_slug =>
+    requests.get(`/activities/classroom/${classroom_slug}`),
+  create: (classroom_slug, activity_type_id, reaction_to_id) =>
+    requests.post('/activity', {
+      classroom_slug,
+      activity_type_id,
+      reaction_to_id
+    }),
+  allForReactions: () => requests.get('/activities'),
+  getReactions: (classroom_slug, code) =>
+    requests.get(
+      `/activity/classroom/${classroom_slug}/activity/${code}/reactions`
+    )
+};
+
+// prettier-ignore
+const Classroom = {
+  all: () =>
+    requests.get('/classrooms'),
+  create: classname => 
+    requests.post(`/classroom`, { classname })
+}
+
+// prettier-ignore
+const Submission = {
+  all: (class_slug, code) =>
+    requests.get(`/submission/classroom/${class_slug}/activity/${code}`),
+  allWithCode: code =>
+    requests.get(`/submission/activity/${code}`),
+  toggleApproval: (code, submissionId) =>
+    requests.post(`/submission/${submissionId}`, { code })
+};
+
 export default {
   Auth,
   Profile,
   Project,
   Space,
   Field,
-  Theme
+  Theme,
+  Activity,
+  ActivityType,
+  Classroom,
+  Submission
 };

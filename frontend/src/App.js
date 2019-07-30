@@ -18,6 +18,16 @@ const CreateProject = lazy(() => import('./containers/CreateProject'));
 const ProjectView = lazy(() => import('./containers/ProjectView'));
 const ProjectDetail = lazy(() => import('./containers/ProjectDetail'));
 const Expo2020 = lazy(() => import('./containers/Expo2020'));
+const GCEDDashboard = lazy(() => import('./containers/GCEDDashboard'));
+const ActivityTypes = lazy(() => import('./containers/ActivityTypes'));
+const CreateClassroom = lazy(() => import('./containers/CreateClassroom'));
+const ActivityPage = lazy(() => import('./containers/ActivitiesPage'));
+const CreateActivity = lazy(() => import('./containers/CreateActivity'));
+const Submissions = lazy(() => import('./containers/Submissions'));
+const UploadSubmission = lazy(() => import('./containers/UploadSubmission'));
+const SubmissionViewer = lazy(() => import('./containers/SubmissionViewer'));
+const ReactToActivities = lazy(() => import('./containers/ReactToActivities'));
+const Reactions = lazy(() => import('./containers/ReactionsPage'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -37,23 +47,7 @@ const DefaultLayout = observer(props => {
 const PrivateRoute = observer(props => {
   const commonStore = useContext(CommonStore);
   const userStore = useContext(UserStore);
-  return (
-    <React.Fragment>
-      {commonStore.appLoaded && userStore.currentUser ? (
-        <React.Fragment>
-          <AsyncHeader />
-          <Route {...props} />
-        </React.Fragment>
-      ) : (
-        commonStore.appLoaded && <Redirect to="/404" />
-      )}
-    </React.Fragment>
-  );
-});
 
-const App = () => {
-  const commonStore = useContext(CommonStore);
-  const userStore = useContext(UserStore);
   useEffect(() => {
     if (commonStore.token) {
       userStore.pullUser().finally(() => commonStore.setAppLoaded());
@@ -63,6 +57,23 @@ const App = () => {
   }, [commonStore]);
 
   return (
+    <React.Fragment>
+      {commonStore.appLoaded && userStore.currentUser ? (
+        <React.Fragment>
+          <AsyncHeader />
+          <Route {...props} />
+        </React.Fragment>
+      ) : (
+        commonStore.appLoaded && (
+          <Redirect to={`/login?to=${props.location.pathname}`} />
+        )
+      )}
+    </React.Fragment>
+  );
+});
+
+const App = () => {
+  return (
     <CustomBrowsingRouter>
       <Suspense fallback={<LoadingSpinner />}>
         <div className="App w-100 center h-100 flex flex-column bt bw2 b--blue">
@@ -70,7 +81,7 @@ const App = () => {
           <Switch>
             <DefaultLayout path="/signup" component={withTracker(Signup)} />
             <DefaultLayout path="/login" component={withTracker(Login)} />
-            <DefaultLayout
+            <PrivateRoute
               path="/dashboard"
               component={withTracker(Dashboard)}
             />
@@ -90,7 +101,47 @@ const App = () => {
               path="/create"
               component={withTracker(CreateProject)}
             />
+            <PrivateRoute
+              path="/create-classroom"
+              component={withTracker(CreateClassroom)}
+            />
+            <PrivateRoute
+              path="/classroom/:classSlug/create-activity"
+              component={withTracker(CreateActivity)}
+            />
+            <PrivateRoute
+              path="/classroom/:classSlug/react-activity"
+              component={withTracker(ReactToActivities)}
+            />
             <Route path="/expo2020" component={withTracker(Expo2020)} />
+            <PrivateRoute
+              path="/gced-dashboard"
+              component={withTracker(GCEDDashboard)}
+            />
+            <PrivateRoute
+              path="/classroom/:classSlug/activities"
+              component={withTracker(ActivityPage)}
+            />
+            <PrivateRoute
+              path="/classroom/:classSlug/activity/:code/reactions"
+              component={withTracker(Reactions)}
+            />
+            <PrivateRoute
+              path="/classroom/:classSlug/activity/:code"
+              component={withTracker(Submissions)}
+            />
+            <DefaultLayout
+              path="/activity/submit"
+              component={withTracker(UploadSubmission)}
+            />
+            <Route
+              path="/activity/view"
+              component={withTracker(SubmissionViewer)}
+            />
+            <DefaultLayout
+              path="/activities"
+              component={withTracker(ActivityTypes)}
+            />
             <DefaultLayout exact path="/" component={withTracker(Home)} />
             <DefaultLayout component={withTracker(Page404)} />
           </Switch>

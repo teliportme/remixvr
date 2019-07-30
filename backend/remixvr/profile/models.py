@@ -24,6 +24,8 @@ class UserProfile(Model, SurrogatePK):
                            secondaryjoin=id == followers_assoc.c.followed_by,
                            backref='followed_by',
                            lazy='dynamic')
+    school_id = reference_col("school", nullable=True)
+    school = relationship("School", backref="teachers")
 
     def __init__(self, user, **kwargs):
         db.Model.__init__(self, user=user, **kwargs)

@@ -17,6 +17,13 @@ SPACE_NOT_FOUND = template(['Space not found'], code=404)
 FIELD_ERROR = template(['Error while updating field'], code=422)
 NO_FILES_FOUND = template(['No files found'], code=422)
 INVALID_FILETYPE = template(['Invalid file type found'], code=422)
+ITEM_NOT_FOUND = template(['Item not found'], code=404)
+ITEM_ALREADY_EXISTS = template(['Item already exists'], code=422)
+NOT_ASSOCIATED_WITH_ANY_SCHOOL = template(
+    ['Not associated with any school'], code=422)
+CLASSROOM_NOT_FOUND = template(['Classroom not found'], code=404)
+REACTION_ACTIVITY_NOT_PROVIDED = template(
+    ['Reaction activity not provided'], code=422)
 
 
 class InvalidUsage(Exception):
@@ -76,3 +83,23 @@ class InvalidUsage(Exception):
     @classmethod
     def invalid_file_type(cls):
         return cls(**INVALID_FILETYPE)
+
+    @classmethod
+    def item_not_found(cls):
+        return cls(**ITEM_NOT_FOUND)
+
+    @classmethod
+    def item_already_exists(cls):
+        return cls(**ITEM_ALREADY_EXISTS)
+
+    @classmethod
+    def no_associated_school(cls):
+        return cls(**NOT_ASSOCIATED_WITH_ANY_SCHOOL)
+
+    @classmethod
+    def classroom_not_found(cls):
+        return cls(**CLASSROOM_NOT_FOUND)
+
+    @classmethod
+    def reaction_activity_not_found(cls):
+        return cls(**REACTION_ACTIVITY_NOT_PROVIDED)

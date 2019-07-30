@@ -11,6 +11,10 @@ import profileStore from './stores/profileStore';
 import authStore from './stores/authStore';
 import projectStore from './stores/projectStore';
 import themeStore from './stores/themeStore';
+import activityStore from './stores/activityStore';
+import activityTypeStore from './stores/activityTypeStore';
+import classroomStore from './stores/classroomStore';
+import submissionStore from './stores/submissionStore';
 
 const stores = {
   userStore,
@@ -18,11 +22,15 @@ const stores = {
   profileStore,
   authStore,
   projectStore,
-  themeStore
+  themeStore,
+  activityStore,
+  activityTypeStore,
+  classroomStore,
+  submissionStore
 };
 
 // For easier debugging
-window._____APP_STATE_____ = stores;
+// window._____APP_STATE_____ = stores;
 
 promiseFinally.shim();
 
