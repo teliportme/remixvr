@@ -41,10 +41,17 @@ const SubmissionViewer = observer(props => {
       case 'pano':
         return (
           <ReactPannellum
+            id="pano"
             sceneId="firstScene"
             imageSource={apiUrl + submission.file.url}
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
             config={{
-              autoRotate: -2
+              hfov: 90,
+              compass: false,
+              autoLoad: true
             }}
           />
         );
