@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
 import Slideshow from '../components/slidez';
 import getAPIUrl from '../components/GetAPIUrl';
+import ReactPannellum, { getConfig } from 'react-pannellum';
 
 const SubmissionViewer = observer(props => {
   const submissionStore = useContext(SubmissionStore);
@@ -22,6 +23,7 @@ const SubmissionViewer = observer(props => {
       case 'image':
         return (
           <img
+            className="h-100"
             key={submission.id}
             src={apiUrl + submission.file.url}
             alt="submission"
@@ -30,9 +32,20 @@ const SubmissionViewer = observer(props => {
       case 'video':
         return (
           <video
+            className="h-100"
             controls
             key={submission.id}
             src={apiUrl + submission.file.url}
+          />
+        );
+      case 'pano':
+        return (
+          <ReactPannellum
+            sceneId="firstScene"
+            imageSource={apiUrl + submission.file.url}
+            config={{
+              autoRotate: -2
+            }}
           />
         );
     }
@@ -40,11 +53,18 @@ const SubmissionViewer = observer(props => {
 
   return (
     submissionStore.submissions.length > 0 && (
-      <Slideshow autoplay={false} showIndex>
-        {submissionStore.submissions.map(submission =>
-          getItem(submission.file_type, submission)
-        )}
-      </Slideshow>
+      <React.Fragment>
+        <Helmet>
+          <title>
+            View Submissions for {submissionStore.activity.code} Activity
+          </title>
+        </Helmet>
+        <Slideshow autoplay={false} showIndex>
+          {submissionStore.submissions.map(submission =>
+            getItem(submission.file_type, submission)
+          )}
+        </Slideshow>
+      </React.Fragment>
     )
   );
 });
