@@ -90,7 +90,12 @@ const UploadSubmission = observer(props => {
               allowRevert={false}
               allowImagePreview={mobilecheck() ? false : true}
               maxFiles={1}
-              acceptedFileTypes={['image/png', 'image/jpg', 'image/jpeg']}
+              acceptedFileTypes={[
+                'image/png',
+                'image/jpg',
+                'image/jpeg',
+                'video/mp4'
+              ]}
               maxFileSize={'500MB'}
               labelMaxFileSizeExceeded={`File is too large.`}
               labelTapToRetry={'Submit again to retry'}
@@ -99,50 +104,52 @@ const UploadSubmission = observer(props => {
               onprocessfile={(error, file) => {
                 if (!error) pond.current.removeFile(file.id);
               }}
-              beforeAddFile={file =>
-                new Promise(resolve => {
-                  let hasXmpData = false;
+              beforeAddFile={file => {
+                if (file.fileExtension !== 'mp4') {
+                  return new Promise(resolve => {
+                    let hasXmpData = false;
 
-                  getFileArrayBuffer(file.source).then(fileBuffer => {
-                    const imageXmp = EXIF.findXMPinJPEG(fileBuffer.buffer);
+                    getFileArrayBuffer(file.source).then(fileBuffer => {
+                      const imageXmp = EXIF.findXMPinJPEG(fileBuffer.buffer);
 
-                    if (
-                      imageXmp &&
-                      imageXmp['x:xmpmeta'] &&
-                      imageXmp['x:xmpmeta']['rdf:RDF'] &&
-                      imageXmp['x:xmpmeta']['rdf:RDF']['rdf:Description'] &&
-                      imageXmp['x:xmpmeta']['rdf:RDF']['rdf:Description'][
-                        '@attributes'
-                      ] &&
-                      imageXmp['x:xmpmeta']['rdf:RDF']['rdf:Description'][
-                        '@attributes'
-                      ]['xmlns:GPano']
-                    ) {
-                      hasXmpData = true;
-                    }
-                  });
+                      if (
+                        imageXmp &&
+                        imageXmp['x:xmpmeta'] &&
+                        imageXmp['x:xmpmeta']['rdf:RDF'] &&
+                        imageXmp['x:xmpmeta']['rdf:RDF']['rdf:Description'] &&
+                        imageXmp['x:xmpmeta']['rdf:RDF']['rdf:Description'][
+                          '@attributes'
+                        ] &&
+                        imageXmp['x:xmpmeta']['rdf:RDF']['rdf:Description'][
+                          '@attributes'
+                        ]['xmlns:GPano']
+                      ) {
+                        hasXmpData = true;
+                      }
+                    });
 
-                  const image = document.createElement('img');
-                  image.src = URL.createObjectURL(file.source);
-                  image.onerror = function(err) {
-                    clearInterval(intervalId);
-                    return resolve(false);
-                  };
-
-                  var intervalId = setInterval(function() {
-                    if (image.naturalWidth && image.naturalHeight) {
+                    const image = document.createElement('img');
+                    image.src = URL.createObjectURL(file.source);
+                    image.onerror = function(err) {
                       clearInterval(intervalId);
-                      URL.revokeObjectURL(image.src);
-                      const wideImage =
-                        image.naturalWidth >= image.naturalHeight * 2;
+                      return resolve(false);
+                    };
 
-                      const isPanorama = hasXmpData || wideImage;
-                      file.setMetadata('isPano', isPanorama);
-                      return resolve(true);
-                    }
-                  }, 1);
-                })
-              }
+                    var intervalId = setInterval(function() {
+                      if (image.naturalWidth && image.naturalHeight) {
+                        clearInterval(intervalId);
+                        URL.revokeObjectURL(image.src);
+                        const wideImage =
+                          image.naturalWidth >= image.naturalHeight * 2;
+
+                        const isPanorama = hasXmpData || wideImage;
+                        file.setMetadata('isPano', isPanorama);
+                        return resolve(true);
+                      }
+                    }, 1);
+                  });
+                }
+              }}
               server={{
                 process: (
                   fieldName,

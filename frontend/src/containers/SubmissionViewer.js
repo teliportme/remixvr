@@ -17,18 +17,32 @@ const SubmissionViewer = observer(props => {
     submissionStore.loadSubmissionsWithCode(activity_code);
   }, []);
 
+  const getItem = (type, submission) => {
+    switch (type) {
+      case 'image':
+        return (
+          <img
+            key={submission.id}
+            src={apiUrl + submission.file.url}
+            alt="submission"
+          />
+        );
+      case 'video':
+        return (
+          <video
+            controls
+            key={submission.id}
+            src={apiUrl + submission.file.url}
+          />
+        );
+    }
+  };
+
   return (
     submissionStore.submissions.length > 0 && (
       <Slideshow autoplay={false} showIndex>
-        {submissionStore.submissions.map(
-          submission =>
-            submission.file_type === 'image' && (
-              <img
-                key={submission.id}
-                src={apiUrl + submission.file.url}
-                alt="submission"
-              />
-            )
+        {submissionStore.submissions.map(submission =>
+          getItem(submission.file_type, submission)
         )}
       </Slideshow>
     )
