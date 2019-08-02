@@ -28,6 +28,7 @@ const UploadSubmission = lazy(() => import('./containers/UploadSubmission'));
 const SubmissionViewer = lazy(() => import('./containers/SubmissionViewer'));
 const ReactToActivities = lazy(() => import('./containers/ReactToActivities'));
 const Reactions = lazy(() => import('./containers/ReactionsPage'));
+const GCEDLanding = lazy(() => import('./containers/GCEDLanding'));
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -142,6 +143,7 @@ const App = () => {
               path="/activities"
               component={withTracker(ActivityTypes)}
             />
+            <DefaultLayout path="/gced" component={withTracker(GCEDLanding)} />
             <DefaultLayout exact path="/" component={withTracker(Home)} />
             <DefaultLayout component={withTracker(Page404)} />
           </Switch>

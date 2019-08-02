@@ -2,10 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import SubmissionStore from '../stores/submissionStore';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
-import dayjs from 'dayjs';
 import Slideshow from '../components/slidez';
 import getAPIUrl from '../components/GetAPIUrl';
-import ReactPannellum, { getConfig } from 'react-pannellum';
+import ReactPannellum from 'react-pannellum';
 
 const SubmissionViewer = observer(props => {
   const submissionStore = useContext(SubmissionStore);
@@ -54,6 +53,15 @@ const SubmissionViewer = observer(props => {
               compass: false,
               autoLoad: true
             }}
+          />
+        );
+      default:
+        return (
+          <img
+            className="h-100"
+            key={submission.id}
+            src={apiUrl + submission.file.url}
+            alt="submission"
           />
         );
     }

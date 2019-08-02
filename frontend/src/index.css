@@ -2895,6 +2895,12 @@ code {
     url(/fonts/karla-v7-latin-700.woff2) format('woff2'),
     url(/fonts/karla-v7-latin-700.woff) format('woff');
 }
+.remixvr-blue {
+  color: #216ef4;
+}
+.bg-remixvr-blue {
+  background-color: #216ef4;
+}
 #root,
 body,
 html {

@@ -23,6 +23,14 @@
       url('/fonts/karla-v7-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+.remixvr-blue {
+  color: #216ef4;
+}
+
+.bg-remixvr-blue {
+  background-color: #216ef4;
+}
+
 html,
 body,
 #root {
