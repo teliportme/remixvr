@@ -19,6 +19,17 @@ const GCEDDashboard = observer(() => {
   return (
     <div className="w-80-ns w-100 pa3 center">
       <Helmet title="GCED Dashboard" />
+      <div className="b--dark-blue bb flex mb3">
+        <Link
+          className="b--black bw2 black f3 pb2 pt2 tc over-bg-light-gray link ph4"
+          to="/dashboard"
+        >
+          My Projects
+        </Link>
+        <div className="b b--dark-blue dark-blue bw2 f3 h pb2 ph4 pt2 tc bb">
+          GCED
+        </div>
+      </div>
       <h2 className="fw7 f2">My Classrooms</h2>
       <div>
         <Link

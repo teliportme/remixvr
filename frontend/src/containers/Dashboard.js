@@ -20,7 +20,17 @@ const Dashboard = observer(() => {
   return (
     <div className="w-80-ns w-100 pa3 center">
       <Helmet title="Dashboard" />
-      <h2 className="fw7 f2">My Projects</h2>
+      <div className="b--dark-blue bb flex mb3">
+        <div className="b b--dark-blue bb black bw2 dark-blue f3 pb2 pt2 tc ph4">
+          My Projects
+        </div>
+        <Link
+          to="/gced-dashboard"
+          className="b--black black bw2 f3 hover-bg-light-gray link pb2 ph4 pt2 tc"
+        >
+          GCED
+        </Link>
+      </div>
       <div>
         <Link
           to="/create"
