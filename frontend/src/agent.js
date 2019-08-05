@@ -101,7 +101,9 @@ const Project = {
   getTheme: slug =>
     requests.get(`/projects/${slug}/theme`),
   remix: (slug, data) =>
-    requests.post(`/projects/${slug}/remix`, data)
+    requests.post(`/projects/${slug}/remix`, data),
+  search: term =>
+    requests.get(`/projects/search/${term}`)
 }
 
 // prettier-ignore

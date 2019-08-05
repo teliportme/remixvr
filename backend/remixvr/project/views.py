@@ -168,6 +168,15 @@ def get_project(slug):
     return project
 
 
+@blueprint.route('/api/projects/search/<term>', methods=('GET',))
+@jwt_required
+@marshal_with(projects_schema)
+def search_project(term):
+    projects = Project.query.filter(Project.title.match(term)).filter(
+        Project.author_id == current_user.profile.id).all()
+    return projects
+
+
 @blueprint.route('/api/projects/<slug>/favorite', methods=('POST',))
 @jwt_required
 @marshal_with(project_schema)

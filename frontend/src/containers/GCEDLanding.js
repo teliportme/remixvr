@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 const GradientDiv = styled.div`
   background: linear-gradient(180deg, #efefef 0%, rgba(255, 255, 255, 0) 100%);
@@ -8,6 +9,9 @@ const GradientDiv = styled.div`
 
 const GCEDLanding = () => (
   <React.Fragment>
+    <Helmet>
+      <title>Global Citizenship Education (GCED) on RemixVR</title>
+    </Helmet>
     <GradientDiv>
       <div className="center pv3 w-100 w-50-l w-80-m ph3 tc">
         <h1 className="f2 ttc lh-title remixvr-blue">

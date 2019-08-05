@@ -4,6 +4,7 @@ import agent from '../agent';
 
 class ProjectStore {
   isLoading = false;
+  isSearching = false;
   isLoadingSpaces = false;
   hasNextPage = true;
   count = 0;
@@ -12,6 +13,7 @@ class ProjectStore {
   predicate = {};
   spacesRegistry = new Map();
   projectTheme = { config: {} };
+  searchResultsRegistry = new Map();
 
   // prettier-ignore
   get projects() {
@@ -29,6 +31,15 @@ class ProjectStore {
       spaces.push(value);
     }
     return spaces;
+  }
+
+  // prettier-ignore
+  get searchResults() {
+    const projects = [];
+    for (let [key, value] of this.searchResultsRegistry) { // eslint-disable-line no-unused-vars
+      projects.push(value);
+    }
+    return projects;
   }
 
   clear() {
@@ -87,6 +98,20 @@ class ProjectStore {
       })
       .finally(() => {
         this.isLoading = false;
+      });
+  }
+
+  searchProjects(term) {
+    this.isSearching = true;
+    this.searchResultsRegistry.clear();
+    return agent.Project.search(term)
+      .then(({ projects }) => {
+        projects.forEach(project => {
+          this.searchResultsRegistry.set(project.slug, project);
+        });
+      })
+      .finally(() => {
+        this.isSearching = false;
       });
   }
 
@@ -175,6 +200,7 @@ class ProjectStore {
 
 decorate(ProjectStore, {
   isLoading: observable,
+  isSearching: observable,
   isLoadingSpaces: observable,
   hasNextPage: observable,
   count: observable,
@@ -183,6 +209,7 @@ decorate(ProjectStore, {
   spacesRegistry: observable,
   predicate: observable,
   projectTheme: observable,
+  searchResults: computed,
 
   projects: computed,
   spaces: computed,
@@ -194,7 +221,9 @@ decorate(ProjectStore, {
   createSpace: action,
   getProjectTheme: action,
   createField: action,
-  updateField: action
+  updateField: action,
+  searchProjects: action,
+  searchResultsRegistry: observable
 });
 
 export const projectStore = new ProjectStore();
