@@ -10,7 +10,7 @@ The editable VR experiences are called VR templates. Anyone can create a VR temp
 
 ![RemixVR](https://media.giphy.com/media/KZfKUhK06Gc8KL0O6Y/giphy.gif)
 
-For example, let's look at the [ObjectsVR](https://github.com/teliportme/remixVR/tree/master/templates/packages/objectsvr) template. It has three options. You can change the object, the 360 background and the sound it creates when hovering on the object.
+For example, let's look at the [ObjectsVR](https://github.com/teliportme/remixvr/tree/master/themes/packages/objectsvr) template. It has three options. You can change the object, the 360 background and the sound it creates when hovering on the object.
 
 In the initial version, these options are updated by editing the code. However, as we continue to develop RemixVR, we'll be including a visual way to update the options.
 
