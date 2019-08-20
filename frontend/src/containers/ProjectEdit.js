@@ -47,6 +47,13 @@ const ProjectEdit = observer(props => {
     ) : (
       <React.Fragment>
         <div className="w-100 w-80-ns h-100 center ph3 ph0-ns measure-ns">
+          <SpacesCarousel
+            projectSlug={props.match.params.slug}
+            config={projectStore.projectTheme.config}
+            spaces={projectStore.spaces}
+            spacesLength={projectStore.projectTheme.config.spaces.length}
+            history={props.history}
+          />
           <h2 className="fw7 f2 mb0">Enter project fields</h2>
           <p className="f5 gray lh-copy">
             Fill the value for each field. These values will be used for
@@ -57,21 +64,20 @@ const ProjectEdit = observer(props => {
             spaceId={projectStore.spaces[currentSpace].id}
           />
           <a
+            className="b--dark-green ba bg-green bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white"
+            href="#"
+          >
+            Save Project
+          </a>
+          <a
             className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
             target="_blank"
             href={`/project/${props.match.params.slug}/view`}
             rel="noopener noreferrer"
           >
-            Save & View Project
+            View Project
           </a>
         </div>
-        <SpacesCarousel
-          projectSlug={props.match.params.slug}
-          config={projectStore.projectTheme.config}
-          spaces={projectStore.spaces}
-          spacesLength={projectStore.projectTheme.config.spaces.length}
-          history={props.history}
-        />
       </React.Fragment>
     ))
   );

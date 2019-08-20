@@ -63,6 +63,30 @@
       "title": "Banner",
       "type": "banner",
       "description": "Add a banner with title & description."
+    },
+    {
+      "fields": [
+        {
+          "label": "Title",
+          "type": "text"
+        },
+        {
+          "label": "Object",
+          "type": "object"
+        },
+        {
+          "label": "background",
+          "type": "color"
+        },
+        {
+          "label": "Audio (Optional)",
+          "type": "audio"
+        }
+      ],
+      "maxCount": 0,
+      "title": "Object",
+      "type": "object",
+      "description": "Add a 3D object with a description."
     }
   ]
 }
