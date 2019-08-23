@@ -24,11 +24,10 @@ def register_user(username, password, email, **kwargs):
         school_id = kwargs.pop('school_id')
         userprofile = UserProfile(
             User(username.lower(), email.lower(), password=password, **kwargs).save()).save()
-        userprofile.user.token = create_access_token(identity=userprofile.user)
-
         if school_id:
             userprofile.school_id = school_id
             userprofile.save()
+        userprofile.user.token = create_access_token(identity=userprofile.user)
     except IntegrityError:
         db.session.rollback()
         raise InvalidUsage.user_already_registered()
