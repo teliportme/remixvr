@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState, lazy, Suspense } from 'react';
 import AuthStore from '../stores/authStore';
 import SchoolStore from '../stores/schoolStore';
+import CommonStore from '../stores/commonStore';
 import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 import useRouter from '../components/useRouter';
@@ -20,6 +21,7 @@ const StyledSchoolSearch = styled(Select)`
 const Signup = observer(() => {
   const authStore = useContext(AuthStore);
   const schoolStore = useContext(SchoolStore);
+  const commonStore = useContext(CommonStore);
   const { history } = useRouter();
 
   const [username, setUsername] = useState('');
@@ -41,6 +43,14 @@ const Signup = observer(() => {
 
   const handleSubmitForm = event => {
     event.preventDefault();
+    if (isTeacher && !selectedSchool) {
+      commonStore.setSnackMessage(
+        'School Not Selected',
+        'Please mention the school you work for.',
+        'danger'
+      );
+      return null;
+    }
     const school_id = selectedSchool && isTeacher ? selectedSchool.id : null;
     authStore.register(username, email, password, school_id).then(() => {
       history.push(nextUrl);

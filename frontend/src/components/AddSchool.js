@@ -32,6 +32,7 @@ const AddSchool = ({ closeModal }) => {
 
   return (
     <div className="center measure mb4 pb4 ph3">
+      <h3 className="f3 f2-ns dark-gray tc">Add new school</h3>
       <div className="mb3">
         <label htmlFor="schoolname" className="b mid-gray">
           School Name
@@ -78,6 +79,7 @@ const AddSchool = ({ closeModal }) => {
           type="submit"
           className="bg-dark-gray bn br2 lh-title mb0 mr2 mt2 normal nowrap pb2 pl3 pointer pr3 pt2 tc white"
           disabled={schoolStore.savingSchool}
+          onClick={closeModal}
         >
           Cancel
         </button>
@@ -88,7 +90,7 @@ const AddSchool = ({ closeModal }) => {
           isLoading={schoolStore.savingSchool}
           onClick={createSchool}
         >
-          Save
+          Add School
         </SavingButton>
       </div>
     </div>
