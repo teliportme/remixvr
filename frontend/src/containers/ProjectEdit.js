@@ -63,12 +63,9 @@ const ProjectEdit = observer(props => {
             fields={projectStore.spaces[currentSpace].fields}
             spaceId={projectStore.spaces[currentSpace].id}
           />
-          <a
-            className="b--dark-green ba bg-green bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white"
-            href="#"
-          >
+          <button className="b--dark-green ba bg-green bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white pointer">
             Save Project
-          </a>
+          </button>
           <a
             className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
             target="_blank"

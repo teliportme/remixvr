@@ -92,7 +92,7 @@ const App = () => {
   return (
     <CustomBrowsingRouter>
       <Suspense fallback={<LoadingSpinner />}>
-        <div className="App w-100 center h-100 flex flex-column bt bw2 b--blue">
+        <div className="App w-100 center h-100 flex flex-column bt">
           <ReactNotification ref={notificationDOMRef} />
           <MetaTags />
           <Switch>
