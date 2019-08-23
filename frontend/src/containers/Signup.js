@@ -1,22 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, lazy, Suspense } from 'react';
 import AuthStore from '../stores/authStore';
+import SchoolStore from '../stores/schoolStore';
 import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 import useRouter from '../components/useRouter';
 import ErrorMessage from '../components/ErrorMessage';
+import styled from 'styled-components';
+import Select from 'react-dropdown-select';
+import ReactModal from 'react-modal';
+import LoadingSpinner from '../components/LoadingSpinner';
+const AddSchool = lazy(() => import('../components/AddSchool'));
+
+const StyledSchoolSearch = styled(Select)`
+  border: 1px solid #555 !important;
+  border-radius: 0.25rem !important;
+  min-height: 38px;
+`;
 
 const Signup = observer(() => {
   const authStore = useContext(AuthStore);
+  const schoolStore = useContext(SchoolStore);
   const { history } = useRouter();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nextUrl] = useState('/dashboard');
+  const [isTeacher, setTeacher] = useState(true);
+  const [showModal, setModal] = useState(false);
+  const [selectedSchool, setSchool] = useState(null);
 
   const { errors } = authStore;
 
   useEffect(() => {
+    schoolStore.loadSchools();
     if (authStore.isUserLoggedIn) {
       history.push(nextUrl);
     }
@@ -24,10 +41,15 @@ const Signup = observer(() => {
 
   const handleSubmitForm = event => {
     event.preventDefault();
-    authStore.register(username, email, password).then(() => {
+    const school_id = selectedSchool && isTeacher ? selectedSchool.id : null;
+    authStore.register(username, email, password, school_id).then(() => {
       history.push(nextUrl);
     });
   };
+
+  function closeModal() {
+    setModal(false);
+  }
 
   return (
     <div className="bg-near-white center measure mb4 pb4 ph3">
@@ -87,6 +109,50 @@ const Signup = observer(() => {
             }}
           />
         </div>
+        <label className="pointer">
+          <input
+            type="checkbox"
+            name="check"
+            className="mr2"
+            checked={isTeacher}
+            onChange={() => {
+              setTeacher(!isTeacher);
+            }}
+          />
+          {isTeacher ? (
+            <span className="green b">I work at a school</span>
+          ) : (
+            <span className="blue b">I'm not associated with a school</span>
+          )}
+        </label>
+        {isTeacher && (
+          <div className="mb3 mt3">
+            <label htmlFor="schoolname" className="b mid-gray">
+              Select School{' '}
+              <span
+                className="f6 fr fw4 i underline gray pointer"
+                onClick={() => {
+                  setModal(true);
+                }}
+              >
+                School not listed?
+              </span>
+            </label>
+            <StyledSchoolSearch
+              options={schoolStore.schools}
+              placeholder="Search School"
+              labelField="name_with_region"
+              valueField="id"
+              dropdownGap={10}
+              onChange={val => {
+                setSchool(val[0]);
+              }}
+              searchBy="name_with_region"
+              loading={schoolStore.isLoading}
+              className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100 f4"
+            />
+          </div>
+        )}
         <div className="tr">
           <button
             type="submit"
@@ -99,6 +165,18 @@ const Signup = observer(() => {
         </div>
       </form>
       <ErrorMessage errors={errors} />
+      <ReactModal
+        appElement={document.body}
+        isOpen={showModal}
+        className="absolute shadow-2 bg-white br2 outline-0 pa2 top-2 bottom-1 left-1 right-1 flex justify-center"
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
+        onRequestClose={closeModal}
+      >
+        <Suspense fallback={<LoadingSpinner />}>
+          <AddSchool closeModal={closeModal} />
+        </Suspense>
+      </ReactModal>
     </div>
   );
 });

@@ -19,11 +19,11 @@ blueprint = Blueprint('schools', __name__)
 @jwt_optional
 @marshal_with(schools_schema)
 def get_schools():
-    return School.query.all()
+    return School.query.order_by(School.name).all()
 
 
 @blueprint.route('/api/school', methods=('POST',))
-@jwt_required
+@jwt_optional
 @use_kwargs(school_schema)
 @marshal_with(school_schema)
 def create_school(name, country, region):

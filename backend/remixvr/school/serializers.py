@@ -6,12 +6,16 @@ class SchoolSchema(Schema):
     name = fields.Str()
     country = fields.Str()
     region = fields.Str()
-    slug = fields.Str()
-    # https://marshmallow.readthedocs.io/en/stable/nesting.html#two-way-nesting
-    teachers = fields.Nested(
-        'remixvr.profile.serializers.OnlyUsernameSchema', many=True, only=['username'])
-    created_at = fields.DateTime()
-    updated_at = fields.DateTime()
+    name_with_region = fields.Method("school_and_region")
+    # slug = fields.Str()
+    # # https://marshmallow.readthedocs.io/en/stable/nesting.html#two-way-nesting
+    # teachers = fields.Nested(
+    #     'remixvr.profile.serializers.OnlyUsernameSchema', many=True, only=['username'])
+    # created_at = fields.DateTime()
+    # updated_at = fields.DateTime()
+
+    def school_and_region(self, obj):
+        return '{} - {}'.format(obj.name, obj.region)
 
     class Meta:
         strict = True

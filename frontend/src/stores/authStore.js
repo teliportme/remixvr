@@ -30,10 +30,10 @@ class AuthStore {
         this.inProgress = false;
       });
   }
-  register(username, email, password) {
+  register(username, email, password, school_id) {
     this.inProgress = true;
     this.errors = undefined;
-    return agent.Auth.register(username, email, password)
+    return agent.Auth.register(username, email, password, school_id)
       .then(({ user }) => {
         commonStore.setToken(user.token);
         userStore.setUser(user);

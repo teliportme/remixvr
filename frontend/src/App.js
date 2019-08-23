@@ -1,6 +1,9 @@
 import React, { lazy, Suspense, useContext, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import { autorun } from 'mobx';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import LoadingSpinner from './components/LoadingSpinner';
 import CustomBrowsingRouter from './components/CustomBrowserRouter';
 import MetaTags from './components/DefaultMetaTags';
@@ -74,10 +77,23 @@ const PrivateRoute = observer(props => {
 });
 
 const App = () => {
+  const commonStore = useContext(CommonStore);
+
+  let notificationDOMRef = React.createRef();
+
+  autorun(() => {
+    if (commonStore.snackMessage.message !== null) {
+      notificationDOMRef.current &&
+        notificationDOMRef.current.addNotification(commonStore.snackMessage);
+      commonStore.setSnackMessage();
+    }
+  });
+
   return (
     <CustomBrowsingRouter>
       <Suspense fallback={<LoadingSpinner />}>
         <div className="App w-100 center h-100 flex flex-column bt bw2 b--blue">
+          <ReactNotification ref={notificationDOMRef} />
           <MetaTags />
           <Switch>
             <DefaultLayout path="/signup" component={withTracker(Signup)} />

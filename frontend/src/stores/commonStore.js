@@ -12,6 +12,36 @@ class CommonStore {
     this.token = token;
   }
 
+  snackMessage = {
+    title: null,
+    message: null,
+    type: '',
+    insert: '',
+    container: 'bottom-right',
+    dismiss: { duration: 2000 },
+    dismissable: { click: true }
+  };
+
+  setSnackMessage(
+    title = null,
+    message = null,
+    type = 'success',
+    insert = 'bottom',
+    container = 'bottom-center',
+    duration = 3000,
+    dismissable = true
+  ) {
+    this.snackMessage = {
+      title,
+      message,
+      type,
+      insert,
+      container,
+      dismiss: { duration },
+      dismissible: { click: dismissable }
+    };
+  }
+
   constructor() {
     reaction(
       () => this.token,
@@ -31,7 +61,9 @@ decorate(CommonStore, {
   token: observable,
   appLoaded: observable,
   setAppLoaded: action,
-  setToken: action
+  setToken: action,
+  snackMessage: observable,
+  setSnackMessage: action
 });
 
 export const commonStore = new CommonStore();

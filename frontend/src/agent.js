@@ -51,14 +51,12 @@ const requests = {
 
 // prettier-ignore
 const Auth = {
-  current: () =>
-    requests.get('/user'),
+  current: () => requests.get('/user'),
   login: (userid, password) =>
     requests.post('/users/login', { userid, password }),
-  register: (username, email, password) =>
-    requests.post('/users', { username, email, password }),
-  save: user =>
-    requests.put('/user', { user })
+  register: (username, email, password, school_id) =>
+    requests.post('/users', { username, email, password, school_id }),
+  save: user => requests.put('/user', { user })
 };
 
 // prettier-ignore
@@ -170,6 +168,14 @@ const Submission = {
     requests.post(`/submission/${submissionId}`, { code })
 };
 
+// prettier-ignore
+const School = {
+  all: () =>
+    requests.get(`/schools`),
+  create: (name, country, region) =>
+    requests.post(`/school`, { name, country, region})
+}
+
 export default {
   Auth,
   Profile,
@@ -180,5 +186,6 @@ export default {
   Activity,
   ActivityType,
   Classroom,
-  Submission
+  Submission,
+  School
 };

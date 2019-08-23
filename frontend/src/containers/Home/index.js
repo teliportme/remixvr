@@ -172,11 +172,11 @@ const Home = () => (
         of VR and how RemixVR can help them in classrooms. They were really
         excited to use VR in classrooms.
       </p>
-      <article class="cf">
-        <div class="fl w-50-ns w-100 tc pa1">
+      <article className="cf">
+        <div className="fl w-50-ns w-100 tc pa1">
           <img src={Teachers1} alt="RemixVR teachers" className="w-100" />
         </div>
-        <div class="fl w-50-ns w-100 tc pa1">
+        <div className="fl w-50-ns w-100 tc pa1">
           <img src={Teachers2} alt="Teachers using RemixVR" className="w-100" />
         </div>
       </article>
