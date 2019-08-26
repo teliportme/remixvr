@@ -1,8 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import ReactModal from 'react-modal';
+import { Helmet } from 'react-helmet';
 import ProjectStore from '../stores/projectStore';
 import useRouter from '../components/useRouter';
+import MetaBanner from './Home/remix-vr-classrooms.png';
 
 const ProjectDetail = observer(props => {
   const projectStore = useContext(ProjectStore);
@@ -34,6 +36,48 @@ const ProjectDetail = observer(props => {
   return (
     project && (
       <div className="w-100 w-80-ns h-100 center ph3 ph0-ns measure-ns">
+        <Helmet>
+          <title>{project.title}</title>
+          <meta
+            property="description"
+            content={
+              project.description ||
+              'Start using VR in classrooms to boost student engagement. Remix VR also provides Global citizenship tools for GCED.'
+            }
+          />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:url"
+            content={`https://remixvr.org/project/${projectSlug}`}
+          />
+          <meta property="og:title" content={`${project.title} on RemixVR`} />
+          <meta
+            property="og:description"
+            content={
+              project.description ||
+              'Start using VR in classrooms to boost student engagement. Remix VR also provides Global citizenship tools for GCED.'
+            }
+          />
+          <meta property="og:image" content={MetaBanner} />
+
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta
+            property="twitter:url"
+            content={`https://remixvr.org/project/${projectSlug}`}
+          />
+          <meta
+            property="twitter:title"
+            content={`${project.title} on RemixVR`}
+          />
+          <meta
+            property="twitter:description"
+            content={
+              project.description ||
+              'Start using VR in classrooms to boost student engagement. Remix VR also provides Global citizenship tools for GCED.'
+            }
+          />
+          <meta property="twitter:image" content={MetaBanner} />
+        </Helmet>
         <h1 className="ttc">{project.title}</h1>
         <a
           className="b--dark-gray ba bg-gray bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white pointer"

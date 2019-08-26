@@ -41,7 +41,7 @@ const Path5 = styled.path`
 const Page404 = () => (
   <div className="center cf flex flex-wrap pa2 w-100 w-50-ns">
     <Helmet>
-      <title>Page not found | P360 by TeliportMe</title>
+      <title>Page not found</title>
     </Helmet>
     <div className="fl flex items-center justify-center w-100 w-50-ns pa5 flex-column">
       <h1 className="f-headline lh-solid mid-gray mb0">404</h1>
