@@ -6,12 +6,14 @@ import ReactModal from 'react-modal';
 import FieldLabel from '../FieldLabel';
 import FieldInput from '../FieldInput';
 import getAPIUrl from '../GetAPIUrl';
+import LoadingSpinner from '../LoadingSpinner';
 
 const ObjectGooglePoly = observer(({ field, spaceId }) => {
   const [savingModel, setSavingModel] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [assets, setAssets] = useState([]);
+  const [isSearching, setSearching] = useState(false);
   const projectStore = useContext(ProjectStore);
   const apiUrl = getAPIUrl();
 
@@ -53,12 +55,16 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
     event.preventDefault();
     const API_KEY = process.env.REACT_APP_POLY_API_KEY;
     const url = `https://poly.googleapis.com/v1/assets?keywords=${searchTerm}&format=GLTF2&key=${API_KEY}`;
-
+    setSearching(true);
     const request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.addEventListener('load', function(event) {
+      setSearching(false);
       const data = JSON.parse(event.target.response);
-      setAssets(data.assets);
+      if (data.assets) setAssets(data.assets);
+      else {
+        setAssets([]);
+      }
     });
     request.send(null);
   };
@@ -111,17 +117,23 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
                   </button>
                 </div>
               </form>
-              <div>
-                {assets.map((asset, index) => (
-                  <img
-                    alt={asset.displayName || 'object'}
-                    src={asset.thumbnail.url}
-                    key={index}
-                    className="w4 h4 ma2"
-                    onClick={modelSelect.bind(null, asset)}
-                  />
-                ))}
-              </div>
+              <React.Fragment>
+                {isSearching ? (
+                  <LoadingSpinner />
+                ) : assets.length > 0 ? (
+                  assets.map((asset, index) => (
+                    <img
+                      alt={asset.displayName || 'object'}
+                      src={asset.thumbnail.url}
+                      key={index}
+                      className="w4 h4 ma2"
+                      onClick={modelSelect.bind(null, asset)}
+                    />
+                  ))
+                ) : (
+                  <div className="f4 tc">No items found</div>
+                )}
+              </React.Fragment>
             </React.Fragment>
           </ReactModal>
         </div>
