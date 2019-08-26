@@ -69,7 +69,9 @@ const Profile = {
   unfollow: username =>
     requests.del(`/profiles/${username}/follow`),
   get: username =>
-    requests.get(`/profiles/${username}`)
+    requests.get(`/profiles/${username}`),
+  saveSchool: school_id =>
+    requests.post(`/profiles/addschool`, { school_id })
 };
 
 // prettier-ignore

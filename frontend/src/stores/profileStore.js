@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { action, decorate, observable } from 'mobx';
 import agent from '../agent';
+import { userStore } from './userStore';
 
 class ProfileStore {
   profile = undefined;
@@ -15,6 +16,13 @@ class ProfileStore {
       .finally(() => {
         this.isLoadingProfile = false;
       });
+  }
+
+  saveSchool(school_id) {
+    console.log(userStore);
+    return agent.Profile.saveSchool(school_id).then(() => {
+      userStore.currentUser.school_id = school_id;
+    });
   }
 
   follow() {
