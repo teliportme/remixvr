@@ -5,6 +5,7 @@ import UserStore from '../stores/userStore';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
+import { IoMdOpen } from 'react-icons/io';
 import SavingButton from '../components/SavingButton';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -91,12 +92,22 @@ const Dashboard = observer(() => {
                   <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
                     {`${project.theme.title} Theme`}
                   </button>
-                  <Link
-                    to={`/project/${project.slug}/edit/s/0`}
-                    className="db f3 fw7 link near-black pt2"
-                  >
-                    {project.title}
-                  </Link>
+                  <div className="pt2">
+                    <Link
+                      to={`/project/${project.slug}/edit/s/0`}
+                      className="f3 fw7 link near-black"
+                    >
+                      {project.title}
+                    </Link>
+                    <Link
+                      to={`/project/${project.slug}`}
+                      className="ml3"
+                      title="show project page"
+                      target="_blank"
+                    >
+                      <IoMdOpen className="silver" />
+                    </Link>
+                  </div>
                   <span className="db f6 gray pv2 truncate">
                     {dayjs(project.created_at).format('MMM D, YYYY')}
                   </span>
@@ -113,12 +124,22 @@ const Dashboard = observer(() => {
                 <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
                   {`${project.theme.title} Theme`}
                 </button>
-                <Link
-                  to={`/project/${project.slug}/edit/s/0`}
-                  className="db f3 fw7 link near-black pt2"
-                >
-                  {project.title}
-                </Link>
+                <div className="pt2">
+                  <Link
+                    to={`/project/${project.slug}/edit/s/0`}
+                    className="f3 fw7 link near-black"
+                  >
+                    {project.title}
+                  </Link>
+                  <Link
+                    to={`/project/${project.slug}`}
+                    className="ml3"
+                    title="show project page"
+                    target="_blank"
+                  >
+                    <IoMdOpen className="silver" />
+                  </Link>
+                </div>
                 <span className="db f6 gray pv2 truncate">
                   {dayjs(project.created_at).format('MMM D, YYYY')}
                 </span>
