@@ -120,6 +120,11 @@ const Header = observer(() => {
           </MenuLi>
         )}
         <MenuLi>
+          <Link to="/gced" className="link dim f6 f5-ns db  pointer dark-gray">
+            GCED
+          </Link>
+        </MenuLi>
+        <MenuLi>
           <a
             href="https://docs.remixvr.org"
             target="_blank"
