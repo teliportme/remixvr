@@ -15,6 +15,7 @@ const Home = lazy(() => import('./containers/Home'));
 const Page404 = lazy(() => import('./containers/Page404'));
 const Login = lazy(() => import('./containers/Login'));
 const Signup = lazy(() => import('./containers/Signup'));
+const AddOrganization = lazy(() => import('./containers/AddOrganization'));
 const Dashboard = lazy(() => import('./containers/Dashboard'));
 const ProjectEdit = lazy(() => import('./containers/ProjectEdit'));
 const CreateProject = lazy(() => import('./containers/CreateProject'));
@@ -98,6 +99,10 @@ const App = () => {
           <Switch>
             <DefaultLayout path="/signup" component={withTracker(Signup)} />
             <DefaultLayout path="/login" component={withTracker(Login)} />
+            <PrivateRoute
+              path="/add-org"
+              component={withTracker(AddOrganization)}
+            />
             <PrivateRoute
               path="/dashboard"
               component={withTracker(Dashboard)}

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import styled from 'styled-components';
-import SchoolStore from '../stores/schoolStore';
+import SchoolStore from '../stores/orgStore';
 import CommonStore from '../stores/commonStore';
 import SavingButton from './SavingButton';
 
@@ -21,7 +21,7 @@ const AddSchool = ({ closeModal }) => {
   `;
 
   const createSchool = () => {
-    schoolStore.createSchool(schoolName, country, region).then(() => {
+    schoolStore.createOrg(schoolName, country, region).then(() => {
       commonStore.setSnackMessage(
         'School Added',
         'Now you can search for your school'

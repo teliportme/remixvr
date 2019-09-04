@@ -13,7 +13,7 @@ const MenuIcon = styled.label`
   position: relative;
   user-select: none;
 
-  @media (min-width: 48em) {
+  @media (min-width: 49em) {
     display: none;
   }
 `;
@@ -47,7 +47,7 @@ const MenuUl = styled.ul`
   max-height: 0;
   transition: max-height 0.2s ease-out;
 
-  @media (min-width: 48em) {
+  @media (min-width: 49em) {
     clear: none;
     float: right;
     max-height: none;

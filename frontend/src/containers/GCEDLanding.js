@@ -23,7 +23,7 @@ const GCEDLanding = () => (
           from around the world to interact.
         </p>
         <Link
-          to="/signup"
+          to="/signup?gc=t"
           className="f3 link dim br2 ph3 pv2 mb2 dib white bg-blue bb bw2 b--dark-blue mt3"
         >
           Sign Up Now

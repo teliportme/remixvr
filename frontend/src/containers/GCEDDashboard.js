@@ -8,7 +8,7 @@ import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import UserStore from '../stores/userStore';
 import ClassroomStore from '../stores/classroomStore';
-import SchoolStore from '../stores/schoolStore';
+import OrgStore from '../stores/orgStore';
 import ProfileStore from '../stores/profileStore';
 import CommonStore from '../stores/commonStore';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -23,7 +23,7 @@ const StyledSchoolSearch = styled(Select)`
 const GCEDDashboard = observer(() => {
   const userStore = useContext(UserStore);
   const classroomStore = useContext(ClassroomStore);
-  const schoolStore = useContext(SchoolStore);
+  const orgStore = useContext(OrgStore);
   const profileStore = useContext(ProfileStore);
   const commonStore = useContext(CommonStore);
 
@@ -39,7 +39,7 @@ const GCEDDashboard = observer(() => {
 
   const showSchoolSearch = () => {
     setShowSchool(true);
-    schoolStore.loadSchools();
+    orgStore.loadOrgs();
   };
 
   function closeModal() {
@@ -125,7 +125,7 @@ const GCEDDashboard = observer(() => {
                   </span>
                 </label>
                 <StyledSchoolSearch
-                  options={schoolStore.schools}
+                  options={orgStore.schools}
                   placeholder="Search School"
                   labelField="name_with_region"
                   valueField="id"
@@ -134,7 +134,7 @@ const GCEDDashboard = observer(() => {
                     setSchool(val[0]);
                   }}
                   searchBy="name_with_region"
-                  loading={schoolStore.isLoading}
+                  loading={orgStore.isLoading}
                   className="mt1 db w1 pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100 f4"
                 />
               </div>

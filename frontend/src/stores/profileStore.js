@@ -19,7 +19,6 @@ class ProfileStore {
   }
 
   saveSchool(school_id) {
-    console.log(userStore);
     return agent.Profile.saveSchool(school_id).then(() => {
       userStore.currentUser.school_id = school_id;
     });

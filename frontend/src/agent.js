@@ -171,7 +171,7 @@ const Submission = {
 };
 
 // prettier-ignore
-const School = {
+const Org = {
   all: () =>
     requests.get(`/schools`),
   create: (name, country, region) =>
@@ -189,5 +189,5 @@ export default {
   ActivityType,
   Classroom,
   Submission,
-  School
+  Org
 };
