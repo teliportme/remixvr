@@ -181,7 +181,7 @@ const AddOrganization = observer(({ history }) => {
                 disabled={orgStore.savingOrg}
                 isLoading={orgStore.savingOrg}
               >
-                Choose Organization
+                Add Organization
               </SavingButton>
             </div>
           </form>
