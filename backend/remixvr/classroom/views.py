@@ -28,12 +28,12 @@ def get_user_classrooms():
 @jwt_required
 @use_kwargs(classroom_schema)
 @marshal_with(classroom_schema)
-def create_classroom(classname, **kwargs):
+def create_classroom(classname, subject, age_students, **kwargs):
     try:
         school = current_user.profile.school
         if not school:
             raise InvalidUsage.no_associated_school()
-        classroom = Classroom(classname=classname,
+        classroom = Classroom(classname=classname, subject=subject, age_students=age_students,
                               teacher=current_user.profile, school=school).save()
     except IntegrityError:
         db.session.rollback()

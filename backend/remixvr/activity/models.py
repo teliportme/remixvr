@@ -10,6 +10,7 @@ from remixvr.database import (Model, SurrogatePK,
 class Activity(SurrogatePK, Model):
 
     __tablename__ = 'activity'
+    activity_name = Column(db.String(200))
     is_reaction = Column(db.Boolean, nullable=False, default=False)
     activity_type_id = reference_col("activity_type", nullable=False)
     activity_type = relationship("ActivityType", backref="activities")
@@ -28,7 +29,7 @@ class Activity(SurrogatePK, Model):
 
     def __init__(self, activity_type_id, classroom, code, **kwargs):
         db.Model.__init__(self, activity_type_id=activity_type_id,
-                          classroom=classroom, code=code)
+                          classroom=classroom, code=code, **kwargs)
 
     @property
     def submissions_count(self):

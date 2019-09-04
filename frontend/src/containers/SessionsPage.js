@@ -40,13 +40,24 @@ const Activities = observer(props => {
         <ul className="list pl0 ml0 mw6 bn">
           {activityStore.activities.map(activity => (
             <li key={activity.code} className="bt pt3 b--light-green">
+              {activity.is_reaction ? (
+                <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
+                  Reaction Activity
+                </button>
+              ) : (
+                <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
+                  Creation Activity
+                </button>
+              )}
               <Link
                 to={`/classroom/${props.match.params.classSlug}/activity/${
                   activity.code
                 }`}
                 className="db f3 fw7 link near-black pt2"
               >
-                {activity.activity_type.title}
+                {activity.activity_name && !activity.is_reaction
+                  ? activity.activity_name
+                  : activity.activity_type.title}
               </Link>
               <span className="db f6 gray pv2 truncate">
                 {dayjs(activity.created_at).format('MMM D, YYYY')}

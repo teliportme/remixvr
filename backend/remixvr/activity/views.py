@@ -42,7 +42,7 @@ def get_activity(code):
 @jwt_required
 @use_kwargs(activity_schema)
 @marshal_with(activity_schema)
-def create_activity(classroom_slug, activity_type_id, **kwargs):
+def create_activity(classroom_slug, activity_name, activity_type_id, **kwargs):
     classroom = Classroom.query.filter_by(slug=classroom_slug).first()
     if not classroom:
         raise InvalidUsage.classroom_not_found()
@@ -53,7 +53,7 @@ def create_activity(classroom_slug, activity_type_id, **kwargs):
             break
     try:
         activity = Activity(activity_type_id=activity_type_id,
-                            classroom=classroom, code=code)
+                            activity_name=activity_name, classroom=classroom, code=code)
         if 'reaction_to_id' in kwargs:
             reaction_to = Activity.get_by_id(kwargs['reaction_to_id'])
             activity.reaction_to = reaction_to

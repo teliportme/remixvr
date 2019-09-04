@@ -68,9 +68,15 @@ class ActivityStore {
       });
   }
 
-  createActivity(classroom_slug, activity_type_id, reaction_to_id) {
+  createActivity(
+    classroom_slug,
+    activity_name,
+    activity_type_id,
+    reaction_to_id
+  ) {
     return agent.Activity.create(
       classroom_slug,
+      activity_name,
       activity_type_id,
       reaction_to_id
     );

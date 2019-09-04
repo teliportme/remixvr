@@ -11,6 +11,7 @@ const CreateActivity = observer(({ history, match }) => {
   const activityStore = useContext(ActivityStore);
 
   const [selectedActivityType, setActivityType] = useState();
+  const [activityName, setActivityName] = useState('');
 
   useEffect(() => {
     activityTypeStore.loadActivityTypes();
@@ -19,7 +20,11 @@ const CreateActivity = observer(({ history, match }) => {
   const handleSubmitForm = event => {
     event.preventDefault();
     activityStore
-      .createActivity(match.params.classSlug, selectedActivityType)
+      .createActivity(
+        match.params.classSlug,
+        activityName,
+        selectedActivityType
+      )
       .then(activity => {
         history.push(
           `/classroom/${match.params.classSlug}/activity/${activity.code}`
@@ -33,6 +38,21 @@ const CreateActivity = observer(({ history, match }) => {
       <form onSubmit={handleSubmitForm}>
         <section className="w-50-l w-100">
           <h3 className="f2">Create New Activity</h3>
+          <FieldLabel htmlFor="activity" className="b mid-gray mt3 db">
+            Name your activity
+          </FieldLabel>
+          <FieldInput>
+            <input
+              type="text"
+              className="mt1 db pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bn br2 w-100 outline-0"
+              id="classname"
+              placeholder="Activity name"
+              value={activityName}
+              onChange={e => {
+                setActivityName(e.target.value);
+              }}
+            />
+          </FieldInput>
           <FieldLabel htmlFor="activity" className="b mid-gray mt3 db">
             Select Activity
           </FieldLabel>

@@ -15,20 +15,21 @@ from .serializers import school_schema, schools_schema
 blueprint = Blueprint('schools', __name__)
 
 
-@blueprint.route('/api/schools', methods=('GET',))
+@blueprint.route('/api/orgs', methods=('GET',))
 @jwt_optional
 @marshal_with(schools_schema)
 def get_schools():
     return School.query.order_by(School.name).all()
 
 
-@blueprint.route('/api/school', methods=('POST',))
+@blueprint.route('/api/org', methods=('POST',))
 @jwt_optional
 @use_kwargs(school_schema)
 @marshal_with(school_schema)
-def create_school(name, country, region):
+def create_school(name, type, country, region):
     try:
-        school = School(name=name, country=country, region=region).save()
+        school = School(name=name, type=type,
+                        country=country, region=region).save()
     except IntegrityError:
         db.session.rollback()
         raise InvalidUsage.item_already_exists()

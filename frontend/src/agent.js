@@ -139,9 +139,10 @@ const ActivityType = {
 const Activity = {
   all: classroom_slug =>
     requests.get(`/activities/classroom/${classroom_slug}`),
-  create: (classroom_slug, activity_type_id, reaction_to_id) =>
+  create: (classroom_slug, activity_name, activity_type_id, reaction_to_id) =>
     requests.post('/activity', {
       classroom_slug,
+      activity_name,
       activity_type_id,
       reaction_to_id
     }),
@@ -154,11 +155,10 @@ const Activity = {
 
 // prettier-ignore
 const Classroom = {
-  all: () =>
-    requests.get('/classrooms'),
-  create: classname => 
-    requests.post(`/classroom`, { classname })
-}
+  all: () => requests.get('/classrooms'),
+  create: (classname, subject, age_students) =>
+    requests.post(`/classroom`, { classname, subject, age_students })
+};
 
 // prettier-ignore
 const Submission = {
@@ -173,9 +173,9 @@ const Submission = {
 // prettier-ignore
 const Org = {
   all: () =>
-    requests.get(`/schools`),
-  create: (name, country, region) =>
-    requests.post(`/school`, { name, country, region})
+    requests.get(`/orgs`),
+  create: (name, type, country, region) =>
+    requests.post(`/org`, { name, type, country, region})
 }
 
 export default {

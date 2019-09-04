@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import Select from 'react-dropdown-select';
 import OrgStore from '../../stores/orgStore';
 import ProfileStore from '../../stores/profileStore';
+import UserStore from '../../stores/userStore';
 import SavingButton from '../../components/SavingButton';
 import MapImg from './map-monochrome.svg';
 
@@ -19,6 +20,7 @@ const StyledOrgSearch = styled(Select)`
 
 const AddOrganization = observer(({ history }) => {
   const [orgName, setOrgName] = useState('');
+  const [orgType, setOrgType] = useState({ value: 'school' });
   const [country, setCountry] = useState('');
   const [region, setRegion] = useState('');
   const [showNewOrg, setNewOrg] = useState(false);
@@ -27,6 +29,7 @@ const AddOrganization = observer(({ history }) => {
 
   const orgStore = useContext(OrgStore);
   const profileStore = useContext(ProfileStore);
+  const userStore = useContext(UserStore);
 
   const StyledCountryDropdown = styled(CountryDropdown)`
     appearance: none;
@@ -40,7 +43,7 @@ const AddOrganization = observer(({ history }) => {
     // add new org & add to profile
     if (showNewOrg) {
       orgStore
-        .createOrg(orgName, country, region)
+        .createOrg(orgName, orgType.value, country, region)
         .then(org => {
           profileStore.saveSchool(org.id);
         })
@@ -56,6 +59,9 @@ const AddOrganization = observer(({ history }) => {
   };
 
   useEffect(() => {
+    if (userStore.currentUser.school_id) {
+      history.push(nextUrl);
+    }
     orgStore.loadOrgs();
     const isGCED = window.localStorage.getItem('gced-signup');
     if (isGCED) {
@@ -118,6 +124,27 @@ const AddOrganization = observer(({ history }) => {
                     onChange={e => {
                       setOrgName(e.target.value);
                     }}
+                  />
+                </div>
+                <div className="mb3">
+                  <label htmlFor="orgType" className="b mid-gray">
+                    Type of Organization
+                  </label>
+                  <StyledOrgSearch
+                    options={[
+                      { label: 'School', value: 'school' },
+                      { label: 'Non Profit', value: 'nonprofit' },
+                      { label: 'Private Company', value: 'private' }
+                    ]}
+                    placeholder="Choose Organization Type"
+                    labelField="label"
+                    valueField="value"
+                    dropdownGap={10}
+                    onChange={val => {
+                      setOrgType(val[0]);
+                    }}
+                    searchBy="label"
+                    className="mt1 db w1 pr3 pv3 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100 f4"
                   />
                 </div>
                 <div className="mb3">

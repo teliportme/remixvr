@@ -6,6 +6,7 @@ class SchoolSchema(Schema):
     name = fields.Str()
     country = fields.Str()
     region = fields.Str()
+    type = fields.Str()
     name_with_region = fields.Method("school_and_region")
     # slug = fields.Str()
     # # https://marshmallow.readthedocs.io/en/stable/nesting.html#two-way-nesting

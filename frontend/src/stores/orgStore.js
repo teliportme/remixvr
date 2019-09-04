@@ -30,9 +30,9 @@ class OrgStore {
       });
   }
 
-  createOrg(name, country, region) {
+  createOrg(name, type, country, region) {
     this.savingOrg = true;
-    return agent.Org.create(name, country, region).finally(() => {
+    return agent.Org.create(name, type, country, region).finally(() => {
       this.savingOrg = false;
     });
   }

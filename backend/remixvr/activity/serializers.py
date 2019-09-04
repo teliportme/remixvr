@@ -6,6 +6,7 @@ from remixvr.classroom.serializers import ClassroomSchema
 
 class ActivitySchema(Schema):
     id = fields.Int()
+    activity_name = fields.Str()
     activity_type = fields.Nested(ActivityTypeSchema, only=[
                                   'pdf_link', 'slug', 'title', 'id'])
     activity_type_id = fields.Int(load_only=True)

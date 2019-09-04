@@ -29,11 +29,13 @@ class ClassroomStore {
       });
   }
 
-  createClassroom(classname) {
-    return agent.Classroom.create(classname).then(classroom => {
-      this.classroomRegistry.set(classroom.slug, classroom);
-      return classroom;
-    });
+  createClassroom(classname, subject, age_students) {
+    return agent.Classroom.create(classname, subject, age_students).then(
+      classroom => {
+        this.classroomRegistry.set(classroom.slug, classroom);
+        return classroom;
+      }
+    );
   }
 }
 

@@ -7,6 +7,8 @@ from remixvr.school.serializers import SchoolSchema
 class ClassroomSchema(Schema):
     classname = fields.Str()
     slug = fields.Str()
+    subject = fields.Str()
+    age_students = fields.Str()
     school = fields.Nested(SchoolSchema, only=[
                            'country', 'region', 'slug', 'name'])
     teacher = fields.Nested(OnlyUsernameSchema)

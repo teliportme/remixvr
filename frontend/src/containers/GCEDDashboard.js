@@ -1,19 +1,11 @@
-import React, { useContext, useEffect, useState, lazy, Suspense } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
-import Select from 'react-dropdown-select';
 import dayjs from 'dayjs';
-import styled from 'styled-components';
 import UserStore from '../stores/userStore';
 import ClassroomStore from '../stores/classroomStore';
 import LoadingSpinner from '../components/LoadingSpinner';
-
-const StyledSchoolSearch = styled(Select)`
-  border: 1px solid #555 !important;
-  border-radius: 0.25rem !important;
-  min-height: 38px;
-`;
 
 const GCEDDashboard = observer(() => {
   const userStore = useContext(UserStore);

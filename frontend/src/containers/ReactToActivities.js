@@ -14,6 +14,7 @@ const ReactToActivities = observer(props => {
     activityStore
       .createActivity(
         props.match.params.classSlug,
+        'reaction',
         activity.activity_type.id,
         activity.id
       )
