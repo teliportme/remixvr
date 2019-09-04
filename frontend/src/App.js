@@ -25,7 +25,7 @@ const Expo2020 = lazy(() => import('./containers/Expo2020'));
 const GCEDDashboard = lazy(() => import('./containers/GCEDDashboard'));
 const ActivityTypes = lazy(() => import('./containers/ActivityTypes'));
 const CreateClassroom = lazy(() => import('./containers/CreateClassroom'));
-const ActivityPage = lazy(() => import('./containers/ActivitiesPage'));
+const SessionsPage = lazy(() => import('./containers/SessionsPage'));
 const CreateActivity = lazy(() => import('./containers/CreateActivity'));
 const Submissions = lazy(() => import('./containers/Submissions'));
 const UploadSubmission = lazy(() => import('./containers/UploadSubmission'));
@@ -141,8 +141,8 @@ const App = () => {
               component={withTracker(GCEDDashboard)}
             />
             <PrivateRoute
-              path="/classroom/:classSlug/activities"
-              component={withTracker(ActivityPage)}
+              path="/classroom/:classSlug/sessions"
+              component={withTracker(SessionsPage)}
             />
             <PrivateRoute
               path="/classroom/:classSlug/activity/:code/reactions"

@@ -14,8 +14,14 @@ const Activities = observer(props => {
 
   return (
     <div className="w-80-ns w-100 pa3 center">
-      <Helmet title="Classroom Activities" />
-      <h2 className="fw7 f2">My Activities</h2>
+      <Helmet title="Classroom Sessions" />
+      <h2 className="fw7 f2 mb2">My Sessions</h2>
+      <p className="lh-copy f4-ns f5 dark-gray">
+        In each session with your class, you can choose what type of activity to
+        do. <br />
+        You can either create content with creation activity or react to
+        existing activities completed by classes around the world.
+      </p>
       <div>
         <Link
           to={`/classroom/${props.match.params.classSlug}/create-activity`}
