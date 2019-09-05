@@ -22,7 +22,7 @@ const SignupGCEDBubbles = observer(({ history, match }) => {
       .createActivity(
         match.params.classSlug,
         bubbleName,
-        process.env.REACT_APP_SURROUNDING_VR_ACTIVITY_TYPE_ID || 1
+        parseInt(process.env.REACT_APP_SURROUNDING_VR_ACTIVITY_TYPE_ID) || 1
       )
       .then(activity => {
         history.push(
