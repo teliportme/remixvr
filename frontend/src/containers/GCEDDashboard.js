@@ -49,7 +49,7 @@ const GCEDDashboard = observer(() => {
               {classroomStore.classrooms.map(classroom => (
                 <li key={classroom.slug} className="bt pt3 b--light-green">
                   <Link
-                    to={`/classroom/${classroom.slug}/sessions`}
+                    to={`/classroom/${classroom.slug}/bubbles`}
                     className="db f3 fw7 link near-black pt2"
                   >
                     {classroom.classname}

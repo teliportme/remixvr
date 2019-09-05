@@ -14,8 +14,8 @@ const Activities = observer(props => {
 
   return (
     <div className="w-80-ns w-100 pa3 center">
-      <Helmet title="Classroom Sessions" />
-      <h2 className="fw7 f2 mb2">My Sessions</h2>
+      <Helmet title="Classroom Bubbles" />
+      <h2 className="fw7 f2 mb2">My Bubbles</h2>
       <p className="lh-copy f4-ns f5 dark-gray">
         In each session with your class, you can choose what type of activity to
         do. <br />

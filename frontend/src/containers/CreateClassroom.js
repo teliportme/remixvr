@@ -18,7 +18,7 @@ const CreateClassroom = observer(({ history }) => {
     classroomStore
       .createClassroom(classname, subject, age.value)
       .then(classroom => {
-        history.push(`/classroom/${classroom.slug}/sessions`);
+        history.push(`/classroom/${classroom.slug}/bubbles`);
       });
   };
 
