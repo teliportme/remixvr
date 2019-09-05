@@ -33,6 +33,10 @@ const SubmissionViewer = lazy(() => import('./containers/SubmissionViewer'));
 const ReactToActivities = lazy(() => import('./containers/ReactToActivities'));
 const Reactions = lazy(() => import('./containers/ReactionsPage'));
 const GCEDLanding = lazy(() => import('./containers/GCEDLanding'));
+const SignupGCEDClass = lazy(() => import('./containers/SignupGCEDClass'));
+const SignupGCEDActivities = lazy(() =>
+  import('./containers/SignupGCEDActivities')
+);
 
 const AsyncHeader = props => (
   <React.Suspense fallback={<div />}>
@@ -124,12 +128,20 @@ const App = () => {
               component={withTracker(CreateProject)}
             />
             <PrivateRoute
+              path="/gced-signup-class"
+              component={withTracker(SignupGCEDClass)}
+            />
+            <PrivateRoute
               path="/create-classroom"
               component={withTracker(CreateClassroom)}
             />
             <PrivateRoute
               path="/classroom/:classSlug/create-activity"
               component={withTracker(CreateActivity)}
+            />
+            <PrivateRoute
+              path="/gced-signup-create-bubble/classroom/:classSlug"
+              component={withTracker(SignupGCEDActivities)}
             />
             <PrivateRoute
               path="/classroom/:classSlug/react-activity"

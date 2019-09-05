@@ -28,14 +28,18 @@ const Submissions = observer(props => {
   return (
     <div className="w-80-ns w-100 pa3 center">
       <Helmet title="Submissions" />
-      <h2 className="fw7 f2 mb0">Submissions</h2>
+      <h2 className="fw7 f2 mb0">Bubble Submissions</h2>
       {submissionStore.activity && (
         <div className="gray mb4">
-          Activity created at{' '}
+          Activity <i>{submissionStore.activity.activity_name}</i> created on{' '}
           {dayjs(submissionStore.activity.created_at).format('MMM D, YYYY')} for{' '}
           <span className="i">
             {submissionStore.activity.classroom.classname}
           </span>
+          <p className="f4-ns f5">
+            All your bubble's submissions will appear here. Follow the
+            instructions for the activity.
+          </p>
           {submissionStore.activity.is_reaction && (
             <div>
               <span className="f4 db mt3 mb2 dark-gray">

@@ -1,6 +1,6 @@
 [build]
   base = "frontend"
-  environment = { REACT_APP_API_URL = "https://api.staging.remixvr.org/api", REACT_APP_API_ROOT = "s" }
+  environment = { REACT_APP_API_URL = "https://api.staging.remixvr.org/api", REACT_APP_API_ROOT = "s", REACT_APP_SURROUNDING_VR_ACTIVITY_TYPE_ID = 1 }
 
 [context.production]
   environment = { REACT_APP_API_URL = "https://api.remixvr.org/api", REACT_APP_API_ROOT = "p" }

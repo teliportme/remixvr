@@ -4,7 +4,7 @@ import agent from '../agent';
 
 class ActivityStore {
   isLoading = false;
-
+  isCreatingActivity = false;
   activityRegistry = new Map();
   reactionsRegistry = new Map();
 
@@ -74,12 +74,15 @@ class ActivityStore {
     activity_type_id,
     reaction_to_id
   ) {
+    this.isCreatingActivity = true;
     return agent.Activity.create(
       classroom_slug,
       activity_name,
       activity_type_id,
       reaction_to_id
-    );
+    ).finally(() => {
+      this.isCreatingActivity = false;
+    });
   }
 }
 

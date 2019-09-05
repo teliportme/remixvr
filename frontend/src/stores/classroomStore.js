@@ -4,6 +4,7 @@ import agent from '../agent';
 
 class ClassroomStore {
   isLoading = false;
+  isCreatingClassroom = false;
   classroomRegistry = new Map();
 
   // prettier-ignore
@@ -30,17 +31,21 @@ class ClassroomStore {
   }
 
   createClassroom(classname, subject, age_students) {
-    return agent.Classroom.create(classname, subject, age_students).then(
-      classroom => {
+    this.isCreatingClassroom = true;
+    return agent.Classroom.create(classname, subject, age_students)
+      .then(classroom => {
         this.classroomRegistry.set(classroom.slug, classroom);
         return classroom;
-      }
-    );
+      })
+      .finally(() => {
+        this.isCreatingClassroom = false;
+      });
   }
 }
 
 decorate(ClassroomStore, {
   isLoading: observable,
+  isCreatingClassroom: observable,
   classroomRegistry: observable,
   classrooms: computed,
   loadClassrooms: action

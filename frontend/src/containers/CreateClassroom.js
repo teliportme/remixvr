@@ -72,7 +72,7 @@ const CreateClassroom = observer(({ history }) => {
                 { label: '14-18', value: '14-18' },
                 { label: '18+', value: '18+' }
               ]}
-              placeholder="Choose Organization Type"
+              placeholder="Choose age range"
               labelField="label"
               valueField="value"
               dropdownGap={10}

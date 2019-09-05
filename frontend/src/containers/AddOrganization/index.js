@@ -134,7 +134,8 @@ const AddOrganization = observer(({ history }) => {
                     options={[
                       { label: 'School', value: 'school' },
                       { label: 'Non Profit', value: 'nonprofit' },
-                      { label: 'Private Company', value: 'private' }
+                      { label: 'Private Company', value: 'private' },
+                      { label: 'Other', value: 'other' }
                     ]}
                     placeholder="Choose Organization Type"
                     labelField="label"
