@@ -65,7 +65,7 @@ const AddOrganization = observer(({ history }) => {
     orgStore.loadOrgs();
     const isGCED = window.localStorage.getItem('gced-signup');
     if (isGCED) {
-      setNextUrl('/create-classroom');
+      setNextUrl('/gced-signup-class');
     }
   }, []);
 
