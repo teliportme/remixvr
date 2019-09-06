@@ -41,7 +41,7 @@ const SubmissionViewer = observer(props => {
         return (
           <ReactPannellum
             key={submission.id}
-            id="pano"
+            id={`pano-${submission.id}`}
             sceneId="firstScene"
             imageSource={apiUrl + submission.file.url}
             style={{
