@@ -26,4 +26,4 @@ class Classroom(SurrogatePK, Model):
         date_slug = str(dtn.year % 100) + str(dtn.month) + \
             str(dtn.day) + str(dtn.hour) + str(dtn.minute)
         db.Model.__init__(self, school=school, classname=classname, teacher=teacher,
-                          slug=slugify(classname + date_slug + str(teacher.id) + str(school.id)))
+                          slug=slugify(classname + date_slug + str(teacher.id) + str(school.id)), **kwargs)
