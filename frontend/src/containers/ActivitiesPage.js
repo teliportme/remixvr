@@ -27,13 +27,13 @@ const Activities = observer(props => {
           to={`/classroom/${props.match.params.classSlug}/create-activity`}
           className="f5 link dim br2 ph3 pv2 mb2 dib white bg-blue bb bw2 b--dark-blue"
         >
-          New Creation Activity
+          New Bubble
         </Link>
         <Link
           to={`/classroom/${props.match.params.classSlug}/react-activity`}
           className="b--gold bb bg-yellow black br2 bw2 dib dim f5 link mb2 ml3-ns ph3 pv2"
         >
-          New Reaction Activity
+          React to Bubbles
         </Link>
       </div>
       {activityStore.activities.length > 0 ? (
