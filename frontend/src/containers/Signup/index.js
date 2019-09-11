@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet';
 import useRouter from '../../components/useRouter';
 import ErrorMessage from '../../components/ErrorMessage';
 import UnlockImg from './unlock-monochrome.svg';
+import { IoIosEye } from 'react-icons/io';
+import { IoIosEyeOff } from 'react-icons/io';
 import SavingButton from '../../components/SavingButton';
 
 const Signup = observer(props => {
@@ -14,7 +16,9 @@ const Signup = observer(props => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [nextUrl] = useState('/add-org');
+  const [showPassword, setShowPassword] = useState(false);
 
   const urlParams = new URLSearchParams(props.location.search);
   const isGCED = urlParams.get('gc') === 't';
@@ -98,6 +102,44 @@ const Signup = observer(props => {
                 value={password}
                 onChange={e => {
                   setPassword(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb3">
+              <label
+                htmlFor="confirmpassword"
+                className="b mb1 mid-gray fl mr2"
+              >
+                Confirm Password
+              </label>
+              {showPassword ? (
+                <IoIosEye
+                  className="fl pointer"
+                  style={{ width: '1.2em', height: '1.2em' }}
+                  fill="#555"
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                />
+              ) : (
+                <IoIosEyeOff
+                  className="fl pointer"
+                  style={{ width: '1.2em', height: '1.2em' }}
+                  fill="#555"
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                />
+              )}
+              <input
+                type={showPassword ? 'text' : 'password'}
+                className="mt1 db w1 pr3 pv3 pl3 lh-title mid-gray bg-white-90 bt br bb bl bt br bb bl br2 w-100"
+                id="confirmpassword"
+                placeholder="Confirm Password"
+                required
+                value={confirmPassword}
+                onChange={e => {
+                  setConfirmPassword(e.target.value);
                 }}
               />
             </div>

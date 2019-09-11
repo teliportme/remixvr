@@ -72,27 +72,19 @@ const AddOrganization = observer(({ history }) => {
   return (
     <div className="cf h-100">
       <Helmet>
-        <title>Add Organization</title>
+        <title>Join Organization</title>
       </Helmet>
       <div className="bg-light-gray fl w-100 w-50-ns h-25 h-100-ns flex justify-center items-center">
         <img src={MapImg} className="h-75 h-50-ns w-90" alt="map" />
       </div>
       <div className="w-100 w-50-ns fl h-100 flex-ns items-center">
         <div className="center w-100 w-70-l w-90-m mb4 pb4 ph3">
-          <h3 className="f3 f1-ns dark-gray tc">Add organization</h3>
+          <h3 className="f3 f1-ns dark-gray tc">Join organization</h3>
           <form onSubmit={addOrgToProfile}>
             {!showNewOrg ? (
               <div className="mb3 mt3">
                 <label htmlFor="schoolname" className="b mid-gray">
                   Select Organization/School{' '}
-                  <span
-                    className="f6 fr fw4 i underline gray pointer"
-                    onClick={() => {
-                      setNewOrg(true);
-                    }}
-                  >
-                    Not listed?
-                  </span>
                 </label>
                 <StyledOrgSearch
                   options={orgStore.orgs}
@@ -176,13 +168,23 @@ const AddOrganization = observer(({ history }) => {
               </React.Fragment>
             )}
             <div className="tr">
+              {!showNewOrg && (
+                <button
+                  className="bg-black-90 black bn br2 lh-title mb0 mr3 mt2 normal nowrap pl3 pointer pr3 pv3 tc white"
+                  onClick={() => {
+                    setNewOrg(true);
+                  }}
+                >
+                  Add Organization
+                </button>
+              )}
               <SavingButton
                 type="submit"
                 className="bg-dark-green bn br2 lh-title mb0 mt2 normal nowrap pl3 pointer pr3 pv3 tc white"
                 disabled={orgStore.savingOrg}
                 isLoading={orgStore.savingOrg}
               >
-                Add Organization
+                Join Organization
               </SavingButton>
             </div>
           </form>
