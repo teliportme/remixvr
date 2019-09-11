@@ -37,6 +37,10 @@ const Signup = observer(props => {
 
   const handleSubmitForm = event => {
     event.preventDefault();
+    if (password !== confirmPassword) {
+      authStore.setError('Passwords do not match');
+      return;
+    }
     authStore.register(username, email, password).then(() => {
       history.push(nextUrl);
     });

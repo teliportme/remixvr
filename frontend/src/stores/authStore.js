@@ -13,6 +13,10 @@ class AuthStore {
     return isUserLoggedIn;
   }
 
+  setError(error) {
+    this.errors = { body: [error] };
+  }
+
   login(userid, password) {
     this.inProgress = true;
     this.errors = undefined;
@@ -57,10 +61,7 @@ class AuthStore {
 decorate(AuthStore, {
   inProgress: observable,
   errors: observable,
-  setUsername: action,
-  setEmail: action,
-  setPassword: action,
-  clearPassword: action,
+  setError: action,
   login: action,
   register: action,
   logout: action,
