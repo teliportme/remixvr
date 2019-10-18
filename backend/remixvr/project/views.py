@@ -49,6 +49,20 @@ def get_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
     return res.order_by(Project.created_at.desc()).offset(offset).limit(limit).all()
 
 
+@blueprint.route('/api/projects/self', methods=('GET',))
+@jwt_required
+@use_kwargs({'tag': fields.Str(),
+             'favorited': fields.Str(), 'limit': fields.Int(), 'offset': fields.Int()})
+@marshal_with(projects_schema)
+def get_my_projects(tag=None, author=None, favorited=None, limit=20, offset=0):
+    res = Project.query
+    if tag:
+        res = res.filter(Project.tagList.any(Tags.tagname == tag))
+    if favorited:
+        res = res.join(Project.favoriters).filter(User.username == favorited)
+    return res.filter(Project.author == current_user.profile).order_by(Project.created_at.desc()).offset(offset).limit(limit).all()
+
+
 @blueprint.route('/api/projects/<slug>/remix', methods=('POST',))
 @jwt_required
 @use_kwargs(project_schema)
