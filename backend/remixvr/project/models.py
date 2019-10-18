@@ -51,6 +51,7 @@ class Project(SurrogatePK, Model):
     author = relationship('UserProfile', backref=db.backref('projects'))
     theme_id = reference_col("theme", nullable=False)
     theme = relationship("Theme", backref="projects")
+    code = Column(db.String(100), nullable=False, unique=True)
     # can be draft, published, deleted
     status = Column(db.String(15), nullable=False, default="draft")
 

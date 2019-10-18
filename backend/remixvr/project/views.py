@@ -3,6 +3,7 @@
 import datetime as dt
 import json
 import uuid
+import secrets
 
 from flask import Blueprint
 from flask_apispec import use_kwargs, marshal_with
@@ -125,8 +126,13 @@ def make_project(title, description, theme_slug, tags=None):
     theme = Theme.query.filter_by(slug=theme_slug).first()
     if not theme:
         raise InvalidUsage.theme_not_found()
+    while True:
+        code = secrets.token_hex(3)
+        existing_project = Project.query.filter_by(code=code).first()
+        if not existing_project:
+            break
     project = Project(title=title, description=description,
-                      author=current_user.profile, theme=theme)
+                      author=current_user.profile, theme=theme, code=code)
     if tags is not None:
         for tag in tags:
             mtag = Tags.query.filter_by(tagname=tag).first()
@@ -177,6 +183,16 @@ def delete_project(slug):
 @marshal_with(project_schema)
 def get_project(slug):
     project = Project.query.filter_by(slug=slug).first()
+    if not project:
+        raise InvalidUsage.project_not_found()
+    return project
+
+
+@blueprint.route('/api/projects/code/<code>', methods=('GET',))
+@jwt_optional
+@marshal_with(project_schema)
+def get_project_by_code(code):
+    project = Project.query.filter_by(code=code).first()
     if not project:
         raise InvalidUsage.project_not_found()
     return project
@@ -253,6 +269,6 @@ def get_project_theme(slug):
 ######
 
 
-@blueprint.route('/api/tags', methods=('GET',))
-def get_tags():
-    return jsonify({'tags': [tag.tagname for tag in Tags.query.all()]})
+# @blueprint.route('/api/tags', methods=('GET',))
+# def get_tags():
+#     return jsonify({'tags': [tag.tagname for tag in Tags.query.all()]})

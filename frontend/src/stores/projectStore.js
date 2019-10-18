@@ -132,6 +132,7 @@ class ProjectStore {
 
   loadSpaces(slug) {
     this.isLoadingSpaces = true;
+    this.spacesRegistry.clear();
     return agent.Space.allSpaces(slug)
       .then(spaces => {
         spaces.forEach(space => {

@@ -11,6 +11,7 @@ const ProjectEdit = observer(props => {
 
   const [ready, setReady] = useState(false);
   const [currentSpace, setCurrentSpace] = useState(0);
+  const [thisProject, setThisProject] = useState(null);
 
   const projectSlug = props.match.params.slug;
   useEffect(() => {
@@ -25,6 +26,9 @@ const ProjectEdit = observer(props => {
           setCurrentSpace(spaceNumber);
         }
       });
+    });
+    projectStore.loadProject(projectSlug).then(project => {
+      setThisProject(project);
     });
   }, [projectStore]);
 
@@ -59,7 +63,13 @@ const ProjectEdit = observer(props => {
                 spacesLength={projectStore.projectTheme.config.spaces.length}
                 history={props.history}
               />
-              <h2 className="fw7 f2 mb0">Enter project fields</h2>
+              {thisProject && (
+                <button className="b--light-green bg-washed-green br-pill f5 pv1 tc mv2 ph2">
+                  Project Code:{' '}
+                  <span className="fw7">{`${thisProject.code}`}</span>
+                </button>
+              )}
+              <h2 className="fw7 f2 mv0">Enter project fields</h2>
               <p className="f5 gray lh-copy">
                 Fill the value for each field. These values will be used for
                 creating and viewing your project.

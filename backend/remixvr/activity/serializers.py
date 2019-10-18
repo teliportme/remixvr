@@ -13,7 +13,7 @@ class ActivitySchema(Schema):
     classroom = fields.Nested(ClassroomSchema, only=[
                               'classname', 'slug', 'school'])
     classroom_slug = fields.Str(load_only=True)
-    code = fields.Str()
+    code = fields.Str(dump_only=True)
     is_reaction = fields.Bool()
     submissions_count = fields.Int()
     reaction_to_id = fields.Int(load_only=True)
