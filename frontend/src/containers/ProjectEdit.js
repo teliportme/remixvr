@@ -5,6 +5,7 @@ import SpacesCarousel from '../components/SpacesCarousel';
 import FieldsGenerate from '../components/FieldsGenerate';
 import ProjectStore from '../stores/projectStore';
 import SpaceList from '../components/SpaceList';
+import ProjectShareModal from '../components/ProjectShareModal';
 
 const ProjectEdit = observer(props => {
   const projectStore = useContext(ProjectStore);
@@ -12,6 +13,7 @@ const ProjectEdit = observer(props => {
   const [ready, setReady] = useState(false);
   const [currentSpace, setCurrentSpace] = useState(0);
   const [thisProject, setThisProject] = useState(null);
+  const [showShareModal, setShareModal] = useState(false);
 
   const projectSlug = props.match.params.slug;
   useEffect(() => {
@@ -77,13 +79,34 @@ const ProjectEdit = observer(props => {
               />
             </div>
             <div className="w-100 w-80-ns h-100 center ph3 ph0-ns fl overflow-auto measure-m">
+              <div className="ml3-ns mv2">
+                <button className="b--dark-green ba bg-green bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white pointer">
+                  Save
+                </button>
+                <a
+                  className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white mr3"
+                  target="_blank"
+                  href={`/lesson/${props.match.params.slug}/view`}
+                  rel="noopener noreferrer"
+                >
+                  View
+                </a>
+                <button
+                  onClick={() => {
+                    setShareModal(true);
+                  }}
+                  className="b--dark-red ba bg-red bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white pointer"
+                >
+                  Share
+                </button>
+              </div>
               <div className="ml3-ns">
-                {thisProject && (
+                {/* {thisProject && (
                   <button className="b--light-green bg-washed-green br-pill f5 pv1 tc mv2 ph2">
                     Lesson Code:{' '}
                     <span className="fw7">{`${thisProject.code}`}</span>
                   </button>
-                )}
+                )} */}
                 <h2 className="fw7 f2 mv0">Enter lesson fields</h2>
                 <p className="f5 gray lh-copy">
                   Fill the value for each field. These values will be used for
@@ -95,21 +118,17 @@ const ProjectEdit = observer(props => {
                     spaceId={projectStore.spaces[currentSpace].id}
                   />
                 )}
-                <button className="b--dark-green ba bg-green bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white pointer">
-                  Save Lesson
-                </button>
-                <a
-                  className="b--dark-blue ba bg-blue bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white"
-                  target="_blank"
-                  href={`/lesson/${props.match.params.slug}/view`}
-                  rel="noopener noreferrer"
-                >
-                  View Lesson
-                </a>
               </div>
             </div>
           </div>
         ))}
+      <ProjectShareModal
+        showModal={showShareModal}
+        closeModal={() => {
+          setShareModal(false);
+        }}
+        projectCode={thisProject && thisProject.code}
+      />
     </React.Fragment>
   );
 });
