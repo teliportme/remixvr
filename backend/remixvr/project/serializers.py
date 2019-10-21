@@ -24,7 +24,7 @@ class ProjectSchema(Schema):
     code = fields.Str(dump_only=True)
     status = fields.Str()
     theme = fields.Nested(
-        ThemeSchema, only=["slug", "title", "author"], dump_only=True)
+        ThemeSchema, only=["slug", "title", "type"], dump_only=True)
     project = fields.Nested('self', exclude=(
         'project',), default=True, load_only=True)
 

@@ -14,10 +14,12 @@ class ThemeSchema(Schema):
     cover_image = fields.Str()
     url = fields.Str()
     config = fields.Raw()
+    type = fields.Str()
 
     @post_dump
     def dump_theme(self, data):
-        data['author'] = data['author']['profile']
+        if 'author' in data:
+            data['author'] = data['author']['profile']
         return {'theme': data}
 
     class Meta:
@@ -28,7 +30,8 @@ class ThemeSchemas(ThemeSchema):
 
     @post_dump
     def dump_theme(self, data):
-        data['author'] = data['author']['profile']
+        if 'author' in data:
+            data['author'] = data['author']['profile']
         return data
 
     @post_dump(pass_many=True)
