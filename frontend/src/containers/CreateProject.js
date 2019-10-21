@@ -67,7 +67,7 @@ const CreateProject = observer(({ history }) => {
           <FieldLabel htmlFor="description" className="b mid-gray mt3 db">
             Select Theme
           </FieldLabel>
-          <div className="f4 pa2 ttc cf" style={{ background: '#eef4d4' }}>
+          <div className="f4 pa2 cf" style={{ background: '#eef4d4' }}>
             {themeStore.themes.map(theme => (
               <article
                 key={theme.slug}
@@ -81,8 +81,11 @@ const CreateProject = observer(({ history }) => {
                 <div className="pa2 ph3-ns pb3-ns bg-white">
                   <div className="dt w-100 mt1">
                     <div className="dtc">
+                      <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc">
+                        {theme.type}
+                      </button>
                       <h1 className="f5 f4-ns mv0">{theme.title}</h1>
-                      <h2 className="gray f6 fw4 pt1 mv0">
+                      <h2 className="gray f6 fw4 pt1 mv0 ttc">
                         By {theme.author.username}
                       </h2>
                     </div>

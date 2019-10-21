@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectStore from '../stores/projectStore';
 import UserStore from '../stores/userStore';
@@ -6,14 +6,92 @@ import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
 import { IoMdOpen } from 'react-icons/io';
+import styled from 'styled-components';
 import SavingButton from '../components/SavingButton';
 import LoadingSpinner from '../components/LoadingSpinner';
+import randomColor from 'randomcolor';
+
+const Lesson = ({ project }) => {
+  const color = randomColor({ luminosity: 'light' });
+  return (
+    <article className="br2 dark-gray w-100 center">
+      <div className="h3 br--top br2" style={{ background: color }} />
+      <div className="pa2 ph3-ns pb3-ns bl br bb b--light-gray br2">
+        <button
+          className="b--black-05 bg-light-gray br-pill f6 fw7 mv1 pv1 tc"
+          style={{ userSelect: 'none' }}
+        >
+          {project.theme.type || 'Web'}
+        </button>
+        <div className="b--dashed b--gray ba child code dib fr gray ml3 mt1 pa1 tracked">
+          {project.code}
+        </div>
+        <div className="dt w-100 mt1">
+          <div className="dtc">
+            <h3 className="f5 f4-ns mv0">
+              <Link
+                to={`/lesson/${project.slug}/edit/s/0`}
+                className="f3 fw7 link near-black"
+              >
+                {project.title}
+              </Link>
+            </h3>
+          </div>
+        </div>
+        <span className="db f6 gray pv2 truncate">
+          {dayjs(project.created_at).format('MMM D, YYYY')}
+        </span>
+        <div className="mt3">
+          <Link
+            to={`/lesson/${project.slug}/edit/s/0`}
+            className="b bn gray mt2 pa0 pointer underline-hover mr2 link"
+          >
+            Edit
+          </Link>
+          <Link
+            to={`/lesson/${project.slug}`}
+            target="_blank"
+            className="b bn gray mt2 pa0 pointer underline-hover link"
+          >
+            View
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+const LessonContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+
+  @media screen and (min-width: 30em) {
+    grid-template-columns: 1fr;
+  }
+  @media screen and (min-width: 30em) and (max-width: 65em) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: 65em) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: 90em) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: 119em) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+`;
 
 const Dashboard = observer(() => {
   const projectStore = useContext(ProjectStore);
   const userStore = useContext(UserStore);
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
+
+  const inputEl = useRef(null);
 
   useEffect(() => {
     if (userStore.currentUser) {
@@ -24,7 +102,7 @@ const Dashboard = observer(() => {
 
   const handleSearchProjects = event => {
     event.preventDefault();
-    projectStore.searchProjects(searchTerm).then(() => {
+    projectStore.searchProjects(inputEl.current.value).then(() => {
       setShowSearchResults(true);
     });
   };
@@ -32,7 +110,7 @@ const Dashboard = observer(() => {
   const clearSearch = event => {
     event.preventDefault();
     setShowSearchResults(false);
-    setSearchTerm('');
+    inputEl.current.value = '';
   };
 
   return (
@@ -62,15 +140,11 @@ const Dashboard = observer(() => {
             placeholder="Search Lessons"
             type="text"
             name="Search"
-            value={searchTerm}
-            onChange={e => {
-              setSearchTerm(e.target.value);
-            }}
+            ref={inputEl}
           />
           <SavingButton
             className="bg-animate bg-black-70 bn br--right-ns br2-ns button-reset f5-l f6 hover-bg-black pointer pv3 tc white outline-0 justify-center w4"
             type="submit"
-            disabled={!searchTerm}
             isLoading={projectStore.isSearching}
           >
             Search
@@ -86,66 +160,20 @@ const Dashboard = observer(() => {
       {!projectStore.isLoading && !projectStore.isSearching ? (
         showSearchResults ? (
           projectStore.searchResults.length > 0 ? (
-            <ul className="list pl0 ml0 mw6 bn">
+            <LessonContainer>
               {projectStore.searchResults.map(project => (
-                <li key={project.slug} className="bt pt3 b--light-green">
-                  <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
-                    {`${project.theme.title} Theme`}
-                  </button>
-                  <div className="pt2">
-                    <Link
-                      to={`/lesson/${project.slug}/edit/s/0`}
-                      className="f3 fw7 link near-black"
-                    >
-                      {project.title}
-                    </Link>
-                    <Link
-                      to={`/lesson/${project.slug}`}
-                      className="ml3"
-                      title="show lesson page"
-                      target="_blank"
-                    >
-                      <IoMdOpen className="silver" />
-                    </Link>
-                  </div>
-                  <span className="db f6 gray pv2 truncate">
-                    {dayjs(project.created_at).format('MMM D, YYYY')}
-                  </span>
-                </li>
+                <Lesson project={project} key={project.slug} />
               ))}
-            </ul>
+            </LessonContainer>
           ) : (
             <div className="lh-copy mt3 dark-gray">No results found!</div>
           )
         ) : projectStore.count > 0 ? (
-          <ul className="list pl0 ml0 mw6 bn">
+          <LessonContainer>
             {projectStore.projects.map(project => (
-              <li key={project.slug} className="bt pt3 b--light-green">
-                <button className="b--light-green bg-washed-green br-pill f6 fw7 pv1 tc ttc">
-                  {`${project.theme.title} Theme`}
-                </button>
-                <div className="pt2">
-                  <Link
-                    to={`/lesson/${project.slug}/edit/s/0`}
-                    className="f3 fw7 link near-black"
-                  >
-                    {project.title}
-                  </Link>
-                  <Link
-                    to={`/lesson/${project.slug}`}
-                    className="ml3"
-                    title="show lesson page"
-                    target="_blank"
-                  >
-                    <IoMdOpen className="silver" />
-                  </Link>
-                </div>
-                <span className="db f6 gray pv2 truncate">
-                  {dayjs(project.created_at).format('MMM D, YYYY')}
-                </span>
-              </li>
+              <Lesson project={project} key={project.slug} />
             ))}
-          </ul>
+          </LessonContainer>
         ) : (
           <div className="lh-copy mt3 dark-gray">
             You haven't created any lessons yet!
