@@ -59,7 +59,7 @@ const Dashboard = observer(() => {
         <form className="pv3 flex" onSubmit={handleSearchProjects}>
           <input
             className="bg-light-gray black-80 bn br--left-ns br2-ns f5-l f6 input-reset lh-solid pa3 outline-0"
-            placeholder="Search Projects"
+            placeholder="Search Lessons"
             type="text"
             name="Search"
             value={searchTerm}
@@ -94,15 +94,15 @@ const Dashboard = observer(() => {
                   </button>
                   <div className="pt2">
                     <Link
-                      to={`/project/${project.slug}/edit/s/0`}
+                      to={`/lesson/${project.slug}/edit/s/0`}
                       className="f3 fw7 link near-black"
                     >
                       {project.title}
                     </Link>
                     <Link
-                      to={`/project/${project.slug}`}
+                      to={`/lesson/${project.slug}`}
                       className="ml3"
-                      title="show project page"
+                      title="show lesson page"
                       target="_blank"
                     >
                       <IoMdOpen className="silver" />
@@ -126,15 +126,15 @@ const Dashboard = observer(() => {
                 </button>
                 <div className="pt2">
                   <Link
-                    to={`/project/${project.slug}/edit/s/0`}
+                    to={`/lesson/${project.slug}/edit/s/0`}
                     className="f3 fw7 link near-black"
                   >
                     {project.title}
                   </Link>
                   <Link
-                    to={`/project/${project.slug}`}
+                    to={`/lesson/${project.slug}`}
                     className="ml3"
-                    title="show project page"
+                    title="show lesson page"
                     target="_blank"
                   >
                     <IoMdOpen className="silver" />

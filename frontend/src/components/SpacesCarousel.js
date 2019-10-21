@@ -3,9 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import SpaceList from '../components/SpaceList';
+import SpaceImage from '../components/SpaceImage';
+import { IoIosCloseCircle } from 'react-icons/io';
 
 const SpacesCarousel = observer(
-  ({ config, spaces, spacesLength, projectSlug, history }) => {
+  ({ config, spaces, spacesLength, projectSlug, history, deleteSpace }) => {
     const [showModal, setModal] = useState(false);
 
     function closeModal() {
@@ -14,22 +16,27 @@ const SpacesCarousel = observer(
 
     return (
       spacesLength > 1 && (
-        <div className="column flex justify-center w-100">
+        <div className="absolute bg-white h-100 overflow-auto relative-ns w-100">
           {spaces.map((space, index) => (
             <NavLink
-              activeClassName="bg-blue"
-              className="b--dark-blue ba br3 bw1 dark-blue flex h3 items-center justify-center no-underline ma2 outline-0 pointer w3 b f4 outline-0"
+              activeClassName="bg-lightest-blue"
+              className="b b--light-blue ba br3 f4 flex h3 items-center justify-center mh2 mv3 no-underline outline-0 pointer relative hide-child w-80"
               key={space.id}
-              to={`/project/${projectSlug}/edit/s/${index}`}
+              to={`/lesson/${projectSlug}/edit/s/${index}`}
             >
-              {index + 1}
+              <SpaceImage type={space.type} />
+              <IoIosCloseCircle
+                onClick={deleteSpace.bind(null, space.id, index)}
+                className="absolute dark-gray child"
+                style={{ top: '-0.6rem', right: '-0.5rem' }}
+              />
             </NavLink>
           ))}
           <button
             onClick={() => {
               setModal(true);
             }}
-            className="w3 h3 ma2 bg-dark-blue white f6 bn pointer outline-0 br3"
+            className="w-80 h3 ma2 bg-blue white f6 bn pointer outline-0 br3"
           >
             Add new space
           </button>

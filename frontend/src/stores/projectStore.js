@@ -151,6 +151,11 @@ class ProjectStore {
     });
   }
 
+  deleteSpace(spaceId) {
+    this.spacesRegistry.delete(spaceId);
+    return agent.Space.delete(spaceId);
+  }
+
   getProjectTheme(slug) {
     // if (this.projectTheme) return this.projectTheme;
     return agent.Project.getTheme(slug).then(({ theme }) => {
