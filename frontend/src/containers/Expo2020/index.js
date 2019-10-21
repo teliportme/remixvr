@@ -93,7 +93,7 @@ const Expo2020 = () => (
         allowFullScreen="yes"
         scrolling="no"
         className="bn mb3"
-        src="https://staging--remixvr.netlify.com/project/taj-lesson-62791d/view"
+        src="https://staging--remixvr.netlify.com/lesson/taj-lesson-62791d/view"
       />
     </div>
   </div>

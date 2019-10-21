@@ -29,7 +29,7 @@ const ProjectDetail = observer(props => {
     event.preventDefault();
     projectStore.remixProject(project.slug, { title }).then(({ project }) => {
       console.log(project);
-      history.push(`/project/${project.slug}/edit/s/0`);
+      history.push(`/lesson/${project.slug}/edit/s/0`);
     });
   }
 
@@ -48,7 +48,7 @@ const ProjectDetail = observer(props => {
           <meta property="og:type" content="website" />
           <meta
             property="og:url"
-            content={`https://remixvr.org/project/${projectSlug}`}
+            content={`https://remixvr.org/lesson/${projectSlug}`}
           />
           <meta property="og:title" content={`${project.title} on RemixVR`} />
           <meta
@@ -63,7 +63,7 @@ const ProjectDetail = observer(props => {
           <meta property="twitter:card" content="summary_large_image" />
           <meta
             property="twitter:url"
-            content={`https://remixvr.org/project/${projectSlug}`}
+            content={`https://remixvr.org/lesson/${projectSlug}`}
           />
           <meta
             property="twitter:title"
@@ -82,7 +82,7 @@ const ProjectDetail = observer(props => {
         <a
           className="b--dark-gray ba bg-gray bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mt3 ph3 pv2 white pointer"
           target="_blank"
-          href={`/project/${project.slug}/view`}
+          href={`/lesson/${project.slug}/view`}
           rel="noopener noreferrer"
         >
           View Project

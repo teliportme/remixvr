@@ -7,13 +7,14 @@ const SpaceList = observer(({ spaces, projectSlug, history, closeModal }) => {
   const createSpace = spaceType => {
     projectStore.createSpace(projectSlug, spaceType).then(() => {
       history.push(
-        `/project/${projectSlug}/edit/s/${projectStore.spaces.length - 1}`
+        `/lesson/${projectSlug}/edit/s/${projectStore.spaces.length - 1}`
       );
     });
   };
 
   return (
     <div className="flex flex-column">
+      <h2>Select type of space</h2>
       <div style={{ flex: '1 1 auto' }}>
         {spaces.map(space => (
           <div

@@ -115,12 +115,24 @@ const App = () => {
               path="/project/:slug/edit/s/:spaceId"
               component={withTracker(ProjectEdit)}
             />
+            <PrivateRoute
+              path="/lesson/:slug/edit/s/:spaceId"
+              component={withTracker(ProjectEdit)}
+            />
             <Route
               path="/project/:slug/view"
               component={withTracker(ProjectView)}
             />
+            <Route
+              path="/lesson/:slug/view"
+              component={withTracker(ProjectView)}
+            />
             <DefaultLayout
               path="/project/:slug"
+              component={withTracker(ProjectDetail)}
+            />
+            <DefaultLayout
+              path="/lesson/:slug"
               component={withTracker(ProjectDetail)}
             />
             <PrivateRoute

@@ -40,7 +40,7 @@ const Dashboard = observer(() => {
       <Helmet title="Dashboard" />
       <div className="b--dark-blue bb flex mb3">
         <div className="b b--dark-blue bb black bw2 dark-blue f3 pb2 pt2 tc ph4">
-          My Projects
+          My Lessons
         </div>
         <Link
           to="/gced-dashboard"
@@ -53,7 +53,7 @@ const Dashboard = observer(() => {
         to="/create"
         className="f5 link dim br2 ph3 pv2 mb2 dib white bg-blue bb bw2 b--dark-blue"
       >
-        Create project
+        Create lesson
       </Link>
       <div>
         <form className="pv3 flex" onSubmit={handleSearchProjects}>
@@ -148,7 +148,7 @@ const Dashboard = observer(() => {
           </ul>
         ) : (
           <div className="lh-copy mt3 dark-gray">
-            You haven't created any projects yet!
+            You haven't created any lessons yet!
           </div>
         )
       ) : (

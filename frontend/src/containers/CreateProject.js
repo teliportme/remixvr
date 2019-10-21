@@ -23,25 +23,25 @@ const CreateProject = observer(({ history }) => {
     projectStore
       .createProject(title, description, selectedTheme)
       .then(({ project }) => {
-        history.push(`/project/${project.slug}/edit/s/0`);
+        history.push(`/lesson/${project.slug}/edit/s/0`);
       });
   };
 
   return (
     <div className="w-80-ns w-100 pa3 center">
-      <Helmet title="Create Project" />
+      <Helmet title="Create Lesson" />
       <form onSubmit={handleSubmitForm}>
-        <section className="w-50-l w-100">
-          <h3 className="f2">Create New Project</h3>
+        <section className="w-60-l w-100">
+          <h3 className="f2">Create New Lesson</h3>
           <FieldLabel htmlFor="title" className="b mid-gray">
-            Project title
+            Lesson title
           </FieldLabel>
           <FieldInput>
             <input
               type="text"
               className="mt1 db pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bn br2 w-100 outline-0"
               id="title"
-              placeholder="Project Title"
+              placeholder="Lesson Title"
               required
               value={title}
               onChange={e => {
@@ -50,14 +50,14 @@ const CreateProject = observer(({ history }) => {
             />
           </FieldInput>
           <FieldLabel htmlFor="description" className="b mid-gray mt3 db">
-            Project description
+            Lesson description
           </FieldLabel>
           <FieldInput>
             <input
               type="text"
               className="mt1 db pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bn br2 w-100 outline-0"
               id="description"
-              placeholder="Project Description"
+              placeholder="Lesson Description"
               value={description}
               onChange={e => {
                 setDescription(e.target.value);
@@ -67,11 +67,11 @@ const CreateProject = observer(({ history }) => {
           <FieldLabel htmlFor="description" className="b mid-gray mt3 db">
             Select Theme
           </FieldLabel>
-          <FieldInput>
+          <div className="f4 pa2 ttc cf" style={{ background: '#eef4d4' }}>
             {themeStore.themes.map(theme => (
               <article
                 key={theme.slug}
-                className="br2 ba dark-gray b--black-10 mv4 w-50 mw5"
+                className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-ns mw5 fl mh2"
               >
                 <img
                   src={theme.cover_image}
@@ -115,7 +115,7 @@ const CreateProject = observer(({ history }) => {
                 </div>
               </article>
             ))}
-          </FieldInput>
+          </div>
         </section>
         <div className="tc tl-ns">
           <button
@@ -124,7 +124,7 @@ const CreateProject = observer(({ history }) => {
             // disabled={inProgress}
             // isLoading={inProgress}
           >
-            Create Project
+            Create Lesson
           </button>
         </div>
       </form>
