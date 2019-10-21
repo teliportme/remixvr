@@ -12,7 +12,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import randomColor from 'randomcolor';
 
 const Lesson = ({ project }) => {
-  const color = randomColor({ luminosity: 'light' });
+  const color = randomColor({ luminosity: 'light', hue: 'green' });
   return (
     <article className="br2 dark-gray w-100 center">
       <div className="h3 br--top br2" style={{ background: color }} />
