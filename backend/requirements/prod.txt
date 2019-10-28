@@ -19,3 +19,5 @@ Flask-Cors==3.0.6
 marshmallow-oneofschema==1.0.5
 python-dotenv==0.10.1
 simplejson==3.16.0
+raven==6.10.0
+blinker==1.4

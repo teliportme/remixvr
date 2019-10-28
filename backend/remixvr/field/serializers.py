@@ -101,7 +101,7 @@ class ObjectSchema(FieldSchema):
     thumbnail = fields.Str()
     attribute = fields.Str()
     source = fields.Str()
-    source_id = fields.Str()
+    source_id = fields.Str(missing="")
     object_files = fields.List(fields.Str())
 
 # added to be included in combined schema to extract file while uploading

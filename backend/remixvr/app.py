@@ -7,6 +7,7 @@ from remixvr import (commands, user, profile, project, theme, field,
                      space, activity, activitytype, classroom, school, submission)
 from remixvr.settings import ProdConfig
 from remixvr.exceptions import InvalidUsage
+from raven.contrib.flask import Sentry
 
 
 def create_app(config_object=ProdConfig):
@@ -18,6 +19,7 @@ def create_app(config_object=ProdConfig):
     app = Flask(__name__.split('.')[0])
     app.url_map.strict_slashes = False
     app.config.from_object(config_object)
+    sentry = Sentry(app)
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
