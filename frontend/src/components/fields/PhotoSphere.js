@@ -25,8 +25,8 @@ const PhotoSphere = observer(({ field, spaceId }) => {
       <FieldLabel htmlFor="file" className="f4 db ttc">
         {field.label}
       </FieldLabel>
-      <FieldInput className="cf overflow-hidden">
-        <div className="fl">
+      <FieldInput className="overflow-hidden">
+        <div>
           <input
             type="file"
             id="file"
@@ -44,7 +44,7 @@ const PhotoSphere = observer(({ field, spaceId }) => {
             {field.file && enableUpload ? `Replace` : 'Upload'}
           </SavingButton>
         </div>
-        <div className="fl">
+        <div>
           {field.file && field.file.url && (
             <img alt="photosphere" src={apiUrl + field.file.url} />
           )}

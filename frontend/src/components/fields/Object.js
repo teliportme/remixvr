@@ -76,8 +76,8 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
       <FieldLabel htmlFor="file" className="f4 db ttc">
         {field.label}
       </FieldLabel>
-      <FieldInput className="cf overflow-hidden">
-        <div className="fl">
+      <FieldInput>
+        <div>
           <SavingButton
             label
             htmlFor="file"
@@ -139,12 +139,9 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
             </React.Fragment>
           </ReactModal>
         </div>
-        <div className="fl">
+        <div>
           {field.folder && field.object_filename && (
-            <img
-              alt="photosphere"
-              src={apiUrl + field.folder + field.thumbnail}
-            />
+            <img alt="object" src={apiUrl + field.folder + field.thumbnail} />
           )}
         </div>
       </FieldInput>
