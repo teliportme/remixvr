@@ -58,6 +58,7 @@ def save_object_files(folder, main_object_file, object_files, thumbnail):
     main_filename = unquote(os.path.basename(main_parsed_url.path))
 
     object_files.append(main_object_file)
+    object_files_urls = []
 
     if thumbnail is not None:
         saved_file = urllib.request.urlretrieve(thumbnail, 'thumbnail.png')
@@ -71,8 +72,9 @@ def save_object_files(folder, main_object_file, object_files, thumbnail):
         filename = unquote(os.path.basename(parsed_url.path))
         saved_file = urllib.request.urlretrieve(object_file, filename)
         url = '/uploads/{}/{}'.format(folder, filename)
+        object_files_urls.append(url)
         file_object = File(filename=filename, url=url,
                            filesize=saved_file[1]['Content-Length'])
         file_object.save()
     object_path = '/uploads/{}/'.format(folder)
-    return object_path, main_filename
+    return object_path, main_filename, object_files_urls

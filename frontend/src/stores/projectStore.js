@@ -220,6 +220,7 @@ decorate(ProjectStore, {
   projects: computed,
   spaces: computed,
   setPage: action,
+  clear: action,
   setPredicate: action,
   loadProjects: action,
   loadProject: action,

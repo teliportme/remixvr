@@ -33,7 +33,9 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
         main_object_file: mainObjectItemUrl,
         object_files: objectResources,
         thumbnail: asset.thumbnail.url,
-        attribute: asset.authorName
+        attribute: asset.authorName,
+        source: 'poly',
+        source_id: asset.name
       };
       projectStore
         .updateField(spaceId, field.id, data)

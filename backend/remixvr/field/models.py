@@ -2,6 +2,7 @@
 """Theme models."""
 import datetime as dt
 from sqlalchemy.orm.collections import attribute_mapped_collection
+from sqlalchemy.dialects.postgresql import ARRAY
 
 from remixvr.database import (
     Column, relationship, Model, SurrogatePK, db, reference_col)
@@ -178,5 +179,8 @@ class Object(Field):
     object_filename = Column(db.String(100))
     thumbnail = Column(db.String(100))
     attribute = Column(db.String(200))
+    source = Column(db.String(100))
+    source_id = Column(db.String(200))
+    object_files = Column(ARRAY(db.String))
 
     __mapper_args__ = {"polymorphic_identity": "object"}
