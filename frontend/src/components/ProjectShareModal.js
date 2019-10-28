@@ -24,12 +24,12 @@ const ProjectShareModal = ({ showModal, closeModal, projectCode }) => (
     <h2 className="dark-gray tc mt4">Lesson Sharing</h2>
     <div className="flex justify-center">
       <button className="b--light-blue bg-lightest-blue br2 flex flex-column items-center justify-around mh2 pointer outline-0 dim">
-        <FaUserLock className="h2 w2 blue pt2" />
-        <span className="f4 pb2">Private</span>
-      </button>
-      <button className="b--light-blue br2 flex flex-column items-center justify-around mh2 pointer outline-0 dim">
         <FaUserFriends className="h2 w2 blue pt2" />
         <span className="f4 pb2">Public</span>
+      </button>
+      <button className="b--light-blue br2 flex flex-column items-center justify-around mh2 pointer outline-0 dim">
+        <FaUserLock className="h2 w2 blue pt2" />
+        <span className="f4 pb2">Private</span>
       </button>
       <button className="b--light-blue br2 flex flex-column items-center justify-around mh2 pointer outline-0 dim">
         <FaSchool className="h2 w2 blue pt2" />
