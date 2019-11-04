@@ -7,6 +7,7 @@ import Text from '../components/fields/Text';
 import Color from '../components/fields/Color';
 import Audio from '../components/fields/Audio';
 import Object from '../components/fields/Object';
+import Select from '../components/fields/Select';
 
 // https://stackoverflow.com/a/27267762/1291535
 // function flatten(ary) {
@@ -62,6 +63,12 @@ const FieldsGenerate = observer(({ fields, spaceId }) => {
       return (
         <FieldWrapper key={field.id}>
           <Object field={field} spaceId={spaceId} />
+        </FieldWrapper>
+      );
+    } else if (field.type === 'select') {
+      return (
+        <FieldWrapper key={field.id}>
+          <Select field={field} spaceId={spaceId} />
         </FieldWrapper>
       );
     } else {

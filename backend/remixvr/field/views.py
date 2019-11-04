@@ -14,7 +14,7 @@ from sqlalchemy.exc import IntegrityError
 from remixvr.database import db
 from remixvr.exceptions import InvalidUsage
 from remixvr.space.models import Space
-from .models import (Field, Position, Text, Number, Audio, Video,
+from .models import (Field, Position, Text, Number, Select, Audio, Video,
                      VideoSphere, Image, PhotoSphere, File, Link, Color, Object)
 from .serializers import field_schema, field_schemas, combined_schema
 from .utils import check_file_extension_for_type, save_object_files
@@ -115,6 +115,9 @@ def create_field(label, space_id, type, **kwargs):
                          author=current_user.profile, ** kwargs)
         elif type == 'number':
             field = Number(label=label, space=space,
+                           author=current_user.profile, **kwargs)
+        elif type == 'select':
+            field = Select(label=label, space=space,
                            author=current_user.profile, **kwargs)
         elif type == 'audio':
             field = Audio(label=label, space=space,

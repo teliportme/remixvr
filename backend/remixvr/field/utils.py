@@ -1,4 +1,4 @@
-from .models import (Field, Position, Text, Number, Audio, Video,
+from .models import (Field, Position, Text, Number, Select, Audio, Video,
                      VideoSphere, Image, PhotoSphere, File, Link, Color, Object)
 from flask_jwt_extended import current_user
 from flask import current_app as app
@@ -7,27 +7,37 @@ from .models import File
 
 import urllib.request
 import os
+import json
 
 
 def generate_fields(space, fields):
     for field in fields:
-        if field['type'] == 'photosphere':
-            new_field = PhotoSphere(
-                space=space, author=current_user.profile, label=field['label'])
         if field['type'] == 'text':
             new_field = Text(
                 space=space, author=current_user.profile, label=field['label'])
+        if field['type'] == 'number':
+            new_field = Number(
+                space=space, author=current_user.profile, label=field['label'])
+        if field['type'] == 'select':
+            new_field = Select(
+                space=space, author=current_user.profile, label=field['label'], possible_values=field['possible_values'])
+        if field['type'] == 'audio':
+            new_field = Audio(
+                space=space, author=current_user.profile, label=field['label'])
+        if field['type'] == 'photosphere':
+            new_field = PhotoSphere(
+                space=space, author=current_user.profile, label=field['label'])
         if field['type'] == 'image':
             new_field = Image(
+                space=space, author=current_user.profile, label=field['label'])
+        if field['type'] == 'video':
+            new_field = Video(
                 space=space, author=current_user.profile, label=field['label'])
         if field['type'] == 'videosphere':
             new_field = VideoSphere(
                 space=space, author=current_user.profile, label=field['label'])
         if field['type'] == 'color':
             new_field = Color(
-                space=space, author=current_user.profile, label=field['label'])
-        if field['type'] == 'audio':
-            new_field = Audio(
                 space=space, author=current_user.profile, label=field['label'])
         if field['type'] == 'object':
             new_field = Object(
@@ -43,7 +53,7 @@ def check_file_extension_for_type(type, file_extension):
         if file_extension not in ['.mp3']:
             raise InvalidUsage.invalid_file_type()
     elif type == 'video' or type == 'videosphere':
-        if file_extension not in ['.mp4']:
+        if file_extension not in ['.mp4', '.mov']:
             raise InvalidUsage.invalid_file_type()
 
 

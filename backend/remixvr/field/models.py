@@ -87,6 +87,16 @@ class Number(Field):
     __mapper_args__ = {"polymorphic_identity": "number"}
 
 
+class Select(Field):
+
+    __tablename__ = 'select'
+    id = Column(db.ForeignKey("field.id"), primary_key=True)
+    selected_value = Column(db.String)
+    possible_values = Column(db.JSON)
+
+    __mapper_args__ = {"polymorphic_identity": "select"}
+
+
 class Audio(Field):
 
     __tablename__ = 'audio'

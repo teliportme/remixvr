@@ -4,7 +4,7 @@ from marshmallow_oneofschema import OneOfSchema
 from flask import current_app as app
 
 from remixvr.project.serializers import ProjectSchema
-from .models import (Position, Text, Number, Audio, Video,
+from .models import (Position, Text, Number, Select, Audio, Video,
                      VideoSphere, Image, PhotoSphere, Link, Color, Object)
 
 
@@ -49,6 +49,11 @@ class TextSchema(FieldSchema):
 class NumberSchema(FieldSchema):
     # number_value and text_value and not value to distinguish the fields by type while serializing in the view using combined_schema
     number_value = fields.Int(attribute="value")
+
+
+class SelectSchema(FieldSchema):
+    selected_value = fields.Str()
+    possible_values = fields.List(fields.Dict())
 
 
 class AudioSchema(FieldSchema):
@@ -117,6 +122,7 @@ class ProjectFieldSchema(OneOfSchema):
         'position': PositionSchema,
         'text': TextSchema,
         'number': NumberSchema,
+        'select': SelectSchema,
         'audio': AudioSchema,
         'video': VideoSchema,
         'videosphere': VideoSphereSchema,
@@ -134,6 +140,8 @@ class ProjectFieldSchema(OneOfSchema):
             return 'text'
         elif isinstance(obj, Number):
             return 'number'
+        elif isinstance(obj, Select):
+            return 'select'
         elif isinstance(obj, Audio):
             return 'audio'
         elif isinstance(obj, Video):
@@ -157,7 +165,7 @@ class ProjectFieldSchema(OneOfSchema):
         strict = True
 
 
-class CombinedSchema(PositionSchema, TextSchema, NumberSchema, FileLoadSchema,
+class CombinedSchema(PositionSchema, TextSchema, NumberSchema, SelectSchema, FileLoadSchema,
                      AudioSchema, VideoSchema, VideoSphereSchema,
                      ImageSchema, PhotoSphereSchema, LinkSchema, ColorSchema, ObjectSchema):
     pass

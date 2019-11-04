@@ -102,7 +102,7 @@ const ProjectEdit = observer(props => {
                   Publish
                 </button>
               </div>
-              <div className="ml3-ns">
+              <div className="ml3-ns pb5">
                 <h2 className="fw7 f2 mv0">Enter lesson fields</h2>
                 {projectStore.spaces[currentSpace] && (
                   <FieldsGenerate

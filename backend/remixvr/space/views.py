@@ -19,7 +19,7 @@ blueprint = Blueprint('spaces', __name__)
 @marshal_with(space_schema)
 def get_space(space_id):
     space = Space.get_by_id(space_id)
-    if not field:
+    if not space:
         raise InvalidUsage.space_not_found()
     return space
 
