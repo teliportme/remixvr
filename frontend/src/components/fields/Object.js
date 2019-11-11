@@ -73,14 +73,11 @@ const ObjectGooglePoly = observer(({ field, spaceId }) => {
 
   return (
     <React.Fragment>
-      <FieldLabel htmlFor="file" className="f4 db ttc">
-        {field.label}
-      </FieldLabel>
+      <FieldLabel className="f4 db ttc">{field.label}</FieldLabel>
       <FieldInput>
         <div>
           <SavingButton
             label
-            htmlFor="file"
             disabled={savingModel}
             isLoading={savingModel}
             className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"

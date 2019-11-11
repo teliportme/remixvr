@@ -22,9 +22,7 @@ const PhotoSphere = observer(({ field, spaceId }) => {
 
   return (
     <React.Fragment>
-      <FieldLabel htmlFor="file" className="f4 db ttc">
-        {field.label}
-      </FieldLabel>
+      <FieldLabel className="f4 db ttc">{field.label}</FieldLabel>
       <FieldInput className="overflow-hidden">
         <div>
           <input
