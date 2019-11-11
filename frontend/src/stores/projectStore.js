@@ -80,6 +80,10 @@ class ProjectStore {
     return agent.Project.create({ title, description, theme_slug, tags });
   }
 
+  editProject(slug, data) {
+    return agent.Project.edit(slug, data);
+  }
+
   loadProjects() {
     this.isLoading = true;
     if (this.projectPage === 0) {
@@ -222,6 +226,8 @@ decorate(ProjectStore, {
   setPage: action,
   clear: action,
   setPredicate: action,
+  createProject: action,
+  editProject: action,
   loadProjects: action,
   loadProject: action,
   loadSpaces: action,

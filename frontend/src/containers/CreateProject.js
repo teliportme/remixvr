@@ -53,8 +53,9 @@ const CreateProject = observer(({ history }) => {
             Lesson description
           </FieldLabel>
           <FieldInput>
-            <input
-              type="text"
+            <textarea
+              style={{ resize: 'none' }}
+              rows="3"
               className="mt1 db pt2 pr3 pb2 pl3 lh-title mid-gray bg-white-90 bn br2 w-100 outline-0"
               id="description"
               placeholder="Lesson Description"

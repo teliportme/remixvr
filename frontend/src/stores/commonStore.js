@@ -13,8 +13,8 @@ class CommonStore {
   }
 
   snackMessage = {
-    title: null,
     message: null,
+    title: null,
     type: '',
     insert: '',
     container: 'bottom-right',
@@ -23,8 +23,8 @@ class CommonStore {
   };
 
   setSnackMessage(
-    title = null,
     message = null,
+    title = null,
     type = 'success',
     insert = 'bottom',
     container = 'bottom-center',
@@ -32,8 +32,8 @@ class CommonStore {
     dismissable = true
   ) {
     this.snackMessage = {
-      title,
       message,
+      title,
       type,
       insert,
       container,

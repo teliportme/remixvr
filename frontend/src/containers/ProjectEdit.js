@@ -6,6 +6,7 @@ import FieldsGenerate from '../components/FieldsGenerate';
 import ProjectStore from '../stores/projectStore';
 import SpaceList from '../components/SpaceList';
 import ProjectShareModal from '../components/ProjectShareModal';
+import ProjectDetailsEditModal from '../components/ProjectDetailsEditModal';
 
 const ProjectEdit = observer(props => {
   const projectStore = useContext(ProjectStore);
@@ -14,6 +15,7 @@ const ProjectEdit = observer(props => {
   const [currentSpace, setCurrentSpace] = useState(0);
   const [thisProject, setThisProject] = useState(null);
   const [showShareModal, setShareModal] = useState(false);
+  const [showEditModal, setEditModal] = useState(false);
 
   const projectSlug = props.match.params.slug;
   useEffect(() => {
@@ -80,6 +82,14 @@ const ProjectEdit = observer(props => {
             </div>
             <div className="w-100 w-80-ns h-100 center ph3 ph0-ns fl overflow-auto">
               <div className="ml3-ns mv2">
+                <button
+                  onClick={() => {
+                    setEditModal(true);
+                  }}
+                  className="b--blue-2 ba bg-blue-5 bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pointer pv2 white"
+                >
+                  Edit
+                </button>
                 <button className="b--dark-green ba bg-green bl-0 br-0 br3 bt-0 bw2 dib dim f6 link mr3 mt3 ph3 pv2 white pointer">
                   Save
                 </button>
@@ -121,6 +131,13 @@ const ProjectEdit = observer(props => {
         }}
         projectCode={thisProject && thisProject.code}
       />
+      {thisProject && (
+        <ProjectDetailsEditModal
+          showModal={showEditModal}
+          closeModal={() => setEditModal(false)}
+          project={thisProject}
+        />
+      )}
     </React.Fragment>
   );
 });
