@@ -14,6 +14,7 @@ class UserSchema(Schema):
     createdAt = fields.DateTime(attribute='created_at', dump_only=True)
     updatedAt = fields.DateTime(attribute='updated_at')
     school_id = fields.Int(allow_none=True)
+    gced_enabled = fields.Bool(default=False)
     # ugly hack.
     user = fields.Nested('self', exclude=('user',),
                          default=True, load_only=True)

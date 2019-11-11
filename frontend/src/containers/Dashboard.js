@@ -5,7 +5,6 @@ import UserStore from '../stores/userStore';
 import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react-lite';
 import dayjs from 'dayjs';
-import { IoMdOpen } from 'react-icons/io';
 import styled from 'styled-components';
 import SavingButton from '../components/SavingButton';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -88,7 +87,6 @@ const LessonContainer = styled.div`
 const Dashboard = observer(() => {
   const projectStore = useContext(ProjectStore);
   const userStore = useContext(UserStore);
-  const [searchTerm, setSearchTerm] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
 
   const inputEl = useRef(null);
@@ -120,12 +118,14 @@ const Dashboard = observer(() => {
         <div className="b b--dark-blue bb black bw2 dark-blue f3 pb2 pt2 tc ph4">
           My Lessons
         </div>
-        <Link
-          to="/gced-dashboard"
-          className="b--black black bw2 f3 hover-bg-light-gray link pb2 ph4 pt2 tc"
-        >
-          GCED
-        </Link>
+        {userStore.currentUser.gced_enabled && (
+          <Link
+            to="/gced-dashboard"
+            className="b--black black bw2 f3 hover-bg-light-gray link pb2 ph4 pt2 tc"
+          >
+            GCED
+          </Link>
+        )}
       </div>
       <Link
         to="/create"

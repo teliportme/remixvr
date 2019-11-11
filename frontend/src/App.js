@@ -83,8 +83,13 @@ const PrivateRoute = observer(props => {
 
 const App = () => {
   const commonStore = useContext(CommonStore);
+  const userStore = useContext(UserStore);
 
   let notificationDOMRef = React.createRef();
+
+  useEffect(() => {
+    userStore.pullUser();
+  });
 
   autorun(() => {
     if (commonStore.snackMessage.message !== null) {

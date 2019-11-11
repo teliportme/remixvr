@@ -56,7 +56,7 @@ const Auth = {
     requests.post('/users/login', { userid, password }),
   register: (username, email, password, school_id) =>
     requests.post('/users', { username, email, password, school_id }),
-  save: user => requests.put('/user', { user })
+  save: user => requests.put('/user', { ...user })
 };
 
 // prettier-ignore

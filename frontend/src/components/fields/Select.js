@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import ProjectStore from '../../stores/projectStore';
 import FieldLabel from '../FieldLabel';

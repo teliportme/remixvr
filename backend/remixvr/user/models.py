@@ -19,6 +19,7 @@ class User(SurrogatePK, Model):
     bio = Column(db.String(300), nullable=True)
     image = Column(db.String(120), nullable=True)
     token: str = ''
+    gced_enabled = Column(db.Boolean, default=False)
 
     def __init__(self, username, email, password=None, **kwargs):
         """Create instance."""

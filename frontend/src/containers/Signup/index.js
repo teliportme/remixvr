@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthStore from '../../stores/authStore';
+import UserStore from '../../stores/userStore';
 import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 import useRouter from '../../components/useRouter';
@@ -11,6 +12,7 @@ import SavingButton from '../../components/SavingButton';
 
 const Signup = observer(props => {
   const authStore = useContext(AuthStore);
+  const userStore = useContext(UserStore);
   const { history } = useRouter();
 
   const [username, setUsername] = useState('');
@@ -26,8 +28,12 @@ const Signup = observer(props => {
   const { errors } = authStore;
 
   useEffect(() => {
-    if (authStore.isUserLoggedIn) {
+    if (authStore.isUserLoggedIn && !isGCED) {
       history.push(nextUrl);
+    } else if (authStore.isUserLoggedIn && isGCED) {
+      userStore
+        .updateUser({ gced_enabled: true })
+        .then(() => history.push(`/gced-dashboard`));
     }
     window.localStorage.removeItem('gced-signup');
     if (isGCED) {

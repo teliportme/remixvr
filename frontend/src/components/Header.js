@@ -4,6 +4,7 @@ import RemixvrLogo from './logos/remixvr-logo.png';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import AuthStore from '../stores/authStore';
+import UserStore from '../stores/userStore';
 import useRouter from '../components/useRouter';
 
 const MenuIcon = styled.label`
@@ -91,6 +92,7 @@ const MenuLi = styled.li`
 
 const Header = observer(() => {
   const authStore = useContext(AuthStore);
+  const userStore = useContext(UserStore);
   const isUserLoggedIn = authStore.isUserLoggedIn;
   const { history } = useRouter();
 
@@ -119,11 +121,16 @@ const Header = observer(() => {
             </Link>
           </MenuLi>
         )}
-        <MenuLi>
-          <Link to="/gced" className="link dim f6 f5-ns db  pointer dark-gray">
-            GCED
-          </Link>
-        </MenuLi>
+        {userStore.currentUser && userStore.currentUser.gced_enabled && (
+          <MenuLi>
+            <Link
+              to="/gced"
+              className="link dim f6 f5-ns db  pointer dark-gray"
+            >
+              GCED
+            </Link>
+          </MenuLi>
+        )}
         <MenuLi>
           <a
             href="https://docs.remixvr.org"
