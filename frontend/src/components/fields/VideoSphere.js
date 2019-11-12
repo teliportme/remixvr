@@ -27,14 +27,14 @@ const VideoSphere = observer(({ field, spaceId }) => {
         <div>
           <input
             type="file"
-            id="file"
+            id="fileVideosphere"
             disabled={!enableUpload}
             onChange={uploadFile}
             style={{ visibility: 'hidden', width: 0 }}
           />
           <SavingButton
             label
-            htmlFor="file"
+            htmlFor="fileVideosphere"
             disabled={!enableUpload}
             isLoading={!enableUpload}
             className="f6 link dim br2 ph2 pv2 mv2 dib white bg-dark-gray pointer"
