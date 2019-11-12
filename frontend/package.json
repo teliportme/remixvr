@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "browserslist": "^4.7.2",
+    "caniuse-lite": "^1.0.30001008",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.14",
     "filepond": "^4.4.11",
