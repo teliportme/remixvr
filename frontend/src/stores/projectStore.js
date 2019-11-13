@@ -84,6 +84,11 @@ class ProjectStore {
     return agent.Project.edit(slug, data);
   }
 
+  deleteProject(slug) {
+    this.projectRegistry.delete(slug);
+    return agent.Project.delete(slug);
+  }
+
   loadProjects() {
     this.isLoading = true;
     if (this.projectPage === 0) {

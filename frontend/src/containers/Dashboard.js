@@ -12,6 +12,14 @@ import randomColor from 'randomcolor';
 
 const Lesson = ({ project }) => {
   const color = randomColor({ luminosity: 'light', hue: 'green' });
+
+  const projectStore = useContext(ProjectStore);
+
+  const deleteLesson = slug => {
+    if (window.confirm('Are you sure you want to delete this lesson?')) {
+      projectStore.deleteProject(slug);
+    }
+  };
   return (
     <article className="br2 dark-gray w-100 center">
       <div className="h3 br--top br2" style={{ background: color }} />
@@ -42,18 +50,24 @@ const Lesson = ({ project }) => {
         </span>
         <div className="mt3">
           <Link
+            to={`/lesson/${project.slug}`}
+            target="_blank"
+            className="b bn gray mt2 pa0 pointer underline-hover mr2 link"
+          >
+            View
+          </Link>
+          <Link
             to={`/lesson/${project.slug}/edit/s/0`}
             className="b bn gray mt2 pa0 pointer underline-hover mr2 link"
           >
             Edit
           </Link>
-          <Link
-            to={`/lesson/${project.slug}`}
-            target="_blank"
-            className="b bn gray mt2 pa0 pointer underline-hover link"
+          <button
+            onClick={deleteLesson.bind(null, project.slug)}
+            className="b bn gray mt2 pa0 pointer underline-hover mr2"
           >
-            View
-          </Link>
+            Delete
+          </button>
         </div>
       </div>
     </article>

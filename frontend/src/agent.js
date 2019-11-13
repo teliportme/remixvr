@@ -89,7 +89,7 @@ const Project = {
   edit: (slug, data) =>
     requests.put(`/projects/${slug}`, data),
   delete: slug =>
-    requests.delete(`/projects/${slug}`),
+    requests.del(`/projects/${slug}`),
   create: data =>
     requests.post('/projects', data),
   feed: (page, lim=20) =>
@@ -97,7 +97,7 @@ const Project = {
   favorite: slug =>
     requests.post(`/projects/${slug}/favorite`),
   unfavorite: slug =>
-    requests.delete(`/projects/${slug}/favorite`),
+    requests.del(`/projects/${slug}/favorite`),
   getTheme: slug =>
     requests.get(`/projects/${slug}/theme`),
   remix: (slug, data) =>
