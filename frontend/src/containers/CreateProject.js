@@ -86,9 +86,6 @@ const CreateProject = observer(({ history }) => {
                         {theme.type}
                       </button>
                       <h1 className="f5 f4-ns mv0">{theme.title}</h1>
-                      <h2 className="gray f6 fw4 pt1 mv0 ttc">
-                        By {theme.author.username}
-                      </h2>
                     </div>
                     <div className="dtc tr" />
                   </div>
@@ -113,7 +110,7 @@ const CreateProject = observer(({ history }) => {
                       }}
                       className="b--dark-green bb bg-green bl-0 br-0 br1 br2 bt-0 bw2 dib f6 link mb2 pv1 white pointer"
                     >
-                      Use Theme
+                      Select Theme
                     </button>
                   )}
                 </div>

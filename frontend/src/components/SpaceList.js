@@ -32,7 +32,7 @@ const SpaceList = observer(({ spaces, projectSlug, history, closeModal }) => {
                 if (closeModal) closeModal();
               }}
             >
-              Choose
+              Select
             </button>
           </div>
         ))}
