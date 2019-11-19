@@ -4,6 +4,7 @@ from flask_jwt_extended import current_user
 from flask import current_app as app
 from urllib.parse import urlparse, unquote
 from .models import File
+from remixvr.exceptions import InvalidUsage
 
 import urllib.request
 import os
